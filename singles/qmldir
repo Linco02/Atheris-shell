@@ -1,3 +1,4 @@
 singleton SingleTimer1 1.0 SingleTimer1.qml
 singleton SingleTimer2 1.0 SingleTimer2.qml
 singleton Style 1.0 Style.qml
+singleton Sett 1.0 Settings.qml

@@ -1,9 +1,26 @@
 import QtQuick
 import Quickshell
-import qs.modules
 import qs.singles
-import qs.elements
 import qs.widgets
+
+ShellRoot {
+    LazyLoader {
+        active: Sett.enableTopPanel
+        component: Panel{ property int ancorSide: Panel.PanelSide.Top }
+    }
+    LazyLoader {
+        active: Sett.enableBottomPanel
+        component: Panel{ property int ancorSide: Panel.PanelSide.Bottom }
+    }
+    LazyLoader {
+        active: Sett.enableLeftPanel
+        component: Panel{ property int ancorSide: Panel.PanelSide.Left }
+    }
+    LazyLoader {
+        active: Sett.enableRightPanel
+        component: Panel{ property int ancorSide: Panel.PanelSide.Right }
+    }
+}
 
 // PanelWindow {
 //     id: toplevel
@@ -86,14 +103,3 @@ import qs.widgets
 //         }
 //     }
 // }
-
-ShellRoot {
-    PanelWindow {
-        anchors {
-            left: true
-            bottom: true
-            right: true
-        }
-        implicitHeight: 16
-    }
-}
