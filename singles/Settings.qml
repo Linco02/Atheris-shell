@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick
+import qs.widgets
 
 QtObject {
     // ================
@@ -10,24 +11,24 @@ QtObject {
     property bool enableLeftPanel: true
     property bool enableRightPanel: true
 
-    property var topPanel: [{
-        leftSide: [ ],
-        centerSide: [ ],
-        rightSide: [ ]
-    }]
-    property var bottomPanel: [{
-        leftSide: [ ],
-        centerSide: [ ],
-        rightSide: [ ]
-    }]
-    property var leftPanel: [{
-        topSide: [ ],
-        centerSide: [ ],
-        bottomSide: [ ]
-    }]
-    property var rightPanel: [{
-        topSide: [ ],
-        centerSide: [ ],
-        bottomSide: [ ]
-    }]
+    property var topPanel: {
+        topORleftSide: [ ]
+        centerSide: [ Clock ]
+        bottomORrightmSide: [ ]
+    }
+    property var bottomPanel: {
+        topORleftSide: [ ]
+        centerSide: [ Clock ]
+        bottomORrightmSide: [ ]
+    }
+    property var leftPanel: {
+        topORleftSide: [ ]
+        centerSide: [ Clock ]
+        bottomORrightmSide: [ ]
+    }
+    property var rightPanel: {
+        topORleftSide: [ ]
+        centerSide: [ Clock ]
+        bottomORrightmSide: [ ]
+    }
 }

@@ -39,4 +39,16 @@ PanelWindow {
     }
 
     color: Style.backGround
+
+    Row {
+        anchors.centerIn: parent
+        Repeater {
+            model: Settings.topPanel
+
+            Loader {
+                sourceComponent: modelData
+            }
+        }
+    }
+
 }

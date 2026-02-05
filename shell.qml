@@ -6,19 +6,19 @@ import qs.widgets
 ShellRoot {
     LazyLoader {
         active: Sett.enableTopPanel
-        component: Panel{ property int ancorSide: Panel.PanelSide.Top }
+        component: Panel { property int ancorSide: Panel.PanelSide.Top }
     }
     LazyLoader {
         active: Sett.enableBottomPanel
-        component: Panel{ property int ancorSide: Panel.PanelSide.Bottom }
+        component: Panel { property int ancorSide: Panel.PanelSide.Bottom }
     }
     LazyLoader {
         active: Sett.enableLeftPanel
-        component: Panel{ property int ancorSide: Panel.PanelSide.Left }
+        component: Panel { property int ancorSide: Panel.PanelSide.Left }
     }
     LazyLoader {
         active: Sett.enableRightPanel
-        component: Panel{ property int ancorSide: Panel.PanelSide.Right }
+        component: Panel { property int ancorSide: Panel.PanelSide.Right }
     }
 }
 
