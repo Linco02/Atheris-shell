@@ -2,14 +2,13 @@ import QtQuick
 import qs.singles
 import qs.elements
 
-Component {
-    id: Clock
+Item {
     property var date: ""
 
     height: 20; width: clockText.width + Style.padding * 2
 
     Connections {
-        target: SingleTimer2
+        target: SingleTimer1
         function onTick() { 
             date = new Date().toLocaleTimeString("h:mm:ss")
         }

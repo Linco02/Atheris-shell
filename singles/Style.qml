@@ -16,10 +16,10 @@ QtObject {
     property real spacing: 15 * scale
 
     // панелі
-    property real topPanel: 32 * scale
-    property real bottomPanel: 10 * scale
-    property real leftPanel: 5 * scale
-    property real rightPanel: 5 * scale
+    property real topPanel: 30 * scale
+    property real bottomPanel: 30 * scale
+    property real leftPanel: 25 * scale
+    property real rightPanel: 25 * scale
 
     // ========================
     // === палітра кольорів ===

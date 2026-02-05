@@ -1,10 +1,19 @@
 import QtQuick
 import Quickshell
 import qs.singles
+import qs.widgets
 
 PanelWindow {
     id: root
     enum PanelSide { Top, Bottom, Left, Right }
+
+    // Component { id: clockComp; Clock {} }
+
+    // property var topPanel: ({
+    //     topORleftSide: [ ],
+    //     centerSide: [ clockComp ],
+    //     bottomORrightmSide: [ ]
+    // })
 
     anchors {
         top: (
@@ -43,7 +52,7 @@ PanelWindow {
     Row {
         anchors.centerIn: parent
         Repeater {
-            model: Settings.topPanel
+            model: PanelSettings.topPanel.centerSide
 
             Loader {
                 sourceComponent: modelData
