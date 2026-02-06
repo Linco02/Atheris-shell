@@ -1,5 +1,5 @@
 import QtQuick
-import qs.singles
+import qs.settings
 
 Rectangle {
     color: Style.foreGround

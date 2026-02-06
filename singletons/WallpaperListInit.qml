@@ -1,7 +1,7 @@
 pragma Singleton
 import QtQuick
 import Qt.labs.folderlistmodel
-import qs.singles
+import qs.settings
 
 Item {
     signal wallpaperReady()

@@ -1,6 +1,6 @@
 import QtQuick
 import qs.settings
-import qs.component
+import qs.components
 
 Item {
     property var date: ""

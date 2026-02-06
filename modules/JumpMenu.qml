@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Shapes
 import Quickshell
-import qs.singles
+import qs.components
+import qs.settings
 
 PanelWindow {
     id: shell

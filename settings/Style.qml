@@ -17,9 +17,9 @@ QtObject {
 
     // панелі
     property real topPanel: 30 * scale
-    property real bottomPanel: 30 * scale
-    property real leftPanel: 25 * scale
-    property real rightPanel: 25 * scale
+    property real bottomPanel: 20 * scale
+    property real leftPanel: 10 * scale
+    property real rightPanel: 10 * scale
 
     // ===================================
     // === палітра кольорів та шпалери ===
@@ -40,7 +40,7 @@ QtObject {
     property color color8: "transparent"
 
     // колір елементів
-    property color backGround: "#F19CBB"
+    property color backGround: color2
     property color foreGround: "#E52B50"
     property color centerGround: "#F0F8FF"
     property color borderColor: "#FFBF00"

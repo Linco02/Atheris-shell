@@ -8,10 +8,10 @@ QtObject {
     // ================
     // ==== Панелі ====
     // ================
-    property bool enableTopPanel: false
-    property bool enableBottomPanel: false
-    property bool enableLeftPanel: false
-    property bool enableRightPanel: false
+    property bool enableTopPanel: true
+    property bool enableBottomPanel: true
+    property bool enableLeftPanel: true
+    property bool enableRightPanel: true
 
     // property var topPanel: {
     //     topORleftSide: [ ]

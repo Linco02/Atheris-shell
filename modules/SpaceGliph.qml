@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell.Io
-import qs.elements
-import qs.singles
+import qs.components
+import qs.settings
 
 RectForeground {
     id: root

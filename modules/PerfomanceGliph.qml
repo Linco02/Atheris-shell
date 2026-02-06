@@ -2,8 +2,8 @@ import QtQuick
 import Quickshell
 import QtQuick.Shapes
 import Quickshell.Io
-import qs.singles
-import qs.elements
+import qs.components
+import qs.settings
 
 Item {
     id: root

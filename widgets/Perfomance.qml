@@ -1,5 +1,5 @@
 import QtQuick
-import qs.elements
+import qs.components
 import qs.modules
 
 
