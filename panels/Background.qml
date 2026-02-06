@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-// import qs.backend
 import qs.singles
 
 PanelWindow {
