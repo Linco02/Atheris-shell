@@ -4,20 +4,26 @@ import qs.singles
 import qs.widgets
 
 ShellRoot {
+
     LazyLoader {
-        active: Sett.enableTopPanel
+        active: Settings.enableBackground
+        component: Background {}
+    }
+
+    LazyLoader {
+        active: Settings.enableTopPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Top }
     }
     LazyLoader {
-        active: Sett.enableBottomPanel
+        active: Settings.enableBottomPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Bottom }
     }
     LazyLoader {
-        active: Sett.enableLeftPanel
+        active: Settings.enableLeftPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Left }
     }
     LazyLoader {
-        active: Sett.enableRightPanel
+        active: Settings.enableRightPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Right }
     }
 }

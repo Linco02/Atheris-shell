@@ -52,10 +52,12 @@ PanelWindow {
     Row {
         anchors.centerIn: parent
         Repeater {
-            model: PanelSettings.topPanel.centerSide
+            // model: Settings.centerSide
 
             Loader {
-                sourceComponent: modelData
+                Clock {}
+                // sourceComponent: modelData
+                // onLoaded: console.log("yes")
             }
         }
     }

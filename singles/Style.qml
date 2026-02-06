@@ -21,9 +21,25 @@ QtObject {
     property real leftPanel: 25 * scale
     property real rightPanel: 25 * scale
 
-    // ========================
-    // === палітра кольорів ===
-    // ========================
+    // ===================================
+    // === палітра кольорів та шпалери ===
+    // ===================================
+
+    // шпалери
+    property var imagesList: []
+    property url images: ""
+
+    // згенерована палітра
+    property color color1: "transparent"
+    property color color2: "transparent"
+    property color color3: "transparent"
+    property color color4: "transparent"
+    property color color5: "transparent"
+    property color color6: "transparent"
+    property color color7: "transparent"
+    property color color8: "transparent"
+
+    // колір елементів
     property color backGround: "#F19CBB"
     property color foreGround: "#E52B50"
     property color centerGround: "#F0F8FF"
