@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
-import qs.singles
-import qs.widgets
+import qs.panels
 
 ShellRoot {
 

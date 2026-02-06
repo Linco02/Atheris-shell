@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Qt.labs.folderlistmodel
-import qs.singles
+import qs.settings
 
 Item {
     property var palit: wallpaperPalit.colors

@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import qs.singles
+import qs.settings
 
 Rectangle {
     property var palit: []

@@ -1,7 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import qs.singles
+import qs.settings
+import qs.widgets
 
 PanelWindow {
     id: background
@@ -15,5 +16,4 @@ PanelWindow {
     color: "transparent"
 
     Wallpaper {}
-    WallpaperChoser {}
 }
