@@ -23,13 +23,13 @@ Item {
         Style.color8 = palit[7]
     }
 
-    Connections {
-        target: WallpaperListInit
-        function onWallpaperReady() {
-            const imagesChose = Math.floor(Math.random() * Style.imagesList.length)
-            Style.images = Style.imagesList[imagesChose]
-        }
-    }
+    // Connections {
+    //     target: WallpaperListInit
+    //     function onWallpaperReady() {
+    //         const imagesChose = Math.floor(Math.random() * Style.imagesList.length)
+    //         Style.images = Style.imagesList[imagesChose]
+    //     }
+    // }
 
     ColorQuantizer {
         source: Qt.resolvedUrl(Style.images)

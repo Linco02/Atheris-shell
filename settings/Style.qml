@@ -11,15 +11,22 @@ QtObject {
     
     // декорація
     property real radius: 15 * scale
-    property real radius2: 30 * scale
+    property real radius2: 20 * scale
     property real padding: 5 * scale
     property real spacing: 15 * scale
 
     // панелі
     property real topPanel: 30 * scale
-    property real bottomPanel: 20 * scale
+    property real bottomPanel: 15 * scale
     property real leftPanel: 10 * scale
     property real rightPanel: 10 * scale
+
+    // ======================
+    // === Шрифт та текст ===
+    // ======================
+
+    property real fontSize: 12
+    property string fontFamily: "FiraCode Nerd Font"
 
     // ===================================
     // === палітра кольорів та шпалери ===
@@ -27,7 +34,7 @@ QtObject {
 
     // шпалери
     property var imagesList: []
-    property url images: ""
+    property url images: "file:///home/linco02/assets/wallpaper/b-060.jpg"
 
     // згенерована палітра
     property color color1: "transparent"

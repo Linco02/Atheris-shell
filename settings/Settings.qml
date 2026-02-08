@@ -9,28 +9,28 @@ QtObject {
     // ==== Панелі ====
     // ================
     property bool enableTopPanel: true
-    property bool enableBottomPanel: true
-    property bool enableLeftPanel: true
-    property bool enableRightPanel: true
+    property bool enableBottomPanel: false
+    property bool enableLeftPanel: false
+    property bool enableRightPanel: false
 
-    // property var topPanel: {
-    //     topORleftSide: [ ]
-    //     centerSide: [ Clock ]
-    //     bottomORrightmSide: [ ]
-    // }
-    // property var bottomPanel: {
-    //     topORleftSide: [ ]
-    //     centerSide: [ Clock ]
-    //     bottomORrightmSide: [ ]
-    // }
-    // property var leftPanel: {
-    //     topORleftSide: [ ]
-    //     centerSide: [ Clock ]
-    //     bottomORrightmSide: [ ]
-    // }
-    // property var rightPanel: {
-    //     topORleftSide: [ ]
-    //     centerSide: [ Clock ]
-    //     bottomORrightmSide: [ ]
-    // }
+    property var topPanel: {
+        "topORleftSide": [  ],
+        "centerSide": [ "../widgets/Clock.qml" ],
+        "bottomORrightSide": [  ]
+    }
+    property var bottomPanel: {
+        "topORleftSide": [  ],
+        "centerSide": [  ],
+        "bottomORrightSide": [  ]
+    }
+    property var leftPanel: {
+        "topORleftSide": [  ],
+        "centerSide": [  ],
+        "bottomORrightSide": [  ]
+    }
+    property var rightPanel: {
+        "topORleftSide": [  ],
+        "centerSide": [  ],
+        "bottomORrightSide": [  ]
+    }
 }
