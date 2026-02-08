@@ -16,6 +16,7 @@ PanelWindow {
     property int panelHeight: height
     property int panelWidth: width
     property real radius: Style.radius2
+    property real padding: Style.padding
 
     anchors {
         top: (
@@ -77,53 +78,59 @@ PanelWindow {
 
             Item {
                 anchors.fill: parent
-                Row {
-                    anchors {
-                        left: parent.left
-                        verticalCenter: parent.verticalCenter
-                    }
 
-                    Repeater {
-                        model: root.panelWidgets().topORleftSide || []
-                        Loader {
-                            source: modelData
-                            onLoaded: {
-                                isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                            }
-                        }
-                    }
-                }
-
-                Row {
+                RectBackground {
                     anchors.centerIn: parent
+                    height: parent.height - padding; width: parent.width - padding
+                    Row {
+                        anchors {
+                            left: parent.left
+                            verticalCenter: parent.verticalCenter
+                        }
 
-                    Repeater {
-                        model: root.panelWidgets().centerSide || []
-                        Loader {
-                            source: modelData
-                            onLoaded: {
-                                isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
+                        Repeater {
+                            model: root.panelWidgets().topORleftSide || []
+                            Loader {
+                                source: modelData
+                                onLoaded: {
+                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
+                                }
+                            }
+                        }
+                    }
+
+                    Row {
+                        anchors.centerIn: parent
+
+                        Repeater {
+                            model: root.panelWidgets().centerSide || []
+                            Loader {
+                                source: modelData
+                                onLoaded: {
+                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
+                                }
+                            }
+                        }
+                    }
+
+                    Row {
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
+
+                        Repeater {
+                            model: root.panelWidgets().bottomORrightSide || []
+                            Loader {
+                                source: modelData
+                                onLoaded: {
+                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
+                                }
                             }
                         }
                     }
                 }
 
-                Row {
-                    anchors {
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                    }
-
-                    Repeater {
-                        model: root.panelWidgets().bottomORrightSide || []
-                        Loader {
-                            source: modelData
-                            onLoaded: {
-                                isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                            }
-                        }
-                    }
-                }
             }
 
             // PanelWindow {
