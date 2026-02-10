@@ -34,7 +34,7 @@ QtObject {
 
     // шпалери
     property var imagesList: []
-    property url images: "file:///home/linco02/assets/wallpaper/b-060.jpg"
+    property url images: ""
 
     // згенерована палітра
     property color color1: "transparent"

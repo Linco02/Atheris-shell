@@ -8,7 +8,7 @@ Item {
 
     FolderListModel {
         id: listWallpaper
-        folder: "file:///home/linco02/assets/wallpaper"
+        folder: "file:///home/linco02/Atheris/assets/wallpaper/"
         nameFilters: ["*.jpg", "*.png"]
 
         onStatusChanged: {

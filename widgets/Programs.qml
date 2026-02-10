@@ -1,4 +1,3 @@
-//@ pragma IconTheme Papirus
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
@@ -19,9 +18,10 @@ RectForeground {
                 // color: modelData.focused ? "red" : "blue"
 
                 IconImage {
-                    height: parent.height; width: parent.height
+                    implicitSize: parent.height
                     // Передаємо appId вікна як назву іконки
                     source: Quickshell.iconPath(modelData.appId.split('.').pop().toLowerCase())
+
                 }
                 
                 MouseArea {
