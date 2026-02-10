@@ -18,7 +18,8 @@ RectForeground {
                 // color: modelData.focused ? "red" : "blue"
 
                 IconImage {
-                    implicitSize: parent.height
+                    anchors.centerIn: parent
+                    implicitSize: parent.height - 4
                     // Передаємо appId вікна як назву іконки
                     source: Quickshell.iconPath(modelData.appId.split('.').pop().toLowerCase())
 
