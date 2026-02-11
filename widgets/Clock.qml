@@ -10,15 +10,23 @@ Item {
     height: isVerticalPanel ? clockText.height + Style.padding * 2 : panelHeight 
     width: isVerticalPanel ? panelWidth : clockText.width + Style.padding * 2
 
+    function clockUpdate() {
+        time = new Date().toLocaleTimeString("h:mm:ss")
+        if (isVerticalPanel === true) {
+            date = time.replace(/:/g, "\n")
+        } else
+        date = time
+    }
+
     Connections {
         target: SingleTimer1
         function onTick() { 
-            time = new Date().toLocaleTimeString("h:mm:ss")
-            if (isVerticalPanel === true) {
-                date = time.replace(/:/g, "\n")
-            } else
-            date = time
+            clockUpdate()
         }
+    }
+
+    Component.onCompleted: {
+        clockUpdate()
     }
 
     RectForeground {
