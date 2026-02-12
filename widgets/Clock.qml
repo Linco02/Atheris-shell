@@ -31,7 +31,6 @@ Item {
 
     RectForeground {
         anchors.centerIn: parent
-        radius: 0
         height: isVerticalPanel ? clockText.height : parent.height
         width: isVerticalPanel ? parent.width : parent.width - Style.padding
         TextStyle1 {

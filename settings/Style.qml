@@ -47,7 +47,8 @@ QtObject {
     property color color8: "transparent"
 
     // колір елементів
-    property color backGround: color2
+    property color panelColor: color2
+    property color backGround: '#4ae52b'
     property color foreGround: "#E52B50"
     property color centerGround: "#F0F8FF"
     property color borderColor: "#FFBF00"

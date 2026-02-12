@@ -50,7 +50,7 @@ PanelWindow {
         ancorSide === Panel.PanelSide.Right ? Style.rightPanel : 0
     }
 
-    color: Style.backGround
+    color: Style.panelColor
 
     function panelWidgets() {
         switch(ancorSide){
@@ -75,18 +75,20 @@ PanelWindow {
         id: topBottom
         Item {
             anchors.fill: parent
-
             Item {
-                anchors.fill: parent
-
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+                height: 30; width: leftTBRow.width
                 RectBackground {
-                    anchors.centerIn: parent
-                    height: parent.height - padding; width: parent.width - padding
-                    Row {
-                        anchors {
-                            left: parent.left
-                            verticalCenter: parent.verticalCenter
-                        }
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: 20; width: leftTBRow.width
+                    x: 10
+                    
+                    RowStyle1 {
+                        id: leftTBRow
+                        anchors.centerIn: parent
 
                         Repeater {
                             model: root.panelWidgets().topORleftSide || []
@@ -98,8 +100,19 @@ PanelWindow {
                             }
                         }
                     }
+                }
+            }
 
-                    Row {
+            Item {
+                anchors.centerIn: parent
+                height: 30; width: leftTBRow.width
+                RectBackground {
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: 20; width: centerTBRow.width
+                    x: 10
+                    
+                    RowStyle1 {
+                        id: centerTBRow
                         anchors.centerIn: parent
 
                         Repeater {
@@ -112,8 +125,24 @@ PanelWindow {
                             }
                         }
                     }
+                }
+            }
 
-                    Row {
+
+
+            Item {
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+                height: 30; width: leftTBRow.width
+                RectBackground {
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: 20; width: rightTBRow.width
+                    x: 10
+                    
+                    RowStyle1 {
+                        id: rightTBRow
                         anchors {
                             right: parent.right
                             verticalCenter: parent.verticalCenter
@@ -130,8 +159,9 @@ PanelWindow {
                         }
                     }
                 }
-
             }
+
+
 
             // PanelWindow {
             //     id: leftCorner
