@@ -13,6 +13,7 @@ PanelWindow {
     property bool isVerticalPanel: !isHorizontalPanel
     property bool isTop: ancorSide === Panel.PanelSide.Top
 
+    property int heightTB: height - Style.padding * 2
     property int panelHeight: height
     property int panelWidth: width
     property real radius: Style.radius2
@@ -75,29 +76,27 @@ PanelWindow {
         id: topBottom
         Item {
             anchors.fill: parent
+
             Item {
                 anchors {
                     left: parent.left
                     verticalCenter: parent.verticalCenter
                 }
-                height: 30; width: leftTBRow.width
-                RectBackground {
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: 20; width: leftTBRow.width
-                    x: 10
-                    
-                    RowStyle1 {
-                        id: leftTBRow
-                        anchors.centerIn: parent
+                height: root.height - Style.padding * 2; width: leftTBRow.width
 
-                        Repeater {
-                            model: root.panelWidgets().topORleftSide || []
-                            Loader {
-                                source: modelData
-                                onLoaded: {
-                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                                }
-                            }
+                RowStyle1 {
+                    id: leftTBRow
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: 10
+
+                    Repeater {
+                        model: root.panelWidgets().topORleftSide || []
+                        Loader {
+                            source: modelData
+                            // onLoaded: {
+                                // isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
+                                // heightTB = Qt.binding(() => root.heightTB)
+                            // }
                         }
                     }
                 }
@@ -105,56 +104,43 @@ PanelWindow {
 
             Item {
                 anchors.centerIn: parent
-                height: 30; width: leftTBRow.width
-                RectBackground {
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: 20; width: centerTBRow.width
-                    x: 10
-                    
-                    RowStyle1 {
-                        id: centerTBRow
-                        anchors.centerIn: parent
+                height: root.height - Style.padding * 2; width: centerTBRow.width
 
-                        Repeater {
-                            model: root.panelWidgets().centerSide || []
-                            Loader {
-                                source: modelData
-                                onLoaded: {
-                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                                }
+                RowStyle1 {
+                    id: centerTBRow
+                    anchors.centerIn: parent
+
+                    Repeater {
+                        model: root.panelWidgets().centerSide || []
+                        Loader {
+                            source: modelData
+                            onLoaded: {
+                                isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
                             }
                         }
                     }
                 }
             }
 
-
-
             Item {
                 anchors {
                     right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
-                height: 30; width: leftTBRow.width
-                RectBackground {
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: 20; width: rightTBRow.width
-                    x: 10
+                height: root.height - Style.padding * 2; width: rightTBRow.width
                     
-                    RowStyle1 {
-                        id: rightTBRow
-                        anchors {
-                            right: parent.right
-                            verticalCenter: parent.verticalCenter
-                        }
+                RowStyle1 {
+                    id: rightTBRow
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: -10
 
-                        Repeater {
-                            model: root.panelWidgets().bottomORrightSide || []
-                            Loader {
-                                source: modelData
-                                onLoaded: {
-                                    isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                                }
+                    Repeater {
+                        model: root.panelWidgets().bottomORrightSide || []
+
+                        Loader {
+                            source: modelData
+                            onLoaded: {
+                                isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
                             }
                         }
                     }

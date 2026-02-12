@@ -13,10 +13,10 @@ QtObject {
     property real radius: 15 * scale
     property real radius2: 20 * scale
     property real padding: 5 * scale
-    property real spacing: 15 * scale
+    property real spacing: 5 * scale
 
     // панелі
-    property real topPanel: 30 * scale
+    property real topPanel: 32 * scale
     property real bottomPanel: 15 * scale
     property real leftPanel: 10 * scale
     property real rightPanel: 10 * scale
@@ -48,7 +48,7 @@ QtObject {
 
     // колір елементів
     property color panelColor: color2
-    property color backGround: '#4ae52b'
+    property color backGround: color3
     property color foreGround: "#E52B50"
     property color centerGround: "#F0F8FF"
     property color borderColor: "#FFBF00"

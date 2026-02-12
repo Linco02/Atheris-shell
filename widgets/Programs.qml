@@ -5,7 +5,7 @@ import Quickshell.Widgets
 import qs.settings
 import qs.components
 
-RectForeground {
+RectBackground {
     id: root
     height: 20; width: 120
     Row {

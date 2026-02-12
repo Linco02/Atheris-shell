@@ -16,7 +16,7 @@ QtObject {
     property var topPanel: {
         "topORleftSide": [ "../widgets/Workspace.qml", "../widgets/Programs.qml" ],
         "centerSide": [ "../widgets/Clock.qml" ],
-        "bottomORrightSide": [ "../widgets/Volume.qml", "../widgets/Network.qml", "../widgets/Language.qml" ]
+        "bottomORrightSide": [ "../widgets/Services.qml" ]
     }
     property var bottomPanel: {
         "topORleftSide": [  ],

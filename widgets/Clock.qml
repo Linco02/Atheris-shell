@@ -3,42 +3,20 @@ import qs.singletons
 import qs.settings
 import qs.components
 
-Item {
-    property var date: ""
-    property var time: ""
-
-    height: isVerticalPanel ? clockText.height + Style.padding * 2 : panelHeight 
-    width: isVerticalPanel ? panelWidth : clockText.width + Style.padding * 2
-
-    function clockUpdate() {
-        time = new Date().toLocaleTimeString("h:mm:ss")
-        if (isVerticalPanel === true) {
-            date = time.replace(/:/g, "\n")
-        } else
-        date = time
-    }
+RectBackground {
+    height: 20; width: clockText.width + Style.padding * 2
+    property string time: ""
 
     Connections {
-        target: SingleTimer1
-        function onTick() { 
-            clockUpdate()
+        target: Time
+        function onDate(data) {
+            time = data
         }
     }
 
-    Component.onCompleted: {
-        clockUpdate()
-    }
-
-    RectForeground {
+    Text {
+        id: clockText
         anchors.centerIn: parent
-        height: isVerticalPanel ? clockText.height : parent.height
-        width: isVerticalPanel ? parent.width : parent.width - Style.padding
-        TextStyle1 {
-            id: clockText
-            anchors.centerIn: parent
-            font.pointSize: isVerticalPanel ? parent.width - Style.padding * 3 : parent.height - Style.padding * 2
-            text: date
-            wrapMode: Text.Wrap
-        }
+        text: time
     }
 }

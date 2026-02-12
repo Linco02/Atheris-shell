@@ -3,7 +3,7 @@ import Quickshell.Hyprland
 import qs.settings
 import qs.components
 
-RectForeground {
+RectBackground {
     id: root
     height: 20; width: wsList.width + Style.padding * 2
     Row {

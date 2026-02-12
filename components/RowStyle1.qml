@@ -1,5 +1,7 @@
 import QtQuick
+import qs.settings
 
 Row {
-    spacing: 10
+    spacing: Style.spacing
 }
+

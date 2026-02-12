@@ -1,3 +1,5 @@
-singleton SingleTimer1 1.0 SingleTimer1.qml
-singleton SingleTimer2 1.0 SingleTimer2.qml
 singleton WallpaperListInit 1.0 WallpaperListInit.qml
+singleton Time 1.0 Time.qml
+singleton Timer1s 1.0 Timer1s.qml
+singleton Timer3s 1.0 Timer3s.qml
+singleton Timer30s 1.0 Timer30s.qml

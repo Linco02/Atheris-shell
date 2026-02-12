@@ -1,16 +1,12 @@
 import QtQuick
-import qs.components
 import Quickshell.Hyprland
+import qs.components
+import qs.settings
 
-RectForeground {
-    height: 20; width: 40
+Item {
+    height: 20; width: languageText.width + Style.padding * 2
 
     property string currentLayout: "US"
-
-    Text {
-        anchors.centerIn: parent
-        text: currentLayout
-    }
 
     function currentLayoutParse(event) {
         if (event.name === "activelayout") {
@@ -27,6 +23,13 @@ RectForeground {
 
     Component.onCompleted: {
         Hyprland.rawEvent.connect(currentLayoutParse);
+    }
+
+    TextStyle2 {
+        id: languageText
+        anchors.centerIn: parent
+        text: currentLayout
+        font.weight: 600
     }
 }
 

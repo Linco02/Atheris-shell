@@ -3,9 +3,10 @@ import Quickshell
 import Quickshell.Io
 import qs.components
 import qs.singletons
+import qs.settings
 
-RectForeground {
-    height: 20; width: 80
+Item {
+    height: 20; width: volumeText.width + Style.padding * 2
 
     property real volumeLevel: 0
 
@@ -16,7 +17,7 @@ RectForeground {
     }
 
     Connections {
-        target: SingleTimer1
+        target: Timer1s
         function onTick() {volumeLevelInfo.running = true}
     }
 
@@ -31,8 +32,9 @@ RectForeground {
         }
     }
 
-    Text {
+    TextStyle2 {
+        id: volumeText
         anchors.centerIn: parent
-        text: "󰕾 " + volumeLevel + "%"
+        text: "󰕾"
     }
 }

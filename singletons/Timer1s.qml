@@ -10,4 +10,9 @@ QtObject {
         interval: 1000; running: true; repeat: true
         onTriggered: { root.tick() }
     }
+
+    property Timer start: Timer {
+        interval: 0; running: true
+        onTriggered: { root.tick() }
+    }
 }

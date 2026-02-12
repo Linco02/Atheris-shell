@@ -3,9 +3,10 @@ import Quickshell
 import Quickshell.Io
 import qs.components
 import qs.singletons
+import qs.settings
 
-RectForeground {
-    height: 20; width: 40
+Item {
+    height: 20; width: networkText.width + Style.padding * 2
     property string currentNetwork: ""
 
     function networkName(data) {
@@ -27,7 +28,7 @@ RectForeground {
     }
 
     Connections {
-        target: SingleTimer2
+        target: Timer3s
         function onTick() {networkNameInfo.running = true}
     }
 
@@ -42,7 +43,8 @@ RectForeground {
         }
     }
 
-    Text {
+    TextStyle2 {
+        id: networkText
         anchors.centerIn: parent
         text: currentNetwork
     }
