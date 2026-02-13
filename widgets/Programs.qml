@@ -5,22 +5,25 @@ import Quickshell.Widgets
 import qs.settings
 import qs.components
 
-RectBackground {
+RectForeground {
     id: root
-    height: 20; width: 120
-    Row {
+    height: panelHeight - Style.padding2x; width: programsRow.width + Style.padding2x
+
+    RowStyle1 {
+        id: programsRow
+        anchors.centerIn: parent
+        
         Repeater {
             model: ToplevelManager.toplevels
 
-            Item {
-                // visible: modelData.id > 0
-                height: root.height; width: root.height
-                // color: modelData.focused ? "red" : "blue"
+            Rectangle {
+                height: root.height; width: modelData.activated ? root.height + Style.padding2x : root.height
+                color: modelData.activated ? Style.activeColor : "transparent"
+                radius: Style.radius
 
                 IconImage {
                     anchors.centerIn: parent
-                    implicitSize: parent.height - 4
-                    // Передаємо appId вікна як назву іконки
+                    implicitSize: 16
                     source: Quickshell.iconPath(modelData.appId.split('.').pop().toLowerCase())
 
                 }

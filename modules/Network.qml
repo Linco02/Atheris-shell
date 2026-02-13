@@ -6,7 +6,7 @@ import qs.singletons
 import qs.settings
 
 Item {
-    height: 20; width: networkText.width + Style.padding * 2
+    height: panelHeight - Style.padding2x; width: networkText.width + Style.padding * 2
     property string currentNetwork: ""
 
     function networkName(data) {
@@ -14,10 +14,10 @@ Item {
         for (const networkList of networString) {
             const parts = networkList.split(":")
             if (parts[1] === "connected") {
-                if (parts[0] === "enp4s0") {
+                if (parts[0] === "enp5s0") {
                     currentNetwork = ""
                     return
-                } else if (parts[0] === "wlp6s0") {
+                } else if (parts[0] === "wlp7s0") {
                     currentNetwork = "󰖩"
                     return
                 } else {

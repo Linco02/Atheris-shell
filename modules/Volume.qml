@@ -6,7 +6,7 @@ import qs.singletons
 import qs.settings
 
 Item {
-    height: 20; width: volumeText.width + Style.padding * 2
+    height: panelHeight - Style.padding2x; width: volumeText.width + Style.padding * 2
 
     property real volumeLevel: 0
 

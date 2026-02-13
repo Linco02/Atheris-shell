@@ -3,7 +3,7 @@ import qs.components
 import qs.modules
 
 
-RectBackground {
+RectForeground {
     anchors.centerIn: parent
     implicitHeight: 330; implicitWidth: gpuInfo.width * 3 + 40
 

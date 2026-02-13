@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Quickshell
+import Quickshell.Wayland
 import qs.components
 import qs.settings
 import qs.widgets
@@ -93,10 +94,6 @@ PanelWindow {
                         model: root.panelWidgets().topORleftSide || []
                         Loader {
                             source: modelData
-                            // onLoaded: {
-                                // isVerticalPanel = Qt.binding(() => root.isVerticalPanel)
-                                // heightTB = Qt.binding(() => root.heightTB)
-                            // }
                         }
                     }
                 }

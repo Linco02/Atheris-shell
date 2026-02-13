@@ -4,7 +4,7 @@ import qs.components
 import qs.settings
 
 Item {
-    height: 20; width: languageText.width + Style.padding * 2
+    height: panelHeight - Style.padding2x; width: languageText.width + Style.padding * 2
 
     property string currentLayout: "US"
 
@@ -29,7 +29,6 @@ Item {
         id: languageText
         anchors.centerIn: parent
         text: currentLayout
-        font.weight: 600
     }
 }
 

@@ -13,7 +13,13 @@ PanelWindow {
         right: true
     }
     WlrLayershell.layer: WlrLayer.Background
-    color: "transparent"
+    color: Style.foreGround
 
     Wallpaper {}
+    // LazyLoader {
+    //     // anchors.fill: parent
+    //     asynchronous: false
+    //     active: Settings.enableWallpaper
+    //     component: Wallpaper {}
+    // }
 }

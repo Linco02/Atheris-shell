@@ -3,7 +3,7 @@ import Quickshell.Services.UPower
 import qs.components
 
 Item {
-    height: 20; width: 100
+    height: panelHeight - Style.padding2x; width: 100
 
     RectForeground {
         anchors.fill: parent

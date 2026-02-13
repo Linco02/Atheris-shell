@@ -14,7 +14,7 @@ QtObject {
     property bool enableRightPanel: false
 
     property var topPanel: {
-        "topORleftSide": [ "../widgets/Workspace.qml", "../widgets/Programs.qml" ],
+        "topORleftSide": [ "../widgets/PowerButton.qml" , "../widgets/Workspace.qml", "../widgets/Programs.qml" ],
         "centerSide": [ "../widgets/Clock.qml" ],
         "bottomORrightSide": [ "../widgets/Services.qml" ]
     }

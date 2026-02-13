@@ -3,8 +3,9 @@ import qs.singletons
 import qs.settings
 import qs.components
 
-RectBackground {
-    height: 20; width: clockText.width + Style.padding * 2
+RectForeground {
+    height: panelHeight - Style.padding2x; width: clockText.width + Style.padding * 2
+
     property string time: ""
 
     Connections {
@@ -14,7 +15,7 @@ RectBackground {
         }
     }
 
-    Text {
+    TextStyle2 {
         id: clockText
         anchors.centerIn: parent
         text: time
