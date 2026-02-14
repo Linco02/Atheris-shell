@@ -32,6 +32,7 @@ RectForeground {
         onClicked: {
             jumpMenu.visible = true
             jumpMenu.percent = 1
+            perfomanceWidget.active = true
         }
     }
 
@@ -42,25 +43,58 @@ RectForeground {
         }
     }
 
+    // Menu
+
     Connections {
         target: jumpMenu
 
         function onClose() {
             perfomanceWidget.active = false
         }
-        function onOpen() {
-            perfomanceWidget.active = true
-        }
     }
 
     JumpMenu {
         id: jumpMenu
-        implicitHeight: perfomanceWidget.height;
-        implicitWidth: perfomanceWidget.width + radius2 * 2
+        implicitHeight: controlCenterWidget.height;
+        implicitWidth: controlCenterWidget.width
 
+        Item {
+            id: controlCenterWidget
+            height: perfomanceWidget.height + navigation.height; width: perfomanceWidget.width + Style.radius2 * 2
 
-        Perfomance {
-            id: perfomanceWidget
+            Rectangle {
+                id: navigation
+                height: 0; width: parent.weight
+                color: "red"
+
+                // Row {
+                //     // anchors.centerIn: parent
+                //     Rectangle {
+                //         height: navigation.height - Style.padding2x; width: height
+                //         color: "blue"
+                //     }
+                // }
+
+            }
+
+            Perfomance {
+                id: perfomanceWidget
+                property bool active: false
+                property real fade: - height
+                y: fade
+
+                Behavior on fade {
+                    NumberAnimation { duration: Style.spedAnim }
+                }
+
+                onActiveChanged: {
+                    if(active) {
+                        fade = navigation.height
+                    } else {
+                        fade = - height
+                    }
+                }
+            }
         }
     }
 }

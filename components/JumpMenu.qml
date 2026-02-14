@@ -15,7 +15,6 @@ PopupWindow {
     color: "transparent"
 
     signal close()
-    signal open()
 
     property bool isTop: root.isTop
     property int rotate: isTop ? 180 : 0
@@ -25,16 +24,16 @@ PopupWindow {
 
     Behavior on percent {
         NumberAnimation {
-            duration: 400
+            duration: Style.spedAnim
             easing.type: Easing.InOutQuad
         }
     }
 
     onPercentChanged: {
-        if (percent === 0 && jumpMenuComponents.visible) {
+        if (percent === 0) {
             jumpMenuComponents.visible = false
-        } else if(percent === 1) {
-            open()
+        } else {
+            return
         }
     }
 
@@ -55,6 +54,10 @@ PopupWindow {
             top: isTop ? parent.top : undefined
         }
         height: parent.height * percent; width: parent.width - radius2 * 2
+        layer {
+            enabled: true
+            samples: 4
+        }
         rotation: rotate
 
         MouseArea {
@@ -96,6 +99,10 @@ PopupWindow {
             bottom: isTop ? undefined : box.bottom
             top: isTop ? box.top : undefined
         }
+        layer {
+            enabled: true
+            samples: 4
+        }
         rotation: rotate
 
         ShapePath {
@@ -120,6 +127,10 @@ PopupWindow {
             left: isTop ? undefined : box.right
             bottom: root.isTop ? undefined : box.bottom
             top: root.isTop ? box.top : undefined
+        }
+        layer {
+            enabled: true
+            samples: 4
         }
         rotation: rotate
 

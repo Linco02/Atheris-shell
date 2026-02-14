@@ -1,62 +1,51 @@
 import QtQuick
 import qs.components
 import qs.modules
+import qs.settings
 
 
 Item {
     id: perfomanceWidget
     implicitHeight: gpuInfo.height + memSpace.height + 20
     implicitWidth: gpuInfo.width * 3 + 40
-    y: -height; x: 20
+    y: 0; x: 20
 
-    property bool active: false
-    onActiveChanged: {
-        if(active) {
-            sleep.running = true
-        } else {
-            y = -height
-        }
-    }
+    // property bool active: false
+    // property real fade: - height
 
-    Timer {
-        id: sleep
-        interval: 300; running: false
-        onTriggered: {
-            fadeIn.start();
-            y = 0
-        }
-    }
+    // onActiveChanged: {
+    //     if(active) {
+    //         fade = 0
+    //     } else {
+    //         fade = - height
+    //     }
+    // }
 
-    NumberAnimation {
-        id: fadeIn
-        target: perfomanceWidget
-        property: "y"
-        from: -parent.height; to: 0
-        duration: 300
-        // easing.type: Easing.OutCubic
-    }
+    // Behavior on fade {
+    //     NumberAnimation { duration: Style.spedAnim }
+    // }
 
     PerfomanceGliph {
         id: gpuInfo
-        x: 10
+        x: Style.padding2x
         property string info3: "GPU"
     }
 
     PerfomanceGliph {
         id: cpuInfo
-        x: 200 + 40
+        x: width + Style.padding2x * 2
         property string info3: "CPU"
     }
 
     PerfomanceGliph {
         id: memInfo
         // anchors.left: cpuInfo.right
-        x: 400 + 70
+        x: width * 2 + Style.padding2x * 3
         property string info3: "MEM"
     }
 
-    SpaceGliph {
+    SpaceGliph2 {
         id: memSpace
-        y: gpuInfo.height + 10; x: 10
+        y: gpuInfo.height + Style.padding2x; x: Style.padding2x
     }
 }

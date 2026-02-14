@@ -122,6 +122,10 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.width - 20; width: parent.width - 20
             y: name.height + 10
+            layer {
+                enabled: true
+                samples: 4
+            }
 
             ShapePath {
                 strokeColor: Style.backGround
@@ -142,6 +146,10 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.width - 20; width: parent.width - 20
             y: name.height + 10
+            layer {
+                enabled: true
+                samples: 4
+            }
 
             ShapePath {
                 strokeColor: Style.activeColor

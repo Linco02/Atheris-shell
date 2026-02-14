@@ -19,7 +19,6 @@ RectForeground {
         onExited: powerWidget.color = Style.foreGround
         onClicked: {
             exitMenuLoader.active = true
-            exitMenu.visible = true
         }
     }
 
