@@ -7,7 +7,6 @@ import qs.settings
 import qs.components
 
 PanelWindow {
-    id: root
     anchors {
         top: true
         left: true

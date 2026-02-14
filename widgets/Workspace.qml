@@ -4,7 +4,7 @@ import qs.settings
 import qs.components
 
 RectForeground {
-    id: root
+    id: workSpaceWidget
     height: panelHeight - Style.padding2x; width: wsList.width
 
     function workspaceMowe(workSpace) {
@@ -23,7 +23,7 @@ RectForeground {
             Rectangle {
                 radius: Style.radius
                 visible: modelData.id > 0
-                height: root.height; width:  modelData.activate ? root.height * 2 : root.height
+                height: workSpaceWidget.height; width:  modelData.activate ? workSpaceWidget.height * 2 : workSpaceWidget.height
                 color: modelData.focused ? Style.activeColor :
                        modelData.urgent ? "red" :
                        "transparent"

@@ -3,7 +3,7 @@ import qs.components
 import qs.settings
 
 RectForeground {
-    id: root
+    id: powerWidget
     height: panelHeight - Style.padding2x; width: powerButton.width + Style.padding * 2
 
     TextStyle2 {
@@ -15,8 +15,8 @@ RectForeground {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: root.color = Style.activeColor
-        onExited: root.color = Style.foreGround
+        onEntered: powerWidget.color = Style.activeColor
+        onExited: powerWidget.color = Style.foreGround
         onClicked: {
             exitMenuLoader.active = true
             exitMenu.visible = true

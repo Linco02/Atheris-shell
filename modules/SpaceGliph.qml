@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell.Io
 import qs.components
 import qs.settings
+import qs.singletons
 
 RectForeground {
     id: root
@@ -15,7 +16,7 @@ RectForeground {
     height: 60; width: parent.width - 20
 
     Connections {
-        target: SingleTimer2
+        target: Timer3s
         function onTick() { checkInfo.running = true }
     }
 

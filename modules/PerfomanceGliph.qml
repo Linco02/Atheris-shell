@@ -4,6 +4,7 @@ import QtQuick.Shapes
 import Quickshell.Io
 import qs.components
 import qs.settings
+import qs.singletons
 
 Item {
     id: root
@@ -20,7 +21,7 @@ Item {
     height: 240; width: 220
     
     Connections {
-        target: SingleTimer1
+        target: Timer3s
         function onTick() { checkInfo.running = true }
     }
 

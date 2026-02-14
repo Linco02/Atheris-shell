@@ -18,7 +18,7 @@ QtObject {
 
     // панелі
     property real topPanel: 34 * scale
-    property real bottomPanel: 15 * scale
+    property real bottomPanel: 34 * scale
     property real leftPanel: 10 * scale
     property real rightPanel: 10 * scale
 

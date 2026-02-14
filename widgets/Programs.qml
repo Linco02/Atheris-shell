@@ -6,7 +6,7 @@ import qs.settings
 import qs.components
 
 RectForeground {
-    id: root
+    id: programsWidget
     height: panelHeight - Style.padding2x; width: programsRow.width + Style.padding2x
 
     RowStyle1 {
@@ -17,7 +17,7 @@ RectForeground {
             model: ToplevelManager.toplevels
 
             Rectangle {
-                height: root.height; width: modelData.activated ? root.height + Style.padding2x : root.height
+                height: programsWidget.height; width: modelData.activated ? programsWidget.height + Style.padding2x : programsWidget.height
                 color: modelData.activated ? Style.activeColor : "transparent"
                 radius: Style.radius
 

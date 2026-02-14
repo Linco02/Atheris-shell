@@ -19,9 +19,9 @@ QtObject {
         "bottomORrightSide": [ "../widgets/Services.qml" ]
     }
     property var bottomPanel: {
-        "topORleftSide": [  ],
-        "centerSide": [  ],
-        "bottomORrightSide": [  ]
+        "topORleftSide": [ "../widgets/PowerButton.qml" , "../widgets/Workspace.qml", "../widgets/Programs.qml" ],
+        "centerSide": [ "../widgets/Clock.qml" ],
+        "bottomORrightSide": [ "../widgets/Services.qml" ]
     }
     property var leftPanel: {
         "topORleftSide": [  ],
