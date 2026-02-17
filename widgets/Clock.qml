@@ -39,7 +39,7 @@ RectForeground {
         }
     }
 
-    ControlCenter {
+    DashBoard {
         id: controlCenter
     }
 }

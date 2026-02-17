@@ -10,6 +10,11 @@ ShellRoot {
         component: Background {}
     }
 
+    // LazyLoader {
+    //     active: Settings.enableNotificationsDaemon
+    //     component: NotificationsDaemon {}
+    // }
+
     LazyLoader {
         active: Settings.enableTopPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Top }
@@ -26,6 +31,7 @@ ShellRoot {
         active: Settings.enableRightPanel
         component: Panel { property int ancorSide: Panel.PanelSide.Right }
     }
+    
 }
 
 // PanelWindow {
