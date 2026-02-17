@@ -29,7 +29,7 @@ PopupWindow {
 
 
     function openMenu() {
-        if (jumpMenu.visible) {
+        if (jumpMenuComponents.visible) {
             stateManager.state = "closed"
         } else {
             visible = true

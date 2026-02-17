@@ -6,6 +6,14 @@ RectForeground {
     id: powerWidget
     height: panelHeight - Style.padding2x; width: powerButton.width + Style.padding * 2
 
+    function openExitMenu() {
+        if (exitMenuLoader.active) {
+            exitMenuLoader.active = false
+        } else {
+            exitMenuLoader.active = true
+        }
+    }
+
     TextStyle2 {
         anchors.centerIn: parent
         id: powerButton
@@ -18,7 +26,7 @@ RectForeground {
         onEntered: powerWidget.color = Style.activeColor
         onExited: powerWidget.color = Style.foreGround
         onClicked: {
-            exitMenuLoader.active = true
+            openExitMenu()
         }
     }
 
