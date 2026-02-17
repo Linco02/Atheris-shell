@@ -10,14 +10,14 @@ QtObject {
     property real scale: 1
 
     // анімації
-    property int spedAnim: 300
+    property int spedAnim: 400
     
     // декорація
     property real radius: 15 * scale
     property real radius2: 20 * scale
     property real padding: 5 * scale
     property real padding2x: padding * 2
-    property real spacing: 5 * scale
+    property real spacing: 10 * scale
 
     // панелі
     property real topPanel: 34 * scale

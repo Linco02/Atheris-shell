@@ -29,11 +29,7 @@ RectForeground {
         hoverEnabled: true
         onEntered: clockwidget.color = Style.activeColor
         onExited: clockwidget.color = Style.foreGround
-        onClicked: {
-            jumpMenu.visible = true
-            jumpMenu.percent = 1
-            perfomanceWidget.active = true
-        }
+        onClicked: jumpMenu.openMenu()
     }
 
     Behavior on color {
@@ -44,56 +40,64 @@ RectForeground {
     }
 
     // Menu
-
-    Connections {
-        target: jumpMenu
-
-        function onClose() {
-            perfomanceWidget.active = false
-        }
-    }
-
     JumpMenu {
         id: jumpMenu
-        implicitHeight: controlCenterWidget.height;
-        implicitWidth: controlCenterWidget.width
+        containerHeight: controlCenterWidget.height
+        containerWidth: controlCenterWidget.width
 
-        Item {
+        Column {
             id: controlCenterWidget
-            height: perfomanceWidget.height + navigation.height; width: perfomanceWidget.width + Style.radius2 * 2
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: Style.spacing
 
-            Rectangle {
+            Item {
                 id: navigation
-                height: 0; width: parent.weight
-                color: "red"
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: switchNavigation.height
+                width: switchNavigation.width + Style.spacing
 
-                // Row {
-                //     // anchors.centerIn: parent
-                //     Rectangle {
-                //         height: navigation.height - Style.padding2x; width: height
-                //         color: "blue"
-                //     }
-                // }
+                Row {
+                    id: switchNavigation
+                    anchors.centerIn: parent
+                    spacing: navigation.height * 3 / 2
 
+                    Item {
+                        height: 40; width: height
+
+                        TextStyle2 {
+                            anchors.centerIn: parent
+                            text: "󰨝"
+                        }
+                    }
+
+                    Item {
+                        height: 40; width: height
+
+                        TextStyle2 {
+                            anchors.centerIn: parent
+                            text: ""
+                        }
+                    }
+
+                    Item {
+                        height: 40; width: height
+
+                        TextStyle2 {
+                            anchors.centerIn: parent
+                            text: "󰼄"
+                        }
+                    }
+                }
+            }
+
+            RectForeground {
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: 2
+                width: parent.width - Style.spacing * 2
             }
 
             Perfomance {
-                id: perfomanceWidget
-                property bool active: false
-                property real fade: - height
-                y: fade
-
-                Behavior on fade {
-                    NumberAnimation { duration: Style.spedAnim }
-                }
-
-                onActiveChanged: {
-                    if(active) {
-                        fade = navigation.height
-                    } else {
-                        fade = - height
-                    }
-                }
+                anchors.horizontalCenter: parent.horizontalCenter
             }
         }
     }

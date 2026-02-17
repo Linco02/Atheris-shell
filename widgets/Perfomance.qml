@@ -6,46 +6,43 @@ import qs.settings
 
 Item {
     id: perfomanceWidget
-    implicitHeight: gpuInfo.height + memSpace.height + 20
-    implicitWidth: gpuInfo.width * 3 + 40
-    y: 0; x: 20
+    implicitHeight: perfomanceBox.height + Style.padding2x
+    implicitWidth: box1.width + Style.padding2x * 2
 
-    // property bool active: false
-    // property real fade: - height
+    Column {
+        id: perfomanceBox
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: Style.padding2x
 
-    // onActiveChanged: {
-    //     if(active) {
-    //         fade = 0
-    //     } else {
-    //         fade = - height
-    //     }
-    // }
+        Row {
+            id: box1
+            spacing: Style.padding2x
 
-    // Behavior on fade {
-    //     NumberAnimation { duration: Style.spedAnim }
-    // }
+            PerfomanceGliph {
+                id: gpuInfo
+                property string info3: "GPU"
+            }
 
-    PerfomanceGliph {
-        id: gpuInfo
-        x: Style.padding2x
-        property string info3: "GPU"
-    }
+            PerfomanceGliph {
+                property string info3: "CPU"
+            }
 
-    PerfomanceGliph {
-        id: cpuInfo
-        x: width + Style.padding2x * 2
-        property string info3: "CPU"
-    }
+            PerfomanceGliph {
+                property string info3: "MEM"
+            }
+        }
+        
+        Column {
+            id: box2
+            spacing: Style.padding2x
 
-    PerfomanceGliph {
-        id: memInfo
-        // anchors.left: cpuInfo.right
-        x: width * 2 + Style.padding2x * 3
-        property string info3: "MEM"
-    }
+            SpaceGliph2 {
+                height: 60; width: perfomanceBox.width
+            }
 
-    SpaceGliph2 {
-        id: memSpace
-        y: gpuInfo.height + Style.padding2x; x: Style.padding2x
+            SpaceGliph2 {
+                height: 60; width: perfomanceBox.width
+            }
+        }
     }
 }

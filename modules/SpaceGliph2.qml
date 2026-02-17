@@ -13,8 +13,6 @@ RectForeground {
     property string textInd2: ""
     property double percent: 0
 
-    height: 60; width: parent.width - 20
-
     Connections {
         target: Timer3s
         function onTick() { checkInfo.running = true }

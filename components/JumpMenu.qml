@@ -11,83 +11,125 @@ PopupWindow {
         rect.x: root.width / 2 - width / 2
         rect.y: isTop ? root.height : - root.height - height
     }
+    implicitHeight: box.height
+    implicitWidth: box.width + radius2 * 2
     visible: false
     color: "transparent"
 
-    signal close()
+    default property alias contents: inerBox.data
+    property alias containerHeight: inerBox.height
+    property alias containerWidth: inerBox.width
 
     property bool isTop: root.isTop
     property int rotate: isTop ? 180 : 0
+
     property real radius: Style.radius
     property real radius2: Style.radius2
     property real percent: 0
 
-    Behavior on percent {
-        NumberAnimation {
-            duration: Style.spedAnim
-            easing.type: Easing.InOutQuad
+
+    function openMenu() {
+        if (jumpMenu.visible) {
+            stateManager.state = "closed"
+        } else {
+            visible = true
+            stateManager.state = "open"
         }
     }
 
-    onPercentChanged: {
-        if (percent === 0) {
-            jumpMenuComponents.visible = false
-        } else {
-            return
-        }
+    Item {
+        id: stateManager
+        states: [
+            State {
+                name: "closed"
+                PropertyChanges { target: box; y: -box.height }
+                PropertyChanges { target: jumpMenuComponents; percent: 0 }
+            },
+            State {
+                name: "open"
+                PropertyChanges { target: box; y: 0 }
+                PropertyChanges { target: jumpMenuComponents; percent: 1 }
+            }
+        ]
+        
+        state: "closed"
+
+        transitions: [
+            Transition {
+                from: "open"; to: "closed"
+                SequentialAnimation {
+                    ParallelAnimation {
+                        DefaultNumAnim { property: "y" }
+                        DefaultNumAnim { property: "percent" }
+                    }
+
+                    PropertyAction {
+                        target: jumpMenuComponents
+                        property: "visible"
+                        value: false
+                    }
+                }
+            },
+
+            Transition {
+                from: "closed"; to: "open"
+                ParallelAnimation {
+                    DefaultNumAnim { property: "y" }
+                    DefaultNumAnim { property: "percent" }
+                }
+            }
+        ]
     }
 
     Timer {
         id: time
         interval: 100
         onTriggered: {
-            jumpMenuComponents.percent = 0
-            close()
+            percent = 0
+            stateManager.state = "closed"
         }
     }
 
-    Shape {
+    Item {
         id: box
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: isTop ? undefined : parent.bottom
-            top: isTop ? parent.top : undefined
-        }
-        height: parent.height * percent; width: parent.width - radius2 * 2
-        layer {
-            enabled: true
-            samples: 4
-        }
-        rotation: rotate
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: inerBox.height; width: inerBox.width
 
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onEntered: {
-                jumpMenuComponents.visible = true
-                jumpMenuComponents.percent = 1
-                time.stop()
-            }
             onExited: {
                 time.running = true
             }
         }
 
-        ShapePath {
-            strokeWidth: 0
-            fillColor: Style.backGround
-            startY: radius2; startX: 0
-            PathArc {
-                y: 0; x: radius2
-                radiusY: radius2; radiusX: radius2
+        Shape {
+            layer {
+                enabled: true
+                samples: 4
             }
-            PathLine { y: 0; x: width - radius2 * 3}
-            PathArc {
-                y: radius2; x: width - radius2 * 2
-                radiusY: radius2; radiusX: radius2
+            rotation: rotate
+
+            ShapePath {
+                strokeWidth: 0
+                fillColor: Style.backGround
+                startY: radius2; startX: 0
+                PathArc {
+                    y: 0; x: radius2
+                    radiusY: radius2; radiusX: radius2
+                }
+                PathLine { y: 0; x: width - radius2 * 3}
+                PathArc {
+                    y: radius2; x: width - radius2 * 2
+                    radiusY: radius2; radiusX: radius2
+                }
+                PathLine { y: height; x: width - radius2 * 2 }
+                PathLine { y: height; x: 0 }
             }
-            PathLine { y: height; x: width - radius2 * 2 }
-            PathLine { y: height; x: 0 }
+        }
+
+        Item {
+            id: inerBox
         }
     }
 
@@ -96,8 +138,8 @@ PopupWindow {
         anchors {
             right: isTop ? undefined : box.left
             left: isTop ? box.right : undefined
-            bottom: isTop ? undefined : box.bottom
-            top: isTop ? box.top : undefined
+            bottom: isTop ? undefined : jumpMenuComponents.bottom
+            top: isTop ? jumpMenuComponents.top : undefined
         }
         layer {
             enabled: true
@@ -125,8 +167,8 @@ PopupWindow {
         anchors {
             right: isTop ? box.left : undefined
             left: isTop ? undefined : box.right
-            bottom: root.isTop ? undefined : box.bottom
-            top: root.isTop ? box.top : undefined
+            bottom: root.isTop ? undefined : jumpMenuComponents.bottom
+            top: root.isTop ? jumpMenuComponents.top : undefined
         }
         layer {
             enabled: true
