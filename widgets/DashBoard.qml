@@ -26,11 +26,11 @@ Item {
 
             Row {
                 spacing: 10
-                RectForeground {
+                Calendar {
                     height: 300; implicitWidth: 300
                 }
 
-                RectForeground {
+                PerfomanceMini {
                     height: 300; implicitWidth: 100
                 }
             }

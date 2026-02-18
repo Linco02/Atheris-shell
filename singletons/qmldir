@@ -3,3 +3,5 @@ singleton Time 1.0 Time.qml
 singleton Timer1s 1.0 Timer1s.qml
 singleton Timer3s 1.0 Timer3s.qml
 singleton Timer30s 1.0 Timer30s.qml
+singleton CalendarInit 1.0 CalendarInit.qml
+singleton PerfomanceInit 1.0 PerfomanceInit.qml

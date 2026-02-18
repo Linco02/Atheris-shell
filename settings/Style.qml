@@ -61,8 +61,8 @@ QtObject {
 
     property color textColor: "white"
 
-    property color activeTextColor: "#F0F8FF"
-    property color inactiveTextColor: "#F0F8FF"
+    property color activeTextColor: color8
+    property color inactiveTextColor: color1
 }
 
 // #031523 (найтемніший)
