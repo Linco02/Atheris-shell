@@ -95,11 +95,13 @@ PopupWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         height: inerBox.height; width: inerBox.width
 
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            onExited: {
-                time.running = true
+        HoverHandler {
+            onHoveredChanged: {
+                if (!hovered) {
+                    time.start()
+                } else {
+                    time.stop()
+                }
             }
         }
 

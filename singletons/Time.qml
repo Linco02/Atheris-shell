@@ -5,11 +5,16 @@ import qs.settings
 import qs.components
 
 QtObject {
-    signal date(string time)
+    signal date(var date)
+    signal time(var time)
 
     function clockUpdate() {
-        const data = new Date().toLocaleTimeString("h:mm:ss")
-        date(data)
+        let currentDate = new Date()
+        const dataDate = Qt.formatDateTime(currentDate, "dd/MM/yyyy")
+        const dateTime = Qt.formatTime(currentDate, "hh:mm")
+
+        time(dateTime)
+        date(dataDate)
     }
 
     property var connections: Connections {

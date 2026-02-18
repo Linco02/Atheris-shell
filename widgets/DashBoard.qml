@@ -1,79 +1,45 @@
 import QtQuick
-import QtQuick.Controls
-import qs.settings
 import qs.components
+import qs.settings
 
-JumpMenu {
-    containerHeight: controlCenterWidget.height
-    containerWidth: controlCenterWidget.width
+Item {
+    id: dashBoaradWidget
+    implicitHeight: box.height + Style.padding2x
+    implicitWidth: box.width + Style.padding2x * 2
 
-    Column {
-        id: controlCenterWidget
+    Row {
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: Style.spacing
+        id: box
+        spacing: 10
+        Column {
+            spacing: 10
+            Row {
+                spacing: 10
+                ClockDate {
+                    height: 100; implicitWidth: 200
+                }
 
-        Item {
-            id: navigation
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: switchNavigation.height
-            width: switchNavigation.width + Style.spacing
+                Weather {
+                    height: 100; implicitWidth: 200
+                }       
+            }
 
             Row {
-                id: switchNavigation
-                anchors.centerIn: parent
-                spacing: navigation.height * 3 / 2
-
-                Item {
-                    height: 40; width: height
-
-                    TextStyle2 {
-                        anchors.centerIn: parent
-                        text: "󰼄"
-                    }
-                    // MouseArea1 {
-                    //     onClicked: pages.push()
-                    // }
+                spacing: 10
+                RectForeground {
+                    height: 300; implicitWidth: 300
                 }
 
-                Item {
-                    height: 40; width: height
-
-                    TextStyle2 {
-                        anchors.centerIn: parent
-                        text: "󰨝"
-                    }
-                }
-
-                Item {
-                    height: 40; width: height
-
-                    TextStyle2 {
-                        anchors.centerIn: parent
-                        text: ""
-                    }
+                RectForeground {
+                    height: 300; implicitWidth: 100
                 }
             }
         }
 
         RectForeground {
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: 2
-            width: parent.width - Style.spacing * 2
-        }
-
-        // StackView {
-        //     id: pages
-        //     height: perfomanceWidget.height; width: perfomanceWidget.width
-
-        //     initialItem: Perfomance {
-        //         id: perfomanceWidget
-        //         anchors.horizontalCenter: parent.horizontalCenter
-        //     }
-        // }
-
-        Perfomance {
-            id: perfomanceWidget
-            anchors.horizontalCenter: parent.horizontalCenter
+            height: box.height; implicitWidth: 300
         }
     }
+
+
 }

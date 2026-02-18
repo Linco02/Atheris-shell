@@ -40,9 +40,9 @@ Item {
                 height: 60; width: perfomanceBox.width
             }
 
-            SpaceGliph2 {
-                height: 60; width: perfomanceBox.width
-            }
+            // SpaceGliph2 {
+            //     height: 60; width: perfomanceBox.width
+            // }
         }
     }
 }

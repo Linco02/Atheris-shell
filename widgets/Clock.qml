@@ -3,8 +3,6 @@ import qs.singletons
 import qs.settings
 import qs.components
 
-import Quickshell
-
 RectForeground {
     id: clockwidget
     height: panelHeight - Style.padding2x; width: clockText.width + Style.padding * 2
@@ -13,7 +11,7 @@ RectForeground {
 
     Connections {
         target: Time
-        function onDate(data) {
+        function onTime(data) {
             time = data
         }
     }
@@ -39,7 +37,7 @@ RectForeground {
         }
     }
 
-    DashBoard {
+    DashBoardCenter {
         id: controlCenter
     }
 }
