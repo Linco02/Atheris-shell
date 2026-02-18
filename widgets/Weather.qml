@@ -43,8 +43,8 @@ RectForeground {
                     let data = JSON.parse(xhr.responseText)
                     let current = data.current_condition[0]
 
-                    temp = current.temp_C + "°C"
-                    description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
+                    weatherWidget.temp = current.temp_C + "°C"
+                    weatherWidget.description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
                 }
             }
         }
