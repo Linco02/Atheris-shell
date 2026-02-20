@@ -9,6 +9,18 @@ RectForeground {
     id: programsWidget
     height: panelHeight - Style.padding2x; width: programsRow.width + Style.padding2x
 
+    function setIcons(appId) {
+        let name = appId.split('.').pop().toLowerCase()
+        let path = Quickshell.iconPath(name, true)
+        let sourceIcons = Quickshell.iconPath("image-missing")
+        
+        if (path.length > 0) {
+            sourceIcons = path
+        }
+
+        return sourceIcons
+    }
+
     RowStyle1 {
         id: programsRow
         anchors.centerIn: parent
@@ -22,10 +34,10 @@ RectForeground {
                 radius: Style.radius
 
                 IconImage {
+                    id: programIcons
                     anchors.centerIn: parent
                     implicitSize: 16
-                    source: Quickshell.iconPath(modelData.appId.split('.').pop().toLowerCase())
-
+                    source: setIcons(modelData.appId)
                 }
                 
                 MouseArea {
