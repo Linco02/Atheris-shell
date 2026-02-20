@@ -7,9 +7,15 @@ import qs.settings
 RectForeground {
     id: calendarWidget
     property int today: new Date().getDate()
+    property string mounth: Qt.formatDateTime(new Date(), "MMMM")
 
     Column {
         anchors.centerIn: parent
+
+        TextStyle1 {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: mounth
+        }
 
         // Сітка назв днів
         GridView {

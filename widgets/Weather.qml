@@ -3,67 +3,25 @@ import Quickshell
 import Quickshell.Widgets
 import qs.components
 import qs.settings
+import qs.singletons
 
 RectForeground {
     id: weatherWidget
-    property string weatherIcom: "weather-few-clouds"
+    property string weatherIcom: "emblem-synchronizing"
     property string temp: "--"
     property string description: "Завантаження"
 
-    function getWeatherIcon(description) {
-        let desc = description.toLowerCase();
-        let isDay = true
-        
-        if (desc.includes("clear") || desc.includes("sunny")) {
-            weatherIcom = isDay ? "weather-clear-sunny" : "weather-clear-night";
+    Connections {
+        target: WeatherInit
+        function onWeatherTemp(tempData) {
+            temp = tempData
         }
-        if (desc.includes("cloud")) {
-            weatherIcom = isDay ? "weather-clouds" : "weather-clouds-night";
+        function onWeatherDescription(descriptionData) {
+            description = descriptionData
         }
-        if (desc.includes("rain") || desc.includes("shower")) {
-            weatherIcom = "weather-showers-scattered";
+        function onWeathrIcon(weathrIconData) {
+            weatherIcom = weathrIconData
         }
-        if (desc.includes("snow")) {
-            weatherIcom = "weather-snow";
-        }
-        if (desc.includes("thunder") || desc.includes("storm")) {
-            weatherIcom = "weather-storm";
-        }
-        
-        weatherIcom = "weather-few-clouds"; // Дефолтна іконка
-    }
-
-    function fetchWeather() {
-        let xhr = new XMLHttpRequest();
-
-        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    let data = JSON.parse(xhr.responseText)
-                    let current = data.current_condition[0]
-
-                    weatherWidget.temp = current.temp_C + "°C"
-                    weatherWidget.description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
-                }
-            }
-        }
-        xhr.send()
-        getWeatherIcon(description)
-    }
-
-    Timer {
-        interval: 1800000; running: true; repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            fetchWeather()
-            getWeatherIcon(description)
-        }
-    }
-
-    Timer {
-        interval: 10000; running: true
-        onTriggered: getWeatherIcon(description)
     }
 
     Row {
