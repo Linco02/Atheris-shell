@@ -6,8 +6,8 @@ import qs.settings
 
 Item {
     id: perfomanceWidget
-    implicitHeight: perfomanceBox.height + Style.padding2x
-    implicitWidth: box1.width + Style.padding2x * 2
+    implicitHeight: perfomanceBox.height
+    implicitWidth: perfomanceBox.width
 
     Column {
         id: perfomanceBox
@@ -37,7 +37,7 @@ Item {
             spacing: Style.padding2x
 
             SpaceGliph2 {
-                height: 60; width: perfomanceBox.width
+                height: 60; width: box1.width
             }
 
             // SpaceGliph2 {

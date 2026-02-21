@@ -7,9 +7,16 @@ JumpMenu {
     containerHeight: controlCenterWidget.height
     containerWidth: controlCenterWidget.width
 
+    // Behavior on containerHeight {
+    //     NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad }
+    // }
+
     Column {
         id: controlCenterWidget
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
         spacing: Style.spacing
 
         Item {
@@ -31,7 +38,7 @@ JumpMenu {
                         text: "󰼄"
                     }
                     MouseArea1 {
-                        onClicked: pages.replace(mediaPage, StackView.PopTransition)
+                        onClicked: pages.replace("Music.qml")
                     }
                 }
 
@@ -43,7 +50,7 @@ JumpMenu {
                         text: "󰨝"
                     }
                     MouseArea1 {
-                        onClicked: pages.replace(dashBoaradPage, StackView.PushTransition)
+                        onClicked: pages.replace("DashBoard.qml")
                     }
                 }
 
@@ -55,7 +62,7 @@ JumpMenu {
                         text: ""
                     }
                     MouseArea1 {
-                        onClicked: pages.replace(perfomancePage, StackView.PushTransition)
+                        onClicked: pages.replace("Perfomance.qml")
                     }
                 }
             }
@@ -67,32 +74,17 @@ JumpMenu {
             width: parent.width - Style.spacing * 2
         }
 
-        StackView {
-            id: pages
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: currentItem ? currentItem.implicitHeight : 200
-            width: currentItem ? currentItem.implicitWidth : 200
+        Rect {
+            height: pages.height + Style.spacing; width: pages.width + Style.spacing * 2
 
-            initialItem: dashBoaradPage
-        }
-
-        Component {
-            id: mediaPage
-            Rectangle {
-                implicitHeight: 400
-                implicitWidth: 300
-                color: "blue"
+            StackView {
+                id: pages
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: currentItem ? currentItem.implicitHeight : 200
+                width: currentItem ? currentItem.implicitWidth : 200
+                clip: true
+                initialItem: DashBoard {}
             }
-        }
-
-        Component {
-            id: dashBoaradPage
-            DashBoard { }
-        }
-
-        Component {
-            id: perfomancePage
-            Perfomance { }
         }
     }
 }

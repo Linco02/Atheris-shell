@@ -4,8 +4,8 @@ import qs.settings
 
 Item {
     id: dashBoaradWidget
-    implicitHeight: box.height + Style.padding2x
-    implicitWidth: box.width + Style.padding2x * 2
+    implicitHeight: box.height
+    implicitWidth: box.width
 
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -36,7 +36,7 @@ Item {
             }
         }
 
-        RectForeground {
+        MusicMini {
             height: box.height; implicitWidth: 300
         }
     }
