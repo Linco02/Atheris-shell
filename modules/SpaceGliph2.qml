@@ -38,37 +38,40 @@ RectForeground {
         }
     }
 
-    RectBackground {
-        id: box
+    Row {
+        spacing: Style.spacing
+        padding: Style.padding2x
         anchors.centerIn: parent
-        height: parent.height - 20; width: parent.width - 130
-        radius: Style.radius - 5
-    }
+        width: parent.width - Style.padding2x
 
-    Rectangle {
-        anchors {
-            left: box.left
-            verticalCenter: parent.verticalCenter
+        readonly property real maxTextWidth: Math.max(fillText.implicitWidth, avalibleText.implicitWidth)
+
+        TextStyle1 {
+            id: fillText
+            width: parent.maxTextWidth
+            anchors.verticalCenter: parent.verticalCenter
+            text: textInd1
         }
-        height: parent.height - 20; width: (parent.width - 130) * percent
 
-        color: Style.activeColor
-        radius: Style.radius - 5
-    }
+        RectInactive {
+            anchors.verticalCenter: parent.verticalCenter
+            height: root.height - Style.padding2x * 2
+            width: parent.width - parent.maxTextWidth * 2 - Style.padding2x * 4
+            radius: Style.radius
 
-    TextStyle1 {
-        anchors {
-            verticalCenter: parent.verticalCenter
+            RectActive {
+                anchors.left: parent.left
+                height: parent.height; width: parent.width * percent
+
+                radius: parent.radius
+            }
         }
-        x: 10
-        text: textInd1
-    }
 
-    TextStyle1 {
-        anchors {
-            verticalCenter: parent.verticalCenter
+        TextStyle1 {
+            id: avalibleText
+            width: parent.maxTextWidth
+            anchors.verticalCenter: parent.verticalCenter
+            text: textInd2
         }
-        x: root.width - width - 10
-        text: textInd2
     }
 }

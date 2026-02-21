@@ -23,7 +23,7 @@ QtObject {
     property var bottomPanel: {
         "topORleftSide": [ "../widgets/PowerButton.qml" , "../widgets/Workspace.qml", "../widgets/Programs.qml" ],
         "centerSide": [ "../widgets/Clock.qml" ],
-        "bottomORrightSide": [ "../widgets/Services.qml" ]
+        "bottomORrightSide": [ "../widgets/Services.qml", "../widgets/ControlCenter.qml" ]
     }
     property var leftPanel: {
         "topORleftSide": [  ],
