@@ -10,7 +10,7 @@ QtObject {
     property real scale: 1
 
     // анімації
-    property int spedAnim: 400
+    property int spedAnim: 300
     
     // декорація
     property real radius: 15 * scale

@@ -7,10 +7,6 @@ JumpMenu {
     containerHeight: controlCenterWidget.height
     containerWidth: controlCenterWidget.width
 
-    // Behavior on containerHeight {
-    //     NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad }
-    // }
-
     Column {
         id: controlCenterWidget
         anchors {

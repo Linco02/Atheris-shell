@@ -13,6 +13,8 @@ PopupWindow {
     }
     implicitHeight: box.height
     implicitWidth: box.width + radius2 * 2
+
+    
     visible: false
     color: "transparent"
 
