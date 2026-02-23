@@ -1,10 +1,9 @@
 pragma Singleton
 import QtQuick
-import qs.singletons
-import qs.settings
-import qs.components
+import Quickshell
+import qs.config
 
-QtObject {
+Singleton {
     signal date(var date)
     signal time(var time)
 
@@ -18,7 +17,7 @@ QtObject {
     }
 
     property var connections: Connections {
-        target: Timer30s
+        target: Tick30s
         function onTick() { 
             clockUpdate()
         }

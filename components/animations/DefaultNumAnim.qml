@@ -1,7 +1,7 @@
 import QtQuick
-import qs.settings
+import qs.config
 
 NumberAnimation {
-    duration: Style.spedAnim
+    duration: Appearance.durations.normal
     easing.type: Easing.InOutQuad
 }

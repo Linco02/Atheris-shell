@@ -1,9 +1,9 @@
 pragma Singleton
-import QtQuick
+import Quickshell
 import Qt.labs.folderlistmodel
-import qs.settings
 
-Item {
+Singleton {
+    property var wallparersList: []
     signal wallpaperReady()
 
     FolderListModel {
@@ -14,7 +14,7 @@ Item {
         onStatusChanged: {
             if (listWallpaper.status == FolderListModel.Ready) {
                 for (let i = 0; i < count; i++) {
-                    Style.imagesList.push(get(i, "fileUrl"))
+                    wallparersList.push(get(i, "fileUrl"))
                 }
                 wallpaperReady()
             }

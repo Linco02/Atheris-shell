@@ -1,7 +1,7 @@
 import QtQuick
-import qs.settings
+import qs.config
 
 Rectangle {
-    radius: Style.radius
+    radius: Appearance.radius
     color: "transparent"
 }

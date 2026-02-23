@@ -1,13 +1,14 @@
 pragma Singleton
 import QtQuick
+import Quickshell
 
-QtObject {
+Singleton {
     id: root
 
     signal tick()
 
     property Timer timer: Timer {
-        interval: 3000; running: true; repeat: true
+        interval: 30000; running: true; repeat: true
         onTriggered: { root.tick() }
     }
 

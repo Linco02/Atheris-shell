@@ -1,11 +1,10 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import qs.settings
-import qs.widgets
+import qs.config
 
 PanelWindow {
-    id: background
+    id: root
     anchors {
         top: true
         bottom: true
@@ -13,8 +12,10 @@ PanelWindow {
         right: true
     }
     WlrLayershell.layer: WlrLayer.Background
-    color: Style.foreGround
+    exclusiveZone: -1
+    color: Appearance.surface
 
+    Random { }
     Wallpaper {}
     // LazyLoader {
     //     // anchors.fill: parent
