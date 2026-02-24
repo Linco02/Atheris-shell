@@ -1,12 +1,12 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.services
+import qs.config
 import qs.components
-import qs.singletons
-import qs.settings
 
 Item {
-    height: panelHeight - Style.padding2x; width: volumeText.width + Style.padding * 2
+    height: root.height - Appearance.padding.normal; width: volumeText.width + Appearance.padding.normal
 
     property real volumeLevel: 0
 
@@ -17,7 +17,7 @@ Item {
     }
 
     Connections {
-        target: Timer1s
+        target: Tick1s
         function onTick() {volumeLevelInfo.running = true}
     }
 
@@ -32,7 +32,7 @@ Item {
         }
     }
 
-    TextStyle2 {
+    TextStyledH {
         id: volumeText
         anchors.centerIn: parent
         text: "󰕾"

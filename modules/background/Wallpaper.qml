@@ -7,24 +7,15 @@ import qs.components.animations
 Item {
     anchors.fill: parent
 
-    property var currentWall: ""
-
-
-    function wallpaperRandom() {
-        const choseWall = Math.floor(Math.random() * Wallpapers.wallparersList.length)
-        if(currentWall === Wallpapers.wallparersList[choseWall]) {
-            wallpaperRandom()
-        } else {
-            currentWall = Wallpapers.wallparersList[choseWall]
-        }
-    }
-
-    onCurrentWallChanged: {
-        if (back.source == "") {
-            back.source = currentWall
-        } else {
-            forward.source = currentWall
-            forward.state = "change"
+    Connections {
+        target: Appearance
+        function onWallpaperChanged() {
+            if (back.source == "") {
+                back.source = Appearance.wallpaper
+            } else {
+                forward.source = Appearance.wallpaper
+                forward.state = "change"
+            }
         }
     }
 
@@ -49,6 +40,7 @@ Item {
             from: ""; to: "change"
             PropertyAnim {
                 properties: "scale"
+                duration: Appearance.durations.slow
             }
             onRunningChanged: {
                 if(!running) {
@@ -62,18 +54,5 @@ Item {
     component Wall: Image {
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-    }
-
-    Connections {
-        target: Wallpapers
-        function onWallpaperReady() {
-            wallpaperRandom()
-        }
-    }
-
-    
-    MouseArea {
-        anchors.fill: parent
-        onClicked: wallpaperRandom()
     }
 }

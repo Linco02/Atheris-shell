@@ -1,10 +1,11 @@
 import QtQuick
 import Quickshell.Hyprland
+import qs.services
+import qs.config
 import qs.components
-import qs.settings
 
 Item {
-    height: panelHeight - Style.padding2x; width: languageText.width + Style.padding * 2
+    height: root.height - Appearance.padding.normal; width: languageText.width + Appearance.padding.normal
 
     property string currentLayout: "US"
 
@@ -25,7 +26,7 @@ Item {
         Hyprland.rawEvent.connect(currentLayoutParse);
     }
 
-    TextStyle2 {
+    TextStyledH {
         id: languageText
         anchors.centerIn: parent
         text: currentLayout

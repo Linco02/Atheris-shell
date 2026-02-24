@@ -3,7 +3,8 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
-import qs.settings
+import qs.config
+import qs.components.shapes
 import qs.components
 
 PanelWindow {
@@ -43,12 +44,12 @@ PanelWindow {
         }   
     }
 
-    RectForeground {
+    RectBackground {
         id: exitBox
         anchors.centerIn: parent
         height: 200; width: exitRow.width + height / 2
         border {
-            color: Style.borderColor
+            color: Appearance.outline
             width: 2
         }
 
@@ -56,61 +57,50 @@ PanelWindow {
             id: exitRow
             anchors.centerIn: parent
             spacing: exitBox.height / 4
-            RectBackground {
-                height: exitBox.height / 2; width: height
+            RectOwn {
+                TextOwn { text: "" }
 
-                TextStyle1 {
-                    anchors.centerIn: parent
-                    text: ""
-                    font.pointSize: 60
-                }
-
-                MouseArea1 {
+                MouseFill {
                     onClicked: poweroffProcess.running = true
                 }
             }
 
-            RectBackground {
-                height: exitBox.height / 2; width: height
+            RectOwn {
+                TextOwn { text: "" }
 
-                TextStyle1 {
-                    anchors.centerIn: parent
-                    text: ""
-                    font.pointSize: 60
-                }
-
-                MouseArea1 {
+                MouseFill {
                     onClicked: rebootProcess.running = true
                 }
             }
 
-            RectBackground {
-                height: exitBox.height / 2; width: height
+            RectOwn {
+                TextOwn { text: "󰤄" }
 
-                TextStyle1 {
-                    anchors.centerIn: parent
-                    text: "󰤄"
-                    font.pointSize: 60
-                }
-
-                MouseArea1 {
+                MouseFill {
                     onClicked: suspendProcess.running = true
                 }
             }
 
-            RectBackground {
-                height: exitBox.height / 2; width: height
+            RectOwn {
+                TextOwn { text: "󰚭" }
 
-                TextStyle1 {
-                    anchors.centerIn: parent
-                    text: "󰚭"
-                    font.pointSize: 60
-                }
-
-                MouseArea1 {
+                MouseFill {
                     onClicked: hibernateProcess.running = true
                 }
             }
         }
+    }
+
+    component RectOwn: RectForeground {
+        height: exitBox.height / 2; width: height
+    }
+
+    component TextOwn: TextStyled {
+        anchors.centerIn: parent
+        font.pointSize: 60
+    }
+
+    component MouseFill: MouseArea {
+        anchors.fill: parent
     }
 }

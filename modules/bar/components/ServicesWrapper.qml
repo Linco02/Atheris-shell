@@ -1,10 +1,9 @@
 import QtQuick
-import qs.modules
-import qs.components
-import qs.settings
+import qs.components.shapes
+import qs.config
 
 RectForeground {
-    height: panelHeight - Style.padding2x; width: servicesContainer.width + Style.padding * 2
+    height: root.height - Appearance.padding.normal; width: servicesContainer.width + Appearance.padding.normal
     Row {
         anchors.centerIn: parent
         id: servicesContainer

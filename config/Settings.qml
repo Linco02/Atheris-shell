@@ -11,5 +11,6 @@ Singleton {
     // ==== Панелі ====
     // ================
     property bool enableBar: true
+    property bool enableBottomCenter: true
 
 }

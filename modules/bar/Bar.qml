@@ -33,7 +33,9 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 x: 10
 
-                
+                PowerButton { }
+                Workspace { }
+                Programs { }
             }
         }
 
@@ -61,7 +63,7 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 x: -10
 
-                
+                ServicesWrapper { }
             }
         }
     }

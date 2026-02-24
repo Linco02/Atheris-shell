@@ -5,6 +5,7 @@ import Quickshell
 Singleton {
     readonly property AppearanceConfig.AnimDurations durations: Config.appearance.durations
     readonly property AppearanceConfig.Padding padding: Config.appearance.padding
+    readonly property AppearanceConfig.Radius radius: Config.appearance.radius
     // =======================
     // === загальні змінні ===
     // =======================
@@ -12,9 +13,6 @@ Singleton {
     // масштаб
     property real scale: 1
     
-    // декорація
-    property real radius: 15 * scale
-    property real radius2: 20 * scale
     // property real padding: 5 * scale
     property real padding2x: padding * 2
     property real spacing: 10 * scale
@@ -32,7 +30,6 @@ Singleton {
     // ===================================
     // === палітра кольорів та шпалери ===
     // ===================================
-
     // шпалери
     property url wallpaper: ""
 

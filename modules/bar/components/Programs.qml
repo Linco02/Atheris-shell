@@ -2,12 +2,14 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
-import qs.settings
-import qs.components
+import qs.config
+import qs.components.animations
+import qs.components.containers
+import qs.components.shapes
 
 RectForeground {
     id: programsWidget
-    height: panelHeight - Style.padding2x; width: programsRow.width + Style.padding2x
+    height: root.height - Appearance.padding.normal; width: programsRow.width
 
     function setIcons(appId) {
         let name = appId.split('.').pop().toLowerCase()
@@ -21,17 +23,20 @@ RectForeground {
         return sourceIcons
     }
 
-    RowStyle1 {
+    RowNormal {
         id: programsRow
         anchors.centerIn: parent
+        spacing: 0
         
         Repeater {
             model: ToplevelManager.toplevels
 
             Rectangle {
-                height: programsWidget.height; width: modelData.activated ? programsWidget.height + Style.padding2x : programsWidget.height
-                color: modelData.activated ? Style.activeColor : "transparent"
-                radius: Style.radius
+                id: programBox
+                height: programsWidget.height
+                width: programsWidget.height + Appearance.padding.normal
+                color: modelData.activated ? Appearance.active : "transparent"
+                radius: Appearance.radius.normal
 
                 IconImage {
                     id: programIcons
@@ -42,10 +47,21 @@ RectForeground {
                 
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: {
+                        if (!modelData.activated)
+                            programBox.color = Appearance.active
+                    }
+                    onExited: {
+                        if (!modelData.activated)
+                            programBox.color = Appearance.surfaceRaised
+                    }
                     onClicked: {
                         modelData.activate()
                     }
                 }
+
+                Behavior on color { ColorAnim{ } }
             }
         }
     }

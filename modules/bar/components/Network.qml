@@ -1,12 +1,12 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.services
+import qs.config
 import qs.components
-import qs.singletons
-import qs.settings
 
 Item {
-    height: panelHeight - Style.padding2x; width: networkText.width + Style.padding * 2
+    height: root.height - Appearance.padding.normal; width: networkText.width + Appearance.padding.normal
     property string currentNetwork: ""
 
     function networkName(data) {
@@ -28,7 +28,7 @@ Item {
     }
 
     Connections {
-        target: Timer3s
+        target: Tick3s
         function onTick() {networkNameInfo.running = true}
     }
 
@@ -43,7 +43,7 @@ Item {
         }
     }
 
-    TextStyle2 {
+    TextStyledH {
         id: networkText
         anchors.centerIn: parent
         text: currentNetwork

@@ -17,10 +17,9 @@ RectForeground {
         }
     }
 
-    TextStyled {
+    TextStyledH {
         id: clockText
         anchors.centerIn: parent
-        font.pointSize: parent.height - Appearance.padding.normal
         text: time
     }
 

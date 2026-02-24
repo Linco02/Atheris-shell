@@ -3,6 +3,7 @@ import Quickshell
 import qs.config
 import qs.modules.background
 import qs.modules.bar
+import qs.modules.bottomcenter
 
 
 ShellRoot {
@@ -15,6 +16,10 @@ ShellRoot {
     LazyLoader {
         active: Settings.enableBar
         component: Bar {}
+    }
+    LazyLoader {
+        active: Settings.enableBottomCenter
+        component: BottomCenter {}
     }
 
     // LazyLoader {

@@ -1,10 +1,13 @@
 import QtQuick
+import qs.config
+import qs.components.animations
+import qs.components.shapes
 import qs.components
-import qs.settings
 
 RectForeground {
     id: powerWidget
-    height: panelHeight - Style.padding2x; width: powerButton.width + Style.padding * 2
+    height: root.height - Appearance.padding.normal; width: powerButton.width + Appearance.padding.normal
+    radius: height / 2
 
     function openExitMenu() {
         if (exitMenuLoader.active) {
@@ -14,28 +17,29 @@ RectForeground {
         }
     }
 
-    TextStyle2 {
-        anchors.centerIn: parent
+    TextStyledH {
         id: powerButton
+        anchors.centerIn: parent
         text: ""
     }
 
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: powerWidget.color = Style.activeColor
-        onExited: powerWidget.color = Style.foreGround
+        onEntered: {
+            powerButton.color = Appearance.surfaceRaised
+            powerWidget.color = Appearance.active
+        }
+        onExited: {
+            powerButton.color = Appearance.textSurface
+            powerWidget.color = Appearance.surfaceRaised
+        }
         onClicked: {
             openExitMenu()
         }
     }
 
-    Behavior on color {
-        ColorAnimation {
-            duration: 300
-            easing.type: Easing.InOutQuad
-        }
-    }
+    Behavior on color { ColorAnim{ } }
 
     Loader {
         id: exitMenuLoader
