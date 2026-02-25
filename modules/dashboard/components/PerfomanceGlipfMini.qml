@@ -1,7 +1,9 @@
 import QtQuick
+import qs.config
+import qs.services
+import qs.components.animations
+import qs.components.shapes
 import qs.components
-import qs.singletons
-import qs.settings
 
 Item {
     id: perfomanceGlipfMiniModules
@@ -9,26 +11,22 @@ Item {
     property var listData: info3 === "GPU" ? PerfomanceInit.gpu : info3 === "CPU" ? PerfomanceInit.cpu : PerfomanceInit.mem
     property double percent: listData.percent
 
-    Behavior on percent {
-        NumberAnimation {
-            duration: Style.spedAnim
-            easing.type: Easing.InOutQuad
-        }
-    }
+    Behavior on percent { NumberAnim {} }
 
     Column {
         anchors.centerIn: parent
-        spacing: Style.spacing
+        spacing: Appearance.spacing.normal
         
         RectInactive {
-            height: perfomanceGlipfMiniModules.height - name.height - Style.padding2x * 2; width: perfomanceGlipfMiniModules.width
+            height: perfomanceGlipfMiniModules.height - name.height - Appearance.spacing.large
+            width: perfomanceGlipfMiniModules.width
             RectActive {
                 anchors.bottom: parent.bottom
                 height: parent.height * percent ; width: parent.width
             }
         }
 
-        TextStyle1 {
+        TextStyled {
             id: name
             anchors.horizontalCenter: parent.horizontalCenter
             text: info3 === "GPU" ? "󰢮" : info3 === "CPU" ? "" : ""

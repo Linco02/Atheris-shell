@@ -1,9 +1,10 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
+import qs.config
+import qs.components.shapes
 import qs.components
-import qs.settings
-import qs.singletons
+// import qs.singletons
 
 RectForeground {
     id: weatherWidget
@@ -26,7 +27,7 @@ RectForeground {
 
     Row {
         anchors.centerIn: parent
-        spacing: Style.spacing
+        spacing: Appearance.spacing.normal
 
         IconImage {
             source: Quickshell.iconPath(weatherIcom)
@@ -36,13 +37,13 @@ RectForeground {
         Column {
             anchors.verticalCenter: parent.verticalCenter
 
-            TextStyle1 {
+            TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: weatherWidget.height / 4
                 text: temp
             }
 
-            TextStyle1 {
+            TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: weatherWidget.height / 10
                 text: description

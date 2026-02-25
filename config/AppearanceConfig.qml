@@ -3,6 +3,7 @@ import Quickshell.Io
 JsonObject {
     property AnimDurations durations: AnimDurations {}
     property Padding padding: Padding {}
+    property Spacing spacing: Spacing {}
     property Radius radius: Radius {}
 
     component AnimDurations: JsonObject {
@@ -12,6 +13,13 @@ JsonObject {
     }
 
     component Padding: JsonObject {
+        property int small: 5
+        property int normal: 10
+        property int large: 20
+        property int gigant: 40
+    }
+
+    component Spacing: JsonObject {
         property int small: 5
         property int normal: 10
         property int large: 20

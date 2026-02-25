@@ -27,11 +27,9 @@ RectForeground {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
-            powerButton.color = Appearance.surfaceRaised
             powerWidget.color = Appearance.active
         }
         onExited: {
-            powerButton.color = Appearance.textSurface
             powerWidget.color = Appearance.surfaceRaised
         }
         onClicked: {

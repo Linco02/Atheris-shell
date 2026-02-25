@@ -17,6 +17,7 @@ ShellRoot {
         active: Settings.enableBar
         component: Bar {}
     }
+
     LazyLoader {
         active: Settings.enableBottomCenter
         component: BottomCenter {}

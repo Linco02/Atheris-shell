@@ -2,9 +2,11 @@ import QtQuick
 import Quickshell
 import QtQuick.Shapes
 import Quickshell.Io
+import qs.config
+import qs.services
+import qs.components.shapes
+import qs.components.animations
 import qs.components
-import qs.settings
-import qs.singletons
 
 Item {
     id: root
@@ -15,18 +17,13 @@ Item {
     property string textInd2: listData.textInd2
     property double percent: listData.percent
 
-    Behavior on percent {
-        NumberAnimation {
-            duration: Style.spedAnim
-            easing.type: Easing.InOutQuad
-        }
-    }
+    Behavior on percent { NumberAnim { }}
 
     RectForeground {
         id: box
         anchors.fill: parent
 
-        TextStyle1 {
+        TextStyled {
             id: name
             anchors.horizontalCenter: parent.horizontalCenter
             y: 5
@@ -34,14 +31,14 @@ Item {
         }
 
     
-        TextStyle1 {
+        TextStyled {
             id: insideGliph
             anchors.horizontalCenter: parent.horizontalCenter
             y: name.height + glifBackground.height / 2 - 10
             text: root.textInd1
         }
 
-        TextStyle1 {
+        TextStyled {
             anchors.horizontalCenter: parent.horizontalCenter
             y: name.height + glifBackground.height + insideGliph.height - 60
             text: root.textInd2
@@ -58,7 +55,7 @@ Item {
             }
 
             ShapePath {
-                strokeColor: Style.inactiveColor
+                strokeColor: Appearance.textInactive
                 strokeWidth: 20
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap
@@ -82,7 +79,7 @@ Item {
             }
 
             ShapePath {
-                strokeColor: Style.activeColor
+                strokeColor: Appearance.textAccent
                 strokeWidth: 20
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap

@@ -1,7 +1,9 @@
 import QtQuick
 import Quickshell
 import qs.config
+import qs.components.animations
 import qs.components.containers
+import qs.modules.dashboard
 import "./components"
 
 PanelWindow {
@@ -13,6 +15,7 @@ PanelWindow {
         left: true
         top: true
         right: true
+        // bottom: true
     }
     implicitHeight: Appearance.barHeight
     color: Appearance.surface
@@ -47,7 +50,25 @@ PanelWindow {
                 id: centerTBRow
                 anchors.centerIn: parent
 
-                Clock { }
+                Clock {
+                    DashBoard {
+                        id: controlCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            parent.color = Appearance.active
+                        }
+                        onExited: {
+                            parent.color = Appearance.surfaceRaised
+                        }
+                        onClicked: controlCenter.openMenu()
+                    }
+
+                    Behavior on color { ColorAnim{ } }
+                }   
             }
         }
 

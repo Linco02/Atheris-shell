@@ -1,8 +1,9 @@
 import QtQuick
 import Quickshell.Io
+import qs.config
+import qs.services
+import qs.components.shapes
 import qs.components
-import qs.settings
-import qs.singletons
 
 RectForeground {
     id: root
@@ -14,7 +15,7 @@ RectForeground {
     property double percent: 0
 
     Connections {
-        target: Timer3s
+        target: Tick3s
         function onTick() { checkInfo.running = true }
     }
 
@@ -39,14 +40,14 @@ RectForeground {
     }
 
     Row {
-        spacing: Style.spacing
-        padding: Style.padding2x
+        spacing: Appearance.spacing.normal
+        padding: Appearance.padding.large
         anchors.centerIn: parent
-        width: parent.width - Style.padding2x
+        width: parent.width - Appearance.padding.large
 
         readonly property real maxTextWidth: Math.max(fillText.implicitWidth, avalibleText.implicitWidth)
 
-        TextStyle1 {
+        TextStyled {
             id: fillText
             width: parent.maxTextWidth
             anchors.verticalCenter: parent.verticalCenter
@@ -55,9 +56,9 @@ RectForeground {
 
         RectInactive {
             anchors.verticalCenter: parent.verticalCenter
-            height: root.height - Style.padding2x * 2
-            width: parent.width - parent.maxTextWidth * 2 - Style.padding2x * 4
-            radius: Style.radius
+            height: root.height - Appearance.padding.large * 2
+            width: parent.width - parent.maxTextWidth * 2 - Appearance.padding.large * 4
+            radius: Appearance.radius.normal
 
             RectActive {
                 anchors.left: parent.left
@@ -67,7 +68,7 @@ RectForeground {
             }
         }
 
-        TextStyle1 {
+        TextStyled {
             id: avalibleText
             width: parent.maxTextWidth
             anchors.verticalCenter: parent.verticalCenter

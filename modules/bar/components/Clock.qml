@@ -22,24 +22,4 @@ RectForeground {
         anchors.centerIn: parent
         text: time
     }
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: {
-            parent.color = Appearance.active
-            clockText.color = Appearance.surface
-        }
-        onExited: {
-            parent.color = Appearance.surfaceRaised
-            clockText.color = Appearance.textSurface
-        }
-        // onClicked: controlCenter.openMenu()
-    }
-
-    Behavior on color { ColorAnim{ } }
-
-    // DashBoardCenter {
-    //     id: controlCenter
-    // }
 }

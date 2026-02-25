@@ -25,7 +25,7 @@ Item {
     }
 
     Connections {
-        target: Timer3s
+        target: Tick3s
         function onTick() {
             gpuPerfomance.running = true
             cpuPerfomance.running = true

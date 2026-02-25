@@ -1,45 +1,104 @@
 import QtQuick
+import QtQuick.Controls
+import qs.config
+import qs.components.animations
+import qs.components.shapes
 import qs.components
-import qs.settings
 
-Item {
-    id: dashBoaradWidget
-    implicitHeight: box.height
-    implicitWidth: box.width
+ShapeJump {
+    anchor {
+        window: root
+        rect.x: root.width / 2 - width / 2
+        rect.y: root.height
+    }
+    implicitHeight: 1200; implicitWidth: 1600
 
-    Row {
-        anchors.horizontalCenter: parent.horizontalCenter
-        id: box
-        spacing: 10
-        Column {
-            spacing: 10
+    property int space: Appearance.spacing.normal
+
+    property int rotate: 180
+    containerHeight: controlCenterWidget.height
+    containerWidth: controlCenterWidget.width
+
+    Column {
+        id: controlCenterWidget
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
+        spacing: space
+
+        Item {
+            id: navigation
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: switchNavigation.height
+            width: switchNavigation.width + space
+
             Row {
-                spacing: 10
-                ClockDate {
-                    height: 100; implicitWidth: 200
+                id: switchNavigation
+                anchors.centerIn: parent
+                spacing: navigation.height * 3 / 2
+
+                Item {
+                    height: 40; width: height
+
+                    TextStyledH {
+                        anchors.centerIn: parent
+                        text: "󰼄"
+                    }
+                    MouseFill {
+                        onClicked: pages.replace("Music.qml")
+                    }
                 }
 
-                Weather {
-                    height: 100; implicitWidth: 200
-                }       
-            }
+                Item {
+                    height: 40; width: height
 
-            Row {
-                spacing: 10
-                Calendar {
-                    height: 300; implicitWidth: 300
+                    TextStyledH {
+                        anchors.centerIn: parent
+                        text: "󰨝"
+                    }
+                    MouseFill {
+                        onClicked: pages.replace("Dash.qml")
+                    }
                 }
 
-                PerfomanceMini {
-                    height: 300; implicitWidth: 100
+                Item {
+                    height: 40; width: height
+
+                    TextStyledH {
+                        anchors.centerIn: parent
+                        text: ""
+                    }
+                    MouseFill {
+                        onClicked: pages.replace("Perfomance.qml")
+                    }
                 }
             }
         }
 
-        MusicMini {
-            height: box.height; implicitWidth: 300
+        RectForeground {
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 2
+            width: parent.width - space * 2
+        }
+
+        Rect {
+            height: pages.height + space; width: pages.width + space * 2
+
+            StackView {
+                id: pages
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: currentItem ? currentItem.implicitHeight : 200
+                width: currentItem ? currentItem.implicitWidth : 200
+                clip: true
+                initialItem: Dash {}
+                Behavior on height { NumberAnim { duration: Appearance.durations.fast } }
+                Behavior on width { NumberAnim {duration: Appearance.durations.fast } }
+            }
         }
     }
 
-
+    component MouseFill: MouseArea {
+        anchors.fill: parent
+    }
 }

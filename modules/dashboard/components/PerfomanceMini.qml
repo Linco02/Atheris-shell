@@ -1,19 +1,17 @@
 import QtQuick
-import qs.components
-import qs.modules
-import qs.settings
-
+import qs.config
+import qs.components.shapes
 
 RectForeground {
     id: perfomanceMiniWidget
     // implicitHeight: perfomanceMiniBox.height + Style.padding2x
     // implicitWidth: box1.width + Style.padding2x * 2
-    property int ownHeight: height - Style.padding2x
+    property int ownHeight: height - Appearance.padding.normal
 
     Row {
         id: perfomanceMiniBox
         anchors.centerIn: parent
-        spacing: Style.padding2x
+        spacing: Appearance.padding.normal
 
         PerfomanceGlipfMini {
             anchors.verticalCenter: parent.verticalCenter

@@ -1,8 +1,7 @@
 import QtQuick
+import qs.config
 import qs.components
-import qs.modules
-import qs.settings
-
+import "./components"
 
 Item {
     id: perfomanceWidget
@@ -12,11 +11,11 @@ Item {
     Column {
         id: perfomanceBox
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: Style.padding2x
+        spacing: Appearance.padding.normal
 
         Row {
             id: box1
-            spacing: Style.padding2x
+            spacing: Appearance.padding.normal
 
             PerfomanceGliph {
                 id: gpuInfo
@@ -34,13 +33,13 @@ Item {
         
         Column {
             id: box2
-            spacing: Style.padding2x
+            spacing: Appearance.padding.normal
 
-            SpaceGliph2 {
+            SpaceGliph {
                 height: 60; width: box1.width
             }
 
-            // SpaceGliph2 {
+            // SpaceGliph {
             //     height: 60; width: perfomanceBox.width
             // }
         }

@@ -1,6 +1,7 @@
 import QtQuick
-import qs.singletons
-import qs.settings
+import qs.config
+import qs.services
+import qs.components.shapes
 import qs.components
 
 RectForeground {
@@ -55,9 +56,9 @@ RectForeground {
 
     Row {
         anchors.centerIn: parent
-        spacing: Style.spacing
+        spacing: Appearance.spacing.normal
 
-        TextStyle1 {
+        TextStyled {
             anchors.verticalCenter: parent.verticalCenter
             font.pointSize: clockDateWidget.height / 2
             text: timeSimbol
@@ -65,14 +66,14 @@ RectForeground {
 
         Column {
             anchors.verticalCenter: parent.verticalCenter
-            spacing: Style.spacing
+            spacing: Appearance.spacing.normal
 
-            TextStyle1 {
+            TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: date
             }
 
-            TextStyle1 {
+            TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: time
             }

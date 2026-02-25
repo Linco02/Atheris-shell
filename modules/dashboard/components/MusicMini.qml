@@ -1,16 +1,18 @@
 import QtQuick
 import Quickshell.DBusMenu
-import qs.components
+import qs.components.shapes
 
-RectForeground {
 
-    // anchors {
-    //     top: true
-    //     right: true
-    //     bottom: true
-    // }
-    // implicitWidth: 300
-    // color: "transparent"
+Item {}
+// RectForeground {
+
+//     anchors {
+//         top: true
+//         right: true
+//         bottom: true
+//     }
+//     implicitWidth: 300
+//     color: "transparent"
 
     // Column {
     //     spacing: 20
@@ -45,4 +47,4 @@ RectForeground {
     //     }
     // }
 
-}
+// }

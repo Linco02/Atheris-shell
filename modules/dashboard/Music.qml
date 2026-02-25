@@ -1,6 +1,7 @@
 import QtQuick
+import qs.config
+import qs.components.shapes
 import qs.components
-import qs.settings
 
 Item {
     implicitHeight: musicPage.height

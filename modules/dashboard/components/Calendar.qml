@@ -1,8 +1,9 @@
 import QtQuick
 import Quickshell
+import qs.config
+import qs.services
+import qs.components.shapes
 import qs.components
-import qs.singletons
-import qs.settings
 
 RectForeground {
     id: calendarWidget
@@ -12,7 +13,7 @@ RectForeground {
     Column {
         anchors.centerIn: parent
 
-        TextStyle1 {
+        TextStyled {
             anchors.horizontalCenter: parent.horizontalCenter
             text: mounth
         }
@@ -27,7 +28,7 @@ RectForeground {
                 width: 35
                 height: 35
 
-                TextStyle1 {
+                TextStyled {
                     anchors.centerIn: parent
                     text: modelData
                 }
@@ -47,16 +48,16 @@ RectForeground {
                 Rectangle {
                     anchors.fill: parent
                     anchors.margins: 2
-                    color: (modelData.day === today && modelData.isCurrent) ? Style.backGround : "transparent"
-                    radius: Style.radius / 2
+                    color: (modelData.day === today && modelData.isCurrent) ? Appearance.surface : "transparent"
+                    radius: Appearance.radius.normal
                 }
 
-                TextStyle1 {
+                TextStyled {
                     anchors.centerIn: parent
                     text: modelData.day
                     color: {
-                        if (modelData.day === today && modelData.isCurrent) return Style.activeTextColor;
-                        return modelData.isCurrent ? Style.textColor : Style.inactiveTextColor;
+                        if (modelData.day === today && modelData.isCurrent) return Appearance.textAccent;
+                        return modelData.isCurrent ? Appearance.textSurface : Appearance.textInactive;
                     }
                 }
             }
