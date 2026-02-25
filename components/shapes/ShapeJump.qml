@@ -28,7 +28,7 @@ PopupWindow {
 
     Timer {
         id: time
-        interval: 300
+        interval: 100
         onTriggered: {
             percent = 0
             box.state = "close"
@@ -65,7 +65,7 @@ PopupWindow {
                 name: "open"
                 PropertyChanges {
                     target: box
-                    y: root.height - 4
+                    y: 0
                 }
                 PropertyChanges { target: shapeJump; percent: 1 }
             }

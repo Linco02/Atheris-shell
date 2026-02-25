@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import qs.config
 import qs.components.animations
+import qs.components.containers
 import qs.components.shapes
 import qs.components
 
@@ -11,7 +12,7 @@ ShapeJump {
         rect.x: root.width / 2 - width / 2
         rect.y: root.height
     }
-    implicitHeight: 1200; implicitWidth: 1600
+    implicitHeight: 1000; implicitWidth: 1600
 
     property int space: Appearance.spacing.normal
 
@@ -92,6 +93,8 @@ ShapeJump {
                 width: currentItem ? currentItem.implicitWidth : 200
                 clip: true
                 initialItem: Dash {}
+            
+
                 Behavior on height { NumberAnim { duration: Appearance.durations.fast } }
                 Behavior on width { NumberAnim {duration: Appearance.durations.fast } }
             }
