@@ -2,9 +2,9 @@ import QtQuick
 import Quickshell
 import Quickshell.Widgets
 import qs.config
+import qs.services
 import qs.components.shapes
 import qs.components
-// import qs.singletons
 
 RectForeground {
     id: weatherWidget
@@ -12,18 +12,18 @@ RectForeground {
     property string temp: "--"
     property string description: "Завантаження"
 
-    // Connections {
-    //     target: WeatherInit
-    //     function onWeatherTemp(tempData) {
-    //         temp = tempData
-    //     }
-    //     function onWeatherDescription(descriptionData) {
-    //         description = descriptionData
-    //     }
-    //     function onWeathrIcon(weathrIconData) {
-    //         weatherIcom = weathrIconData
-    //     }
-    // }
+    Connections {
+        target: WeatherInit
+        function onWeatherTemp(tempData) {
+            temp = tempData
+        }
+        function onWeatherDescription(descriptionData) {
+            description = descriptionData
+        }
+        function onWeathrIcon(weathrIconData) {
+            weatherIcom = weathrIconData
+        }
+    }
 
     Row {
         anchors.centerIn: parent

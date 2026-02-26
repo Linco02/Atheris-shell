@@ -86,7 +86,7 @@ PanelWindow {
                 x: -10
 
                 ServicesWrapper {
-                    ControlCenter { }
+                    // ControlCenter { }
                 }
             }
         }

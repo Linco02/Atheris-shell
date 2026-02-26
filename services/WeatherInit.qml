@@ -12,26 +12,78 @@ QtObject {
         onTriggered: { fetchWeather() }
     }
 
+    // function fetchWeather() {
+    //     let xhr = new XMLHttpRequest();
+
+    //     xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
+    //     xhr.onreadystatechange = function() {
+    //         if (xhr.readyState === XMLHttpRequest.DONE) {
+    //             if (xhr.status === 200) {
+    //                 let data = JSON.parse(xhr.responseText)
+    //                 let current = data.current_condition[0]
+
+    //                 let temp = current.temp_C
+    //                 let description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
+    //                 let iconName = current.weatherDesc[0].value
+
+    //                 weatherTemp(temp)
+    //                 weatherDescription(description)
+    //                 weathrIcon(getWeatherIcon(iconName))
+    //             }
+    //         }
+    //     }
+    //     xhr.send()
+    // }
+
     function fetchWeather() {
         let xhr = new XMLHttpRequest();
 
-        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
+        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1");
+        xhr.timeout = 10000; // 10 сек
+
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    let data = JSON.parse(xhr.responseText)
-                    let current = data.current_condition[0]
+            if (xhr.readyState !== XMLHttpRequest.DONE)
+                return;
 
-                    let temp = current.temp_C
-                    let description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
-                    let iconName = current.weatherDesc[0].value
+            // якщо не 200 — просто мовчимо
+            if (xhr.status !== 200)
+                return;
 
-                    weatherTemp(temp)
-                    weatherDescription(description)
-                    weathrIcon(getWeatherIcon(iconName))
-                }
+            try {
+                let data = JSON.parse(xhr.responseText)
+
+                if (!data.current_condition || data.current_condition.length === 0)
+                    return;
+
+                let current = data.current_condition[0]
+
+                let temp = current.temp_C
+                let description =
+                    current.lang_uk
+                    ? current.lang_uk[0].value
+                    : current.weatherDesc[0].value
+
+                let iconName = current.weatherDesc[0].value
+
+                weatherTemp(temp)
+                weatherDescription(description)
+                weathrIcon(getWeatherIcon(iconName))
+
+            } catch (e) {
+                // якщо JSON битий — просто ігноруємо
+                return;
             }
         }
+
+        xhr.onerror = function() {
+            // повністю ігноруємо помилки мережі
+            return;
+        }
+
+        xhr.ontimeout = function() {
+            return;
+        }
+
         xhr.send()
     }
 
@@ -53,7 +105,7 @@ QtObject {
             "blowing snow": "weather-snow",
             "blizzard": "weather-snow",
             "fog": "weather-fog",
-            "freezing fog": "weather-fog", // Виправляємо вашу помилку тут
+            "freezing fog": "weather-fog",
             "patchy light drizzle": "weather-showers-scattered",
             "light drizzle": "weather-showers-scattered",
             "freezing drizzle": "weather-freezing-rain",
@@ -71,7 +123,6 @@ QtObject {
             "patchy light snow with thunder": "weather-storm"
         };
 
-        // Пошук за прямим збігом або за ключовим словом
         if (mapping[desc]) return mapping[desc];
         
         if (desc.includes("rain")) return "weather-showers";
