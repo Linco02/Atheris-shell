@@ -20,9 +20,11 @@ Item {
         RectInactive {
             height: perfomanceGlipfMiniModules.height - name.height - Appearance.spacing.large
             width: perfomanceGlipfMiniModules.width
+            bottomLeftRadius: 4; bottomRightRadius: 4
             RectActive {
                 anchors.bottom: parent.bottom
-                height: parent.height * percent ; width: parent.width
+                height: parent.height * percent; width: parent.width
+                bottomLeftRadius: 4; bottomRightRadius: 4
             }
         }
 

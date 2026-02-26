@@ -15,6 +15,7 @@ ShapeJump {
     implicitHeight: 600; implicitWidth: 1000
 
     property int space: Appearance.spacing.normal
+    property int gap: 60
 
     property int rotate: 180
     containerHeight: controlCenterWidget.height
@@ -46,9 +47,7 @@ ShapeJump {
                         anchors.centerIn: parent
                         text: "󰼄"
                     }
-                    MouseFill {
-                        onClicked: pages.replace("Music.qml")
-                    }
+                    MouseFill { onClicked: widgetRow.state = "page1" }
                 }
 
                 Item {
@@ -58,9 +57,7 @@ ShapeJump {
                         anchors.centerIn: parent
                         text: "󰨝"
                     }
-                    MouseFill {
-                        onClicked: pages.replace("Dash.qml")
-                    }
+                    MouseFill { onClicked: widgetRow.state = "page2" }
                 }
 
                 Item {
@@ -70,9 +67,7 @@ ShapeJump {
                         anchors.centerIn: parent
                         text: ""
                     }
-                    MouseFill {
-                        onClicked: pages.replace("Perfomance.qml")
-                    }
+                    MouseFill { onClicked: widgetRow.state = "page3" }
                 }
             }
         }
@@ -80,23 +75,59 @@ ShapeJump {
         RectForeground {
             anchors.horizontalCenter: parent.horizontalCenter
             height: 2
-            width: parent.width - space * 2
+            width: widgetRow.width
         }
 
         Rect {
-            height: pages.height + space; width: pages.width + space * 2
+            id: widgetRow
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: page1.height; width: page1.width
+            clip: true
+            state: "page2"
 
-            StackView {
+            states: [
+                State {
+                    name: "page1"
+                    PropertyChanges {
+                        target: widgetRow
+                        height: page1.height; width: page1.width
+                    }
+                    PropertyChanges { target: pages; x: 0 }
+                },
+                State {
+                    name: "page2"
+                    PropertyChanges {
+                        target: widgetRow
+                        height: page2.height; width: page2.width
+                    }
+                    PropertyChanges { target: pages; x: - gap - page1.width }
+                },
+                State {
+                    name: "page3"
+                    PropertyChanges {
+                        target: widgetRow
+                        height: page3.height; width: page3.width
+                    }
+                    PropertyChanges { target: pages; x: - gap * 2 - page1.width - page2.width }
+                }
+            ]
+
+            transitions: Transition {
+                ParallelAnimation {
+                    NumberAnim { property: "height"; duration: Appearance.durations.fast }
+                    NumberAnim { property: "width"; duration: Appearance.durations.fast }
+                    NumberAnim { property: "x" }
+                }
+            }
+
+            Row {
                 id: pages
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: currentItem ? currentItem.implicitHeight : 200
-                width: currentItem ? currentItem.implicitWidth : 200
-                clip: true
-                initialItem: Dash {}
-            
-
-                Behavior on height { NumberAnim { duration: Appearance.durations.fast } }
-                Behavior on width { NumberAnim {duration: Appearance.durations.fast } }
+                spacing: gap
+                x: 0
+                
+                Music { id: page1 }
+                Dash { id: page2 }
+                Perfomance { id: page3 }
             }
         }
     }

@@ -26,13 +26,17 @@ PopupWindow {
         }
     }
 
+    mask: Region {
+        x: box.x
+        y: box.y
+        width: box.width
+        height: box.height
+    }
+
     Timer {
         id: time
         interval: 100
-        onTriggered: {
-            percent = 0
-            stateManager.state = "close"
-        }
+        onTriggered: { openMenu() }
     }
 
     Item {
@@ -101,10 +105,13 @@ PopupWindow {
 
         HoverHandler {
             onHoveredChanged: {
-                if (!hovered) {
+                if(!hovered) {
                     time.start()
                 } else {
                     time.stop()
+                    if(stateManager.state != "open") {
+                        stateManager.state = "open"
+                    }
                 }
             }
         }

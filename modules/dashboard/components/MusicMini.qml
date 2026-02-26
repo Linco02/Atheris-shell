@@ -3,16 +3,15 @@ import Quickshell.DBusMenu
 import qs.components.shapes
 
 
-Item {}
-// RectForeground {
+RectForeground {
 
-//     anchors {
-//         top: true
-//         right: true
-//         bottom: true
-//     }
-//     implicitWidth: 300
-//     color: "transparent"
+    // anchors {
+    //     top: true
+    //     right: true
+    //     bottom: true
+    // }
+    // implicitWidth: 300
+    // color: "transparent"
 
     // Column {
     //     spacing: 20
@@ -47,4 +46,4 @@ Item {}
     //     }
     // }
 
-// }
+}

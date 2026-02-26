@@ -4,6 +4,7 @@ import qs.config
 import qs.components.animations
 import qs.components.containers
 import qs.modules.dashboard
+import qs.modules.controlcenter
 import "./components"
 
 PanelWindow {
@@ -84,7 +85,9 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 x: -10
 
-                ServicesWrapper { }
+                ServicesWrapper {
+                    ControlCenter { }
+                }
             }
         }
     }

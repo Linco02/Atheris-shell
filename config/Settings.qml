@@ -6,7 +6,7 @@ Singleton {
     property bool enableBackground: true
     property bool enableWallpaper: true
 
-    property bool enableNotificationsDaemon: true
+    property bool controlCenter: false
     // ================
     // ==== Панелі ====
     // ================

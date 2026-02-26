@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import qs.components
+import qs.components.shapes
 
 PopupWindow {
     anchor {
@@ -9,8 +9,8 @@ PopupWindow {
         rect.x: root.width - width - 10
     }
     implicitHeight: 600; implicitWidth: 300
-    visible: false
-    color: "transparent"
+    visible: true
+    color: "red"
 
     RectForeground {
         height: 400; width: parent.width

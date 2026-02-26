@@ -24,7 +24,7 @@ ShellRoot {
     }
 
     // LazyLoader {
-    //     active: Settings.enableNotificationsDaemon
-    //     component: NotificationsDaemon {}
+    //     active: Settings.controlCenter
+    //     component: ControlCenter {}
     // }
 }
