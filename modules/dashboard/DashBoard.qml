@@ -12,7 +12,7 @@ ShapeJump {
         rect.x: root.width / 2 - width / 2
         rect.y: root.height
     }
-    implicitHeight: 1000; implicitWidth: 1600
+    implicitHeight: 600; implicitWidth: 1000
 
     property int space: Appearance.spacing.normal
 
