@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Shapes
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import Quickshell.Services.Mpris
 import qs.config
 import qs.components.animations
@@ -20,7 +20,7 @@ RectForeground {
     }
 
     Column {
-        // visible: activePlayer !== null
+        visible: activePlayer !== null
         anchors.centerIn: parent
         spacing: 10
 
@@ -35,7 +35,7 @@ RectForeground {
                 height: imageSize; width: height
 
                 layer.enabled: true
-                layer.effect: OpacityMask {
+                layer.effect: MultiEffect {
                     maskSource: Rectangle {
                         height: image.height; width: height
                         radius: height / 2

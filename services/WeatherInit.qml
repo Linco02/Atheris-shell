@@ -12,80 +12,80 @@ QtObject {
         onTriggered: { fetchWeather() }
     }
 
-    // function fetchWeather() {
-    //     let xhr = new XMLHttpRequest();
-
-    //     xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
-    //     xhr.onreadystatechange = function() {
-    //         if (xhr.readyState === XMLHttpRequest.DONE) {
-    //             if (xhr.status === 200) {
-    //                 let data = JSON.parse(xhr.responseText)
-    //                 let current = data.current_condition[0]
-
-    //                 let temp = current.temp_C
-    //                 let description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
-    //                 let iconName = current.weatherDesc[0].value
-
-    //                 weatherTemp(temp)
-    //                 weatherDescription(description)
-    //                 weathrIcon(getWeatherIcon(iconName))
-    //             }
-    //         }
-    //     }
-    //     xhr.send()
-    // }
-
     function fetchWeather() {
         let xhr = new XMLHttpRequest();
 
-        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1");
-        xhr.timeout = 10000; // 10 сек
-
+        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState !== XMLHttpRequest.DONE)
-                return;
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    let data = JSON.parse(xhr.responseText)
+                    let current = data.current_condition[0]
 
-            // якщо не 200 — просто мовчимо
-            if (xhr.status !== 200)
-                return;
+                    let temp = current.temp_C
+                    let description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
+                    let iconName = current.weatherDesc[0].value
 
-            try {
-                let data = JSON.parse(xhr.responseText)
-
-                if (!data.current_condition || data.current_condition.length === 0)
-                    return;
-
-                let current = data.current_condition[0]
-
-                let temp = current.temp_C
-                let description =
-                    current.lang_uk
-                    ? current.lang_uk[0].value
-                    : current.weatherDesc[0].value
-
-                let iconName = current.weatherDesc[0].value
-
-                weatherTemp(temp)
-                weatherDescription(description)
-                weathrIcon(getWeatherIcon(iconName))
-
-            } catch (e) {
-                // якщо JSON битий — просто ігноруємо
-                return;
+                    weatherTemp(temp)
+                    weatherDescription(description)
+                    weathrIcon(getWeatherIcon(iconName))
+                }
             }
         }
-
-        xhr.onerror = function() {
-            // повністю ігноруємо помилки мережі
-            return;
-        }
-
-        xhr.ontimeout = function() {
-            return;
-        }
-
         xhr.send()
     }
+
+    // function fetchWeather() {
+    //     let xhr = new XMLHttpRequest();
+
+    //     xhr.open("GET", "https://wttr.in/Cherkasy?format=j1");
+    //     xhr.timeout = 10000; // 10 сек
+
+    //     xhr.onreadystatechange = function() {
+    //         if (xhr.readyState !== XMLHttpRequest.DONE)
+    //             return;
+
+    //         // якщо не 200 — просто мовчимо
+    //         if (xhr.status !== 200)
+    //             return;
+
+    //         try {
+    //             let data = JSON.parse(xhr.responseText)
+
+    //             if (!data.current_condition || data.current_condition.length === 0)
+    //                 return;
+
+    //             let current = data.current_condition[0]
+
+    //             let temp = current.temp_C
+    //             let description =
+    //                 current.lang_uk
+    //                 ? current.lang_uk[0].value
+    //                 : current.weatherDesc[0].value
+
+    //             let iconName = current.weatherDesc[0].value
+
+    //             weatherTemp(temp)
+    //             weatherDescription(description)
+    //             weathrIcon(getWeatherIcon(iconName))
+
+    //         } catch (e) {
+    //             // якщо JSON битий — просто ігноруємо
+    //             return;
+    //         }
+    //     }
+
+    //     xhr.onerror = function() {
+    //         // повністю ігноруємо помилки мережі
+    //         return;
+    //     }
+
+    //     xhr.ontimeout = function() {
+    //         return;
+    //     }
+
+    //     xhr.send()
+    // }
 
     function getWeatherIcon(iconName) {
         const desc = iconName.toLowerCase();
