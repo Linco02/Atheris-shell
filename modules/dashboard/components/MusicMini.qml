@@ -20,7 +20,7 @@ RectForeground {
     }
 
     Column {
-        visible: activePlayer !== null
+        // visible: activePlayer !== null
         anchors.centerIn: parent
         spacing: 10
 
@@ -100,8 +100,8 @@ RectForeground {
         }
 
 
-        TextStyledOwn { text: activePlayer?.trackTitle ?? "" }
-        TextStyledOwn { text: activePlayer?.trackArtist ?? "" }
+        TextStyledOwn { text: activePlayer?.trackTitle ?? "..." }
+        TextStyledOwn { text: activePlayer?.trackArtist ?? "......" }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -163,6 +163,7 @@ RectForeground {
 
     Timer {
         interval: 1000; running: true; repeat: true
-        onTriggered: progressbar.sweepAngle = 360 * (activePlayer.position / activePlayer.length)
+        onTriggered: if (activePlayer)
+            progressbar.sweepAngle = 360 * (activePlayer.position / activePlayer.length)
     }
 }
