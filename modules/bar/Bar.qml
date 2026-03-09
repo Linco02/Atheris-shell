@@ -85,9 +85,8 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 x: -10
 
-                ServicesWrapper {
-                    // ControlCenter { }
-                }
+                ServicesWrapper { }
+                ControlCenterButton { }
             }
         }
     }

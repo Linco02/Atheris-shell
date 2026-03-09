@@ -47,6 +47,12 @@ PanelWindow {
             }
         }
 
-        WallpaperChoser { id: wallChoser }
+        WallpaperChoser {
+            id: wallChoser
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+        }
     }
 }

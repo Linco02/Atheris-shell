@@ -6,7 +6,8 @@ import qs.components
 
 RectForeground {
     id: powerWidget
-    height: root.height - Appearance.padding.normal; width: powerButton.width + Appearance.padding.normal
+    height: root.height - Appearance.padding.normal
+    width: height + Appearance.padding.normal
     radius: height / 2
 
     function openExitMenu() {
@@ -20,7 +21,7 @@ RectForeground {
     TextStyledH {
         id: powerButton
         anchors.centerIn: parent
-        text: ""
+        text: ""
     }
 
     MouseArea {

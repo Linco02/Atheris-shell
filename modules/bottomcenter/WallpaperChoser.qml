@@ -8,7 +8,6 @@ import qs.components.animations
 
 RectBackground {
     id: root
-    anchors.centerIn: parent
     implicitHeight: (box.height + Appearance.padding.gigant) * percent
     implicitWidth: box.width + Appearance.padding.gigant
     border.color: Appearance.outline
