@@ -25,13 +25,13 @@ RectForeground {
             controlcenterWidget.color = Appearance.surfaceRaised
         }
         onClicked: {
-            
+            controlcenter.openMenu()
         }
     }
 
     Behavior on color { ColorAnim{ } }
 
     ControlCenter {
-        
+        id: controlcenter
     }
 }

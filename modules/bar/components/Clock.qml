@@ -4,6 +4,7 @@ import qs.config
 import qs.components.shapes
 import qs.components.animations
 import qs.components
+import qs.modules.dashboard
 
 RectForeground {
     height: root.height - Appearance.padding.normal; width: clockText.width + Appearance.padding.large
@@ -22,4 +23,22 @@ RectForeground {
         anchors.centerIn: parent
         text: time
     }
+
+    DashBoard {
+        id: controlCenter
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onEntered: {
+            parent.color = Appearance.active
+        }
+        onExited: {
+            parent.color = Appearance.surfaceRaised
+        }
+        onClicked: controlCenter.openMenu()
+    }
+
+    Behavior on color { ColorAnim{ } }
 }

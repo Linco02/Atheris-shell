@@ -1,11 +1,39 @@
 import QtQuick
+import qs.config
+import qs.components.shapes
 import qs.components
 
-Rectangle {
+RectForeground {
+    id: root
     anchors.horizontalCenter: parent.horizontalCenter
-    height: 40
-    width: parent.width - 20
-    TextStyled {
-        text: "test"
+    height: container.height
+    width: parent.width - Appearance.padding.large
+
+    Row {
+        id: container
+        width: parent.width - Appearance.padding.large
+        spacing: 10
+        padding: 10
+
+        RectBlock {
+
+            // TextStyled {
+            //     text: "test"
+            //     color: "red"
+            // }
+        }
+
+        RectBlock {
+
+            TextStyled {
+                text: "test"
+                color: "red"
+            }
+        }
+    }
+
+    component RectBlock: RectInactive{
+        radius: root.radius - parent.spacing
+        height: 50; width: root.width / 2 - parent.spacing * 3 / 2
     }
 }

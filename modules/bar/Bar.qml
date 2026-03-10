@@ -10,7 +10,7 @@ import "./components"
 PanelWindow {
     id: root
 
-    property real padding: Appearance.padding.normal
+    property int padd: Appearance.padding.normal
 
     anchors {
         left: true
@@ -30,12 +30,12 @@ PanelWindow {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
             }
-            height: root.height - padding * 2; width: leftTBRow.width
+            height: root.height - padd * 2; width: leftTBRow.width
 
             RowNormal {
                 id: leftTBRow
                 anchors.verticalCenter: parent.verticalCenter
-                x: 10
+                x: padd
 
                 PowerButton { }
                 Workspace { }
@@ -45,31 +45,13 @@ PanelWindow {
 
         Item {
             anchors.centerIn: parent
-            height: root.height - padding * 2; width: centerTBRow.width
+            height: root.height - padd * 2; width: centerTBRow.width
 
             RowNormal {
                 id: centerTBRow
                 anchors.centerIn: parent
 
-                Clock {
-                    DashBoard {
-                        id: controlCenter
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
-                            parent.color = Appearance.active
-                        }
-                        onExited: {
-                            parent.color = Appearance.surfaceRaised
-                        }
-                        onClicked: controlCenter.openMenu()
-                    }
-
-                    Behavior on color { ColorAnim{ } }
-                }   
+                Clock { }   
             }
         }
 
@@ -78,12 +60,12 @@ PanelWindow {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
             }
-            height: root.height - padding * 2; width: rightTBRow.width
+            height: root.height - padd * 2; width: rightTBRow.width
                 
             RowNormal {
                 id: rightTBRow
                 anchors.verticalCenter: parent.verticalCenter
-                x: -10
+                x: - padd
 
                 ServicesWrapper { }
                 ControlCenterButton { }

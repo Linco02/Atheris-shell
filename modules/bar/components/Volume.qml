@@ -37,4 +37,14 @@ Item {
         anchors.centerIn: parent
         text: "󰕾"
     }
+
+    Process {
+        id: pavucontrol
+        command: [ "pavucontrol" ]
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: pavucontrol.running = true
+    }
 }
