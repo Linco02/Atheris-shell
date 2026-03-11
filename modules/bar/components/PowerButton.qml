@@ -28,10 +28,10 @@ RectForeground {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
-            powerWidget.color = Appearance.active
+            powerWidget.color = Colors.active
         }
         onExited: {
-            powerWidget.color = Appearance.surfaceRaised
+            powerWidget.color = Colors.surfaceRaised
         }
         onClicked: {
             openExitMenu()

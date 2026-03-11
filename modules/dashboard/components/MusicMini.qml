@@ -34,6 +34,19 @@ RectForeground {
                 anchors.centerIn: parent
                 height: imageSize; width: height
 
+                // Rectangle {
+                //     id: maskItem
+                //     anchors.fill: parent
+                //     radius: width / 2
+                //     visible: false
+                // }
+                
+                // layer.enabled: true
+                // layer.effect: MultiEffect {
+                //     // 2. Передаємо ID об'єкта
+                //     maskSource: maskItem
+                // }
+
                 layer.enabled: true
                 layer.effect: MultiEffect {
                     maskSource: Rectangle {
@@ -43,8 +56,8 @@ RectForeground {
                 }
                 
                 Image {
-                    anchors.centerIn: parent
-                    height: image.height; width: height
+                    id: img
+                    width: imageSize; height: imageSize
                     source: activePlayer?.trackArtUrl ?? ""
                     fillMode: Image.PreserveAspectCrop
                 }

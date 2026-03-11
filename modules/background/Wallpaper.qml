@@ -25,22 +25,22 @@ Item {
 
     Wall {
         id: forward
-        scale: 0
+        opacity: 0
 
         states: State {
             name: "change"
 
             PropertyChanges {
                 target: forward
-                scale: 1
+                opacity: 1
             }
         }
 
         transitions: Transition {
             from: ""; to: "change"
             PropertyAnim {
-                properties: "scale"
-                duration: Appearance.durations.slow
+                properties: "opacity"
+                duration: Appearance.durations.normal
             }
             onRunningChanged: {
                 if(!running) {

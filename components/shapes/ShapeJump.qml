@@ -207,7 +207,7 @@ PopupWindow {
 
             ShapePath {
                 strokeWidth: 0
-                fillColor: Appearance.surface
+                fillColor: Colors.surface
                 startY: rad; startX: rad
                 PathArc {
                     y: rad - rad * percent; x: 0 

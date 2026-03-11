@@ -10,7 +10,7 @@ RectBackground {
     id: root
     implicitHeight: (box.height + Appearance.padding.gigant) * percent
     implicitWidth: box.width + Appearance.padding.gigant
-    border.color: Appearance.outline
+    border.color: Colors.outline
     border.width: 2
 
     signal close()
