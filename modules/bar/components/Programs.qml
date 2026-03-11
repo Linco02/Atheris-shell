@@ -35,7 +35,7 @@ RectForeground {
                 id: programBox
                 height: programsWidget.height
                 width: programsWidget.height + Appearance.padding.normal
-                color: modelData.activated ? Appearance.active : "transparent"
+                color: modelData.activated ? Colors.active : "transparent"
                 radius: Appearance.radius.normal
 
                 IconImage {
@@ -50,11 +50,11 @@ RectForeground {
                     hoverEnabled: true
                     onEntered: {
                         if (!modelData.activated)
-                            programBox.color = Appearance.active
+                            programBox.color = Colors.active
                     }
                     onExited: {
                         if (!modelData.activated)
-                            programBox.color = Appearance.surfaceRaised
+                            programBox.color = Colors.surfaceRaised
                     }
                     onClicked: {
                         modelData.activate()

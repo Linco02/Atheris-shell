@@ -49,7 +49,7 @@ PanelWindow {
         anchors.centerIn: parent
         height: 200; width: exitRow.width + height / 2
         border {
-            color: Appearance.outline
+            color: Colors.outline
             width: 2
         }
 

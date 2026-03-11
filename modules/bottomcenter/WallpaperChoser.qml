@@ -15,6 +15,8 @@ RectBackground {
 
     signal close()
     property real percent: 0
+    property int imageHeight: 135
+    property int imageWidth: 240
 
     states: State {
         name: "open"
@@ -68,17 +70,6 @@ RectBackground {
         }
     }
 
-    function palitPush(palit) {
-        Appearance.base = palit[0]
-        Appearance.mantle = palit[1]
-        Appearance.overlay = palit[2]
-        Appearance.muted = palit[3]
-        Appearance.subtle = palit[4]
-        Appearance.accent = palit[5]
-        Appearance.highlight = palit[6]
-        Appearance.rose = palit[7]
-    }
-
     Connections {
         target: Wallpapers
         function onWallpaperReady() {
@@ -107,20 +98,20 @@ RectBackground {
     Item {
         id: box
         anchors.centerIn: parent
-        height: 168; width: 900
+        height: imageHeight; width: imageWidth * 4
         clip: true
         opacity: 0
 
         RowNormal {
             id: row
-            x: - currentIndex * 240 - 120 + box.width / 2 - currentIndex * Appearance.padding.normal
+            x: - currentIndex * imageWidth - imageWidth / 2 + box.width / 2 - currentIndex * Appearance.padding.normal
 
             property int currentIndex: 0
 
             Connections {
                 target: Wallpapers
                 function onWallpaperReady() {
-                    let index = Wallpapers.wallparersList.indexOf(Appearance.wallpaper);
+                    let index = Wallpapers.wallparersList.indexOf(Wallpapers.wallpaper);
                     if (index !== -1)
                         row.currentIndex = index;
                 }
@@ -131,8 +122,7 @@ RectBackground {
                 currentIndex = Math.max(0, currentIndex - 1)
                 let wallData = wallRepeator.itemAt(currentIndex)
                 if (wallData) {
-                    palitPush(wallData.paletteColors)
-                    Appearance.wallpaper = wallData.wallSource
+                    Wallpapers.wallpaper = wallData.wallSource
                 }
             }
 
@@ -140,8 +130,7 @@ RectBackground {
                 currentIndex = Math.min(children.length - 2, currentIndex + 1)
                 let wallData = wallRepeator.itemAt(currentIndex)
                 if (wallData) {
-                    palitPush(wallData.paletteColors)
-                    Appearance.wallpaper = wallData.wallSource
+                    Wallpapers.wallpaper = wallData.wallSource
                 }
             }            
 
@@ -151,52 +140,17 @@ RectBackground {
                 id: wallRepeator
                 model: wallpaperModel
                 Item {
-                    height: 168; width: 240
+                    height: imageHeight; width: imageWidth
                     scale: index === row.currentIndex ? 1 : 0.8
 
-                    property var paletteColors: wallpaperPalit.colors
                     property string wallSource: model.wallpaperUrl
 
                     Behavior on scale { NumberAnim { } }
 
-                    ColorQuantizer {
-                        id: wallpaperPalit
-                        source: Qt.resolvedUrl(model.wallpaperUrl)
-                        depth: 3
-                        rescaleSize: 64
-                    }
-
                     Image {
-                        anchors.top: parent.top
-                        height: parent.height; width: parent.width
+                        anchors.fill: parent
                         asynchronous: true
                         source: model.wallpaperUrl
-                    }
-
-                    Rectangle {
-                        id: colorsPalit
-                        anchors.bottom: parent.bottom
-                        height: 40; width: parent.width
-                        Row {
-                            anchors.centerIn: parent
-                            spacing: 5
-
-                            Repeater {
-                                model: wallpaperPalit.colors
-
-                                Rectangle {
-                                    height: colorsPalit.height / 2; width: colorsPalit.height / 2
-                                    color: wallpaperPalit.colors[index]
-                                    border.width: 2
-                                }
-
-                                onCountChanged: {
-                                    if (count === 8) {
-                                        colorsPalit.color = wallpaperPalit.colors[7]
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }

@@ -55,7 +55,7 @@ Item {
             }
 
             ShapePath {
-                strokeColor: Appearance.inactive
+                strokeColor: Colors.inactive
                 strokeWidth: 20
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap
@@ -79,7 +79,7 @@ Item {
             }
 
             ShapePath {
-                strokeColor: Appearance.active
+                strokeColor: Colors.active
                 strokeWidth: 20
                 fillColor: "transparent"
                 capStyle: ShapePath.RoundCap

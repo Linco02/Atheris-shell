@@ -44,7 +44,7 @@ RectForeground {
                 radius: Appearance.radius.normal
                 visible: modelData.id > 0
                 height: workSpaceWidget.height; width: height * 2
-                color: modelData.urgent ? Appearance.warning :
+                color: modelData.urgent ? Colors.warning :
                     "transparent"
 
                 property bool isActive: modelData.focused ? true : false
@@ -66,7 +66,7 @@ RectForeground {
                     hoverEnabled: true
                     onEntered: {
                         if (!modelData.focused)
-                            workspace.color = Appearance.active
+                            workspace.color = Colors.active
                     }
                     onExited: {
                         if (!modelData.focused)

@@ -3,5 +3,5 @@ import qs.config
 
 Rectangle {
     radius: Appearance.radius.normal
-    color: Appearance.inactive
+    color: Colors.inactive
 }

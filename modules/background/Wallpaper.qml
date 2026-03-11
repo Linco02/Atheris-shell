@@ -8,12 +8,12 @@ Item {
     anchors.fill: parent
 
     Connections {
-        target: Appearance
+        target: Wallpapers
         function onWallpaperChanged() {
             if (back.source == "") {
-                back.source = Appearance.wallpaper
+                back.source = Wallpapers.wallpaper
             } else {
-                forward.source = Appearance.wallpaper
+                forward.source = Wallpapers.wallpaper
                 forward.state = "change"
             }
         }

@@ -24,12 +24,12 @@ Item {
         target: Wallpapers
         function onWallpaperReady() {
             const imagesChose = Math.floor(Math.random() * Wallpapers.wallparersList.length)
-            Appearance.wallpaper = Wallpapers.wallparersList[imagesChose]
+            Wallpapers.wallpaper = Wallpapers.wallparersList[imagesChose]
         }
     }
 
     ColorQuantizer {
-        source: Qt.resolvedUrl(Appearance.wallpaper)
+        source: Qt.resolvedUrl(Wallpapers.wallpaper)
         id: wallpaperPalit
         depth: 3
         rescaleSize: 64

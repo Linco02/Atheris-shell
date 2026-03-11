@@ -19,7 +19,7 @@ PanelWindow {
         // bottom: true
     }
     implicitHeight: Appearance.barHeight
-    color: Appearance.surface
+    color: Colors.surface
 
 
     Item {

@@ -13,7 +13,7 @@ PanelWindow {
     }
     WlrLayershell.layer: WlrLayer.Background
     exclusiveZone: -1
-    color: Appearance.surface
+    color: Colors.surface
 
     Random { }
     Wallpaper {}

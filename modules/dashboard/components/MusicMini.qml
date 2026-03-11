@@ -59,7 +59,7 @@ RectForeground {
                 }
 
                 ShapePath {
-                    strokeColor: Appearance.inactive
+                    strokeColor: Colors.inactive
                     strokeWidth: 10
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap
@@ -82,7 +82,7 @@ RectForeground {
                 }
 
                 ShapePath {
-                    strokeColor: Appearance.active
+                    strokeColor: Colors.active
                     strokeWidth: 10
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap

@@ -3,6 +3,8 @@ import Quickshell
 import qs.config
 import qs.components.shapes
 
+import qs.services
+
 PopupWindow {
     anchor {
         window: root
@@ -22,26 +24,15 @@ PopupWindow {
         }
     }
 
+    Palit {
+        id: testcolor
+    }
+
     RectBackground {
         x: parent.width - width
         height: 500; width: 400
         border.width: 2
-        border.color: Appearance.outline
-
-        // Item {
-        //     anchors.centerIn: parent
-        //     height: parent.height - Appearance.padding.large * 2
-        //     width: parent.width - Appearance.padding.large * 2
-            
-        //     Column {
-        //         anchors.fill: parent
-        //         spacing: Appearance.padding.large
-                
-        //         Info { }
-        //         Services { }
-        //         Notifi { }
-        //     }
-        // }
+        border.color: Colors.outline
 
         Column {
             anchors.fill: parent
@@ -49,6 +40,19 @@ PopupWindow {
             padding: Appearance.padding.large
             
             Info { }
+            Row {
+                Repeater {
+                    model: testcolor.test
+
+                    Rectangle {
+                        height: 20; width: 20
+                        color: modelData
+                        Component.onCompleted: {
+                            console.log(modelData)
+                        }
+                    }
+                }
+            }
             Services { }
             Notifi { }
         }

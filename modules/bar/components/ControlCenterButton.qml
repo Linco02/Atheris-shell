@@ -19,10 +19,10 @@ RectForeground {
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
-            controlcenterWidget.color = Appearance.active
+            controlcenterWidget.color = Colors.active
         }
         onExited: {
-            controlcenterWidget.color = Appearance.surfaceRaised
+            controlcenterWidget.color = Colors.surfaceRaised
         }
         onClicked: {
             controlcenter.openMenu()

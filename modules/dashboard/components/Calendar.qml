@@ -48,7 +48,7 @@ RectForeground {
                 Rectangle {
                     anchors.fill: parent
                     anchors.margins: 2
-                    color: (modelData.day === today && modelData.isCurrent) ? Appearance.surface : "transparent"
+                    color: (modelData.day === today && modelData.isCurrent) ? Colors.surface : "transparent"
                     radius: Appearance.radius.normal
                 }
 
@@ -56,8 +56,8 @@ RectForeground {
                     anchors.centerIn: parent
                     text: modelData.day
                     color: {
-                        if (modelData.day === today && modelData.isCurrent) return Appearance.textAccent;
-                        return modelData.isCurrent ? Appearance.textSurface : Appearance.textInactive;
+                        if (modelData.day === today && modelData.isCurrent) return Colors.textAccent;
+                        return modelData.isCurrent ? Colors.textSurface : Colors.textInactive;
                     }
                 }
             }

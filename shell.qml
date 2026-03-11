@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import qs.config
+import qs.services
 import qs.modules.background
 import qs.modules.bar
 import qs.modules.bottomcenter
@@ -27,4 +28,7 @@ ShellRoot {
     //     active: Settings.controlCenter
     //     component: ControlCenter {}
     // }
+
+    // cлужби
+    Palit { }
 }
