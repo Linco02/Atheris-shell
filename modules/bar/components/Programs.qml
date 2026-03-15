@@ -15,13 +15,32 @@ RectForeground {
         let name = appId.split('.').pop().toLowerCase()
         let path = Quickshell.iconPath(name, true)
         let sourceIcons = Quickshell.iconPath("image-missing")
+        const iconMap = {
+            "codium": "vscodium",
+            "org.kde.dolphin": "dolphin",
+            "org.telegram.desktop": "telegram"
+        }   
         
         if (path.length > 0) {
             sourceIcons = path
+        } else if (iconMap[appId]) {
+            sourceIcons = Quickshell.iconPath(iconMap[appId], true)
+        } else {
+            console.log(appId)
         }
 
         return sourceIcons
     }
+
+    // function setIcons(appId) {
+    //     const fallback = Quickshell.iconPath("image-missing", true)
+
+    //     const entry = DesktopEntries.heuristicLookup(appId)
+    //     if (entry && entry.icon)
+    //         return Quickshell.iconPath(entry.icon, true)
+
+    //     return fallback
+    // }
 
     RowNormal {
         id: programsRow

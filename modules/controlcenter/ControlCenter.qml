@@ -12,7 +12,7 @@ PopupWindow {
         rect.x: root.width - width - Appearance.padding.normal
     }
     implicitHeight: 900; implicitWidth: 500
-    visible: true
+    visible: false
     // color: '#1f1869c5'
     color: "transparent"
 
