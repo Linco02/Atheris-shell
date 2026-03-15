@@ -6,7 +6,7 @@ import qs.config
 import qs.components
 
 Item {
-    height: root.height - Appearance.padding.normal; width: networkText.width + Appearance.padding.normal
+    height: parent.height; width: networkText.width
     property string currentNetwork: ""
 
     function networkName(data) {
@@ -43,7 +43,7 @@ Item {
         }
     }
 
-    TextStyledH {
+    TextStyledFH {
         id: networkText
         anchors.centerIn: parent
         text: currentNetwork

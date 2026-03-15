@@ -5,7 +5,7 @@ import qs.config
 import qs.components
 
 Item {
-    height: root.height - Appearance.padding.normal; width: languageText.width + Appearance.padding.normal
+    height: parent.height; width: languageText.width
 
     property string currentLayout: "US"
 
@@ -26,10 +26,9 @@ Item {
         Hyprland.rawEvent.connect(currentLayoutParse);
     }
 
-    TextStyledH {
+    TextStyledFH {
         id: languageText
         anchors.centerIn: parent
         text: currentLayout
     }
 }
-

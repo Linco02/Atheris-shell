@@ -6,7 +6,7 @@ import qs.config
 import qs.components
 
 Item {
-    height: root.height - Appearance.padding.normal; width: volumeText.width + Appearance.padding.normal
+    height: parent.height; width: volumeText.width
 
     property real volumeLevel: 0
 
@@ -32,7 +32,7 @@ Item {
         }
     }
 
-    TextStyledH {
+    TextStyledFH {
         id: volumeText
         anchors.centerIn: parent
         text: "󰕾"
