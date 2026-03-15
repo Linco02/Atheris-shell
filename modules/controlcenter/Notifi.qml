@@ -1,58 +1,79 @@
 import QtQuick
+import Quickshell
+import Quickshell.Widgets
 import Quickshell.Io
 import Quickshell.Services.Notifications
+import qs.config
+import qs.services
+import qs.components.shapes
+import qs.components.containers
+import qs.components
 
-Item {
-    height: 200; width: 200
+RectForeground {
+    id: root
+    height: 300; width: parent.width
 
-    NotificationServer {
-        id: myNotificationServer
-        
-        onNotification: (n) => {
-            // Примусово змушуємо сервер стежити за цим сповіщенням
-            n.tracked = true; 
-        }
-    }
+    function setIcons(icon, urgent) {
+        var iconChose = ""
+        console.log(icon)
 
-    Process {
-        id: testNotifi
-        // Додаємо затримку, щоб сповіщення точно встигло обробитися
-        command: ["notify-send", "Hello", "This is a test notification"]
+        if (!icon || icon === "") {
+            if (urgent === 0)
+                iconChose = "dialog-information"
+            if (urgent === 1)
+                iconChose = "dialog-warning"
+            if (urgent === 2)
+                iconChose = "dialog-error"
+        } else 
+            iconChose = icon
+
+        return Quickshell.iconPath(iconChose)
     }
 
     Column {
         anchors.fill: parent
-        spacing: 10
-        padding: 20
+        width: parent.width
+        spacing: Appearance.padding.normal
+        padding: Appearance.padding.normal
 
-        Rectangle {
-            width: 100; height: 40; color: "red"
-            Text { anchors.centerIn: parent; text: "Надіслати"; color: "white" }
-            MouseArea { anchors.fill: parent; onClicked: testNotifi.running = true }
-        }
-
-        // Відображення списку
         Repeater {
-            // ВАЖЛИВО: використовуємо .values для доступу до масиву
-            model: myNotificationServer.trackedNotifications.values
+            model: NotifiServis.server.trackedNotifications.values
 
-            delegate: Rectangle {
-                width: 180; height: 50
-                color: "lightgray"
-                border.color: "gray"
-                
-                Text {
-                    anchors.left: parent.left
-                    text: modelData ? modelData.summary : "Порожньо"
-                }
-                Text {
-                    anchors.right: parent.right
-                    text: modelData ? modelData.appName : "Порожньо"
+            delegate: Rect {
+                height: 50; width: parent.width - parent.padding * 2
+                radius: root.radius - parent.padding
+                color: modelData.urgency === 0 ? Colors.inactive
+                    : modelData.urgency === 2 ? Colors.warning
+                    : Colors.active
+
+                Row {
+                    height: parent.height
+
+                    IconImage {
+                        id: notifImage
+                        implicitSize: parent.height
+                        source: setIcons(modelData.icon, modelData.urgency)
+                    }
+
+                    Column {
+                        OwnText {
+                            text: modelData ? modelData.summary : ""
+                        }
+                        OwnText {
+                            text: modelData ? modelData.appName : ""
+                        }
+                    }
                 }
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: dismiss()
+                }
+
+                component OwnText: TextStyled {
+                    color: modelData.urgency === 0 ? Colors.textInactive
+                        : modelData.urgency === 2 ? Colors.textAccent
+                        : Colors.textAccent
                 }
             }
         }

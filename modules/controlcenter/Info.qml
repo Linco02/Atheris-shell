@@ -1,5 +1,6 @@
 import QtQuick
 import qs.config
+import qs.services
 import qs.components.shapes
 import qs.components
 
@@ -24,6 +25,32 @@ Item {
 
             TextStyledH {
                 text: "󰂚"
+                color: Colors.inactive
+                MouseFill {
+                    onClicked: {
+                        NotifiServis.send("test", "test", "low")
+                    }
+                }
+            }
+
+            TextStyledH {
+                text: "󰂚"
+                color: Colors.active
+                MouseFill {
+                    onClicked: {
+                        NotifiServis.send("test", "test", "normal")
+                    }
+                }
+            }
+
+            TextStyledH {
+                text: "󰂚"
+                color: Colors.warning
+                MouseFill {
+                    onClicked: {
+                        NotifiServis.send("test", "test", "critical")
+                    }
+                }
             }
 
             TextStyledH {

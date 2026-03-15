@@ -7,7 +7,7 @@ RectForeground {
     id: root
     anchors.horizontalCenter: parent.horizontalCenter
     height: container.height
-    width: parent.width - Appearance.padding.large
+    width: parent.width
 
     Row {
         id: container
