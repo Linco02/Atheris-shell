@@ -15,17 +15,19 @@ RectForeground {
 
     function setIcons(icon, urgent) {
         var iconChose = ""
-        console.log(icon)
-
-        if (!icon || icon === "") {
+        let path = Quickshell.iconPath(icon, true)
+        
+        if (path) {
+            if (path !== "")
+                iconChose = icon
+        } else {
             if (urgent === 0)
                 iconChose = "dialog-information"
             if (urgent === 1)
                 iconChose = "dialog-warning"
             if (urgent === 2)
                 iconChose = "dialog-error"
-        } else 
-            iconChose = icon
+        }
 
         return Quickshell.iconPath(iconChose)
     }
@@ -52,7 +54,7 @@ RectForeground {
                     IconImage {
                         id: notifImage
                         implicitSize: parent.height
-                        source: setIcons(modelData.icon, modelData.urgency)
+                        source: setIcons(modelData.image, modelData.urgency)
                     }
 
                     Column {
