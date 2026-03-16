@@ -6,79 +6,66 @@ import qs.components.shapes
 import qs.components
 
 RectForeground {
-    id: workSpaceWidget
-    height: root.height - Appearance.padding.normal; width: wsList.width
+    id: root
+    height: parent.height; width: workspaceContainer.width
 
-    function workspaceMowe(workSpace) {
-        if (!workSpace.active) {
-            workSpace.activate()
-        }
+    property var wsActive: Hyprland.focusedWorkspace.id
+
+    onWsActiveChanged: {
+        workspaceDecoration(wsActive)
     }
 
-    function activeMove(index) {
-        for (let i = 0; i < Hyprland.workspaces.length; i++) {
+    function workspaceActivate(index) {
+        if (Hyprland.focusedWorkspace.id !== index) {
+            Hyprland.dispatch(`workspace ${index}`)
+        } else
+            return
+    }
 
-        }
-        // console.log(index)
-        activeRect.x = (index - 1) * activeRect.width
+    function workspaceDecoration(index) {
+        workspaceDecorate.x = index * 50 - 50
     }
 
     RectActive {
-        id: activeRect
-        height: workSpaceWidget.height; width: workSpaceWidget.height * 2
+        id: workspaceDecorate
+        height: root.height; width: 50
 
         Behavior on x { NumberAnim {} }
     }
 
-    Behavior on width { NumberAnim {} }
-
     Row {
-        id: wsList
-        anchors.centerIn: parent
+        id: workspaceContainer
+        height: parent.height
 
         Repeater {
-            model: Hyprland.workspaces
+            model: 10
 
-            Rectangle {
-                id: workspace
-                radius: Appearance.radius.normal
-                visible: modelData.id > 0
-                height: workSpaceWidget.height; width: height * 2
-                color: modelData.urgent ? Colors.warning :
-                    "transparent"
-
-                property bool isActive: modelData.focused ? true : false
+            Rect {
+                height: root.height; width: 50
+                visible: index <= 4 || Hyprland.focusedWorkspace.id >= index + 1
 
                 TextStyledH {
                     anchors.centerIn: parent
-                    text: modelData.focused ? "●" :
-                        modelData.active ? "○" :
-                        "◉"
+                    text: Hyprland.focusedWorkspace.id !== index + 1
+                        ? "○"
+                        : "●"
                 }
 
-                onIsActiveChanged: {
-                    if (isActive)
-                        activeMove(modelData.id)
+                MouseFill {
+                    onClicked: workspaceActivate(index + 1)
                 }
+            }
+        }
+    }
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: {
-                        if (!modelData.focused)
-                            workspace.color = Colors.active
-                    }
-                    onExited: {
-                        if (!modelData.focused)
-                            workspace.color = "transparent"
-                    }
-                    onClicked: {
-                        workspace.color = "transparent"
-                        workspaceMowe(modelData)
-                    }
-                }
+    Behavior on width { NumberAnim {} }
 
-                Behavior on color { ColorAnim{ } }
+    Repeater {
+        model: Hyprland.workspaces
+
+        Item {
+            Component.onCompleted: {
+                console.log(modelData.name)
             }
         }
     }

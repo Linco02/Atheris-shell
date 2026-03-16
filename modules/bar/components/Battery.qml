@@ -77,6 +77,7 @@ Item {
 
 
     Component.onCompleted: {
-        statusChange()
+        if (visible)
+            statusChange()
     }
 }

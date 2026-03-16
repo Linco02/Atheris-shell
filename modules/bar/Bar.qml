@@ -23,53 +23,32 @@ PanelWindow {
 
 
     Item {
-        anchors.fill: parent
+        anchors.centerIn: parent
+        height: parent.height - Appearance.padding.normal
+        width: parent.width - Appearance.padding.large
 
-        Item {
-            anchors {
-                left: parent.left
-                verticalCenter: parent.verticalCenter
-            }
-            height: root.height - padd * 2; width: leftTBRow.width
+        RowNormal {
+            anchors.left: parent.left
+            height: parent.height
 
-            RowNormal {
-                id: leftTBRow
-                anchors.verticalCenter: parent.verticalCenter
-                x: padd
-
-                PowerButton { }
-                Workspace { }
-                Programs { }
-            }
+            PowerButton { }
+            Workspace { }
+            Programs { }
         }
 
-        Item {
+        RowNormal {
             anchors.centerIn: parent
-            height: root.height - padd * 2; width: centerTBRow.width
+            height: parent.height
 
-            RowNormal {
-                id: centerTBRow
-                anchors.centerIn: parent
-
-                Clock { }   
-            }
+            Clock { }
         }
 
-        Item {
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-            height: root.height - padd * 2; width: rightTBRow.width
-                
-            RowNormal {
-                id: rightTBRow
-                anchors.verticalCenter: parent.verticalCenter
-                x: - padd
+        RowNormal {
+            anchors.right: parent.right
+            height: parent.height
 
-                ServicesWrapper { }
-                ControlCenterButton { }
-            }
+            ServicesWrapper { }
+            ControlCenterButton { }
         }
     }
 }
