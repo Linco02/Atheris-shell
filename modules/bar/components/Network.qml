@@ -14,10 +14,10 @@ Item {
         for (const networkList of networString) {
             const parts = networkList.split(":")
             if (parts[1] === "connected") {
-                if (parts[0] === "enp5s0") {
+                if (parts[0][0] === "e") {
                     currentNetwork = ""
                     return
-                } else if (parts[0] === "wlp7s0") {
+                } else if (parts[0][0] === "w") {
                     currentNetwork = "󰖩"
                     return
                 } else {
