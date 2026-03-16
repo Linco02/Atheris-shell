@@ -12,11 +12,12 @@ import qs.components
 PopFlash {
     anchor {
         window: root
-        rect.x: Appearance.padding.normal
         rect.y: root.height + Appearance.padding.normal
+        rect.x: Appearance.padding.normal
     }
     implicitHeight: 900; implicitWidth: 500
 
+    property bool isLeft: true
     property var list: [ "", "", "󰤄", "󰚭" ]
     property var listText: [ "Вимкнути", "Перезавантажити", "Сон", "Гібернація" ]
 

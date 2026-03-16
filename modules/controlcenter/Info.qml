@@ -3,6 +3,7 @@ import qs.config
 import qs.services
 import qs.components.shapes
 import qs.components
+import "./components"
 
 Item {
     id: root
@@ -13,9 +14,8 @@ Item {
     Item {
         anchors.fill: parent
 
-        TextStyledH {
+        UpTime {
             anchors.left: parent.left
-            text: "Up 16h25m"
         }
 
         Row {
@@ -55,10 +55,6 @@ Item {
 
             TextStyledH {
                 text: ""
-            }
-
-            TextStyledH {
-                text: ""
             }
         }
     }

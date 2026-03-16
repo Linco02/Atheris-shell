@@ -78,6 +78,10 @@ PopupWindow {
 
     RectBackground {
         id: box
+        anchors {
+            left: isLeft === true ? parent.left : undefined
+            right: isLeft === false ? parent.right: undefined
+        }
         height: container.height + Appearance.padding.large
         width: container.width + Appearance.padding.large
         border.color: Colors.outline
