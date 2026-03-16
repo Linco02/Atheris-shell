@@ -21,6 +21,7 @@ PopFlash {
     property var listText: [ "Вимкнути", "Перезавантажити", "Сон", "Гібернація" ]
 
     function choseProcess(index) {
+        console.log("yes")
         if (index === 0)
             poweroffProcess.running = true
         else if (index === 1)
@@ -51,7 +52,6 @@ PopFlash {
                     RectOwn {
                         id: button
                         TextOwn { text: modelData }
-                        MouseFill { onClicked: choseProcess(index) }
                         Behavior on color { ColorAnim { } }
                     }
 
@@ -65,6 +65,7 @@ PopFlash {
 
                 MouseFill {
                     hoverEnabled: true
+                    onClicked: choseProcess(index)
                     onEntered: {
                         parent.color = Colors.surfaceRaised
                         button.color = Colors.active
