@@ -6,7 +6,7 @@ import qs.components.containers
 import qs.components.shapes
 import qs.components
 
-ShapeJump {
+PopJump {
     anchor {
         window: root
         rect.x: root.width / 2 - width / 2

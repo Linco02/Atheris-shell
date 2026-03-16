@@ -4,103 +4,87 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import qs.config
+import qs.components.animations
+import qs.components.containers
 import qs.components.shapes
 import qs.components
 
-PanelWindow {
-    anchors {
-        top: true
-        left: true
-        bottom: true
-        right: true
+PopFlash {
+    anchor {
+        window: root
+        rect.x: Appearance.padding.normal
+        rect.y: root.height + Appearance.padding.normal
     }
-    WlrLayershell.layer: WlrLayer.Overlay
-    color: "transparent"
+    implicitHeight: 900; implicitWidth: 500
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: exitMenuLoader.active = false
-    }
+    property var list: [ "", "", "󰤄", "󰚭" ]
+    property var listText: [ "Вимкнути", "Перезавантажити", "Сон", "Гібернація" ]
 
-    Item {
-        Process {
-            id: poweroffProcess
-            command: ["systemctl", "poweroff"]
-        }
-
-        Process {
-            id: rebootProcess
-            command: ["systemctl", "reboot"]
-        }
-
-        Process {
-            id: suspendProcess
-            command: ["systemctl", "suspend"]
-        }
-
-        Process {
-            id: hibernateProcess
-            command: ["systemctl", "hibernate"]
-        }   
+    function choseProcess(index) {
+        if (index === 0)
+            poweroffProcess.running = true
+        else if (index === 1)
+            rebootProcess.running = true
+        else if (index === 2)
+            suspendProcess.running = true
+        else if (index === 3)
+            hibernateProcess.running = true
     }
 
-    RectBackground {
-        id: exitBox
-        anchors.centerIn: parent
-        height: 200; width: exitRow.width + height / 2
-        border {
-            color: Colors.outline
-            width: 2
-        }
+    Process { id: poweroffProcess; command: ["systemctl", "poweroff"] }
+    Process { id: rebootProcess; command: ["systemctl", "reboot"] }
+    Process { id: suspendProcess; command: ["systemctl", "suspend"] }
+    Process { id: hibernateProcess; command: ["systemctl", "hibernate"] }   
 
-        Row {
-            id: exitRow
-            anchors.centerIn: parent
-            spacing: exitBox.height / 4
-            RectOwn {
-                TextOwn { text: "" }
+    Column {
+        spacing: 10
+
+        Repeater {
+            model: list
+
+            Rect {
+                height: childrenRect.height; width: childrenRect.width + Appearance.padding.normal
+
+                RowNormal {
+                    RectOwn {
+                        id: button
+                        TextOwn { text: modelData }
+                        MouseFill { onClicked: choseProcess(index) }
+                        Behavior on color { ColorAnim { } }
+                    }
+
+                    TextStyled {
+                        id: description
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: listText[index]
+                        Behavior on color { ColorAnim { } }
+                    }
+                }
 
                 MouseFill {
-                    onClicked: poweroffProcess.running = true
+                    hoverEnabled: true
+                    onEntered: {
+                        parent.color = Colors.surfaceRaised
+                        button.color = Colors.active
+                        description.color = Colors.textAccent
+                    }
+                    onExited: {
+                        parent.color = "transparent"
+                        button.color = Colors.surface
+                        description.color = Colors.textSurface
+                    }
                 }
-            }
 
-            RectOwn {
-                TextOwn { text: "" }
-
-                MouseFill {
-                    onClicked: rebootProcess.running = true
-                }
-            }
-
-            RectOwn {
-                TextOwn { text: "󰤄" }
-
-                MouseFill {
-                    onClicked: suspendProcess.running = true
-                }
-            }
-
-            RectOwn {
-                TextOwn { text: "󰚭" }
-
-                MouseFill {
-                    onClicked: hibernateProcess.running = true
-                }
+                Behavior on color { ColorAnim { } }
             }
         }
     }
-
+    
     component RectOwn: RectForeground {
-        height: exitBox.height / 2; width: height
+        height: width; width: 40
     }
 
     component TextOwn: TextStyled {
         anchors.centerIn: parent
-        font.pointSize: 60
-    }
-
-    component MouseFill: MouseArea {
-        anchors.fill: parent
     }
 }

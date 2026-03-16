@@ -6,7 +6,7 @@ import qs.components.animations
 import qs.components
 
 PopupWindow {
-    id: shapeJump
+    id: root
     visible: false
     color: "transparent"
 
@@ -18,7 +18,7 @@ PopupWindow {
     property int rad: Appearance.radius.large
 
     function openMenu() {
-        if (shapeJump.visible) {
+        if (root.visible) {
             stateManager.state = "close"
         } else {
             visible = true
@@ -50,7 +50,7 @@ PopupWindow {
                     target: box
                     y: - box.height
                 }
-                PropertyChanges { target: shapeJump; percent: 0 }
+                PropertyChanges { target: root; percent: 0 }
             },
             State {
                 name: "open"
@@ -58,7 +58,7 @@ PopupWindow {
                     target: box
                     y: 0
                 }
-                PropertyChanges { target: shapeJump; percent: 1 }
+                PropertyChanges { target: root; percent: 1 }
             }
         ]
 
@@ -71,7 +71,7 @@ PopupWindow {
                         NumberAnim { property: "percent" }
                     }
                     PropertyAction {
-                        target: shapeJump
+                        target: root
                         property: "visible"
                         value: false
                     }

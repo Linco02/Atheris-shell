@@ -6,7 +6,7 @@ import qs.components
 
 RectForeground {
     id: powerWidget
-    height: root.height - Appearance.padding.normal
+    height: parent.height
     width: height + Appearance.padding.normal
     radius: height / 2
 
@@ -34,19 +34,24 @@ RectForeground {
             powerWidget.color = Colors.surfaceRaised
         }
         onClicked: {
-            openExitMenu()
+            // openExitMenu()
+            exitMenu.openMenu()
         }
     }
 
     Behavior on color { ColorAnim{ } }
 
-    Loader {
-        id: exitMenuLoader
-        active: false
-        sourceComponent: Component {
-            ExitMenu {
-                id: exitMenu
-            }
-        }
+    // Loader {
+    //     id: exitMenuLoader
+    //     active: true
+    //     sourceComponent: Component {
+    //         ExitMenu {
+    //             id: exitMenu
+    //         }
+    //     }
+    // }
+
+    ExitMenu {
+        id: exitMenu
     }
 }

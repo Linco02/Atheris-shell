@@ -59,14 +59,4 @@ RectForeground {
     }
 
     Behavior on width { NumberAnim {} }
-
-    Repeater {
-        model: Hyprland.workspaces
-
-        Item {
-            Component.onCompleted: {
-                console.log(modelData.name)
-            }
-        }
-    }
 }

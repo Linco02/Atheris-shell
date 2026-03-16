@@ -9,18 +9,13 @@ import "./components"
 
 PanelWindow {
     id: root
-
-    property int padd: Appearance.padding.normal
-
     anchors {
         left: true
         top: true
         right: true
-        // bottom: true
     }
     implicitHeight: Appearance.barHeight
     color: Colors.surface
-
 
     Item {
         anchors.centerIn: parent
