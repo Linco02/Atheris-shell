@@ -43,9 +43,11 @@ PopFlash {
             model: list
 
             Rect {
-                height: childrenRect.height; width: childrenRect.width + Appearance.padding.normal
+                height: childrenRect.height; width: childrenRect.width
 
                 RowNormal {
+                    rightPadding: 10
+
                     RectOwn {
                         id: button
                         TextOwn { text: modelData }
