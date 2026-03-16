@@ -20,7 +20,7 @@ PanelWindow {
     Item {
         anchors.centerIn: parent
         height: parent.height - Appearance.padding.normal
-        width: parent.width - Appearance.padding.large
+        width: parent.width - Appearance.padding.large - Appearance.padding.normal
 
         RowNormal {
             anchors.left: parent.left
