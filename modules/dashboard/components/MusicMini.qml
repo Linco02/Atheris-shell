@@ -19,10 +19,10 @@ RectForeground {
         return null
     }
 
-    Timer {
-        interval: 2000; running: true; repeat: true
-        onTriggered: console.log(Mpris.players.values.length)
-    }
+    // Timer {
+    //     interval: 2000; running: true; repeat: true
+    //     onTriggered: console.log(Mpris.players.values.length)
+    // }
 
     Column {
         visible: activePlayer !== null

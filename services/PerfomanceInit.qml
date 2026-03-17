@@ -37,7 +37,10 @@ Item {
         id: gpuPerfomance
         command: {
             if (gpuType === "amd") {
-                return ["true"]
+                return [
+                    "sh", "-c",
+                    "cat /sys/class/drm/card1/device/gpu_busy_percent && cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input"
+                ]
             } else if (gpuType === "nvidia") {
                 return [
                     "sh", "-c",
@@ -53,12 +56,15 @@ Item {
         stdout: StdioCollector {
             onStreamFinished: {
                 if (gpuType === "amd") {
-                    var indicator1 = 0
-                    var indicator2 = 0
+                    var info = this.text.trim().split("\n")
+                    if (info.length >= 2) {
+                        var load = parseInt(info[0])
+                        var temp = (parseInt(info[1]) / 1000).toFixed(0)
 
-                    gpu.textInd1 = indicator1 + "%"
-                    gpu.textInd2 = indicator2 + "°C"
-                    gpu.percent = indicator1 / 100
+                        gpu.textInd1 = load + "%"
+                        gpu.textInd2 = temp + "°C"
+                        gpu.percent = load / 100
+                    }
                 } else if (gpuType === "nvidia") {
                     var info = this.text.trim().split(",")
                     var indicator1 = parseInt(info[0])
