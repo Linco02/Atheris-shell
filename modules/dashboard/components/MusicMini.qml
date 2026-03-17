@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Shapes
-import QtQuick.Effects
+import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import qs.config
 import qs.components.animations
@@ -13,10 +13,15 @@ RectForeground {
     property var activePlayer: {
         const players = Mpris.players.values
         for (let i = 0; i < players.length; i++) {
-            if (players[i].playbackState === MprisPlaybackState.Playing)
+            if ( players.length === 1 || players[i].playbackState === MprisPlaybackState.Playing)
                 return players[i]
         }
         return null
+    }
+
+    Timer {
+        interval: 2000; running: true; repeat: true
+        onTriggered: console.log(Mpris.players.values.length)
     }
 
     Column {
@@ -29,35 +34,15 @@ RectForeground {
             anchors.horizontalCenter: parent.horizontalCenter
             height: imageSize + 30; width: height
 
-            Item {
+            ClippingWrapperRectangle {
                 id: image
                 anchors.centerIn: parent
                 height: imageSize; width: height
+                radius: height / 2
 
-                // Rectangle {
-                //     id: maskItem
-                //     anchors.fill: parent
-                //     radius: width / 2
-                //     visible: false
-                // }
-                
-                // layer.enabled: true
-                // layer.effect: MultiEffect {
-                //     // 2. Передаємо ID об'єкта
-                //     maskSource: maskItem
-                // }
-
-                layer.enabled: true
-                layer.effect: MultiEffect {
-                    maskSource: Rectangle {
-                        height: image.height; width: height
-                        radius: height / 2
-                    }
-                }
-                
                 Image {
                     id: img
-                    width: imageSize; height: imageSize
+                    anchors.fill: parent
                     source: activePlayer?.trackArtUrl ?? ""
                     fillMode: Image.PreserveAspectCrop
                 }
