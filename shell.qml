@@ -5,7 +5,7 @@ import qs.services
 import qs.modules.background
 import qs.modules.bar
 import qs.modules.bottomcenter
-
+import qs.modules.lock
 
 ShellRoot {
     // Задній фон //
@@ -31,4 +31,5 @@ ShellRoot {
 
     // cлужби
     Palit { }
+    Lock { }
 }

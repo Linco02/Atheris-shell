@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.config
+import qs.services
 import qs.components.animations
 import qs.components.containers
 import qs.components.shapes
@@ -11,36 +12,7 @@ RectForeground {
     id: programsWidget
     height: root.height - Appearance.padding.normal; width: programsRow.width
 
-    function setIcons(appId) {
-        let name = appId.split('.').pop().toLowerCase()
-        let path = Quickshell.iconPath(name, true)
-        let sourceIcons = Quickshell.iconPath("image-missing")
-        const iconMap = {
-            "codium": "vscodium",
-            "org.kde.dolphin": "dolphin",
-            "org.telegram.desktop": "telegram"
-        }   
-        
-        if (path.length > 0) {
-            sourceIcons = path
-        } else if (iconMap[appId]) {
-            sourceIcons = Quickshell.iconPath(iconMap[appId], true)
-        } else {
-            console.log(appId)
-        }
-
-        return sourceIcons
-    }
-
-    // function setIcons(appId) {
-    //     const fallback = Quickshell.iconPath("image-missing", true)
-
-    //     const entry = DesktopEntries.heuristicLookup(appId)
-    //     if (entry && entry.icon)
-    //         return Quickshell.iconPath(entry.icon, true)
-
-    //     return fallback
-    // }
+    // property 
 
     RowNormal {
         id: programsRow
@@ -61,7 +33,7 @@ RectForeground {
                     id: programIcons
                     anchors.centerIn: parent
                     implicitSize: 16
-                    source: setIcons(modelData.appId)
+                    source: AppIcons.getIcon(modelData.appId)
                 }
                 
                 MouseArea {

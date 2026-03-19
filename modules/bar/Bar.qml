@@ -28,7 +28,7 @@ PanelWindow {
 
             PowerButton { }
             Workspace { }
-            Programs { }
+            Taskbar { }
         }
 
         RowNormal {

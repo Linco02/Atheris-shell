@@ -12,5 +12,6 @@ Singleton {
     // ================
     property bool enableBar: true
     property bool enableBottomCenter: true
+    property bool enableLockStartUp: false
 
 }

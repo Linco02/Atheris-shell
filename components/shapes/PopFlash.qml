@@ -87,6 +87,19 @@ PopupWindow {
         border.color: Colors.outline
         border.width: 2
 
+        HoverHandler {
+            onHoveredChanged: {
+                if(!hovered) {
+                    time.start()
+                } else {
+                    time.stop()
+                    if(stateManager.state != "open") {
+                        stateManager.state = "open"
+                    }
+                }
+            }
+        }
+
         Item {
             id: container
             anchors.centerIn: parent

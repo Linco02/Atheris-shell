@@ -13,6 +13,7 @@ RectForeground {
     height: parent.height; width: workspaceContainer.width
 
     property real cornerRadius: Appearance.radius.normal
+    property var workspaceFocused: Hyprland.focusedWorkspace?.id ?? 1
     readonly property int workspaceNumber: 5
     property int workspaceExist: workspaceNumber
     property list<bool> workspaceOccupied: []
@@ -51,7 +52,7 @@ RectForeground {
                 color: isOccupied ? Colors.inactive
                     : "transparent"
 
-                property bool isFocused: Hyprland.focusedWorkspace.id === index + 1
+                property bool isFocused: workspaceFocused === index + 1
                 property bool isOccupied: workspaceOccupied[index] || false
                 property bool leftRad: isOccupied && (index > 0 && workspaceOccupied[index - 1]) === true
                 property bool rightRad: isOccupied && (index < workspaceOccupied.length - 1 && workspaceOccupied[index + 1]) === true
@@ -71,7 +72,7 @@ RectForeground {
 
     Rect {
         height: root.height; width: 50
-        x: Hyprland.focusedWorkspace.id > 0 ? Hyprland.focusedWorkspace.id * 50 - 50 : 1
+        x: workspaceFocused > 0 ? workspaceFocused * 50 - 50 : 1
         color: Colors.active
 
         Behavior on x { NumberAnim {} }
@@ -82,7 +83,7 @@ RectForeground {
             model: workspaceExist
 
             Item {
-                property bool isFocused: Hyprland.focusedWorkspace.id === index + 1
+                property bool isFocused: workspaceFocused === index + 1
                 property bool isOccupied: workspaceOccupied[index] || false
                 height: root.height; width: 50
 
