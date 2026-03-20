@@ -24,12 +24,23 @@ ShellRoot {
         component: BottomCenter {}
     }
 
-    // LazyLoader {
-    //     active: Settings.controlCenter
-    //     component: ControlCenter {}
-    // }
+    LazyLoader {
+        active: GlobalStates.isPalitOn
+        component: Palit { }
+    }
+
+    LazyLoader {
+        active: GlobalStates.isSessionLockOn
+        component: Lock { }
+    }
+
+    LazyLoader {
+        active: GlobalStates.isShortcutOn
+        component: Shortcuts { }
+    }
 
     // cлужби
-    Palit { }
-    Lock { }
+    // Palit { }
+    // Lock { }
+    // Shortcuts { }
 }

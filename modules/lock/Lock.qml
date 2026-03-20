@@ -13,8 +13,8 @@ import qs.components
 Item {
     Connections {
         target: GlobalStates
-        function onIsSessionLockLockChanged() {
-            lock.locked = GlobalStates.isSessionLockLock
+        function onIsSessionLockOnChanged() {
+            lock.locked = GlobalStates.isSessionLockOn
         }
     }
 

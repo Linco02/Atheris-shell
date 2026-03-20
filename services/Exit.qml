@@ -28,6 +28,6 @@ Singleton {
         else if (chose === "Гібернація")
             hibernateProcess.running = true
         else if (chose === "Заблокувати")
-            GlobalStates.isSessionLockLock = true
+            GlobalStates.isSessionLockOn = true
     }
 }

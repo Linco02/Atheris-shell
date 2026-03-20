@@ -3,5 +3,7 @@ import Quickshell
 import qs.services
 
 Singleton {
-    property bool isSessionLockLock: false
+    property bool isSessionLockOn: false
+    property bool isPalitOn: true
+    property bool isShortcutOn: true
 }
