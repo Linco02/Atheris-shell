@@ -11,6 +11,8 @@ PopupWindow {
     color: "transparent"
 
     default property alias contents: innerContainer.data
+    // property alias containerHeight: container.height
+    // property alias containerWidth: container.width
 
     property real percent: 0
     property int rad: Appearance.radius.large
@@ -85,7 +87,7 @@ PopupWindow {
         ]
     }
 
-    Item {
+    RectBackground {
         id: box
         anchors {
             horizontalCenter: (rotate === 0 || rotate === 180) ? parent.horizontalCenter : undefined
@@ -99,6 +101,8 @@ PopupWindow {
         width: ( rotate === 0 || rotate === 180) ?
             container.width + Appearance.padding.large :
             container.height + Appearance.padding.large
+        topLeftRadius: rad; topRightRadius: rad
+        bottomLeftRadius: 0; bottomRightRadius: 0
         rotation: rotate
 
         HoverHandler {
@@ -114,48 +118,25 @@ PopupWindow {
             }
         }
 
-        Shape {
-            layer {
-                enabled: true
-                samples: 4
-            }
-
-            ShapePath {
-                strokeWidth: 0
-                fillColor: Colors.surface
-                startY: rad; startX: 0
-
-                PathArc {
-                    y: 0; x: rad
-                    radiusY: rad; radiusX: rad
-                }
-                PathLine { y: 0; x: box.width - rad }
-                PathArc {
-                    y: rad; x: box.width
-                    radiusY: rad; radiusX: rad
-                }
-                PathLine { y: box.height; x: box.width }
-                PathLine { y: box.height; x: 0 }
-            }
-        }
-
         Item {
             id: container
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            width: innerContainer.width
-            height: innerContainer.height
             rotation: (360 - rotate) % 360
             clip: true
+            height: innerContainer.height
+            width: innerContainer.width
 
             Item {
                 id: innerContainer
-                anchors.centerIn: parent
-
-                width: childrenRect.width
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
                 height: childrenRect.height
+                width: childrenRect.width
             }
 
             Behavior on width { NumberAnim { } }

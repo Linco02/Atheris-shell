@@ -22,10 +22,10 @@ PopJump {
 
     Loader {
         id: mainLoader
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-        }
+        // anchors {
+        //     top: parent.top
+        //     horizontalCenter: parent.horizontalCenter
+        // }
         // width: childrenRect.width
         // height: childrenRect.height
         active: GlobalStates.isDashboardModule !== ""

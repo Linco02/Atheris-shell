@@ -7,117 +7,110 @@ import qs.components.shapes
 import qs.components
 import "./modules"
 
-Item {
-    height: testdd.height > 0 ? testdd.height : 200
-    width: testdd.width > 0 ? testdd.width : 200
+Column {
+    spacing: space
+    property int space: Appearance.spacing.normal
+    property int gap: 60
 
-    Column {
-        id: testdd
-        spacing: space
+    Item {
+        id: navigation
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: switchNavigation.height
+        width: switchNavigation.width + space
 
-        property int space: Appearance.spacing.normal
-        property int gap: 60
+        Row {
+            id: switchNavigation
+            anchors.centerIn: parent
+            spacing: navigation.height * 3 / 2
 
-        Item {
-            id: navigation
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: switchNavigation.height
-            width: switchNavigation.width + space
+            Item {
+                height: 40; width: height
 
-            Row {
-                id: switchNavigation
-                anchors.centerIn: parent
-                spacing: navigation.height * 3 / 2
-
-                Item {
-                    height: 40; width: height
-
-                    TextStyledH {
-                        anchors.centerIn: parent
-                        text: "󰼄"
-                    }
-                    MouseFill { onClicked: widgetRow.state = "page1" }
+                TextStyledH {
+                    anchors.centerIn: parent
+                    text: "󰼄"
                 }
+                MouseFill { onClicked: widgetRow.state = "page1" }
+            }
 
-                Item {
-                    height: 40; width: height
+            Item {
+                height: 40; width: height
 
-                    TextStyledH {
-                        anchors.centerIn: parent
-                        text: "󰨝"
-                    }
-                    MouseFill { onClicked: widgetRow.state = "page2" }
+                TextStyledH {
+                    anchors.centerIn: parent
+                    text: "󰨝"
                 }
+                MouseFill { onClicked: widgetRow.state = "page2" }
+            }
 
-                Item {
-                    height: 40; width: height
+            Item {
+                height: 40; width: height
 
-                    TextStyledH {
-                        anchors.centerIn: parent
-                        text: ""
-                    }
-                    MouseFill { onClicked: widgetRow.state = "page3" }
+                TextStyledH {
+                    anchors.centerIn: parent
+                    text: ""
                 }
+                MouseFill { onClicked: widgetRow.state = "page3" }
+            }
+        }
+    }
+
+    RectForeground {
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: 2
+        width: widgetRow.width
+    }
+
+    Rect {
+        id: widgetRow
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: page1.height; width: page1.width
+        clip: true
+        state: "page2"
+
+        states: [
+            State {
+                name: "page1"
+                PropertyChanges {
+                    target: widgetRow
+                    height: page1.height; width: page1.width
+                }
+                PropertyChanges { target: pages; x: 0 }
+            },
+            State {
+                name: "page2"
+                PropertyChanges {
+                    target: widgetRow
+                    height: page2.height; width: page2.width
+                }
+                PropertyChanges { target: pages; x: - gap - page1.width }
+            },
+            State {
+                name: "page3"
+                PropertyChanges {
+                    target: widgetRow
+                    height: page3.height; width: page3.width
+                }
+                PropertyChanges { target: pages; x: - gap * 2 - page1.width - page2.width }
+            }
+        ]
+
+        transitions: Transition {
+            ParallelAnimation {
+                NumberAnim { property: "height"; duration: Appearance.durations.fast }
+                NumberAnim { property: "width"; duration: Appearance.durations.fast }
+                NumberAnim { property: "x" }
             }
         }
 
-        RectForeground {
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: 2
-            width: widgetRow.width
-        }
-
-        Rect {
-            id: widgetRow
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: page1.height; width: page1.width
-            clip: true
-            state: "page2"
-
-            states: [
-                State {
-                    name: "page1"
-                    PropertyChanges {
-                        target: widgetRow
-                        height: page1.height; width: page1.width
-                    }
-                    PropertyChanges { target: pages; x: 0 }
-                },
-                State {
-                    name: "page2"
-                    PropertyChanges {
-                        target: widgetRow
-                        height: page2.height; width: page2.width
-                    }
-                    PropertyChanges { target: pages; x: - gap - page1.width }
-                },
-                State {
-                    name: "page3"
-                    PropertyChanges {
-                        target: widgetRow
-                        height: page3.height; width: page3.width
-                    }
-                    PropertyChanges { target: pages; x: - gap * 2 - page1.width - page2.width }
-                }
-            ]
-
-            transitions: Transition {
-                ParallelAnimation {
-                    NumberAnim { property: "height"; duration: Appearance.durations.fast }
-                    NumberAnim { property: "width"; duration: Appearance.durations.fast }
-                    NumberAnim { property: "x" }
-                }
-            }
-
-            Row {
-                id: pages
-                spacing: gap
-                x: 0
-                
-                Music { id: page1 }
-                Dash { id: page2 }
-                Perfomance { id: page3 }
-            }
+        Row {
+            id: pages
+            spacing: gap
+            x: 0
+            
+            Music { id: page1 }
+            Dash { id: page2 }
+            Perfomance { id: page3 }
         }
     }
 }

@@ -7,6 +7,6 @@ import qs.components.shapes
 import qs.components
 
 Rectangle {
-    anchors.centerIn: parent
+    // anchors.centerIn: parent
     height: 200; width: 200
 }
