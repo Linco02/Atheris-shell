@@ -7,27 +7,30 @@ import qs.components.shapes
 import qs.components
 
 PopJump {
+    id: ss
     anchor {
         window: root
         rect.x: root.width / 2 - width / 2
         rect.y: root.height
     }
-    implicitHeight: 600; implicitWidth: 1000
+    implicitHeight: 600; implicitWidth: 1200
 
     property int space: Appearance.spacing.normal
     property int gap: 60
-
     property int rotate: 180
 
+    Connections {
+        target: GlobalStates
+        function onIsDashboardOpenChanged() {
+            if (!GlobalStates.isDashboardOpen) {
+                closeMenu()
+            } else
+                openMenu()
+        }
+    }
 
     Loader {
         id: mainLoader
-        // anchors {
-        //     top: parent.top
-        //     horizontalCenter: parent.horizontalCenter
-        // }
-        // width: childrenRect.width
-        // height: childrenRect.height
         active: GlobalStates.isDashboardModule !== ""
         source: {
             switch(GlobalStates.isDashboardModule) {

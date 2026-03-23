@@ -39,7 +39,6 @@ Singleton {
                     wallparersList.push(get(i, "fileUrl"))
                 }
                 wallpaperReady()
-                // palitCreate()
             }
         }
     }

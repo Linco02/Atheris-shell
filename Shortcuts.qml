@@ -8,9 +8,9 @@ Item {
         name: "dashboard_menu"
         description: "Відкрити дошку"
         onPressed: {
-            // GlobalStates.isWallpaperSelector = false
-            // GlobalStates.isDashboard = !GlobalStates.isDashboard
-            GlobalStates.isDashboardModule = "dashboard"
+            let target = "dashboard"
+            GlobalStates.isDashboardOpen = (GlobalStates.isDashboardModule === target) ? !GlobalStates.isDashboardOpen : true
+            GlobalStates.isDashboardModule = target
         }
     }
 
@@ -18,9 +18,9 @@ Item {
         name: "wallpaper_selector"
         description: "Відкрити вибір шпалер"
         onPressed: {
-            // GlobalStates.isDashboard = false
-            // GlobalStates.isWallpaperSelector = !GlobalStates.isWallpaperSelector
-            GlobalStates.isDashboardModule = "wallpaper"
+            let target = "wallpaper"
+            GlobalStates.isDashboardOpen = (GlobalStates.isDashboardModule === target) ? !GlobalStates.isDashboardOpen : true
+            GlobalStates.isDashboardModule = target
         }
     }
 
@@ -28,7 +28,9 @@ Item {
         name: "programs_selector"
         description: "Відкрити програму"
         onPressed: {
-            GlobalStates.isDashboardModule = "programs"
+            let target = "programs"
+            GlobalStates.isDashboardOpen = (GlobalStates.isDashboardModule === target) ? !GlobalStates.isDashboardOpen : true
+            GlobalStates.isDashboardModule = target
         }
     }
 

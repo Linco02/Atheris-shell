@@ -95,14 +95,6 @@ Column {
             }
         ]
 
-        transitions: Transition {
-            ParallelAnimation {
-                NumberAnim { property: "height"; duration: Appearance.durations.fast }
-                NumberAnim { property: "width"; duration: Appearance.durations.fast }
-                NumberAnim { property: "x" }
-            }
-        }
-
         Row {
             id: pages
             spacing: gap
@@ -111,6 +103,8 @@ Column {
             Music { id: page1 }
             Dash { id: page2 }
             Perfomance { id: page3 }
+
+            Behavior on x { NumberAnim { } }
         }
     }
 }

@@ -37,7 +37,11 @@ RectForeground {
         onExited: {
             parent.color = Colors.surfaceRaised
         }
-        onClicked: controlCenter.openMenu()
+        onClicked: {
+            let target = "dashboard"
+            GlobalStates.isDashboardOpen = (GlobalStates.isDashboardModule === target) ? !GlobalStates.isDashboardOpen : true
+            GlobalStates.isDashboardModule = target
+        }
     }
 
     Behavior on color { ColorAnim{ } }

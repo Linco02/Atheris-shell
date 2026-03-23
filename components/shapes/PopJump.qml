@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Quickshell
+import Quickshell.Widgets
 import qs.config
 import qs.components.animations
 import qs.components
@@ -11,13 +12,10 @@ PopupWindow {
     color: "transparent"
 
     default property alias contents: innerContainer.data
-    // property alias containerHeight: container.height
-    // property alias containerWidth: container.width
-
     property real percent: 0
     property int rad: Appearance.radius.large
 
-    function openMenu() {
+    function switchMenu() {
         if (root.visible) {
             stateManager.state = "close"
         } else {
@@ -25,6 +23,9 @@ PopupWindow {
             stateManager.state = "open"
         }
     }
+
+    function openMenu() { stateManager.state = "open"; visible = true }
+    function closeMenu() { stateManager.state = "close" }
 
     mask: Region {
         x: box.x
@@ -36,7 +37,7 @@ PopupWindow {
     Timer {
         id: time
         interval: 100
-        onTriggered: { openMenu() }
+        onTriggered: { closeMenu() }
     }
 
     Item {
@@ -118,16 +119,17 @@ PopupWindow {
             }
         }
 
-        Item {
+        ClippingRectangle {
             id: container
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
             rotation: (360 - rotate) % 360
-            clip: true
             height: innerContainer.height
             width: innerContainer.width
+            color: "transparent"
+            radius: rad - Appearance.spacing.normal
 
             Item {
                 id: innerContainer
