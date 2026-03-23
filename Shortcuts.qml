@@ -1,13 +1,16 @@
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
+import qs.config
 
 Item {
     GlobalShortcut {
         name: "dashboard_menu"
         description: "Відкрити дошку"
         onPressed: {
-            console.log("dash")
+            // GlobalStates.isWallpaperSelector = false
+            // GlobalStates.isDashboard = !GlobalStates.isDashboard
+            GlobalStates.isDashboardModule = "dashboard"
         }
     }
 
@@ -15,7 +18,23 @@ Item {
         name: "wallpaper_selector"
         description: "Відкрити вибір шпалер"
         onPressed: {
-            console.log("wall")
+            // GlobalStates.isDashboard = false
+            // GlobalStates.isWallpaperSelector = !GlobalStates.isWallpaperSelector
+            GlobalStates.isDashboardModule = "wallpaper"
         }
+    }
+
+    GlobalShortcut {
+        name: "programs_selector"
+        description: "Відкрити програму"
+        onPressed: {
+            GlobalStates.isDashboardModule = "programs"
+        }
+    }
+
+    GlobalShortcut {
+        name: "lock_session"
+        description: "Заблокувати сесію"
+        onPressed: { GlobalStates.isSessionLockOn = true }
     }
 }

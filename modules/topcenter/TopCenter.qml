@@ -38,7 +38,7 @@ PanelWindow {
         implicitHeight: 168 + Appearance.padding.gigant
         implicitWidth: wallChoser.width
         color:  "transparent"
-        visible: false
+        visible: GlobalStates.isWallpaperSelector || GlobalStates.isDashboard
 
         Connections {
             target: wallChoser

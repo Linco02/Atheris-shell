@@ -3,7 +3,6 @@ import Quickshell
 
 Singleton {
     property var substitutions: ({
-        // "codium": "vscodium",
         "com.github.th_ch.youtube_music": "youtube-music",
     })
 

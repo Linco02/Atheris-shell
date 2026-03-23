@@ -1,7 +1,7 @@
 import QtQuick
 import qs.config
 import qs.components
-import "./components"
+import "./../components"
 
 Item {
     id: dashBoaradWidget

@@ -10,9 +10,7 @@ PopupWindow {
     visible: false
     color: "transparent"
 
-    property alias containerHeight: container.height
-    property alias containerWidth: container.width
-    default property alias contents: container.data
+    default property alias contents: innerContainer.data
 
     property real percent: 0
     property int rad: Appearance.radius.large
@@ -147,12 +145,21 @@ PopupWindow {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
+            width: innerContainer.width
+            height: innerContainer.height
+            rotation: (360 - rotate) % 360
+            clip: true
 
-            rotation: 
-                rotate === 90 ? 270 :
-                rotate === 270 ? 90 :
-                rotate === 180 ? 180 :
-                0
+            Item {
+                id: innerContainer
+                anchors.centerIn: parent
+
+                width: childrenRect.width
+                height: childrenRect.height
+            }
+
+            Behavior on width { NumberAnim { } }
+            Behavior on height { NumberAnim { } }
         }
     }
 

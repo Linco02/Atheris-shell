@@ -4,7 +4,7 @@ import qs.config
 import qs.services
 import qs.modules.background
 import qs.modules.bar
-import qs.modules.bottomcenter
+// import qs.modules.bottomcenter
 import qs.modules.lock
 
 ShellRoot {
@@ -19,19 +19,14 @@ ShellRoot {
         component: Bar {}
     }
 
-    LazyLoader {
-        active: Settings.enableBottomCenter
-        component: BottomCenter {}
-    }
+    // LazyLoader {
+    //     active: Settings.enableBottomCenter
+    //     component: BottomCenter {}
+    // }
 
     LazyLoader {
         active: GlobalStates.isPalitOn
         component: Palit { }
-    }
-
-    LazyLoader {
-        active: GlobalStates.isSessionLockOn
-        component: Lock { }
     }
 
     LazyLoader {
@@ -41,6 +36,6 @@ ShellRoot {
 
     // cлужби
     // Palit { }
-    // Lock { }
+    Lock { }
     // Shortcuts { }
 }

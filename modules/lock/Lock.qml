@@ -75,7 +75,7 @@ Item {
                         anchors.centerIn: parent
                         text: "Розблокувати"
                     }
-                    MouseFill { onClicked: GlobalStates.isSessionLockLock = false }
+                    MouseFill { onClicked: GlobalStates.isSessionLockOn = false }
                 }
 
                 RowNormal {
