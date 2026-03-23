@@ -7,7 +7,7 @@ import qs.components.shapes
 import qs.components
 
 PopJump {
-    id: ss
+    id: dashboard
     anchor {
         window: root
         rect.x: root.width / 2 - width / 2
@@ -26,6 +26,14 @@ PopJump {
                 closeMenu()
             } else
                 openMenu()
+        }
+    }
+
+    Connections {
+        target: dashboard
+
+        function onPopClosed() {
+            GlobalStates.isDashboardOpen = false
         }
     }
 

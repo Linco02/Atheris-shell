@@ -14,6 +14,7 @@ PopupWindow {
     default property alias contents: innerContainer.data
     property real percent: 0
     property int rad: Appearance.radius.large
+    signal popClosed()
 
     function switchMenu() {
         if (root.visible) {
@@ -25,7 +26,7 @@ PopupWindow {
     }
 
     function openMenu() { stateManager.state = "open"; visible = true }
-    function closeMenu() { stateManager.state = "close" }
+    function closeMenu() { stateManager.state = "close"; popClosed() }
 
     mask: Region {
         x: box.x
