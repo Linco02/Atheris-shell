@@ -6,27 +6,7 @@ import Qt.labs.folderlistmodel
 Singleton {
     property var wallparersList: []
     property var wallpaper: ""
-    property var chose: ""
     signal wallpaperReady()
-
-    onWallpaperChanged: {
-        palitCreate()
-    }
-
-    function palitCreate() {
-        chose = wallpaper
-        paliCreator.running = true
-    }
-
-    Process {
-        id: paliCreator
-        command: [
-            "matugen",
-            "image",
-            "--source-color-index", "0",
-            chose.toString().replace("file://", "")
-        ]
-    }
 
     FolderListModel {
         id: listWallpaper

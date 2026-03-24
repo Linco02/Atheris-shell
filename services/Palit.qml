@@ -2,10 +2,42 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.config
+import qs.services
 
 Item {
     readonly property var jsonData: JSON.parse(jsonFile.text())
-    property var test: [] 
+    property var test: []
+    property var chose: ""
+
+    Connections {
+        target: Wallpapers
+        function onWallpaperChanged() {
+            palitCreate()
+        }
+    }
+
+    function palitCreate() {
+        chose = Wallpapers.wallpaper
+        paliCreator.running = true
+        openrgbUpdate.running = GlobalStates.isOpenrgbOn
+    }
+
+    Process {
+        id: paliCreator
+        command: [
+            "matugen",
+            "image",
+            "--source-color-index", "0",
+            chose.toString().replace("file://", "")
+        ]
+    }
+
+    Process {
+        id: openrgbUpdate
+        command: [
+            "sh", "/tmp/atheris/openrgb.sh"
+        ]
+    }
 
     function applyPalette(data) {
         if (!data) return;
