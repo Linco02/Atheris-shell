@@ -7,15 +7,31 @@ import Qt.labs.folderlistmodel
 Singleton {
     signal wallpaperReady()
     property var wallparersList: []
+
+    property string wallpaperSelected: ""
     property string wallpaper: ""
     property string wallpaperPlugMpw: ""
+    property bool isWallpaperMpw: false
 
     property var wallIntoImage: []
     property bool iswallIntoImageActive: false
 
+    onWallpaperSelectedChanged: {
+        let path = wallpaperSelected.toString().toLowerCase();
+        if (path.endsWith(".gif") || path.endsWith(".webp") || path.endsWith(".mp4")) {
+            let data = makePictureMpwPath(path)
+            isWallpaperMpw = true
+            wallpaperPlugMpw = data.temp
+            wallpaper = wallpaperSelected
+        } else {
+            isWallpaperMpw = false
+            wallpaper = wallpaperSelected
+        }
+    }
+
     function wallpaperRandom() {
         const imagesChose = Math.floor(Math.random() * wallparersList.length)
-        wallpaper = wallparersList[imagesChose]
+        wallpaperSelected = wallparersList[imagesChose]
     }
 
     function queueNext() {
@@ -50,6 +66,7 @@ Singleton {
         return {raw: rawPath, temp: tempPath}
     }
 
+    // TODO webp не працює
     function makePictureFromMpw(path) {
         let data = makePictureMpwPath(path)
         let rawPath = data.raw

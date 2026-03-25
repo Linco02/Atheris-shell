@@ -100,7 +100,7 @@ Item {
                         hoverEnabled: true
                         onEntered: brick.border.color = Colors.active
                         onExited: brick.border.color = Colors.inactive
-                        onClicked: Wallpapers.wallpaper = model.wallpaperUrl
+                        onClicked: Wallpapers.wallpaperSelected = model.wallpaperUrl
                     }
 
                     Behavior on border.color { ColorAnim { } }

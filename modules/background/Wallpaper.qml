@@ -9,9 +9,15 @@ import qs.components.animations
 Item {
     id: root
     anchors.fill: parent
+    property bool wallpaperReady: false
     property string forwardSource: ""
     property string backSource: ""
-    property string wallpaperfo
+
+    onWallpaperReadyChanged: {
+        console.log(wallpaperReady)
+        if (wallpaperReady)
+            forward.state = ""
+    }
 
     property bool isWallPlay: {
         const activeWs = Hyprland.focusedWorkspace
@@ -31,15 +37,21 @@ Item {
     Connections {
         target: Wallpapers
         function onWallpaperChanged() {
-            // if (backSource === "") {
-            //     backSource = Wallpapers.wallpaper
-            // } else {
-            //     forwardSource = Wallpapers.wallpaper
-            //     forward.state = "change"
-            // }
-            backSource = null
-            backSource = Wallpapers.wallpaper
-            Palit.palitCreate(backSource)
+            wallpaperReady = false
+
+            if (backSource === "") {
+                backSource = Wallpapers.wallpaper
+                Palit.palitCreate(backSource)
+            } else {
+                if (Wallpapers.isWallpaperMpw) {
+                    forwardSource = Wallpapers.wallpaperPlugMpw
+                    Palit.palitCreate(forwardSource)
+                } else {
+                    forwardSource = Wallpapers.wallpaper
+                    Palit.palitCreate(forwardSource)
+                }
+                forward.state = "change"
+            }
         }
     }
 
@@ -57,6 +69,7 @@ Item {
             }
         }
 
+        // Зображення
         Component {
             id: imageComp
             Image {
@@ -67,6 +80,7 @@ Item {
             }
         }
 
+        // Анімовані зображення
         Component {
             id: anmfComp
             AnimatedImage {
@@ -81,9 +95,14 @@ Item {
                     else
                         currentFrame = frame
                 }
+                onStatusChanged: {
+                    if (status === AnimatedImage.Ready)
+                        wallpaperReady = true
+                }
             }
         }
 
+        // Відео
         Component {
             id: videoComp
             Item {
@@ -96,6 +115,11 @@ Item {
                     loops: MediaPlayer.Infinite
                     videoOutput: videoOutput
                     Component.onCompleted: mpwControler(player);
+                    onPositionChanged: {
+                        if (position > 0) {
+                            wallpaperReady = true;
+                        }
+                    }
                 }
 
                 VideoOutput {
@@ -137,81 +161,22 @@ Item {
 
             onRunningChanged: {
                 if(!running) {
-                    backSource = forwardSource
-                    forward.state = ""
+                    backSource = null
+                    backSource = Wallpapers.wallpaper
+                    if (!Wallpapers.isWallpaperMpw)
+                        forward.state = ""
                 }
             }
         }
 
-        // Зображення
-        Loader {
+        Image {
             anchors.fill: parent
-            active: Wallpapers.wallpaperFormat === "img"
-
-            sourceComponent: Component {
-                Image {
-                    anchors.fill: parent
-                    source: forwardSource
-                    fillMode: Image.PreserveAspectCrop
-                    asynchronous: true
-                }
-            }
+            source: forwardSource
+            fillMode: Image.PreserveAspectCrop
+            asynchronous: true
         }
+
     }
-
-
-
-    // GIF
-    // Loader {
-    //     anchors.fill: parent
-    //     active: {
-    //         let path = backSource.toString().toLowerCase();
-    //         if (path.endsWith(".gif")) {
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-
-    //     sourceComponent: Component {
-    //         AnimatedImage {
-    //             anchors.fill: parent
-    //             source: backSource
-    //         }
-    //     }
-    // }
-
-
-    // Wall {
-    //     id: back
-    // }
-
-    // Wall {
-    //     id: forward
-    //     opacity: 0
-
-    //     states: State {
-    //         name: "change"
-
-    //         PropertyChanges {
-    //             target: forward
-    //             opacity: 1
-    //         }
-    //     }
-
-    //     transitions: Transition {
-    //         from: ""; to: "change"
-    //         PropertyAnim {
-    //             properties: "opacity"
-    //             duration: Appearance.durations.normal
-    //         }
-    //         onRunningChanged: {
-    //             if(!running) {
-    //                 back.source = forward.source
-    //                 forward.state = ""
-    //             }
-    //         }
-    //     }
-    // }
 
     component Wall: Image {
         anchors.fill: parent
