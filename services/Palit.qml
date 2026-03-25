@@ -1,35 +1,28 @@
+pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.config
 import qs.services
 
-Item {
+Singleton {
     readonly property var jsonData: JSON.parse(jsonFile.text())
     property var test: []
-    property var chose: ""
 
-    Connections {
-        target: Wallpapers
-        function onWallpaperChanged() {
-            palitCreate()
-        }
-    }
+    function palitCreate(path) {
+        paliCreator.command = [
+            "matugen",
+            "image",
+            "--source-color-index", "0",
+            path.toString().replace("file://", "")
+        ]
+        paliCreator.running = GlobalStates.isPalitOn
 
-    function palitCreate() {
-        chose = Wallpapers.wallpaper
-        paliCreator.running = true
         openrgbUpdate.running = GlobalStates.isOpenrgbOn
     }
 
     Process {
         id: paliCreator
-        command: [
-            "matugen",
-            "image",
-            "--source-color-index", "0",
-            chose.toString().replace("file://", "")
-        ]
     }
 
     Process {

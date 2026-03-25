@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import qs.config
+import qs.services
 
 PanelWindow {
     id: root
@@ -15,12 +16,24 @@ PanelWindow {
     exclusiveZone: -1
     color: Colors.surface
 
-    Random { }
-    Wallpaper {}
-    // LazyLoader {
-    //     // anchors.fill: parent
-    //     asynchronous: false
-    //     active: Settings.enableWallpaper
-    //     component: Wallpaper {}
-    // }
+    function wallpaperOnStartup() {
+        if (GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaper === "" && Wallpapers.wallparersList.length > 0) {
+            Wallpapers.wallpaperRandom()
+        }
+    }
+
+    Loader {
+        active: GlobalStates.isWallpaperOn
+        anchors.fill: parent
+        sourceComponent: Component {
+            Wallpaper {}
+        }
+    }
+
+    Connections {
+        target: Wallpapers
+        function onWallpaperReady() { wallpaperOnStartup() }
+    }
+
+    Component.onCompleted: { wallpaperOnStartup() }
 }

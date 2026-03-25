@@ -24,10 +24,10 @@ ShellRoot {
     //     component: BottomCenter {}
     // }
 
-    LazyLoader {
-        active: GlobalStates.isPalitOn
-        component: Palit { }
-    }
+    // LazyLoader {
+    //     active: GlobalStates.isPalitOn
+    //     component: Palit { }
+    // }
 
     LazyLoader {
         active: GlobalStates.isShortcutOn

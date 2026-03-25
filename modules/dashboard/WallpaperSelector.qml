@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
+import QtMultimedia
 import qs.config
 import qs.services
 import qs.components
@@ -35,8 +36,8 @@ Item {
             columnSpacing: Appearance.spacing.normal
 
             Repeater {
-                id: wallRepeator
                 model: wallpaperModel
+
                 RectClip {
                     id: brick
                     height: imageHeight; width: imageWidth
@@ -45,10 +46,54 @@ Item {
                         color: Colors.inactive
                     }
 
-                    Image {
+                    Loader {
                         anchors.fill: parent
-                        asynchronous: true
-                        source: model.wallpaperUrl
+                        sourceComponent: {
+                            let type = Wallpapers.whatWallpaperFormat(modelData);
+                            if (type === "img") return imageComp;
+                            if (type === "anmf") return anmfComp;
+                            if (type === "video") return videoComp;
+                        }
+                    }
+
+                    Component {
+                        id: imageComp
+                        Image {
+                            anchors.fill: parent
+                            source: modelData
+                            fillMode: Image.PreserveAspectCrop
+                            asynchronous: true
+                        }
+                    }
+
+                    Component {
+                        id: anmfComp
+                        AnimatedImage {
+                            anchors.fill: parent
+                            source: modelData
+                        }
+                    }
+
+                    Component {
+                        id: videoComp
+                        Item {
+                            anchors.fill: parent
+
+                            MediaPlayer {
+                                id: player
+                                source: modelData
+                                audioOutput: AudioOutput { muted: true } 
+                                loops: MediaPlayer.Infinite
+                                videoOutput: videoOutput 
+                            }
+
+                            VideoOutput {
+                                id: videoOutput
+                                anchors.fill: parent
+                            }
+
+                            Component.onCompleted: player.play();
+                        }
                     }
 
                     MouseFill {

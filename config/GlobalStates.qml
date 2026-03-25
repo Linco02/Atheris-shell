@@ -8,5 +8,7 @@ Singleton {
     property bool isOpenrgbOn: true
     property bool isShortcutOn: true
     property bool isDashboardOpen: false
+    property bool isWallpaperOn: true
+    property bool isRandomWallpaperOn: true
     property string isDashboardModule: "dashboard"
 }
