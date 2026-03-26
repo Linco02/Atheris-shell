@@ -97,25 +97,31 @@ Singleton {
         folder: "file:///home/linco02/Atheris-shell/assets/wallpaper/"
         nameFilters: ["*.jpg", ".jpeg", "*.png", "*.mp4", "*.gif", "*.webp"]
 
-        onStatusChanged: {
-            if (listWallpaper.status == FolderListModel.Ready) {
-                const list = [];
+        function updateFiles() {
+            const list = [];
 
-                for (let i = 0; i < count; i++) {
-                    let path = get(i, "fileUrl");
+            for (let i = 0; i < count; i++) {
+                let path = get(i, "fileUrl");
 
-                    list.push(path);
+                list.push(path);
 
-                    let p = path.toString().toLowerCase();
-                    if (p.endsWith(".mp4") || p.endsWith(".gif")) {
-                        wallIntoImage.push(path);
-                    };
+                let p = path.toString().toLowerCase();
+                if (p.endsWith(".mp4") || p.endsWith(".gif")) {
+                    wallIntoImage.push(path);
                 };
+            };
 
-                wallparersList = list;
-                queueNext();
-                wallpaperReady();
-            }
+            wallparersList = list;
+            queueNext();
+            wallpaperReady();
+        }
+
+        onStatusChanged: {
+            if (listWallpaper.status == FolderListModel.Ready) { updateFiles(); }
+        }
+        
+        onCountChanged: {
+            if (status === FolderListModel.Ready) { updateFiles(); }
         }
     }
 }

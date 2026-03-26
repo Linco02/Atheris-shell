@@ -19,10 +19,6 @@ Item {
     property int colNum: 4
     property int rowNum: 3
 
-    ListModel {
-        id: wallpaperModel
-    }
-
     ScrollView {
         anchors.fill: parent
         contentWidth: -1
@@ -36,7 +32,7 @@ Item {
             columnSpacing: Appearance.spacing.normal
 
             Repeater {
-                model: wallpaperModel
+                model: Wallpapers.wallparersList
 
                 RectClip {
                     id: brick
@@ -100,18 +96,12 @@ Item {
                         hoverEnabled: true
                         onEntered: brick.border.color = Colors.active
                         onExited: brick.border.color = Colors.inactive
-                        onClicked: Wallpapers.wallpaperSelected = model.wallpaperUrl
+                        onClicked: Wallpapers.wallpaperSelected = modelData
                     }
 
                     Behavior on border.color { ColorAnim { } }
                 }
             }
-        }
-    }
-
-    Component.onCompleted: {
-        for (let i = 0; i < Wallpapers.wallparersList.length; i ++) {
-            wallpaperModel.append({"wallpaperUrl": Wallpapers.wallparersList[i].toString()})
         }
     }
 }

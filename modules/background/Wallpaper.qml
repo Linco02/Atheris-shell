@@ -165,6 +165,8 @@ Item {
                     backSource = Wallpapers.wallpaper
                     if (!Wallpapers.isWallpaperMpw)
                         forward.state = ""
+                    else
+                        wallpaperReady = true
                 }
             }
         }
