@@ -14,12 +14,12 @@ Singleton {
             "matugen",
             "image",
             "--source-color-index", "0",
-            path.toString().replace("file://", "")
+            Wallpapers.wallpaperRawPath(path)
         ]
         paliCreator.running = GlobalStates.isPalitOn
-        console.log("palet")
-        console.log(path)
-        console.log(Wallpapers.isWallpaperMpw)
+        // console.log("palet")
+        // console.log(path)
+        // console.log(Wallpapers.isWallpaperMpw)
 
         openrgbUpdate.running = GlobalStates.isOpenrgbOn
     }

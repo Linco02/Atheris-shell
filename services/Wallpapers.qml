@@ -20,7 +20,7 @@ Singleton {
         let path = wallpaperSelected.toString().toLowerCase();
         if (path.endsWith(".gif") || path.endsWith(".webp") || path.endsWith(".mp4")) {
             isWallpaperMpw = true
-            wallpaperPlugMpw = wallpaperTempPath(path)
+            wallpaperPlugMpw = wallpaperTempPath(wallpaperSelected)
             wallpaper = wallpaperSelected
         } else {
             isWallpaperMpw = false
@@ -53,7 +53,7 @@ Singleton {
         } else if (path === "") {
             return ""
         } else {
-            console.log("wallpaper uknown format", path)
+            console.log("services/Wallpapers", "wallpaper uknown format", path)
             return ""
         }
     }
@@ -65,7 +65,8 @@ Singleton {
     function wallpaperTempPath(path) {
         let rawPath = wallpaperRawPath(path)
         let fileName = rawPath.split('/').pop().replace(/\.[^/.]+$/, "");
-        return "/tmp/atheris/" + fileName + ".png";
+        let tempPath = "/tmp/atheris/" + fileName + ".png";
+        return tempPath
     }
 
     // TODO webp не працює
@@ -81,7 +82,6 @@ Singleton {
             "-update", "1",
             tempPath
         ];
-        
         makePicture.running = true;
     }
 
@@ -100,6 +100,7 @@ Singleton {
 
         function updateFiles() {
             const list = [];
+            const listMpw = [];
 
             for (let i = 0; i < count; i++) {
                 let path = get(i, "fileUrl");
@@ -108,10 +109,11 @@ Singleton {
 
                 let p = path.toString().toLowerCase();
                 if (p.endsWith(".mp4") || p.endsWith(".gif")) {
-                    wallIntoImage.push(path);
+                    listMpw.push(path);
                 };
             };
 
+            wallIntoImage = listMpw;
             wallparersList = list;
             queueNext();
             wallpaperReady();

@@ -11,13 +11,9 @@ Item {
     anchors.fill: parent
     
     property bool wallpaperReady: false
+    property bool animationEnd: false
     property string forwardSource: ""
     property string backSource: ""
-
-    onWallpaperReadyChanged: {
-        if (wallpaperReady)
-            forward.state = ""
-    }
 
     property bool isWallPlay: {
         const activeWs = Hyprland.focusedWorkspace
@@ -34,24 +30,28 @@ Item {
         }
     }
 
+    function wallpaperSwith() {
+        if (wallpaperReady && animationEnd)
+            forward.state = ""
+    }
+
     Connections {
         target: Wallpapers
         function onWallpaperChanged() {
             wallpaperReady = false
+            
+            let source = Wallpapers.isWallpaperMpw
+                ? Wallpapers.wallpaperPlugMpw
+                : Wallpapers.wallpaper
 
             if (backSource === "") {
                 backSource = Wallpapers.wallpaper
-                Palit.palitCreate(backSource)
             } else {
-                if (Wallpapers.isWallpaperMpw) {
-                    forwardSource = Wallpapers.wallpaperPlugMpw
-                    Palit.palitCreate(forwardSource)
-                } else {
-                    forwardSource = Wallpapers.wallpaper
-                    Palit.palitCreate(forwardSource)
-                }
+                forwardSource = source
                 forward.state = "change"
             }
+            
+            Palit.palitCreate(source)
         }
     }
 
@@ -77,6 +77,13 @@ Item {
                 source: backSource
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
+
+                onStatusChanged: {
+                    if (Image.Ready) {
+                        wallpaperReady = true
+                        wallpaperSwith()
+                    }
+                }
             }
         }
 
@@ -96,8 +103,10 @@ Item {
                         currentFrame = frame
                 }
                 onStatusChanged: {
-                    if (status === AnimatedImage.Ready)
+                    if (status === AnimatedImage.Ready) {
                         wallpaperReady = true
+                        wallpaperSwith()
+                    }
                 }
             }
         }
@@ -111,13 +120,14 @@ Item {
                 MediaPlayer {
                     id: player
                     source: backSource
-                    audioOutput: AudioOutput { muted: true } 
                     loops: MediaPlayer.Infinite
                     videoOutput: videoOutput
-                    Component.onCompleted: mpwControler(player);
-                    onPositionChanged: {
-                        if (position > 0) {
-                            wallpaperReady = true;
+                    Component.onCompleted: mpwControler(player)
+                    onMediaStatusChanged: {
+                        const s = player.mediaStatus
+                        if (s === MediaPlayer.LoadedMedia || s === MediaPlayer.BufferedMedia) {
+                            wallpaperReady = true
+                            wallpaperSwith()
                         }
                     }
                 }
@@ -154,20 +164,17 @@ Item {
         transitions: Transition {
             from: ""; to: "change"
 
-            PropertyAnim {
-                properties: "opacity"
-                duration: Appearance.durations.normal
-            }
+            PropertyAnim { properties: "opacity" }
 
             onRunningChanged: {
                 if(!running) {
                     backSource = null
                     backSource = Wallpapers.wallpaper
-                    if (!Wallpapers.isWallpaperMpw)
-                        forward.state = ""
-                    else
-                        wallpaperReady = true
-                }
+                    animationEnd = true
+                } else
+                    animationEnd = false
+
+                wallpaperSwith()
             }
         }
 
