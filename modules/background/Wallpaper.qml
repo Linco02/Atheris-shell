@@ -31,15 +31,18 @@ Item {
     }
 
     function wallpaperSwith() {
-        if (wallpaperReady && animationEnd)
+        if (wallpaperReady && animationEnd) {
+            wallpaperReady = false
+            animationEnd = false
             forward.state = ""
+        }
     }
 
     Connections {
         target: Wallpapers
         function onWallpaperChanged() {
             wallpaperReady = false
-            
+
             let source = Wallpapers.isWallpaperMpw
                 ? Wallpapers.wallpaperPlugMpw
                 : Wallpapers.wallpaper
@@ -123,18 +126,15 @@ Item {
                     loops: MediaPlayer.Infinite
                     videoOutput: videoOutput
                     Component.onCompleted: mpwControler(player)
-                    onMediaStatusChanged: {
-                        const s = player.mediaStatus
-                        if (s === MediaPlayer.LoadedMedia || s === MediaPlayer.BufferedMedia) {
-                            wallpaperReady = true
-                            wallpaperSwith()
-                        }
-                    }
                 }
 
                 VideoOutput {
                     id: videoOutput
                     anchors.fill: parent
+                    onSourceRectChanged: {
+                        wallpaperReady = true
+                        wallpaperSwith()
+                    }
                 }
 
                 Connections {
@@ -171,8 +171,7 @@ Item {
                     backSource = null
                     backSource = Wallpapers.wallpaper
                     animationEnd = true
-                } else
-                    animationEnd = false
+                }
 
                 wallpaperSwith()
             }
