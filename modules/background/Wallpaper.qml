@@ -9,12 +9,12 @@ import qs.components.animations
 Item {
     id: root
     anchors.fill: parent
+    
     property bool wallpaperReady: false
     property string forwardSource: ""
     property string backSource: ""
 
     onWallpaperReadyChanged: {
-        console.log(wallpaperReady)
         if (wallpaperReady)
             forward.state = ""
     }
@@ -62,7 +62,7 @@ Item {
         Loader {
             anchors.fill: parent
             sourceComponent: {
-                let type = Wallpapers.whatWallpaperFormat(backSource);
+                let type = Wallpapers.wallpaperFormat(backSource);
                 if (type === "img") return imageComp;
                 if (type === "anmf") return anmfComp;
                 if (type === "video") return videoComp;

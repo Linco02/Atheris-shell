@@ -19,6 +19,11 @@ Item {
     property int colNum: 4
     property int rowNum: 3
 
+    MediaPlayer {
+        id: player
+        loops: MediaPlayer.Infinite
+    }
+
     ScrollView {
         anchors.fill: parent
         contentWidth: -1
@@ -42,10 +47,12 @@ Item {
                         color: Colors.inactive
                     }
 
+                    property string type: Wallpapers.wallpaperFormat(modelData)
+
                     Loader {
+                        id: loaderComponent
                         anchors.fill: parent
                         sourceComponent: {
-                            let type = Wallpapers.whatWallpaperFormat(modelData);
                             if (type === "img") return imageComp;
                             if (type === "anmf") return anmfComp;
                             if (type === "video") return videoComp;
@@ -54,48 +61,59 @@ Item {
 
                     Component {
                         id: imageComp
-                        Image {
+                        Item {
                             anchors.fill: parent
-                            source: modelData
-                            fillMode: Image.PreserveAspectCrop
-                            asynchronous: true
+                            OwnImage { source: modelData }
+                            OwnText { text: "" }
                         }
                     }
 
                     Component {
                         id: anmfComp
-                        AnimatedImage {
-                            anchors.fill: parent
-                            source: modelData
+                        Item {
+                            AnimatedImage {
+                                anchors.fill: parent
+                                source: modelData
+                            }
+                            OwnText { text: "󰪐" }
                         }
                     }
 
                     Component {
                         id: videoComp
                         Item {
-                            anchors.fill: parent
+                            property alias videoSurface: videoOutput
 
-                            MediaPlayer {
-                                id: player
-                                source: modelData
-                                audioOutput: AudioOutput { muted: true } 
-                                loops: MediaPlayer.Infinite
-                                videoOutput: videoOutput 
-                            }
-
+                            OwnImage { source: Wallpapers.wallpaperTempPath(modelData) }
                             VideoOutput {
                                 id: videoOutput
                                 anchors.fill: parent
+                                fillMode: VideoOutput.PreserveAspectCrop
                             }
-
-                            Component.onCompleted: player.play();
+                            OwnText { text: "" }
                         }
                     }
 
                     MouseFill {
                         hoverEnabled: true
-                        onEntered: brick.border.color = Colors.active
-                        onExited: brick.border.color = Colors.inactive
+                        onEntered: {
+                            brick.border.color = Colors.active
+
+                            if (type === "video") {
+                                player.stop()
+                                player.source = modelData
+                                player.videoOutput = loaderComponent.item.videoSurface
+                                player.play()
+                            }
+                        }
+                        onExited: {
+                            brick.border.color = Colors.inactive
+
+                            if (type === "video") {
+                                player.stop()
+                                player.videoOutput = null
+                            }
+                        }
                         onClicked: Wallpapers.wallpaperSelected = modelData
                     }
 
@@ -103,5 +121,17 @@ Item {
                 }
             }
         }
+    }
+
+    component OwnImage: Image {
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectCrop
+        asynchronous: true
+    }
+
+    component OwnText: TextStyled {
+        y: 5; x: 5
+        color: Colors.active
+        font.pixelSize: 10
     }
 }

@@ -19,9 +19,8 @@ Singleton {
     onWallpaperSelectedChanged: {
         let path = wallpaperSelected.toString().toLowerCase();
         if (path.endsWith(".gif") || path.endsWith(".webp") || path.endsWith(".mp4")) {
-            let data = makePictureMpwPath(path)
             isWallpaperMpw = true
-            wallpaperPlugMpw = data.temp
+            wallpaperPlugMpw = wallpaperTempPath(path)
             wallpaper = wallpaperSelected
         } else {
             isWallpaperMpw = false
@@ -42,7 +41,7 @@ Singleton {
         }
     }
 
-    function whatWallpaperFormat(wall) {
+    function wallpaperFormat(wall) {
         let path = wall.toString().toLowerCase();
 
         if (path.endsWith(".png") || path.endsWith(".jpg") || path.endsWith(".jpeg")) {
@@ -59,18 +58,20 @@ Singleton {
         }
     }
 
-    function makePictureMpwPath(path) {
-        let rawPath = path.toString().replace("file://", "");
+    function wallpaperRawPath(path) {
+        return path.toString().replace("file://", "");
+    }
+
+    function wallpaperTempPath(path) {
+        let rawPath = wallpaperRawPath(path)
         let fileName = rawPath.split('/').pop().replace(/\.[^/.]+$/, "");
-        let tempPath = "/tmp/atheris/" + fileName + ".png";
-        return {raw: rawPath, temp: tempPath}
+        return "/tmp/atheris/" + fileName + ".png";
     }
 
     // TODO webp не працює
     function makePictureFromMpw(path) {
-        let data = makePictureMpwPath(path)
-        let rawPath = data.raw
-        let tempPath = data.temp
+        let rawPath = wallpaperRawPath(path)
+        let tempPath = wallpaperTempPath(path)
         
         makePicture.command = [
             "ffmpeg", "-y",
@@ -94,7 +95,7 @@ Singleton {
 
     FolderListModel {
         id: listWallpaper
-        folder: "file:///home/linco02/Atheris-shell/assets/wallpaper/"
+        folder: "file:///home/linco02/wallpapers/"
         nameFilters: ["*.jpg", ".jpeg", "*.png", "*.mp4", "*.gif", "*.webp"]
 
         function updateFiles() {

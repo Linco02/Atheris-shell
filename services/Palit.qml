@@ -17,6 +17,9 @@ Singleton {
             path.toString().replace("file://", "")
         ]
         paliCreator.running = GlobalStates.isPalitOn
+        console.log("palet")
+        console.log(path)
+        console.log(Wallpapers.isWallpaperMpw)
 
         openrgbUpdate.running = GlobalStates.isOpenrgbOn
     }
