@@ -17,11 +17,8 @@ Singleton {
             Wallpapers.wallpaperRawPath(path)
         ]
         paliCreator.running = GlobalStates.isPalitOn
-        // console.log("palet")
-        // console.log(path)
-        // console.log(Wallpapers.isWallpaperMpw)
-
         openrgbUpdate.running = GlobalStates.isOpenrgbOn
+        pywalfoxUpdate.running = GlobalStates.isPywalFoxOn
     }
 
     Process {
@@ -32,6 +29,13 @@ Singleton {
         id: openrgbUpdate
         command: [
             "sh", "/tmp/atheris/openrgb.sh"
+        ]
+    }
+
+    Process {
+        id: pywalfoxUpdate
+        command: [
+            "sh", "/tmp/atheris/pywalfox.sh"
         ]
     }
 
