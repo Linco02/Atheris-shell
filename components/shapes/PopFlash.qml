@@ -91,8 +91,10 @@ PopupWindow {
             onHoveredChanged: {
                 if(!hovered) {
                     time.start()
+                    box.border.color = Colors.outline
                 } else {
                     time.stop()
+                    box.border.color = Colors.active
                     if(stateManager.state != "open") {
                         stateManager.state = "open"
                     }
@@ -106,5 +108,7 @@ PopupWindow {
             width: childrenRect.width
             height: childrenRect.height
         }
+
+        Behavior on border.color { ColorAnim { } }
     }
 }

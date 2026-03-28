@@ -20,6 +20,7 @@ PopFlash {
     implicitHeight: 900; implicitWidth: 500
 
     property bool isLeft: true
+    property int buttonWidth: 10
 
     Column {
         spacing: 10
@@ -28,7 +29,7 @@ PopFlash {
             model: [ "Вимкнути", "Перезавантажити", "Сон", "Гібернація", "Заблокувати" ]
 
             Rect {
-                height: childrenRect.height; width: childrenRect.width
+                height: childrenRect.height; width: buttonWidth
 
                 RowNormal {
                     rightPadding: 10
@@ -67,6 +68,11 @@ PopFlash {
                         button.color = Colors.surfaceRaised
                         description.color = Colors.textSurface
                     }
+                }
+
+                Component.onCompleted: {
+                    if (childrenRect.width > buttonWidth)
+                        buttonWidth = childrenRect.width
                 }
 
                 Behavior on color { ColorAnim { } }

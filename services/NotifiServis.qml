@@ -1,8 +1,10 @@
 pragma Singleton
 import QtQuick
+import QtMultimedia
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
+import qs.config
 
 Singleton {
     property alias server: notificationServer
@@ -11,7 +13,10 @@ Singleton {
         id: notificationServer
         
         onNotification: (notifi) => {
-            notifi.tracked = true; 
+            notifi.tracked = true;
+
+            if (GlobalStates.isNotifiSoundOn)
+                notifiSound()
         }
     }
 
@@ -27,4 +32,15 @@ Singleton {
         ]
         notifiSend.running = true
     }
+
+    function notifiSound(urgency) {
+        if (urgency === "critical")
+            playNotifi.source = "../assets/notifiAllert.wav"
+        else
+            playNotifi.source = "../assets/notifiNormal.wav"
+
+        playNotifi.play()
+    }
+
+    SoundEffect { id: playNotifi }
 }
