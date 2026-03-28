@@ -12,8 +12,6 @@ RectForeground {
     id: programsWidget
     height: root.height - Appearance.padding.normal; width: programsRow.width
 
-    // property 
-
     RowNormal {
         id: programsRow
         anchors.centerIn: parent
