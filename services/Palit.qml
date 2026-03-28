@@ -17,12 +17,17 @@ Singleton {
             Wallpapers.wallpaperRawPath(path)
         ]
         paliCreator.running = GlobalStates.isPalitOn
-        openrgbUpdate.running = GlobalStates.isOpenrgbOn
-        pywalfoxUpdate.running = GlobalStates.isPywalFoxOn
     }
 
     Process {
         id: paliCreator
+        onExited: (exitCode) => {
+            if (exitCode === 0) {
+                if (GlobalStates.isOpenrgbOn) openrgbUpdate.running = true
+                if (GlobalStates.isPywalFoxOn) pywalfoxUpdate.running = true
+                if (GlobalStates.isKittyOn) kittyUpdate.running = true
+            }
+        }
     }
 
     Process {
@@ -36,6 +41,13 @@ Singleton {
         id: pywalfoxUpdate
         command: [
             "sh", "/tmp/atheris/pywalfox.sh"
+        ]
+    }
+
+    Process {
+        id: kittyUpdate
+        command: [
+            "pkill", "-USR1", "kitty"
         ]
     }
 
