@@ -83,7 +83,7 @@ Singleton {
     }
 
     onJsonDataChanged: {
-        if (jsonData) {
+        if (jsonData && GlobalStates.palitShellOn) {
             applyPalette(jsonData);
         }
     }
