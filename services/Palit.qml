@@ -23,10 +23,10 @@ Singleton {
         id: paliCreator
         onExited: (exitCode) => {
             if (exitCode === 0) {
-                if (GlobalStates.isOpenrgbOn) openrgbUpdate.running = true
-                if (GlobalStates.isPywalFoxOn) pywalfoxUpdate.running = true
-                if (GlobalStates.isKittyOn) kittyUpdate.running = true
-                if (GlobalStates.isqt6ctOn) qt6ctUpdate.running = true
+                if (GlobalStates.palitOpenrgbOn) openrgbUpdate.running = true
+                if (GlobalStates.palitPywalFoxOn) pywalfoxUpdate.running = true
+                if (GlobalStates.palitKittyOn) kittyUpdate.running = true
+                if (GlobalStates.palitqt6ctOn) qt6ctUpdate.running = true
             }
         }
     }
