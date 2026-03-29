@@ -8,6 +8,7 @@ Singleton {
     property bool isOpenrgbOn: true
     property bool isPywalFoxOn: true
     property bool isKittyOn: true
+    property bool isqt6ctOn: true
     property bool isShortcutOn: true
     property bool isWallpaperOn: true
     property bool isRandomWallpaperOn: true

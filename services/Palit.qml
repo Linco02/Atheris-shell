@@ -26,6 +26,7 @@ Singleton {
                 if (GlobalStates.isOpenrgbOn) openrgbUpdate.running = true
                 if (GlobalStates.isPywalFoxOn) pywalfoxUpdate.running = true
                 if (GlobalStates.isKittyOn) kittyUpdate.running = true
+                if (GlobalStates.isqt6ctOn) qt6ctUpdate.running = true
             }
         }
     }
@@ -48,6 +49,13 @@ Singleton {
         id: kittyUpdate
         command: [
             "pkill", "-USR1", "kitty"
+        ]
+    }
+
+    Process {
+        id: qt6ctUpdate
+        command: [
+            "sh", "sed -i 's|^color_scheme_path=.*|color_scheme_path=/tmp/atheris/qt6ct.conf|' ~/.config/qt6ct/qt6ct.conf"
         ]
     }
 
