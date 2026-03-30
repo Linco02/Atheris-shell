@@ -18,8 +18,8 @@ Item {
         id: musicPage
         anchors.centerIn: parent
         implicitHeight: 500
-        implicitWidth: playersContainer.width
-
+        implicitWidth: playersContainer.width > 0 ? playersContainer.width : 600
+        
         ScrollView {
             anchors.fill: parent
             contentWidth: -1
