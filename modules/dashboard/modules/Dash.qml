@@ -4,7 +4,6 @@ import qs.components
 import "./../components"
 
 Item {
-    id: dashBoaradWidget
     implicitHeight: box.height
     implicitWidth: box.width
 

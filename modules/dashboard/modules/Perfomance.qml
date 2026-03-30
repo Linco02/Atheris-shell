@@ -4,7 +4,6 @@ import qs.components
 import "./../components"
 
 Item {
-    id: perfomanceWidget
     implicitHeight: perfomanceBox.height
     implicitWidth: perfomanceBox.width
 
