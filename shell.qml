@@ -8,34 +8,20 @@ import qs.modules.bar
 import qs.modules.lock
 
 ShellRoot {
-    // Задній фон //
     LazyLoader {
-        active: Settings.enableBackground
+        active: GlobalStates.isBackgroundOn
         component: Background {}
     }
 
     LazyLoader {
-        active: Settings.enableBar
+        active: GlobalStates.isBarOn
         component: Bar {}
     }
-
-    // LazyLoader {
-    //     active: Settings.enableBottomCenter
-    //     component: BottomCenter {}
-    // }
-
-    // LazyLoader {
-    //     active: GlobalStates.isPalitOn
-    //     component: Palit { }
-    // }
 
     LazyLoader {
         active: GlobalStates.isShortcutOn
         component: Shortcuts { }
     }
 
-    // cлужби
-    // Palit { }
     Lock { }
-    // Shortcuts { }
 }

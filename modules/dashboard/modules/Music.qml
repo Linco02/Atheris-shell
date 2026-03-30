@@ -24,29 +24,40 @@ Item {
             id: playersContainer
             spacing: Appearance.padding.normal
 
-            CavaBar {}
+            // CavaBar {}
+            // CavaCircle { }
 
             Repeater {
                 model: Mpris.players
                 delegate: RectForeground {
-                    height: 400; width: 500
+                    height: 600; width: 600
 
                     Column {
-                        anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
                         spacing: Appearance.padding.normal
 
-                        ClippingWrapperRectangle {
+                        Item {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: 200; width: height
-                            radius: height / 2
+                            height: 300; width: 300
 
-                            RectInactive {
+                            CavaCircle {
                                 anchors.fill: parent
+                                property real innerRadius: imagePlayer.height / 2 + Appearance.padding.normal
+                            }
 
-                                Image {
+                            ClippingWrapperRectangle {
+                                id: imagePlayer
+                                anchors.centerIn: parent
+                                height: parent.height / 2; width: height
+                                radius: height / 2
+
+                                RectInactive {
                                     anchors.fill: parent
-                                    source: modelData.trackArtUrl ?? ""
-                                    fillMode: Image.PreserveAspectCrop
+                                    Image {
+                                        anchors.fill: parent
+                                        source: modelData.trackArtUrl ?? ""
+                                        fillMode: Image.PreserveAspectCrop
+                                    }
                                 }
                             }
                         }

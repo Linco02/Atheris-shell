@@ -3,9 +3,20 @@ import Quickshell
 import qs.services
 
 Singleton {
-    property bool isSessionLockOn: false
-    property bool isShortcutOn: true
+    // Панель //
+    property bool isBarOn: true
+    property bool isDashboardOpen: false
+    property string isDashboardModule: "dashboard"
 
+    // Задній план //
+    property bool isBackgroundOn: true
+    property bool isWallpaperOn: true
+    property bool isRandomWallpaperOn: true
+
+    // Блокування //
+    property bool isSessionLockOn: false
+
+    // Палітра //
     property bool isPalitOn: true
     property bool palitShellOn: true
     property bool palitOpenrgbOn: true
@@ -13,11 +24,7 @@ Singleton {
     property bool palitKittyOn: true
     property bool palitqt6ctOn: true
 
-    property bool isWallpaperOn: true
-    property bool isRandomWallpaperOn: true
-
-    property bool isDashboardOpen: false
-    property string isDashboardModule: "dashboard"
-    
+    // Служби //  
+    property bool isShortcutOn: true
     property bool isNotifiSoundOn: true
 }
