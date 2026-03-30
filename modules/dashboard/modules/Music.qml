@@ -20,98 +20,102 @@ Item {
         implicitHeight: 500
         implicitWidth: playersContainer.width
 
-        Column {
-            id: playersContainer
-            spacing: Appearance.padding.normal
+        ScrollView {
+            anchors.fill: parent
+            contentWidth: -1
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
-            // CavaBar {}
-            // CavaCircle { }
+            Column {
+                id: playersContainer
+                spacing: Appearance.padding.normal
 
-            Repeater {
-                model: Mpris.players
-                delegate: RectForeground {
-                    height: 600; width: 600
+                Repeater {
+                    model: Mpris.players
+                    delegate: RectForeground {
+                        height: 600; width: 600
 
-                    Column {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        spacing: Appearance.padding.normal
-
-                        Item {
+                        Column {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: 300; width: 300
+                            spacing: Appearance.padding.normal
 
-                            CavaCircle {
-                                anchors.fill: parent
-                                property real innerRadius: imagePlayer.height / 2 + Appearance.padding.normal
-                            }
+                            Item {
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                height: 300; width: 300
 
-                            ClippingWrapperRectangle {
-                                id: imagePlayer
-                                anchors.centerIn: parent
-                                height: parent.height / 2; width: height
-                                radius: height / 2
-
-                                RectInactive {
+                                CavaCircle {
                                     anchors.fill: parent
-                                    Image {
+                                    property real innerRadius: imagePlayer.height / 2 + Appearance.padding.normal
+                                }
+
+                                ClippingWrapperRectangle {
+                                    id: imagePlayer
+                                    anchors.centerIn: parent
+                                    height: parent.height / 2; width: height
+                                    radius: height / 2
+
+                                    RectInactive {
                                         anchors.fill: parent
-                                        source: modelData.trackArtUrl ?? ""
-                                        fillMode: Image.PreserveAspectCrop
+                                        Image {
+                                            anchors.fill: parent
+                                            source: modelData.trackArtUrl ?? ""
+                                            fillMode: Image.PreserveAspectCrop
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        Column {
-                            TextStyledOwn { text: modelData.trackTitle ?? "..." }
-                            TextStyledOwn { text: modelData.trackArtist ?? "......" }
-                        }
+                            Column {
+                                TextStyledOwn { text: modelData.trackTitle ?? "..." }
+                                TextStyledOwn { text: modelData.trackArtist ?? "......" }
+                            }
 
-                        SliderSmall {
-                            id: progressBar
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            width: 200
-                            from: 0
-                            to: modelData.length
-                            value: modelData.position
-                            onMoved: MrisServices.setPositionMris(modelData, value)
+                            SliderSmall {
+                                id: progressBar
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                width: 200
+                                from: 0
+                                to: modelData.length
+                                value: modelData.position
+                                onMoved: MrisServices.setPositionMris(modelData, value)
 
-                            Connections {
-                                target: Tick1s
-                                function onTick() {
-                                    if (!progressBar.pressed)
+                                Connections {
+                                    target: Tick1s
+                                    function onTick() {
+                                        if (!progressBar.pressed)
+                                            progressBar.value = modelData.position
+                                    }
+                                }
+                            }
+
+                            Row {
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                spacing: Appearance.padding.normal
+                                
+                                ButtonSmall {
+                                    text: "󰙤"
+                                    onClicked: {
+                                        MrisServices.previousMris(modelData)
                                         progressBar.value = modelData.position
+                                    }
                                 }
-                            }
-                        }
 
-                        Row {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            spacing: Appearance.padding.normal
-                            
-                            ButtonSmall {
-                                text: "󰙤"
-                                onClicked: {
-                                    MrisServices.previousMris(modelData)
-                                    progressBar.value = modelData.position
+                                ButtonSmall {
+                                    property bool isPlaying: modelData.playbackState == MprisPlaybackState.Playing
+
+                                    text: isPlaying ? "" : ""
+                                    onClicked: {
+                                        isPlaying ? MrisServices.pauseMris(modelData) : MrisServices.playMris(modelData)
+                                        progressBar.value = modelData.position
+                                    }
                                 }
-                            }
 
-                            ButtonSmall {
-                                property bool isPlaying: modelData.playbackState == MprisPlaybackState.Playing
-
-                                text: isPlaying ? "" : ""
-                                onClicked: {
-                                    isPlaying ? MrisServices.pauseMris(modelData) : MrisServices.playMris(modelData)
-                                    progressBar.value = modelData.position
-                                }
-                            }
-
-                            ButtonSmall {
-                                text: "󰙢"
-                                onClicked: {
-                                    MrisServices.nextMris(modelData)
-                                    progressBar.value = modelData.position
+                                ButtonSmall {
+                                    text: "󰙢"
+                                    onClicked: {
+                                        MrisServices.nextMris(modelData)
+                                        progressBar.value = modelData.position
+                                    }
                                 }
                             }
                         }
