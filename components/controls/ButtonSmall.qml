@@ -19,11 +19,13 @@ Button {
         Behavior on color { ColorAnim { } }
     }
 
-    contentItem: Item { }
+    contentItem: Item {
+        anchors.fill: parent
 
-    TextStyled {
-        text: root.text
-        font.pixelSize: root.height / 2
-        anchors.centerIn: root
+        TextStyled {
+            anchors.centerIn: parent
+            text: root.text
+            font.pixelSize: root.height / 2
+        }
     }
 }
