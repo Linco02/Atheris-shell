@@ -5,6 +5,10 @@ import Quickshell.Services.Mpris
 import qs.config
 
 Singleton {
+    property int playerChose: 0
+    property var playerNow: Mpris.players.values[playerChose]
+    property bool playeNowIsPlay: playerNow.playbackState === MprisPlaybackState.Playing
+    
     property var cavaBarsData: Array(cavaBarsCount).fill(0)
     property int cavaBarsCount: 40
 

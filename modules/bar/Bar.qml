@@ -42,6 +42,7 @@ PanelWindow {
             anchors.right: parent.right
             height: parent.height
 
+            Music { }
             ServicesWrapper { }
             ControlCenterButton { }
         }

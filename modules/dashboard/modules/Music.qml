@@ -14,12 +14,10 @@ Item {
     id: root
     implicitHeight: 500
     implicitWidth: musicPage.width
-    // Component.onCompleted: { console.log(Mpris.players.values.playbackState === status.Playing) }
 
     property var player: Mpris.players.values
-    property int playerChose: 0
-    property var playerNow: Mpris.players.values[playerChose]
-    property bool cavaOn: playerNow.playbackState === status.Playing
+    property var playerNow: MrisServices.playerNow
+    property bool cavaOn: MrisServices.playeNowIsPlay
 
     Row {
         id: musicPage
@@ -30,13 +28,18 @@ Item {
             height: root.height; width: 40
 
             ColumnNormal {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: Appearance.padding.normal
+                topPadding: Appearance.padding.small
+
                 Repeater {
                     model: player
 
                     ButtonSmall {
+                        height: width; width: menuMusic.width - Appearance.padding.normal
                         text: index
                         onClicked: {
-                            playerChose = index
+                            MrisServices.playerChose = index
                             progressBar.value = playerNow.position
                         }
                     }
@@ -106,6 +109,7 @@ Item {
                     spacing: Appearance.padding.normal
                     
                     ButtonSmall {
+                        height: width; width: 50
                         text: "󰙤"
                         onClicked: {
                             MrisServices.previousMris(playerNow)
@@ -114,9 +118,11 @@ Item {
                     }
 
                     ButtonSmall {
+                        height: width; width: 50
+                        text: isPlaying ? "" : ""
+
                         property bool isPlaying: playerNow.playbackState == MprisPlaybackState.Playing
 
-                        text: isPlaying ? "" : ""
                         onClicked: {
                             isPlaying ? MrisServices.pauseMris(playerNow) : MrisServices.playMris(playerNow)
                             progressBar.value = playerNow.position
@@ -124,6 +130,7 @@ Item {
                     }
 
                     ButtonSmall {
+                        height: width; width: 50
                         text: "󰙢"
                         onClicked: {
                             MrisServices.nextMris(playerNow)

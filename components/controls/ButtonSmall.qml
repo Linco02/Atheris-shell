@@ -7,7 +7,6 @@ import qs.config
 
 Button {
     id: root
-    height: 50; width: height
 
     background: RectInactive {
         height: parent.height; width: parent.width
