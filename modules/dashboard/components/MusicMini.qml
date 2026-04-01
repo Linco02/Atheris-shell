@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Shapes
+import QtQuick.Controls
 import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import qs.config
+import qs.services
 import qs.components.animations
 import qs.components.shapes
 import qs.components
@@ -10,22 +12,10 @@ import qs.components
 RectForeground {
     id: root
     property int imageSize: 192
-    property var activePlayer: {
-        const players = Mpris.players.values
-        for (let i = 0; i < players.length; i++) {
-            if ( players.length === 1 || players[i].playbackState === MprisPlaybackState.Playing)
-                return players[i]
-        }
-        return null
-    }
-
-    // Timer {
-    //     interval: 2000; running: true; repeat: true
-    //     onTriggered: console.log(Mpris.players.values.length)
-    // }
+    property bool playerExist: MrisServices.playerExist
+    property var playerActive: MrisServices.playerActive
 
     Column {
-        visible: activePlayer !== null
         anchors.centerIn: parent
         spacing: 10
 
@@ -43,7 +33,7 @@ RectForeground {
                 Image {
                     id: img
                     anchors.fill: parent
-                    source: activePlayer?.trackArtUrl ?? ""
+                    source: playerExist ? playerActive.trackArtUrl : ""
                     fillMode: Image.PreserveAspectCrop
                 }
             }
@@ -98,57 +88,66 @@ RectForeground {
         }
 
 
-        TextStyledOwn { text: activePlayer?.trackTitle ?? "..." }
-        TextStyledOwn { text: activePlayer?.trackArtist ?? "......" }
+        TextStyledOwn { text: playerExist ? playerActive.trackTitle : "..." }
+        TextStyledOwn { text: playerExist ? playerActive.trackArtist : "..." }
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 20
-            Item {
-                height: 40; width: 40
-                TextStyledH {
-                    anchors.centerIn: parent
-                    text: "󰙤"
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (activePlayer)
-                            activePlayer.previous()
-                    }
+
+            ButtonOwn {
+                text: "󰙤"
+
+                onClicked: {
+                    MrisServices.previousMris(playerActive)
+                    progressbar.sweepAngle = 360 * (playerActive.position / playerActive.length)
                 }
             }
 
-            Item {
-                height: 40; width: 40
-                TextStyledH {
-                    anchors.centerIn: parent
-                    text: activePlayer?.playbackState == MprisPlaybackState.Playing ? "" : ""
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    // onClicked: {
-                    //     if (activePlayer?.playbackState == MprisPlaybackState.Playing)
-                    //         activePlayer.pause()
-                    //     else
-                    //         activePlayer.play()
-                    // }
+            ButtonOwn {
+                text: MrisServices.isplayerActivePlay ? "" : ""
+
+                onClicked: {
+                    if (MrisServices.isplayerActivePlay)
+                        MrisServices.pauseMris(playerActive)
+                    else
+                        MrisServices.playMris(playerActive)
+                    progressbar.sweepAngle = 360 * (playerActive.position / playerActive.length)
                 }
             }
 
-            Item {
-                height: 40; width: 40
-                TextStyledH {
-                    anchors.centerIn: parent
-                    text: "󰙢"
+            ButtonOwn {
+                text: "󰙢"
+
+                onClicked: {
+                    MrisServices.nextMris(playerActive)
+                    progressbar.sweepAngle = 360 * (playerActive.position / playerActive.length)
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (activePlayer)
-                            activePlayer.next()
-                    }
-                }
+            }
+        }
+    }
+
+    component ButtonOwn: Button {
+        id: btn
+        height: width; width: 40
+        enabled: playerExist
+
+        background: MouseFill {
+            hoverEnabled: true
+            onEntered: btnText.color = Colors.textAccent
+            onExited: btnText.color = Colors.textSurface
+        }
+
+        contentItem: Item {
+            anchors.fill: parent
+
+            TextStyled {
+                id: btnText
+                anchors.centerIn: parent
+                text: btn.text
+                font.pixelSize: btn.height
+
+                Behavior on color { ColorAnim { } }
             }
         }
     }
@@ -159,9 +158,11 @@ RectForeground {
         horizontalAlignment: Text.AlignHCenter
     }
 
-    Timer {
-        interval: 1000; running: true; repeat: true
-        onTriggered: if (activePlayer)
-            progressbar.sweepAngle = 360 * (activePlayer.position / activePlayer.length)
+    Connections {
+        target: Tick1s
+        enabled: playerExist
+        function onTick() {
+            progressbar.sweepAngle = 360 * (playerActive.position / playerActive.length)
+        }
     }
 }

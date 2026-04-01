@@ -15,9 +15,10 @@ Item {
     implicitHeight: 500
     implicitWidth: musicPage.width
 
-    property var player: Mpris.players.values
-    property var playerNow: MrisServices.playerNow
-    property bool cavaOn: MrisServices.playeNowIsPlay
+    property var player: MrisServices.player
+    property bool playerExist: MrisServices.playerExist
+    property int playerIndex: 0
+    property var playerActive: playerExist ? player[playerIndex] : null
 
     Row {
         id: musicPage
@@ -27,20 +28,31 @@ Item {
             id: menuMusic
             height: root.height; width: 40
 
-            ColumnNormal {
-                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: Appearance.padding.normal
-                topPadding: Appearance.padding.small
+            Loader {
+                anchors.fill: parent
+                active: playerExist
+                sourceComponent: ColumnNormal {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: Appearance.padding.normal
+                    topPadding: Appearance.padding.small
+                
+                    Repeater {
+                        model: player
 
-                Repeater {
-                    model: player
+                        ButtonSmall {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            height: width; width: menuMusic.width - Appearance.padding.normal
 
-                    ButtonSmall {
-                        height: width; width: menuMusic.width - Appearance.padding.normal
-                        text: index
-                        onClicked: {
-                            MrisServices.playerChose = index
-                            progressBar.value = playerNow.position
+                            onClicked: {
+                                playerIndex = index
+                                progressBar.value = playerActive.position
+                            }
+
+                            IconImage {
+                                anchors.centerIn: parent
+                                implicitSize: 16
+                                source: AppIcons.getIcon(player[index].identity)
+                            }
                         }
                     }
                 }
@@ -61,7 +73,6 @@ Item {
                     CavaCircle {
                         anchors.fill: parent
                         property real innerRadius: imagePlayer.height / 2 + Appearance.padding.normal
-                        property bool widgetOn: cavaOn
                     }
 
                     ClippingWrapperRectangle {
@@ -74,7 +85,7 @@ Item {
                             anchors.fill: parent
                             Image {
                                 anchors.fill: parent
-                                source: MrisServices.playerIcon
+                                source: playerExist ? playerActive.trackArtUrl : ""
                                 fillMode: Image.PreserveAspectCrop
                             }
                         }
@@ -82,8 +93,8 @@ Item {
                 }
 
                 Column {
-                    TextStyledOwn { text: playerNow.trackTitle ?? "..." }
-                    TextStyledOwn { text: playerNow.trackArtist ?? "......" }
+                    TextStyledOwn { text: playerExist ? playerActive.trackTitle : "..."}
+                    TextStyledOwn { text: playerExist ? playerActive.trackArtist : "..."}
                 }
 
                 SliderSmall {
@@ -91,50 +102,71 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: 200
                     from: 0
-                    to: playerNow.length
-                    value: playerNow.position
-                    onMoved: MrisServices.setPositionMris(playerNow, value)
+                    to: playerExist ? playerActive.length : 100
+                    value: playerExist ? playerActive.position : 0
+                    enabled: playerExist
 
-                    // Connections {
-                    //     target: Tick1s
-                    //     function onTick() {
-                    //         if (!progressBar.pressed)
-                    //             progressBar.value = playerNow.position
-                    //     }
-                    // }
+                    property var poss: 0
+
+                    onMoved: {
+                        if (positionChange.running) {
+                            poss = value
+                            positionChange.restart()
+                        } else{
+                            poss = value
+                            positionChange.start()
+                        }
+                    }
+
+                    Connections {
+                        target: Tick1s
+                        function onTick() {
+                            if (playerExist && !progressBar.pressed)
+                                progressBar.value = playerActive.position
+                        }
+                    }
+
+                    Timer {
+                        id: positionChange
+                        interval: 200
+                        onTriggered: MrisServices.setPositionMris(playerActive, progressBar.poss)
+                    }
                 }
 
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: Appearance.padding.normal
                     
-                    ButtonSmall {
-                        height: width; width: 50
+                    ButtonControl {
                         text: "󰙤"
                         onClicked: {
-                            MrisServices.previousMris(playerNow)
-                            progressBar.value = playerNow.position
+                            if (playerExist) {
+                                MrisServices.previousMris(playerActive)
+                                progressBar.value = playerActive.position
+                            }
                         }
                     }
 
-                    ButtonSmall {
-                        height: width; width: 50
+                    ButtonControl {
                         text: isPlaying ? "" : ""
 
-                        property bool isPlaying: playerNow.playbackState == MprisPlaybackState.Playing
+                        property bool isPlaying: playerExist ? playerActive.playbackState == MprisPlaybackState.Playing : false
 
                         onClicked: {
-                            isPlaying ? MrisServices.pauseMris(playerNow) : MrisServices.playMris(playerNow)
-                            progressBar.value = playerNow.position
+                            if (playerExist) {
+                                isPlaying ? MrisServices.pauseMris(playerActive) : MrisServices.playMris(playerActive)
+                                progressBar.value = playerActive.position
+                            }
                         }
                     }
 
-                    ButtonSmall {
-                        height: width; width: 50
+                    ButtonControl {
                         text: "󰙢"
                         onClicked: {
-                            MrisServices.nextMris(playerNow)
-                            progressBar.value = playerNow.position
+                            if (playerExist) {
+                                MrisServices.nextMris(playerActive)
+                                progressBar.value = playerActive.position
+                            }
                         }
                     }
                 }
@@ -145,6 +177,11 @@ Item {
             id: menuVolume
             height: root.height; width: 40
         }
+    }
+
+    component ButtonControl: ButtonSmall {
+        height: width; width: 50
+        enabled: playerExist
     }
 
     component TextStyledOwn: TextStyled {

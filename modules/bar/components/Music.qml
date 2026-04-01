@@ -11,11 +11,12 @@ RectForeground {
     visible: false
     height: parent.height; width: 200
 
-    property var player: MrisServices.playerNow
-    property bool isPlay: MrisServices.playeNowIsPlay
+    property var playerActive: MrisServices.playerActive
+    property bool playerExist: MrisServices.playerExist
+    property bool isPlayerPlay: MrisServices.isplayerActivePlay
 
-    onIsPlayChanged: {
-        if (isPlay) {
+    onIsPlayerPlayChanged: {
+        if (isPlayerPlay) {
             statusManager.state = "open"
         } else {
             statusManager.state = "close"
@@ -31,7 +32,7 @@ RectForeground {
                 name: "close"
                 PropertyChanges {
                     target: root
-                    visible: true
+                    visible: false
                     opacity: 0
                     width: 0
                 }
@@ -41,6 +42,7 @@ RectForeground {
                 name: "open"
                 PropertyChanges {
                     target: root
+                    visible: true
                     opacity: 1
                     width: 200
                 }
@@ -78,22 +80,55 @@ RectForeground {
         anchors.verticalCenter: parent.verticalCenter
         x: Appearance.padding.small
         implicitSize: 16
-        source: AppIcons.getIcon(player.identity)
+        source: playerExist ? AppIcons.getIcon(playerActive.identity) : ""
     }
 
     RectClip {
+        id: trackNameContainer
         height: parent.height
         width: root.width - programIcons.width - Appearance.padding.small * 3
+        topLeftRadius: 0; bottomLeftRadius: 0
         x: programIcons.width + Appearance.padding.small * 2
 
-        TextStyled {
+        Row {
+            id: trackNameRow
             anchors.verticalCenter: parent.verticalCenter
-            x: Appearance.padding.small
-            text: player.trackTitle ?? "..."
+            spacing: Appearance.padding.gigant
+
+            TextOwn {
+                id: firstText
+                onTextChanged: {
+                    runningText.running = false
+                    trackNameRow.x = 0
+                    secondText.visible = firstText.width > trackNameContainer.width
+                    runningText.running = firstText.width > trackNameContainer.width
+                    
+                }
+            }
+
+            TextOwn {
+                id: secondText
+                visible: firstText.width > trackNameContainer.width
+            }
+
+            SequentialAnimation on x {
+                id: runningText
+                running: firstText.width > trackNameContainer.width
+                loops: Animation.Infinite
+
+                PauseAnimation { duration: 2000 }
+
+                NumberAnim {
+                    from: 0
+                    to: - (firstText.width + trackNameRow.spacing)
+                    duration: 6000
+                }
+            }
         }
     }
 
-    Component.onCompleted: {
-        visible = MrisServices.playerNow
+    component TextOwn: TextStyled {
+        anchors.verticalCenter: parent.verticalCenter
+        text: playerExist ? playerActive.trackTitle : "..."
     }
 }

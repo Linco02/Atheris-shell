@@ -4,11 +4,26 @@ import Quickshell.Io
 import Quickshell.Services.Mpris
 import qs.config
 
+import QtQuick
+
 Singleton {
-    property int playerChose: 0
-    property var player: Mpris.players.values[playerChose]
-    property bool playerIsPlay: player.playbackState === MprisPlaybackState.Playing
-    property string playerIcon: player ? player.trackArtUrl : ""
+    property var player: Mpris.players.values
+    property bool playerExist: player.length > 0 ? true : false
+    property var playerActive: {
+        if (!playerExist)
+            return null;
+
+        let playerPlaying = player.filter(p => p.playbackState === MprisPlaybackState.Playing);
+        
+        if (playerPlaying.length > 1)
+            return playerPlaying[0];
+        else if (playerPlaying.length === 1)
+            return playerPlaying[0];
+        else
+            return player[0];
+    }
+
+    property bool isplayerActivePlay: playerExist ? playerActive.playbackState === MprisPlaybackState.Playing : false
     
     property var cavaBarsData: Array(cavaBarsCount).fill(0)
     property int cavaBarsCount: 40

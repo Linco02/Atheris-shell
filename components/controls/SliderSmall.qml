@@ -19,7 +19,7 @@ Slider {
             height: parent.height
             width: root.visualPosition * parent.width
 
-            Behavior on width { NumberAnim { } }
+            Behavior on width { NumberAnim { duration: Appearance.durations.fast } }
         }
     }
 
@@ -30,6 +30,6 @@ Slider {
         radius: implicitHeight / 2
         color: Colors.warning
 
-        Behavior on x { NumberAnim { } }
+        Behavior on x { NumberAnim { duration: Appearance.durations.fast } }
     }
 }
