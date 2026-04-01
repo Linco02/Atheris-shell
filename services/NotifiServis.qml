@@ -24,6 +24,7 @@ Singleton {
         id: notifiSend
     }
 
+    // urgency(low/normal/critical)
     function send(name, text, urgency) {
         notifiSend.command = [
             "notify-send",

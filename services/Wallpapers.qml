@@ -22,6 +22,7 @@ Singleton {
             isWallpaperMpw = true
             wallpaperPlugMpw = wallpaperTempPath(wallpaperSelected)
             wallpaper = wallpaperSelected
+            console.log(wallpaper)
         } else {
             isWallpaperMpw = false
             wallpaper = wallpaperSelected

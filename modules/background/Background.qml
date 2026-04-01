@@ -17,9 +17,12 @@ PanelWindow {
     color: Colors.surface
 
     function wallpaperOnStartup() {
-        if (GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaper === "" && Wallpapers.wallparersList.length > 0) {
+        if (GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaper === "" && Wallpapers.wallparersList.length > 0)
             Wallpapers.wallpaperRandom()
-        }
+        else if (!GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaperCurrent !== "")
+            Wallpapers.wallpaperSelected = GlobalStates.wallpaperCurrent
+        else
+            NotifiServis.send("Wallpaper", "Wallpaper не може ініціалізуватися(background/Background)", "critical")
     }
 
     Loader {

@@ -74,7 +74,7 @@ Item {
                             anchors.fill: parent
                             Image {
                                 anchors.fill: parent
-                                source: playerNow.trackArtUrl ?? ""
+                                source: MrisServices.playerIcon
                                 fillMode: Image.PreserveAspectCrop
                             }
                         }
@@ -95,13 +95,13 @@ Item {
                     value: playerNow.position
                     onMoved: MrisServices.setPositionMris(playerNow, value)
 
-                    Connections {
-                        target: Tick1s
-                        function onTick() {
-                            if (!progressBar.pressed)
-                                progressBar.value = playerNow.position
-                        }
-                    }
+                    // Connections {
+                    //     target: Tick1s
+                    //     function onTick() {
+                    //         if (!progressBar.pressed)
+                    //             progressBar.value = playerNow.position
+                    //     }
+                    // }
                 }
 
                 Row {

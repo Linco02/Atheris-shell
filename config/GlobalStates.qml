@@ -11,7 +11,8 @@ Singleton {
     // Задній план //
     property bool isBackgroundOn: true
     property bool isWallpaperOn: true
-    property bool isRandomWallpaperOn: true
+    property bool isRandomWallpaperOn: false
+    property string wallpaperCurrent: "file:///home/linco02/wallpapers/Dark Queen 4K live wallpaper.mp4"
 
     // Блокування //
     property bool isSessionLockOn: false

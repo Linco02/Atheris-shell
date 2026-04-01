@@ -74,7 +74,7 @@ RectForeground {
                                     text: modelData ? modelData.summary : ""
                                 }
                                 OwnText {
-                                    text: modelData ? modelData.appName : ""
+                                    text: modelData ? modelData.body : ""
                                 }
                             }
                         }
