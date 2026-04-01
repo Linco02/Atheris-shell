@@ -45,7 +45,7 @@ Item {
 
                             onClicked: {
                                 playerIndex = index
-                                progressBar.value = playerActive.position
+                                progressBar.value = playerActive?.position ?? 0
                             }
 
                             IconImage {
@@ -85,7 +85,7 @@ Item {
                             anchors.fill: parent
                             Image {
                                 anchors.fill: parent
-                                source: playerExist ? playerActive.trackArtUrl : ""
+                                source: playerActive?.trackArtUrl ?? ""
                                 fillMode: Image.PreserveAspectCrop
                             }
                         }
@@ -93,8 +93,8 @@ Item {
                 }
 
                 Column {
-                    TextStyledOwn { text: playerExist ? playerActive.trackTitle : "..."}
-                    TextStyledOwn { text: playerExist ? playerActive.trackArtist : "..."}
+                    TextStyledOwn { text: playerActive?.trackTitle ?? "..."}
+                    TextStyledOwn { text: playerActive?.trackArtist ?? "..."}
                 }
 
                 SliderSmall {
@@ -102,8 +102,8 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: 200
                     from: 0
-                    to: playerExist ? playerActive.length : 100
-                    value: playerExist ? playerActive.position : 0
+                    to: playerActive?.length ?? 100
+                    value: playerActive?.position ?? 0
                     enabled: playerExist
 
                     property var poss: 0
@@ -122,7 +122,7 @@ Item {
                         target: Tick1s
                         function onTick() {
                             if (playerExist && !progressBar.pressed)
-                                progressBar.value = playerActive.position
+                                progressBar.value = playerActive?.position
                         }
                     }
 
@@ -142,7 +142,7 @@ Item {
                         onClicked: {
                             if (playerExist) {
                                 MrisServices.previousMris(playerActive)
-                                progressBar.value = playerActive.position
+                                progressBar.value = playerActive?.position
                             }
                         }
                     }
@@ -150,12 +150,12 @@ Item {
                     ButtonControl {
                         text: isPlaying ? "" : ""
 
-                        property bool isPlaying: playerExist ? playerActive.playbackState == MprisPlaybackState.Playing : false
+                        property bool isPlaying: playerActive?.playbackState == MprisPlaybackState.Playing ?? false
 
                         onClicked: {
                             if (playerExist) {
                                 isPlaying ? MrisServices.pauseMris(playerActive) : MrisServices.playMris(playerActive)
-                                progressBar.value = playerActive.position
+                                progressBar.value = playerActive?.position
                             }
                         }
                     }
@@ -165,7 +165,7 @@ Item {
                         onClicked: {
                             if (playerExist) {
                                 MrisServices.nextMris(playerActive)
-                                progressBar.value = playerActive.position
+                                progressBar.value = playerActive?.position
                             }
                         }
                     }
