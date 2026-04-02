@@ -25,8 +25,13 @@ PopFlash {
             spacing: Appearance.padding.normal
             
             Info { }
-            Services { }
-            Notifi { anchors.horizontalCenter: parent.horizontalCenter }
+            Services {
+                panelH: root.height
+                panelW: root.width
+            }
+            Notifi {
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
     }
 }

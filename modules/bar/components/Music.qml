@@ -116,12 +116,13 @@ RectForeground {
                 running: firstText.width > trackNameContainer.width
                 loops: Animation.Infinite
 
-                PauseAnimation { duration: 2000 }
+                PauseAnimation { duration: 5000 }
 
                 NumberAnim {
                     from: 0
                     to: - (firstText.width + trackNameRow.spacing)
-                    duration: 6000
+                    easing.type: Easing.Linear
+                    duration: 10000
                 }
             }
         }
