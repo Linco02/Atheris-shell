@@ -1,18 +1,17 @@
+import Quickshell
 import Quickshell.Io
 
 JsonObject {
     property AnimDurations durations: AnimDurations {}
-    property Padding padding: Padding {}
-    property Spacing spacing: Spacing {}
-    property Radius radius: Radius {}
-    property Margine margine: Margine {}
+    property Padding padding: Padding { }
+    property Spacing spacing: Spacing { }
+    property Radius radius: Radius { }
+    property Margine margine: Margine { }
 
     // масштаб
     property real scale: 1
-
     // розмір панелі
     property real barHeight: 34 * scale
-
     // шрифт
     property string fontFamily: "FiraCode Nerd Font"
 
@@ -23,6 +22,7 @@ JsonObject {
     }
 
     component Margine: JsonObject {
+        property real scale: 1
         property int small: 5 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
@@ -30,6 +30,7 @@ JsonObject {
     }
 
     component Padding: JsonObject {
+        property real scale: 1
         property int small: 5 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
@@ -37,6 +38,7 @@ JsonObject {
     }
 
     component Spacing: JsonObject {
+        property real scale: 1
         property int small: 5 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
@@ -44,6 +46,7 @@ JsonObject {
     }
 
     component Radius: JsonObject {
+        property real scale: 1
         property int small: 10 * scale
         property int normal: 15 * scale
         property int large: 20 * scale

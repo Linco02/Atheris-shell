@@ -1,7 +1,8 @@
+pragma Singleton
 import QtQuick
-import Quickshell.Io
+import Quickshell
 
-JsonObject {
+Singleton {
     property color surface: "#191113"
     property color surfaceRaised: "#261d1f"
     property color outline: "#9e8c8f"

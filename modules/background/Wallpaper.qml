@@ -3,8 +3,8 @@ import Quickshell
 import Quickshell.Hyprland
 import QtMultimedia
 import qs.config
-import qs.services
 import qs.components.animations
+import qs.services
 
 Item {
     id: root
@@ -75,11 +75,8 @@ Item {
         // Зображення
         Component {
             id: imageComp
-            Image {
-                anchors.fill: parent
+            Wall {
                 source: backSource
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
 
                 onStatusChanged: {
                     if (Image.Ready) {
@@ -177,17 +174,12 @@ Item {
             }
         }
 
-        Image {
-            anchors.fill: parent
-            source: forwardSource
-            fillMode: Image.PreserveAspectCrop
-            asynchronous: true
-        }
-
+        Wall { source: forwardSource }
     }
 
     component Wall: Image {
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
+        asynchronous: true
     }
 }

@@ -1,7 +1,7 @@
 import Quickshell
 import Quickshell.Wayland
 import qs.config
-// import qs.services
+import QtQuick
 
 PanelWindow {
     id: root
@@ -13,7 +13,7 @@ PanelWindow {
     }
     WlrLayershell.layer: WlrLayer.Background
     exclusiveZone: -1
-    // color: Appearance.colors.surface
+    color: Colors.surface
 
     // function wallpaperOnStartup() {
     //     if (GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaper === "" && Wallpapers.wallparersList.length > 0)
@@ -24,18 +24,17 @@ PanelWindow {
     //         NotifiServis.send("Wallpaper", "Wallpaper не може ініціалізуватися(background/Background)", "critical")
     // }
 
-    // Loader {
-    //     active: GlobalStates.isWallpaperOn
-    //     anchors.fill: parent
-    //     sourceComponent: Component {
-    //         Wallpaper {}
-    //     }
-    // }
+    Loader {
+        active: Appearance.GlobalStates.isWallpaperOn
+        anchors.fill: parent
+        sourceComponent: Component {
+            Wallpaper {}
+        }
+    }
 
     // Connections {
     //     target: Wallpapers
     //     function onWallpaperReady() { wallpaperOnStartup() }
     // }
-
     // Component.onCompleted: { wallpaperOnStartup() }
 }

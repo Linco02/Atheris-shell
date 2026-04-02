@@ -3,13 +3,22 @@ import Quickshell
 import Quickshell.Io
 
 Singleton {
-    property AppearanceConfig appearance: AppearanceConfig {
-        path: Quickshell.configDir + "/appearance.json"
-    }
-    property ColorsConfig colors: ColorsConfig {
-        path: Quickshell.configDir + "/colors.json"
-    }
-    property SettingsConfig settings: SettingsConfig {
-        path: Quickshell.configDir + "/settings.json"
+    id: root
+
+    property alias appearance: adapter.appearance
+    property alias settings: adapter.settings
+
+    FileView {
+        id: fileView
+        path: Quickshell.shellDir + "/shell.json"
+        watchChanges: true
+        onFileChanged: reload()
+        onAdapterUpdated: writeAdapter()
+
+        JsonAdapter {
+            id: adapter
+            property AppearanceConfig appearance: AppearanceConfig {}
+            property SettingsConfig settings: SettingsConfig {}
+        }
     }
 }

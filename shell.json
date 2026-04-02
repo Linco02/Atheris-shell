@@ -1,0 +1,66 @@
+{
+    "appearance": {
+        "barHeight": 34,
+        "durations": {
+            "fast": 200,
+            "normal": 400,
+            "scale": 1,
+            "slow": 800
+        },
+        "fontFamily": "FiraCode Nerd Font",
+        "margine": {
+            "gigant": 40,
+            "large": 20,
+            "normal": 10,
+            "scale": 1,
+            "small": 5
+        },
+        "padding": {
+            "gigant": 40,
+            "large": 20,
+            "normal": 10,
+            "scale": 1,
+            "small": 5
+        },
+        "radius": {
+            "large": 20,
+            "normal": 15,
+            "scale": 1,
+            "small": 10
+        },
+        "scale": 1,
+        "spacing": {
+            "gigant": 40,
+            "large": 20,
+            "normal": 10,
+            "scale": 1,
+            "small": 5
+        }
+    },
+    "colors": {
+        "active": "#ffb1c4",
+        "inactive": "#514346",
+        "outline": "#9e8c8f",
+        "surface": "#191113",
+        "surfaceRaised": "#261d1f",
+        "textAccent": "#703345",
+        "textInactive": "#d6c2c5",
+        "textSurface": "#efdfe1",
+        "warning": "#ffb4ab"
+    },
+    "settings": {
+        "isBackgroundOn": true,
+        "isBarOn": true,
+        "isNotifiSoundOn": true,
+        "isPalitOn": true,
+        "isRandomWallpaperOn": false,
+        "isSessionLockOn": false,
+        "isShortcutOn": true,
+        "isWallpaperOn": true,
+        "palitKittyOn": true,
+        "palitOpenrgbOn": true,
+        "palitPywalFoxOn": true,
+        "palitShellOn": true,
+        "palitqt6ctOn": true
+    }
+}
