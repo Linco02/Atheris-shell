@@ -45,9 +45,9 @@ PanelWindow {
             Music { }
             ServicesWrapper { }
             ControlCenterButton {
-                panelWind: root
-                panelH: root.height
-                panelW: root.width
+                // panelWind: root
+                // panelH: root.height
+                // panelW: root.width
             }
         }
     }
