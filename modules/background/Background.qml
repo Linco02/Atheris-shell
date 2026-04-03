@@ -15,26 +15,11 @@ PanelWindow {
     exclusiveZone: -1
     color: Colors.surface
 
-    // function wallpaperOnStartup() {
-    //     if (GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaper === "" && Wallpapers.wallparersList.length > 0)
-    //         Wallpapers.wallpaperRandom()
-    //     else if (!GlobalStates.isRandomWallpaperOn && Wallpapers.wallpaperCurrent !== "")
-    //         Wallpapers.wallpaperSelected = GlobalStates.wallpaperCurrent
-    //     else
-    //         NotifiServis.send("Wallpaper", "Wallpaper не може ініціалізуватися(background/Background)", "critical")
-    // }
-
     Loader {
-        active: Appearance.GlobalStates.isWallpaperOn
+        active: Global.settings.isWallpaperOn
         anchors.fill: parent
         sourceComponent: Component {
             Wallpaper {}
         }
     }
-
-    // Connections {
-    //     target: Wallpapers
-    //     function onWallpaperReady() { wallpaperOnStartup() }
-    // }
-    // Component.onCompleted: { wallpaperOnStartup() }
 }

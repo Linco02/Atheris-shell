@@ -2,11 +2,12 @@ pragma Singleton
 import Quickshell
 
 Singleton {
-    readonly property var durations: Config.durations.padding
-    readonly property var padding: Config.appearance.padding
-    readonly property var spacing: Config.appearance.spacing
-    readonly property var radius: Config.appearance.radius
-    readonly property var margine: Config.appearance.margine
+    readonly property var appearance: Config.appearance
+    readonly property var durations: appearance.durations
+    readonly property var padding: appearance.padding
+    readonly property var spacing: appearance.spacing
+    readonly property var radius: appearance.radius
+    readonly property var margine: appearance.margine
     readonly property var settings: Config.settings
 
     // ControlCenter
@@ -14,5 +15,5 @@ Singleton {
     property string isDashboardModule: "dashboard"
 
     // Wallpaper
-    property string wallpaperCurrent: "file:///home/linco02/wallpapers/Dark Queen 4K live wallpaper.mp4"
+    property string wallpaperCurrent: "file:///home/linco02/wallpapers/Study 01 by Nixeu.jpg"
 }

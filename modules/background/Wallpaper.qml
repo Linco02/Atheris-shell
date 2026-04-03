@@ -1,7 +1,6 @@
 import QtQuick
-import Quickshell
-import Quickshell.Hyprland
 import QtMultimedia
+import Quickshell
 import qs.config
 import qs.components.animations
 import qs.services
@@ -15,15 +14,8 @@ Item {
     property string forwardSource: ""
     property string backSource: ""
 
-    property bool isWallPlay: {
-        const activeWs = Hyprland.focusedWorkspace
-
-        if (!activeWs) return true
-        return !Hyprland.toplevels.values.some(tl => tl.workspace && tl.workspace.id === activeWs.id)
-    }
-
     function mpwControler(player) {
-        if (isWallPlay) {
+        if (WallpaperService.isWallPlay) {
             player.play()
         } else {
             player.pause()
@@ -38,26 +30,6 @@ Item {
         }
     }
 
-    Connections {
-        target: Wallpapers
-        function onWallpaperChanged() {
-            wallpaperReady = false
-
-            let source = Wallpapers.isWallpaperMpw
-                ? Wallpapers.wallpaperPlugMpw
-                : Wallpapers.wallpaper
-
-            if (backSource === "") {
-                backSource = Wallpapers.wallpaper
-            } else {
-                forwardSource = source
-                forward.state = "change"
-            }
-            
-            Palit.palitCreate(source)
-        }
-    }
-
     Item {
         id: back
         anchors.fill: parent
@@ -65,7 +37,7 @@ Item {
         Loader {
             anchors.fill: parent
             sourceComponent: {
-                let type = Wallpapers.wallpaperFormat(backSource);
+                let type = WallpaperService.wallpaperFormat(backSource);
                 if (type === "img") return imageComp;
                 if (type === "anmf") return anmfComp;
                 if (type === "video") return videoComp;
@@ -135,7 +107,7 @@ Item {
                 }
 
                 Connections {
-                    target: root
+                    target: WallpaperService
                     function onIsWallPlayChanged() {
                         mpwControler(player);
                     }
@@ -166,7 +138,7 @@ Item {
             onRunningChanged: {
                 if(!running) {
                     backSource = null
-                    backSource = Wallpapers.wallpaper
+                    backSource = WallpaperService.wallpaper
                     animationEnd = true
                 }
 
@@ -175,6 +147,26 @@ Item {
         }
 
         Wall { source: forwardSource }
+    }
+
+    Connections {
+        target: WallpaperService
+        function onWallpaperChanged() {
+            wallpaperReady = false
+
+            let source = WallpaperService.isWallpaperMpw
+                ? WallpaperService.wallpaperPlugMpw
+                : WallpaperService.wallpaper
+
+            if (backSource === "") {
+                backSource = WallpaperService.wallpaper
+            } else {
+                forwardSource = source
+                forward.state = "change"
+            }
+            
+            Palit.palitCreate(source)
+        }
     }
 
     component Wall: Image {

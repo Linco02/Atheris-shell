@@ -1,22 +1,40 @@
 pragma Singleton
 import QtQuick
+import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
-import Qt.labs.folderlistmodel
+import Quickshell.Hyprland
+import qs.config
 
 Singleton {
-    signal wallpaperReady()
     property var wallparersList: []
-
     property string wallpaperSelected: ""
     property string wallpaper: ""
     property string wallpaperPlugMpw: ""
     property bool isWallpaperMpw: false
-
     property var wallIntoImage: []
     property bool iswallIntoImageActive: false
+    property bool isWallPlay: {
+        const activeWs = Hyprland.focusedWorkspace
 
-    onWallpaperSelectedChanged: {
+        if (!activeWs) return true
+        
+        return !Hyprland.toplevels.values.some(tl => tl.workspace && tl.workspace.id === activeWs.id)
+    }
+
+    signal wallpaperReady()
+
+    function wallpaperOnStartup() {
+        if (Global.settings.isRandomWallpaperOn && wallparersList.length > 0)
+            wallpaperRandom()
+        else if (Global.wallpaperCurrent !== "")
+            wallpaperSelected = Global.wallpaperCurrent
+        else
+            NotifiServis.send("Wallpaper", "Wallpaper не може ініціалізуватися(background/Background)", "critical")
+        wallpaperChange()
+    }
+
+    function wallpaperChange() {
         let path = wallpaperSelected.toString().toLowerCase();
         if (path.endsWith(".gif") || path.endsWith(".webp") || path.endsWith(".mp4")) {
             isWallpaperMpw = true
@@ -85,14 +103,6 @@ Singleton {
         makePicture.running = true;
     }
 
-    Process {
-        id: makePicture
-        onExited: {
-            iswallIntoImageActive = false;
-            queueNext();
-        }
-    }
-
     FolderListModel {
         id: listWallpaper
         folder: "file:///home/linco02/wallpapers/"
@@ -117,6 +127,7 @@ Singleton {
             wallparersList = list;
             queueNext();
             wallpaperReady();
+            wallpaperOnStartup();
         }
 
         onStatusChanged: {
@@ -126,5 +137,18 @@ Singleton {
         onCountChanged: {
             if (status === FolderListModel.Ready) { updateFiles(); }
         }
+    }
+
+    Process {
+        id: makePicture
+        onExited: {
+            iswallIntoImageActive = false;
+            queueNext();
+        }
+    }
+
+    Connections {
+        target: Global
+        function onWallpaperCurrentChanged() { wallpaperChange() }
     }
 }

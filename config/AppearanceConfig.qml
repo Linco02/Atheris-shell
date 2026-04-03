@@ -10,8 +10,15 @@ JsonObject {
 
     // масштаб
     property real scale: 1
+    // hover ефект
+    property real hover: 1.5
+    // Задній фон
+    property real opacity: 0.4
+    property bool glassEfect: true
     // розмір панелі
     property real barHeight: 34 * scale
+    // кількість worckspace
+    property int workspaceNumber: 5
     // шрифт
     property string fontFamily: "FiraCode Nerd Font"
 
@@ -31,6 +38,7 @@ JsonObject {
 
     component Padding: JsonObject {
         property real scale: 1
+        property int mini: 3 * scale
         property int small: 5 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
