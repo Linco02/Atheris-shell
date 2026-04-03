@@ -61,6 +61,7 @@ RectForeground {
                 height: root.height; width: 50
 
                 TextStyledH {
+                    anchors.centerIn: parent
                     z: 3
                     text: isFocused ? "●" 
                         : isOccupied ? "◉"

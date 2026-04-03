@@ -19,6 +19,8 @@ JsonObject {
     property real barHeight: 34 * scale
     // кількість worckspace
     property int workspaceNumber: 5
+    // кількість cavaBars
+    property int cavaBarsCount: 40
     // шрифт
     property string fontFamily: "FiraCode Nerd Font"
 

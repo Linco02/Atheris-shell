@@ -1,34 +1,15 @@
 import QtQuick
-import Quickshell.Hyprland
-import qs.services
-import qs.config
 import qs.components
+import qs.services
 
 Item {
     height: parent.height; width: languageText.width
 
-    property string currentLayout: "US"
+    readonly property string currentLayoutName: LanguageServices.currentLayoutName
 
-    function currentLayoutParse(event) {
-        if (event.name === "activelayout") {
-            const dataString = event.data;
-            const layoutInfo = dataString.split(",");
-            const fullLayoutName = layoutInfo[layoutInfo.length - 1];
-            if (fullLayoutName === "Ukrainian") {
-                currentLayout =  "UA"
-            } else {
-                currentLayout =  "US"
-            }
-        }
-    }
-
-    Component.onCompleted: {
-        Hyprland.rawEvent.connect(currentLayoutParse);
-    }
-
-    TextStyledFH {
+    TextStyledH {
         id: languageText
         anchors.centerIn: parent
-        text: currentLayout
+        text: currentLayoutName
     }
 }

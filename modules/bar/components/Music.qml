@@ -1,10 +1,10 @@
 import QtQuick
 import Quickshell.Widgets
-import qs.services
-import qs.config
-import qs.components.animations
-import qs.components.shapes
 import qs.components
+import qs.components.shapes
+import qs.components.animations
+import qs.config
+import qs.services
 
 RectForeground {
     id: root
@@ -14,6 +14,7 @@ RectForeground {
     property var playerActive: MrisServices.playerActive
     property bool playerExist: MrisServices.playerExist
     property bool isPlayerPlay: MrisServices.isplayerActivePlay
+    property bool isTextFit: firstText.width > trackNameContainer.width
 
     onIsPlayerPlayChanged: {
         if (isPlayerPlay) {
@@ -78,7 +79,7 @@ RectForeground {
     IconImage {
         id: programIcons
         anchors.verticalCenter: parent.verticalCenter
-        x: Appearance.padding.small
+        x: Global.padding.small
         implicitSize: 16
         source: playerExist ? AppIcons.getIcon(playerActive.identity) : ""
     }
@@ -86,34 +87,28 @@ RectForeground {
     RectClip {
         id: trackNameContainer
         height: parent.height
-        width: root.width - programIcons.width - Appearance.padding.small * 3
+        width: root.width - programIcons.width - Global.padding.small * 3
         topLeftRadius: 0; bottomLeftRadius: 0
-        x: programIcons.width + Appearance.padding.small * 2
+        x: programIcons.width + Global.padding.small * 2
 
         Row {
             id: trackNameRow
             anchors.verticalCenter: parent.verticalCenter
-            spacing: Appearance.padding.gigant
+            spacing: Global.padding.gigant
 
             TextOwn {
                 id: firstText
-                onTextChanged: {
-                    runningText.running = false
-                    trackNameRow.x = 0
-                    secondText.visible = firstText.width > trackNameContainer.width
-                    runningText.running = firstText.width > trackNameContainer.width
-                    
-                }
+                onTextChanged: { trackNameRow.x = 0 }
             }
 
             TextOwn {
                 id: secondText
-                visible: firstText.width > trackNameContainer.width
+                visible: isTextFit
             }
 
             SequentialAnimation on x {
                 id: runningText
-                running: firstText.width > trackNameContainer.width
+                running: isTextFit
                 loops: Animation.Infinite
 
                 PauseAnimation { duration: 5000 }

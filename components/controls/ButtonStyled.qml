@@ -1,8 +1,8 @@
 import QtQuick
-import qs.config
+import qs.components
 import qs.components.shapes
 import qs.components.animations
-import qs.components
+import qs.config
 
 RectForeground {
     id: root
@@ -13,6 +13,7 @@ RectForeground {
 
     TextStyledH {
         id: buttonText
+        anchors.centerIn: parent
     }
 
     MouseFill {

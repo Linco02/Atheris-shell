@@ -6,6 +6,7 @@ import qs.components.containers
 import qs.config
 import "./components"
 import "./components/power"
+import "./components/status"
 
 PanelWindow {
     id: root
@@ -22,25 +23,30 @@ PanelWindow {
         radius: 0
     }
 
-    SpacedRow {
+    RowOwn {
         anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        height: parent.height - Global.padding.normal
         leftPadding: Global.padding.normal
 
         Workspace { }
         Taskbar { }
     }
 
-    SpacedRow {
-        anchors.centerIn: parent
-        height: parent.height - Global.padding.normal
+    RowOwn {
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Clock { }
+        Music { }
     }
 
-    SpacedRow {
+    RowOwn {
         anchors.right: parent.right
+        rightPadding: Global.padding.normal
+
+        StatusGroup { }
+    }
+
+    component RowOwn : SpacedRow {
+        anchors.verticalCenter: parent.verticalCenter
         height: parent.height - Global.padding.normal
     }
 

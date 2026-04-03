@@ -32,7 +32,7 @@ Item {
         }
     }
 
-    TextStyledFH {
+    TextStyledH {
         id: volumeText
         anchors.centerIn: parent
         text: "󰕾"
