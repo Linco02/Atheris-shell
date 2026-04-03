@@ -3,35 +3,20 @@ import qs.config
 import qs.components.animations
 import qs.components.shapes
 import qs.components
-import qs.modules.controlcenter
+// import qs.modules.controlcenter
+import qs.components.controls
 
-RectForeground {
-    id: controlcenterWidget
-    height: root.height - Appearance.padding.normal
-    width: height + Appearance.padding.normal
+ButtonTransparent {
+    id: root
+    height: parent.height
+    text: "󰵙"
 
-    TextStyledH {
-        anchors.centerIn: parent
-        text: ""
-    }
 
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        onEntered: {
-            controlcenterWidget.color = Colors.active
-        }
-        onExited: {
-            controlcenterWidget.color = Colors.surfaceRaised
-        }
-        onClicked: {
-            controlcenter.openMenu()
-        }
-    }
+        // onClicked: {
+        //     controlcenter.openMenu()
+        // }
 
-    Behavior on color { ColorAnim{ } }
-
-    ControlCenter {
-        id: controlcenter
-    }
+    // ControlCenter {
+    //     id: controlcenter
+    // }
 }

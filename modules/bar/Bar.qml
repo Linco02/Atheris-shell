@@ -26,6 +26,7 @@ PanelWindow {
         anchors.left: parent.left
         leftPadding: Global.padding.normal
 
+        PowerButton { }
         Workspace { }
         Taskbar { }
     }
@@ -45,6 +46,7 @@ PanelWindow {
         Sound { }
         Network { }
         Language { }
+        ControlCenterButton { }
     }
 
     component RowOwn : SpacedRow {

@@ -20,7 +20,6 @@ RectForeground {
             delegate: ButtonIcon {
                 height: root.height
                 source: AppIcons.getIcon(modelData.appId)
-                acceptedButtons: Qt.LeftButton | Qt.MiddleButton
                 onLeftClicked: modelData.activate()
                 onMidleClicked: modelData.close()
                 occupied: modelData.activated

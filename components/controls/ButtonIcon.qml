@@ -35,6 +35,7 @@ RectForeground {
     MouseFill {
         id: buttonReaction
         hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         onEntered: { isHovered = true }
         onExited: { isHovered = false }
         onClicked: (mouse) => {

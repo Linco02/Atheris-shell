@@ -1,21 +1,13 @@
 import QtQuick
 import qs.components
-import qs.components.shapes
 import qs.components.animations
 import qs.config
 
-RectForeground {
+Item {
     id: root
     width: buttonText.width + Global.padding.large
-    color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
-        : occupied ? Colors.active
-        : focused ? Colors.inactive
-        : Colors.surfaceRaised
-
-    Behavior on color { ColorAnim { } }
 
     property alias text: buttonText.text
-    property alias acceptedButtons: buttonReaction.acceptedButtons
     property bool occupied: false
     property bool focused: false
     property bool isHovered: false
@@ -24,9 +16,16 @@ RectForeground {
     signal rightClicked()
     signal middleClicked()
 
-    TextStyledH {
+    TextStyled {
         id: buttonText
         anchors.centerIn: parent
+        font.pixelSize: parent.height
+        color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
+            : occupied ? Colors.textAccent
+            : focused ? Colors.textInactive
+            : Colors.textSurface
+
+        Behavior on color { ColorAnim { } }
     }
 
     MouseFill {

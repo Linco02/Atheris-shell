@@ -44,7 +44,6 @@ RectForeground {
             anchors.verticalCenter: parent.verticalCenter
             height: root.height
             text: PipewireServices.muted ? "󰖁" : "󰕾"
-            acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
             onLeftClicked: isvolumeSliderOpen = !isvolumeSliderOpen
             onMiddleClicked: PipewireServices.pavucontrolOpen()
             onRightClicked: PipewireServices.toggleMute()
