@@ -1,9 +1,12 @@
 import QtQuick
 import qs.components
+import qs.components.shapes
+import qs.components.controls
+import qs.config
 import qs.services
 
-Item {
-    height: parent.height; width: languageText.width
+RectForeground {
+    height: parent.height; width: languageText.width + Global.padding.normal
 
     readonly property string currentLayoutName: LanguageServices.currentLayoutName
 

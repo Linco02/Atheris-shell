@@ -5,8 +5,7 @@ import qs.components.animations
 import qs.components.containers
 import qs.config
 import "./components"
-import "./components/power"
-import "./components/status"
+import "./components/buttons"
 
 PanelWindow {
     id: root
@@ -42,7 +41,10 @@ PanelWindow {
         anchors.right: parent.right
         rightPadding: Global.padding.normal
 
-        StatusGroup { }
+        Battery { }
+        Sound { }
+        Network { }
+        Language { }
     }
 
     component RowOwn : SpacedRow {

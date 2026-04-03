@@ -7,7 +7,7 @@ import qs.services
 ButtonStyled {
     height: root.height - Global.padding.normal
     text: "test"
-    onClicked: console.log("yes")
+    onLeftClicked: console.log("yes")
 
     Connections {
         target: Time

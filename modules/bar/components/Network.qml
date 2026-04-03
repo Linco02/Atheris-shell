@@ -1,10 +1,12 @@
 import QtQuick
 import Quickshell
 import qs.components
+import qs.components.shapes
+import qs.config
 import qs.services
 
-Item {
-    height: parent.height; width: networkText.width
+RectForeground {
+    height: parent.height; width: networkText.width + Global.padding.normal
     
     readonly property string currentNetworkSimbol: NetworkServices.currentNetworkSimbol
 
