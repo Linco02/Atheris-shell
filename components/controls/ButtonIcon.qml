@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell.Widgets
 import qs.components
 import qs.components.shapes
-import qs.components.animations
 import qs.config
 
 RectForeground {
@@ -12,8 +11,6 @@ RectForeground {
         : occupied ? Colors.active
         : focused ? Colors.inactive
         : Colors.surfaceRaised
-
-    Behavior on color { ColorAnim { } }
 
     property alias iconSize: buttonIcon.implicitSize
     property alias source: buttonIcon.source
