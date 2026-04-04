@@ -7,7 +7,7 @@ JsonObject {
     // Задній план //
     property bool isBackgroundOn: true
     property bool isWallpaperOn: true
-    property bool isRandomWallpaperOn: false
+    property bool isRandomWallpaperOn: true
 
     // Блокування //
     property bool isSessionLockOn: false

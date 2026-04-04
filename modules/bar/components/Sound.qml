@@ -18,6 +18,7 @@ RectForeground {
 
     SpacedRow {
         id: volumeContainer
+        height: parent.height
         anchors {
             verticalCenter: root.verticalCenter
             right: root.right

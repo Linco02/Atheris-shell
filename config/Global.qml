@@ -15,5 +15,5 @@ Singleton {
     property string isDashboardModule: "dashboard"
 
     // Wallpaper
-    property string wallpaperCurrent: "file:///home/linco02/wallpapers/Study 01 by Nixeu.jpg"
+    property string wallpaperCurrent: "file:///home/linco02/wallpapers/b-003.jpg"
 }

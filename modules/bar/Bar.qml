@@ -53,39 +53,4 @@ PanelWindow {
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height - Global.padding.normal
     }
-
-    // Item {
-    //     anchors.centerIn: parent
-    //     height: parent.height - Global.padding.normal
-    //     width: parent.width - Global.padding.large - Global.padding.normal
-
-    //     RowNormal {
-    //         anchors.left: parent.left
-    //         height: parent.height
-
-    //         PowerButton { }
-    //         Workspace { }
-    //         Taskbar { }
-    //     }
-
-    //     RowNormal {
-    //         anchors.centerIn: parent
-    //         height: parent.height
-
-    //         Clock { }
-    //     }
-
-    //     RowNormal {
-    //         anchors.right: parent.right
-    //         height: parent.height
-
-    //         Music { }
-    //         ServicesWrapper { }
-    //         ControlCenterButton {
-    //             panelWind: root
-    //             panelH: root.height
-    //             panelW: root.width
-    //         }
-    //     }
-    // }
 }

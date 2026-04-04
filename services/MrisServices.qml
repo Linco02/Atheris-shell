@@ -9,7 +9,7 @@ import QtQuick
 Singleton {
     property var player: Mpris.players.values
     property bool playerExist: player.length > 0 ? true : false
-    property bool isplayerActivePlay: playerExist ? playerActive.playbackState === MprisPlaybackState.Playing : false
+    property bool isplayerActivePlay: playerActive?.playbackState === MprisPlaybackState.Playing
     property var playerActive: {
         if (!playerExist)
             return null;
