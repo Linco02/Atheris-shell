@@ -15,9 +15,8 @@ Item {
     property string backSource: ""
 
     function mpwControler(player) {
-        // if (WallpaperService.isDesktopEmpty) player.play()
-        // else player.pause()
-        player.play()
+        if (WallpaperService.isDesktopEmpty) player.play()
+        else player.pause()
     }
 
     function wallpaperSwith() {
@@ -106,7 +105,7 @@ Item {
 
                 Connections {
                     target: WallpaperService
-                    function onIsDesktopEmpty() {
+                    function onIsDesktopEmptyChanged() {
                         mpwControler(player);
                     }
                 }

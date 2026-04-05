@@ -3,7 +3,7 @@ import qs.config
 
 Text {
     color: Colors.textSurface
-    font.pointSize: parent.height - Global.padding.normal
+    font.pixelSize: parent.height - Global.padding.small
     font.family: Global.appearance.fontFamily
     font.weight: 600
 }
