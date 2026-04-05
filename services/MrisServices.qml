@@ -56,7 +56,7 @@ Singleton {
             onRead: data => {
                 const raw = data.trim().split(";").map(n => parseInt(n) || 0)
 
-                const normalized = Array(cavaBarsCount).fill(0).map(
+                const normalized = Array(Global.appearance.cavaBarsCount).fill(0).map(
                     (_, i) => raw[i] ?? 0
                 )
                 

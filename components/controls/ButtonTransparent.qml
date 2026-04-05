@@ -4,7 +4,7 @@ import qs.config
 
 Item {
     id: root
-    width: buttonText.width + Global.padding.large
+    height: parent.height; width: height
 
     property alias text: buttonText.text
     property bool occupied: false
@@ -17,8 +17,8 @@ Item {
 
     TextStyled {
         id: buttonText
-        anchors.centerIn: parent
-        font.pixelSize: parent.height
+        anchors.centerIn: root
+        font.pixelSize: root.height
         color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
             : occupied ? Colors.textAccent
             : focused ? Colors.textInactive

@@ -4,6 +4,7 @@ import qs.components.shapes
 import qs.components.animations
 import qs.components.containers
 import qs.config
+import qs.modules.dashboard
 import "./components"
 import "./components/buttons"
 
@@ -17,40 +18,55 @@ PanelWindow {
     implicitHeight: Global.appearance.barHeight
     color: "transparent"
 
-    RectBackground {
-        anchors.fill: parent
-        radius: 0
+    Item {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+        }
+        height: parent.height; width: parent.width
+
+        RectBackground {
+            anchors.fill: parent
+            radius: 0
+        }
+
+        RowOwn {
+            anchors.left: parent.left
+            leftPadding: Global.padding.normal
+
+            PowerButton { }
+            Workspace { }
+            Taskbar { }
+        }
+
+        RowOwn {
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Clock { }
+            Music { }
+        }
+
+        RowOwn {
+            anchors.right: parent.right
+            rightPadding: Global.padding.normal
+
+            Battery { }
+            Sound { }
+            Network { }
+            Language { }
+            ControlCenterButton { }
+        }
     }
 
-    RowOwn {
-        anchors.left: parent.left
-        leftPadding: Global.padding.normal
-
-        PowerButton { }
-        Workspace { }
-        Taskbar { }
-    }
-
-    RowOwn {
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        Clock { }
-        Music { }
-    }
-
-    RowOwn {
-        anchors.right: parent.right
-        rightPadding: Global.padding.normal
-
-        Battery { }
-        Sound { }
-        Network { }
-        Language { }
-        ControlCenterButton { }
+    Loader {
+        active: true
+        sourceComponent: DashBoard {
+            panel: root
+        }
     }
 
     component RowOwn : SpacedRow {
         anchors.verticalCenter: parent.verticalCenter
-        height: parent.height - Global.padding.normal
+        height: root.height - Global.padding.normal
     }
 }

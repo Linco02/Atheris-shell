@@ -9,7 +9,7 @@ JsonObject {
     property bool isWallpaperOn: true
     property bool isRandomWallpaperOn: true
     property string wallpaperFolder: "/home/linco02/wallpapers/"
-    property var wallpaperFormat: ["video"] // "image", "anmf", "video"
+    property var wallpaperFormat: ["image", "anmf", "video"] // "image", "anmf", "video"
 
     // Блокування //
     property bool isSessionLockOn: false

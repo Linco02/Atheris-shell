@@ -151,8 +151,8 @@ Item {
         function onWallpaperChanged() {
             wallpaperReady = false
 
-            let source = WallpaperService.isWallpaperMpw
-                ? WallpaperService.wallpaperPlugMpw
+            let source = WallpaperService.isWallpaperAnimated
+                ? WallpaperService.wallpaperFrame
                 : WallpaperService.wallpaper
 
             if (backSource === "") {

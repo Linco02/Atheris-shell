@@ -1,3 +1,4 @@
+import QtQuick
 import Quickshell
 import qs.config
 import qs.modules.bar
@@ -12,5 +13,10 @@ ShellRoot {
     LazyLoader {
         active: Global.settings.isBarOn
         component: Bar {}
+    }
+
+    Loader {
+        active: Global.settings.isShortcutOn
+        sourceComponent: Shortcuts { }
     }
 }

@@ -138,6 +138,11 @@ Singleton {
         }
     }
 
+    Connections {
+        target: Global
+        function onWallpaperCurrentChanged() { wallpaperChange(Global.wallpaperCurrent) }
+    }
+
     // property var wallparersList: []
     // property string wallpaperSelected: ""
     // property string wallpaper: ""

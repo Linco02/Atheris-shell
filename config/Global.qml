@@ -10,9 +10,12 @@ Singleton {
     readonly property var margine: appearance.margine
     readonly property var settings: Config.settings
 
+    // Power
+    property bool isPowerOpen: false
+
     // ControlCenter
     property bool isDashboardOpen: false
-    property string isDashboardModule: "dashboard"
+    property string isDashboardModule: "wallpaper"
 
     // Wallpaper
     property string wallpaperCurrent: "file:///home/linco02/wallpapers/b-003.jpg"
