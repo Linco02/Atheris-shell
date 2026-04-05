@@ -15,11 +15,9 @@ Item {
     property string backSource: ""
 
     function mpwControler(player) {
-        if (WallpaperService.isWallPlay) {
-            player.play()
-        } else {
-            player.pause()
-        }
+        // if (WallpaperService.isDesktopEmpty) player.play()
+        // else player.pause()
+        player.play()
     }
 
     function wallpaperSwith() {
@@ -38,7 +36,7 @@ Item {
             anchors.fill: parent
             sourceComponent: {
                 let type = WallpaperService.wallpaperFormat(backSource);
-                if (type === "img") return imageComp;
+                if (type === "image") return imageComp;
                 if (type === "anmf") return anmfComp;
                 if (type === "video") return videoComp;
             }
@@ -108,7 +106,7 @@ Item {
 
                 Connections {
                     target: WallpaperService
-                    function onIsWallPlayChanged() {
+                    function onIsDesktopEmpty() {
                         mpwControler(player);
                     }
                 }
