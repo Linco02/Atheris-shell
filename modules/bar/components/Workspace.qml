@@ -28,7 +28,7 @@ RectForeground {
                     : "transparent"
 
                 property bool isFocused: workspaceFocused === index + 1
-                property bool isOccupied: workspaceOccupied[index]
+                property bool isOccupied: workspaceOccupied[index] || false
                 property bool leftRad: isOccupied && (index > 0 && workspaceOccupied[index - 1]) === true
                 property bool rightRad: isOccupied && (index < workspaceOccupied.length - 1 && workspaceOccupied[index + 1]) === true
 
@@ -55,7 +55,7 @@ RectForeground {
 
             Item {
                 property bool isFocused: workspaceFocused === index + 1
-                property bool isOccupied: workspaceOccupied[index]
+                property bool isOccupied: workspaceOccupied[index] || false
                 height: root.height; width: 50
 
                 TextStyledH {
