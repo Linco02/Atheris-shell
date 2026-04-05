@@ -1,6 +1,5 @@
 import QtQuick
 import qs.components
-import qs.components.animations
 import qs.config
 
 Item {
@@ -24,8 +23,6 @@ Item {
             : occupied ? Colors.textAccent
             : focused ? Colors.textInactive
             : Colors.textSurface
-
-        Behavior on color { ColorAnim { } }
     }
 
     MouseFill {

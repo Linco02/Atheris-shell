@@ -20,7 +20,7 @@ RectForeground {
         Repeater {
             model: workspaceExist
 
-            Rect {
+            Rectangle {
                 height: root.height; width: 50
                 topLeftRadius: leftRad ? 0 : cornerRadius; bottomLeftRadius: leftRad ? 0 : cornerRadius
                 topRightRadius: rightRad ? 0 : cornerRadius; bottomRightRadius: rightRad ? 0 : cornerRadius
@@ -43,11 +43,9 @@ RectForeground {
         }
     }
 
-    Rect {
+    RectActive {
         height: root.height; width: 50
         x: workspaceFocused > 0 ? (workspaceFocused - 1) * 50 : 0
-        color: Colors.active
-
         Behavior on x { NumberAnim {} }
     }
 

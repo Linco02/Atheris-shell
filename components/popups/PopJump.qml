@@ -1,0 +1,213 @@
+import QtQuick
+import QtQuick.Shapes
+import Quickshell
+import Quickshell.Widgets
+import qs.config
+import qs.components.animations
+import qs.components
+
+PopupWindow {
+    id: root
+    visible: false
+    color: "transparent"
+
+    default property alias contents: innerContainer.data
+    property real percent: 0
+    property int rad: Appearance.radius.large
+    signal popClosed()
+
+    function switchMenu() {
+        if (root.visible) {
+            stateManager.state = "close"
+        } else {
+            visible = true
+            stateManager.state = "open"
+        }
+    }
+
+    function openMenu() { stateManager.state = "open"; visible = true }
+    function closeMenu() { stateManager.state = "close"; popClosed() }
+
+    mask: Region {
+        x: box.x
+        y: box.y
+        width: box.width
+        height: box.height
+    }
+
+    Timer {
+        id: time
+        interval: 100
+        onTriggered: { closeMenu() }
+    }
+
+    Item {
+        id: stateManager
+        state: "close"
+
+        states: [
+            State {
+                name: "close"
+                PropertyChanges {
+                    target: box
+                    y: - box.height
+                }
+                PropertyChanges { target: root; percent: 0 }
+            },
+            State {
+                name: "open"
+                PropertyChanges {
+                    target: box
+                    y: 0
+                }
+                PropertyChanges { target: root; percent: 1 }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from: "open"; to: "close"
+                SequentialAnimation {
+                    ParallelAnimation {
+                        NumberAnim { property: "y" }
+                        NumberAnim { property: "percent" }
+                    }
+                    PropertyAction {
+                        target: root
+                        property: "visible"
+                        value: false
+                    }
+                }
+            },
+            Transition {
+                from: "close"; to: "open"
+                ParallelAnimation {
+                    NumberAnim { property: "y" }
+                    NumberAnim { property: "percent" }
+                }
+            }
+        ]
+    }
+
+    RectBackground {
+        id: box
+        anchors {
+            horizontalCenter: (rotate === 0 || rotate === 180) ? parent.horizontalCenter : undefined
+            verticalCenter: (rotate === 90 || rotate === 270) ? parent.verticalCenter : undefined
+            // leftMargin: (rotate === 90 || rotate === 270) ? (height - width) / 2 : 0
+            // rightMargin: (rotate === 90 || rotate === 270) ? (height - width) / 2 : 0
+        }
+        height: ( rotate === 0 || rotate === 180 ) ?
+            container.height + Appearance.padding.normal :
+            container.width + Appearance.padding.normal
+        width: ( rotate === 0 || rotate === 180) ?
+            container.width + Appearance.padding.large :
+            container.height + Appearance.padding.large
+        topLeftRadius: rad; topRightRadius: rad
+        bottomLeftRadius: 0; bottomRightRadius: 0
+        rotation: rotate
+
+        HoverHandler {
+            onHoveredChanged: {
+                if(!hovered) {
+                    time.start()
+                } else {
+                    time.stop()
+                    if(stateManager.state != "open") {
+                        stateManager.state = "open"
+                    }
+                }
+            }
+        }
+
+        ClippingRectangle {
+            id: container
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+            rotation: (360 - rotate) % 360
+            height: innerContainer.height
+            width: innerContainer.width
+            color: "transparent"
+            radius: rad - Appearance.spacing.normal
+
+            Item {
+                id: innerContainer
+                anchors {
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
+                height: childrenRect.height
+                width: childrenRect.width
+            }
+
+            Behavior on width { NumberAnim { } }
+            Behavior on height { NumberAnim { } }
+        }
+    }
+
+    Item {
+        id: corners
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
+        height: rad
+        width: box.width + rad * 2
+        rotation: rotate
+        y: 200
+
+        Shape {
+            id: leftCorner
+            height: rad; width: rad
+            anchors {
+                left: parent.left
+                bottom: parent.bottom
+            }
+            layer {
+                enabled: true
+                samples: 4
+            }
+
+            ShapePath {
+                strokeWidth: 0
+                fillColor: Colors.surface
+                startY: rad; startX: 0
+                PathArc {
+                    y: rad - rad * percent; x: rad
+                    radiusY: rad; radiusX: rad;
+                    direction: PathArc.Counterclockwise
+                    useLargeArc: false
+                }
+                PathLine { y: rad; x: rad; }
+                PathLine { y: rad; x: 0 }
+            }
+        }
+
+        Shape {
+            height: rad; width: rad
+            anchors {
+                right: parent.right
+                bottom: parent.bottom
+            }
+            layer {
+                enabled: true
+                samples: 4
+            }
+
+            ShapePath {
+                strokeWidth: 0
+                fillColor: Colors.surface
+                startY: rad; startX: rad
+                PathArc {
+                    y: rad - rad * percent; x: 0 
+                    radiusY: rad; radiusX: rad
+                    useLargeArc: false
+                }
+                PathLine { y: rad; x: 0 }
+                PathLine { y: rad; x: rad }
+            }
+        }
+    }
+}

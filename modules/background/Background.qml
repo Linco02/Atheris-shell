@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Wayland
+import qs.components.animations
 import qs.config
 import QtQuick
 
@@ -22,4 +23,6 @@ PanelWindow {
             Wallpaper {}
         }
     }
+
+    Behavior on color { ColorAnim { } }
 }

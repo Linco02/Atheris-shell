@@ -1,6 +1,7 @@
 import QtQuick
 import qs.components
 import qs.components.shapes
+import qs.components.animations
 import qs.config
 
 RectForeground {
