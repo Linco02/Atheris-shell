@@ -14,7 +14,7 @@ PopJump {
         active: Global.isDashboardOpen
         source: {
             switch(Global.isDashboardModule) {
-                case "dashboard": return "DashWraper.qml";
+                case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
             }

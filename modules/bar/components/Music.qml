@@ -19,7 +19,7 @@ RectForeground {
     property bool isTextFit: firstText.width > trackNameContainer.width
 
     onIsPlayerPlayChanged: {
-        if (isPlayerPlay) {
+        if (isPlayerPlay || playerExist) {
             root.state = "open"
         } else {
             root.state = "close"

@@ -12,7 +12,7 @@ import qs.components.animations
 
 Item {
     height: imageHeight * rowNum + Global.spacing.normal * (rowNum - 1)
-    width: imageWidth * colNum + Global.spacing.normal * (colNum - 1) + 10
+    width: imageWidth * colNum + Global.spacing.normal * (colNum - 1)
 
     property int imageHeight: 135
     property int imageWidth: 240

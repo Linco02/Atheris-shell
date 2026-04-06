@@ -1,29 +1,16 @@
 import QtQuick
-import qs.components.controls
+import qs.components
+import qs.components.shapes
 import qs.config
-// import qs.modules.dashboard
 import qs.services
 
-ButtonStyled {
+RectForeground {
     height: root.height - Global.padding.normal
-    text: "test"
-    onLeftClicked: console.log("yes")
-
-    Connections {
-        target: Time
-        function onTime(data) {
-            text = data
-        }
+    width: clock.width + Global.padding.large
+    
+    TextStyledH {
+        id: clock
+        anchors.centerIn: parent
+        text: TimeServices.time
     }
 }
-
-//     // DashBoard {
-//     //     id: controlCenter
-//     // }
-
-
-//     //     onClicked: {
-//     //         let target = "dashboard"
-//     //         GlobalStates.isDashboardOpen = (GlobalStates.isDashboardModule === target) ? !GlobalStates.isDashboardOpen : true
-//     //         GlobalStates.isDashboardModule = target
-//     //     }

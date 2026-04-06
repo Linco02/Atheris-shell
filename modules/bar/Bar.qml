@@ -4,7 +4,7 @@ import qs.components.shapes
 import qs.components.animations
 import qs.components.containers
 import qs.config
-import qs.modules.dashboard
+import qs.modules.commandcenter
 import "./components"
 import "./components/buttons"
 
@@ -60,7 +60,7 @@ PanelWindow {
 
     Loader {
         active: true
-        sourceComponent: DashBoard {
+        sourceComponent: CommandCenter {
             panel: root
         }
     }

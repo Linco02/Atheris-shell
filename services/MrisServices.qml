@@ -23,6 +23,7 @@ Singleton {
         else
             return player[0];
     }
+    property real playerActiveProgres: 0
     property var cavaBarsData: Array(Global.appearance.cavaBarsCount).fill(0)
 
     function nextMris(player) {
@@ -62,6 +63,14 @@ Singleton {
                 
                 cavaBarsData = normalized
             }
+        }
+    }
+
+    Connections {
+        target: Tick1s
+        enabled: playerExist
+        function onTick() {
+            playerActiveProgres = playerActive.position / playerActive.length
         }
     }
 }

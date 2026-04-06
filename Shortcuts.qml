@@ -9,11 +9,11 @@ Item {
         Global.isDashboardModule = target
     }
 
-    // GlobalShortcut {
-    //     name: "dashboard_menu"
-    //     description: "Відкрити дошку"
-    //     onPressed: openDashboard("dashboard")
-    // }
+    GlobalShortcut {
+        name: "dashboard_menu"
+        description: "Відкрити дошку"
+        onPressed: openDashboard("dashboard")
+    }
 
     GlobalShortcut {
         name: "wallpaper_selector"
