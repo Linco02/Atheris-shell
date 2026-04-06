@@ -43,7 +43,7 @@ Singleton {
 
     function wallpaperChange(wall) {
         let path = wall.toString().toLowerCase();
-        if (wallpaperFormat(wall) === 1) {
+        if (wallpaperFormat(wall) === "image") {
             isWallpaperAnimated = false
             wallpaper = wall
         } else {

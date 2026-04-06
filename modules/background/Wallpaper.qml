@@ -8,16 +8,11 @@ import qs.services
 Item {
     id: root
     anchors.fill: parent
-    
-    property bool wallpaperReady: false
-    property bool animationEnd: false
+
     property string forwardSource: ""
     property string backSource: ""
-
-    function mpwControler(player) {
-        if (WallpaperService.isDesktopEmpty) player.play()
-        else player.pause()
-    }
+    property bool wallpaperReady: false
+    property bool animationEnd: false
 
     function wallpaperSwith() {
         if (wallpaperReady && animationEnd) {
@@ -62,7 +57,7 @@ Item {
             AnimatedImage {
                 anchors.fill: parent
                 source: backSource
-                playing: isWallPlay
+                playing: WallpaperService.isDesktopEmpty
 
                 property int frame: 0
                 onPlayingChanged: {
@@ -85,6 +80,11 @@ Item {
             id: videoComp
             Item {
                 anchors.fill: parent
+
+                function mpwControler(player) {
+                    if (WallpaperService.isDesktopEmpty) player.play()
+                    else player.pause()
+                }
 
                 MediaPlayer {
                     id: player
@@ -162,7 +162,7 @@ Item {
                 forward.state = "change"
             }
             
-            Palit.palitCreate(source)
+            PalitServices.palitCreate(source)
         }
     }
 

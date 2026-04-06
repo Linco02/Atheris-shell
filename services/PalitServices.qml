@@ -10,13 +10,15 @@ Singleton {
     property var test: []
 
     function palitCreate(path) {
-        paliCreator.command = [
-            "matugen",
-            "image",
-            "--source-color-index", "0",
-            WallpaperService.wallpaperRawPath(path)
-        ]
-        paliCreator.running = Global.settings.isPalitOn
+        if (Global.settings.isPalitOn) {
+            paliCreator.command = [
+                "matugen",
+                "image",
+                "--source-color-index", "0",
+                WallpaperService.wallpaperRawPath(path)
+            ]
+            paliCreator.running = Global.settings.isPalitOn
+        }
     }
 
     Process {
