@@ -13,7 +13,7 @@ JsonObject {
     // hover ефект
     property real hover: 1.5
     // Задній фон
-    property real opacity: 0.8
+    property real opacity: 1
     property bool glassEfect: true
     // розмір панелі
     property real barHeight: 34 * scale
