@@ -6,7 +6,7 @@ import qs.config
 
 RectForeground {
     id: root
-    width: buttonIcon.width + Global.padding.normal
+    height: parent.height; width: height
     color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
         : occupied ? Colors.active
         : focused ? Colors.inactive
@@ -26,7 +26,7 @@ RectForeground {
     IconImage {
         id: buttonIcon
         anchors.centerIn: parent
-        implicitSize: root.height - Global.padding.mini * 2
+        implicitSize: root.height - Global.padding.mini + 2
     }
 
     MouseFill {

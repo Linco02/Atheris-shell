@@ -12,7 +12,7 @@ import qs.components.animations
 
 Item {
     height: imageHeight * rowNum + Global.spacing.normal * (rowNum - 1)
-    width: imageWidth * colNum + Global.spacing.normal * (colNum - 1)
+    width: imageWidth * colNum + Global.spacing.normal * (colNum - 1) + 10
 
     property int imageHeight: 135
     property int imageWidth: 240
@@ -44,80 +44,67 @@ Item {
                     height: imageHeight; width: imageWidth
                     border {
                         width: 2
-                        color: Colors.inactive
+                        color: hover.hovered ? Colors.active : Colors.inactive
+
+                        Behavior on color { ColorAnim { } }
                     }
 
                     property string type: WallpaperService.wallpaperFormat(modelData)
 
+                    Item {
+                        anchors.fill: parent
+                        OwnImage { source: type === "image" ? modelData : WallpaperService.wallpaperTempPath(modelData)}
+                        OwnText { text: type === "image" ? "" : type === "anmf" ? "󰪐" : "" }
+                    }
+
                     Loader {
                         id: loaderComponent
                         anchors.fill: parent
+                        active: type !== "image"
                         sourceComponent: {
-                            if (type === "image") return imageComp;
                             if (type === "anmf") return anmfComp;
                             if (type === "video") return videoComp;
                         }
                     }
 
                     Component {
-                        id: imageComp
-                        Item {
-                            anchors.fill: parent
-                            OwnImage { source: modelData }
-                            OwnText { text: "" }
-                        }
-                    }
-
-                    Component {
                         id: anmfComp
-                        Item {
-                            AnimatedImage {
-                                anchors.fill: parent
-                                source: modelData
-                            }
-                            OwnText { text: "󰪐" }
+                        AnimatedImage {
+                            id: anmf
+                            anchors.fill: parent
+                            source: modelData
+                            playing: hover.hovered ? true : false
                         }
                     }
 
                     Component {
                         id: videoComp
-                        Item {
+                        VideoOutput {
+                            id: videoOutput
+                            anchors.fill: parent
+                            fillMode: VideoOutput.PreserveAspectCrop
+
                             property alias videoSurface: videoOutput
 
-                            OwnImage { source: WallpaperService.wallpaperTempPath(modelData) }
-                            VideoOutput {
-                                id: videoOutput
-                                anchors.fill: parent
-                                fillMode: VideoOutput.PreserveAspectCrop
+                            Connections {
+                                target: hover
+                                function onHoveredChanged() {
+                                    if (hover.hovered) {
+                                        player.stop()
+                                        player.source = modelData
+                                        player.videoOutput = loaderComponent.item.videoSurface
+                                        player.play()
+                                    } else {
+                                        player.stop()
+                                        player.videoOutput = null
+                                    }
+                                }
                             }
-                            OwnText { text: "" }
                         }
                     }
 
-                    MouseFill {
-                        hoverEnabled: true
-                        onEntered: {
-                            brick.border.color = Colors.active
-
-                            if (type === "video") {
-                                player.stop()
-                                player.source = modelData
-                                player.videoOutput = loaderComponent.item.videoSurface
-                                player.play()
-                            }
-                        }
-                        onExited: {
-                            brick.border.color = Colors.inactive
-
-                            if (type === "video") {
-                                player.stop()
-                                player.videoOutput = null
-                            }
-                        }
-                        onClicked: Global.wallpaperCurrent = modelData
-                    }
-
-                    Behavior on border.color { ColorAnim { } }
+                    HoverHandler { id: hover }
+                    TapHandler { onTapped: Global.wallpaperCurrent = modelData }
                 }
             }
         }
