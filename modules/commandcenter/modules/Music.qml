@@ -45,7 +45,7 @@ Item {
 
         RectForeground {
             id: music
-            height: root.height; width: 500
+            height: root.height; width: 400
 
             Column {
                 anchors.centerIn: parent
@@ -72,22 +72,6 @@ Item {
                         }
                     }
                 }
-
-                // RectClip {
-                //     anchors.horizontalCenter: parent.horizontalCenter
-                //     height: music.height / 2; width: height
-                //     radius: height / 2
-
-                //     RectInactive {
-                //         anchors.fill: parent
-
-                //         Image {
-                //             anchors.fill: parent
-                //             source: playerExist ? playerActive.trackArtUrl : ""
-                //             fillMode: Image.PreserveAspectCrop
-                //         }
-                //     }
-                // }
 
                 Column {
                     TextOwn { text: playerActive?.trackTitle ?? "..."}
