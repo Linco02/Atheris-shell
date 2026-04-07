@@ -5,8 +5,7 @@ import qs.config
 import "./components"
 
 Item {
-    implicitHeight: container.height
-    implicitWidth: container.width
+    height: container.height; width: container.width
 
     property int brick: 100
 

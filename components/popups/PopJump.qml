@@ -78,6 +78,7 @@ PopupWindow {
             height: container.height + Global.padding.normal
             width: container.width + Global.padding.large
             topLeftRadius: 0; topRightRadius: 0
+            bottomLeftRadius: rad; bottomRightRadius: rad
         }
 
         RectClip {
@@ -112,12 +113,12 @@ PopupWindow {
                         NumberAnim { property: "y" }
                         NumberAnim { property: "percent" }
                     }
-                    PropertyAction {
-                        target: root
-                        property: "visible"
-                        value: false
+                    ScriptAction {
+                        script: {
+                            closedPop()
+                            root.visible = false
+                        }
                     }
-                    ScriptAction { script: closedPop() }
                 }
             },
             Transition {

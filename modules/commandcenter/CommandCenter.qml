@@ -6,18 +6,32 @@ PopJump {
     id: dashboard
     containerH: mainLoader.height
     containerW: mainLoader.width
-    isOpen: Global.isDashboardOpen
-    onClosedPop: {Global.isDashboardOpen = false}
+    isOpen: Global.isControlCenterOpen
+    onClosedPop: {
+        Global.isControlCenterOpen = false
+        mainLoader.active = false
+    }
 
     Loader {
         id: mainLoader
-        active: Global.isDashboardOpen
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
+        active: Global.isControlCenterOpen
         source: {
-            switch(Global.isDashboardModule) {
+            switch(Global.controlCenterModul) {
                 case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
             }
+        }
+    }
+
+    Connections {
+        target: Global
+        function onIsControlCenterOpenChanged() {
+            if (Global.isControlCenterOpen) mainLoader.active = true
         }
     }
 }

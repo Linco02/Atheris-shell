@@ -9,10 +9,12 @@ RectForeground {
     id: root
 
     Row {
+        id: weather
         anchors.centerIn: parent
         spacing: Global.spacing.normal
 
         IconImage {
+            anchors.verticalCenter: parent.verticalCenter
             source: WeatherServices.weatherIcom
             implicitSize: root.height / 2
         }
@@ -28,8 +30,10 @@ RectForeground {
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
+                width: root.width / 2
                 font.pointSize: root.height / 10 || 20
                 text: WeatherServices.description
+                wrapMode: Text.Wrap
             }
         }
     }

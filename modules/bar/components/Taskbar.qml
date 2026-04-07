@@ -19,7 +19,7 @@ RectForeground {
             model: ToplevelManager.toplevels
             delegate: ButtonIcon {
                 height: root.height
-                source: AppIcons.getIcon(modelData.appId)
+                source: modelData.appId
                 onLeftClicked: modelData.activate()
                 onMidleClicked: modelData.close()
                 occupied: modelData.activated

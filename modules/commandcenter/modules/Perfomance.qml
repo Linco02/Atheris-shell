@@ -1,46 +1,40 @@
 import QtQuick
-import qs.config
 import qs.components
-import "./../components"
+import qs.components.shapes
+import qs.components.containers
+import qs.components.indicators
+import qs.config
+import qs.services
+import "./components"
 
 Item {
-    implicitHeight: perfomanceBox.height
-    implicitWidth: perfomanceBox.width
+    id: root
+    height: perfomanceContainer.height; width: perfomanceContainer.width
 
-    Column {
-        id: perfomanceBox
+    ColumnSpaced {
+        id: perfomanceContainer
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: Appearance.padding.normal
 
-        Row {
+        RowSpaced {
             id: box1
-            spacing: Appearance.padding.normal
 
-            PerfomanceGliph {
-                id: gpuInfo
-                property string info3: "GPU"
-            }
-
-            PerfomanceGliph {
-                property string info3: "CPU"
-            }
-
-            PerfomanceGliph {
-                property string info3: "MEM"
-            }
+            PerfomanceUsage { type: 0 }
+            PerfomanceUsage { type: 1 }
+            PerfomanceUsage { type: 2 }
         }
         
-        Column {
-            id: box2
-            spacing: Appearance.padding.normal
+        ColumnSpaced {
+            Repeater {
+                model: PerfomanceServices.disks
 
-            SpaceGliph {
-                height: 60; width: box1.width
+                delegate: DiskUsage {
+                    height: 44; width: root.width
+                    name: modelData.name
+                    load: modelData.total - modelData.avail
+                    empty: modelData.avail
+                    percent: modelData.percent
+                }
             }
-
-            // SpaceGliph {
-            //     height: 60; width: perfomanceBox.width
-            // }
         }
     }
 }

@@ -13,9 +13,10 @@ Singleton {
     // Power
     property bool isPowerOpen: false
 
-    // ControlCenter
-    property bool isDashboardOpen: false
-    property string isDashboardModule: "wallpaper"
+    // ControlCenter wallpaper/dashboard
+    property bool isControlCenterOpen: false
+    property string controlCenterModul: "dashboard"
+    property string dashboardModul: "dash"
 
     // Wallpaper
     property string wallpaperCurrent: "file:///home/linco02/wallpapers/b-003.jpg"

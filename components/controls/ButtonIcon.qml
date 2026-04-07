@@ -3,6 +3,7 @@ import Quickshell.Widgets
 import qs.components
 import qs.components.shapes
 import qs.config
+import qs.services
 
 RectForeground {
     id: root
@@ -13,8 +14,7 @@ RectForeground {
         : Colors.surfaceRaised
 
     property alias iconSize: buttonIcon.implicitSize
-    property alias source: buttonIcon.source
-    property alias acceptedButtons: buttonReaction.acceptedButtons
+    property string source: ""
     property bool occupied: false
     property bool focused: false
     property bool isHovered: false
@@ -26,6 +26,7 @@ RectForeground {
     IconImage {
         id: buttonIcon
         anchors.centerIn: parent
+        source: AppIcons.getIcon(root.source)
         implicitSize: root.height - Global.padding.mini + 2
     }
 

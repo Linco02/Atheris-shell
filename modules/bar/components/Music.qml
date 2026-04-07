@@ -12,19 +12,12 @@ RectForeground {
     id: root
     visible: false
     height: parent.height; width: musicContainer.width
+    state: playerExist ? "open" : "close"
 
     property var playerActive: MrisServices.playerActive
     property bool playerExist: MrisServices.playerExist
     property bool isPlayerPlay: MrisServices.isplayerActivePlay
     property bool isTextFit: firstText.width > trackNameContainer.width
-
-    onIsPlayerPlayChanged: {
-        if (isPlayerPlay || playerExist) {
-            root.state = "open"
-        } else {
-            root.state = "close"
-        }
-    }
 
     SpacedRow {
         id: musicContainer
@@ -63,7 +56,7 @@ RectForeground {
 
                 SequentialAnimation on x {
                     id: runningText
-                    running: isTextFit
+                    running: isTextFit && isPlayerPlay
                     loops: Animation.Infinite
 
                     PauseAnimation { duration: 5000 }
@@ -74,6 +67,14 @@ RectForeground {
                         easing.type: Easing.Linear
                         duration: 10000
                     }
+                }
+            }
+
+            TapHandler {
+                onTapped: {
+                    Global.dashboardModul = "music"
+                    Global.controlCenterModul = "dashboard"
+                    Global.isControlCenterOpen = !Global.isControlCenterOpen
                 }
             }
 
@@ -97,7 +98,6 @@ RectForeground {
                 width: 0
             }
         },
-
         State {
             name: "open"
             PropertyChanges {
@@ -117,7 +117,6 @@ RectForeground {
                 NumberAnim { property: "opacity" }
             }
         },
-
         Transition {
             from: "open"; to: "close"
             SequentialAnimation {

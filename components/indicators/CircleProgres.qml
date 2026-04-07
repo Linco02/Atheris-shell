@@ -9,12 +9,13 @@ Item {
 
     property real progres: 0
     property int progresW: 10
+    property int angleStart: 90
+    property int angleEnd: 360
 
-    ProgressBar { progresWidth: progresW }
+    ProgressBar { }
     ProgressBar {
         progresColor: Colors.active
         progresBar: progres
-        progresWidth: progresW
     }
 
     component ProgressBar: Shape {
@@ -26,19 +27,18 @@ Item {
         }
 
         property color progresColor: Colors.inactive
-        property int progresWidth: 10
         property real progresBar: 1
 
         ShapePath {
             fillColor: "transparent"
             strokeColor: progresColor
-            strokeWidth: progresWidth
+            strokeWidth: progresW
             capStyle: ShapePath.RoundCap
 
             PathAngleArc {
                 centerX: root.width / 2; centerY: centerX
-                radiusX: root.width / 2 - progresWidth / 2; radiusY: radiusX
-                startAngle: 90; sweepAngle: 360 * progresBar
+                radiusX: root.width / 2 - progresW / 2; radiusY: radiusX
+                startAngle: angleStart; sweepAngle: angleEnd * progresBar
 
                 Behavior on sweepAngle { NumberAnim {} }
             }

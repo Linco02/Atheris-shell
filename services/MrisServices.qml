@@ -9,7 +9,7 @@ import QtQuick
 Singleton {
     property var player: Mpris.players.values
     property bool playerExist: player.length > 0 ? true : false
-    property bool isplayerActivePlay: playerActive?.playbackState === MprisPlaybackState.Playing
+    property bool isplayerActivePlay: checkIsPlaying(playerActive)
     property var playerActive: {
         if (!playerExist)
             return null;
@@ -25,6 +25,10 @@ Singleton {
     }
     property real playerActiveProgres: 0
     property var cavaBarsData: Array(Global.appearance.cavaBarsCount).fill(0)
+
+    function checkIsPlaying(p) {
+        return p.playbackState === MprisPlaybackState.Playing ?? false
+    }
 
     function nextMris(player) {
         player.next()
@@ -47,8 +51,8 @@ Singleton {
     }
 
     Process {
-        id: cavaData
-        running: Global.isDashboardOpen
+        id: radialBars
+        running: Global.isControlCenterOpen && Global.dashboardModul === "music"
         command: [
             "sh", "-c", "cava -p ~/Atheris-shell/assets/cava.ini"
         ]

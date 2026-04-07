@@ -14,101 +14,87 @@ Column {
     property int space: Global.spacing.normal
     property int gap: 60
 
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: Global.spacing.large
+   
+        ButtonOwn {
+            btnText: "󰼄"
+            onClicked: Global.dashboardModul = "music"
+        }
+        ButtonOwn {
+            btnText: "󰨝"
+            onClicked: Global.dashboardModul = "dash"
+        }
+        ButtonOwn {
+            btnText: ""
+            onClicked: Global.dashboardModul = "performance"
+        }
+    }
+
+    RectForeground {
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: 2
+        width: widgetRow.width
+    }
+
     Rect {
         id: widgetRow
         anchors.horizontalCenter: parent.horizontalCenter
-        height: page2.height; width: page2.width
+        height: dash.height; width: dash.width
         clip: true
-        // state: "page2"
+        state: Global.dashboardModul
 
         Row {
             id: pages
             spacing: gap
             x: 0
             
-            // Music { id: page1 }
-            Dash { id: page2 }
-            // Perfomance { id: page3 }
+            Music { id: music }
+            Dash { id: dash }
+            Perfomance { id: performance }
 
             Behavior on x { NumberAnim { } }
         }
 
-        // states: [
-            // State {
-            //     name: "page1"
-            //     PropertyChanges {
-            //         target: widgetRow
-            //         height: page1.height; width: page1.width
-            //     }
-            //     PropertyChanges { target: pages; x: 0 }
-            // },
-            // State {
-            //     name: "page2"
-            //     PropertyChanges {
-            //         target: widgetRow
-            //         height: page2.height; width: page2.width
-            //     }
-            //     PropertyChanges { target: pages; x: - gap - page1.width }
-            // }
-            // State {
-            //     name: "page3"
-            //     PropertyChanges {
-            //         target: widgetRow
-            //         height: page3.height; width: page3.width
-            //     }
-            //     PropertyChanges { target: pages; x: - gap * 2 - page1.width - page2.width }
-            // }
-        // ]
+        states: [
+            State {
+                name: "music"
+                PropertyChanges {
+                    target: widgetRow
+                    height: music.height; width: music.width
+                }
+                PropertyChanges { target: pages; x: 0 }
+            },
+            State {
+                name: "dash"
+                PropertyChanges {
+                    target: widgetRow
+                    height: dash.height; width: dash.width
+                }
+                PropertyChanges { target: pages; x: - gap - music.width }
+            },
+            State {
+                name: "performance"
+                PropertyChanges {
+                    target: widgetRow
+                    height: performance.height; width: performance.width
+                }
+                PropertyChanges { target: pages; x: - gap * 2 - music.width - dash.width }
+            }
+        ]
     }
 
-    // Item {
-    //     id: navigation
-    //     anchors.horizontalCenter: parent.horizontalCenter
-    //     height: switchNavigation.height
-    //     width: switchNavigation.width + space
+    component ButtonOwn: Item {
+        height: 40; width: height
 
-    //     Row {
-    //         id: switchNavigation
-    //         anchors.centerIn: parent
-    //         spacing: navigation.height * 3 / 2
+        property string btnText: ""
+        signal clicked()
 
-    //         Item {
-    //             height: 40; width: height
-
-    //             TextStyledH {
-    //                 anchors.centerIn: parent
-    //                 text: "󰼄"
-    //             }
-    //             MouseFill { onClicked: widgetRow.state = "page1" }
-    //         }
-
-    //         Item {
-    //             height: 40; width: height
-
-    //             TextStyledH {
-    //                 anchors.centerIn: parent
-    //                 text: "󰨝"
-    //             }
-    //             MouseFill { onClicked: widgetRow.state = "page2" }
-    //         }
-
-    //         Item {
-    //             height: 40; width: height
-
-    //             TextStyledH {
-    //                 anchors.centerIn: parent
-    //                 text: ""
-    //             }
-    //             MouseFill { onClicked: widgetRow.state = "page3" }
-    //         }
-    //     }
-    // }
-
-    // RectForeground {
-    //     anchors.horizontalCenter: parent.horizontalCenter
-    //     height: 2
-    //     width: widgetRow.width
-    // }
-
-
+        TextStyledH {
+            anchors.centerIn: parent
+            text: btnText
+        }
+        TapHandler { onTapped: clicked() }
+    }
 }

@@ -9,11 +9,13 @@ Singleton {
     property var cpu: [0, 0, 0]
     property var gpu: [0, 0, 0]
     property var mem: [0, 0, 0]
+    property var disks: []
 
     function runPerfomance() {
         gpuPerfomance.running = true
         cpuPerfomance.running = true
         memPerfomance.running = true
+        diskUsage.running = true
     }
 
     Process {
@@ -24,7 +26,7 @@ Singleton {
                     "sh", "-c",
                     "cat /sys/class/drm/card1/device/gpu_busy_percent" +
                     "&&" +
-                    "awk 'NR == 1 { idle = $5 + $6; total = 0; for (i=2; i<=9; i++) total += $i; print idle, total}' /proc/stat && cat $(grep -rl 'coretemp\\|k10temp' /sys/class/hwmon/hwmon*/name | head -1 | xargs dirname)/temp1_input"
+                    "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input"
                 ]
             } else if (gpuType === "nvidia") {
                 return [
@@ -104,6 +106,38 @@ Singleton {
 
                 mem = [percent, load, free]
             }        
+        }
+    }
+
+    Process {
+        id: diskUsage
+        running: true
+        command: [
+            "sh", "-c", 
+            "df -h --output=source,size,avail,pcent | awk 'NR>1 && $1~/^\\/dev/ && $2~/G/ && int($2)>=10'"
+        ]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var lines = this.text.trim().split("\n");
+                var result = [];
+                
+                for (var i = 0; i < lines.length; i++) {
+                    if (lines[i].trim() === "") continue;
+                    
+                    var p = lines[i].trim().split(/\s+/);
+                    
+                    if (p.length >= 4) {
+                        result.push({
+                            "name": p[0].replace("/dev/", ""),
+                            "total": parseInt(p[1].replace("G", "")),
+                            "avail": parseInt(p[2].replace("G", "")),
+                            "percent": parseInt(p[3].replace("%", "")) / 100
+                        });
+                    }
+                }
+                disks = result;
+            }
         }
     }
 

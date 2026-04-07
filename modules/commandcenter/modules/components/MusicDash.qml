@@ -1,14 +1,10 @@
 import QtQuick
-import QtQuick.Shapes
 import QtQuick.Controls
-import Quickshell.Widgets
-import Quickshell.Services.Mpris
+import qs.components
+import qs.components.shapes
+import qs.components.indicators
 import qs.config
 import qs.services
-import qs.components.animations
-import qs.components.indicators
-import qs.components.shapes
-import qs.components
 
 RectForeground {
     id: root
@@ -86,8 +82,6 @@ RectForeground {
                 anchors.centerIn: parent
                 text: btn.text
                 font.pixelSize: btn.height
-
-                Behavior on color { ColorAnim { } }
             }
         }
     }
