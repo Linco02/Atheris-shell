@@ -14,12 +14,15 @@ RectForeground {
     Row {
         id: programsRow
         anchors.centerIn: parent
+        spacing: 5
+        leftPadding: 5; rightPadding: 5
 
         Repeater {
             model: ToplevelManager.toplevels
             delegate: ButtonIcon {
-                height: root.height
                 source: modelData.appId
+                height: root.height
+                iconSize: root.height - Global.padding.mini * 2
                 onLeftClicked: modelData.activate()
                 onMidleClicked: modelData.close()
                 occupied: modelData.activated

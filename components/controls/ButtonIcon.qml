@@ -7,7 +7,7 @@ import qs.services
 
 RectForeground {
     id: root
-    height: parent.height; width: height
+    height: iconSize; width: height
     color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
         : occupied ? Colors.active
         : focused ? Colors.inactive
