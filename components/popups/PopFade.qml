@@ -38,6 +38,7 @@ PopupWindow {
         id: box
         y: Global.padding.normal
         height: back.height; width: back.width
+        state: "close"
         anchors {
             left: isLeft ? parent.left : undefined
             right: !isLeft ? parent.right : undefined
