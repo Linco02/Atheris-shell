@@ -11,16 +11,19 @@ Singleton {
     readonly property var settings: Config.settings
 
     // Popups
-    property bool isAnythingOpen: isPowerOpen || isControlCenterOpen
+    property bool isAnythingOpen: isPowerOpen || isCommandCenterOpen
 
     // Power
     property bool isPowerOpen: false
+
+    // ControlCenter
+    property bool isControlCenterOpen
 
     // Lock
     property bool isSessionLock: false
 
     // ControlCenter
-    property bool isControlCenterOpen: false
+    property bool isCommandCenterOpen: false
     property var controlCenterModules: [
         {label: "wallpaper", icon: ""},
         {label: "dashboard", icon: "󰨝"},

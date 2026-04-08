@@ -6,9 +6,9 @@ PopJump {
     id: dashboard
     containerH: mainLoader.height
     containerW: mainLoader.width
-    isOpen: Global.isControlCenterOpen
+    isOpen: Global.isCommandCenterOpen
     onClosedPop: {
-        Global.isControlCenterOpen = false
+        Global.isCommandCenterOpen = false
         mainLoader.active = false
     }
 
@@ -18,7 +18,7 @@ PopJump {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
         }
-        active: Global.isControlCenterOpen
+        active: Global.isCommandCenterOpen
         source: {
             switch(Global.controlCenterModul) {
                 case "dashboard": return "DashBoard.qml";
@@ -33,7 +33,7 @@ PopJump {
     Connections {
         target: Global
         function onIsControlCenterOpenChanged() {
-            if (Global.isControlCenterOpen) mainLoader.active = true
+            if (Global.isCommandCenterOpen) mainLoader.active = true
         }
     }
 }

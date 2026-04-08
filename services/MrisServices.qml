@@ -52,7 +52,7 @@ Singleton {
 
     Process {
         id: radialBars
-        running: Global.isControlCenterOpen && Global.dashboardModul === "music"
+        running: Global.isCommandCenterOpen && Global.dashboardModul === "music"
         command: [
             "sh", "-c", "cava -p ~/Atheris-shell/assets/cava.ini"
         ]

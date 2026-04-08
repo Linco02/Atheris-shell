@@ -6,7 +6,7 @@ import qs.config
 Item {
     function openDashboard(target) {
         if (target === "dashboard") Global.dashboardModul = "dash"
-        Global.isControlCenterOpen = (Global.controlCenterModul === target) ? !Global.isControlCenterOpen : true
+        Global.isCommandCenterOpen = (Global.controlCenterModul === target) ? !Global.isCommandCenterOpen : true
         Global.controlCenterModul = target
     }
 
