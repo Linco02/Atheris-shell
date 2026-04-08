@@ -8,5 +8,5 @@ import qs.config
 ButtonTransparent {
     id: root
     text: ""
-    onLeftClicked: Global.isPowerOpen = true
+    onLeftClicked: Global.isPowerOpen = !Global.isPowerOpen
 }

@@ -13,6 +13,9 @@ Singleton {
     // Power
     property bool isPowerOpen: false
 
+    // Lock
+    property bool isSessionLock: false
+
     // ControlCenter wallpaper/dashboard
     property bool isControlCenterOpen: false
     property string controlCenterModul: "dashboard"

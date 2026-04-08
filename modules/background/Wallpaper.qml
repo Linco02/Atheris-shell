@@ -1,8 +1,9 @@
 import QtQuick
 import QtMultimedia
 import Quickshell
-import qs.config
+import qs.components
 import qs.components.animations
+import qs.config
 import qs.services
 
 Item {
@@ -22,94 +23,13 @@ Item {
         }
     }
 
-    Item {
-        id: back
+    SmartView {
         anchors.fill: parent
-
-        Loader {
-            anchors.fill: parent
-            sourceComponent: {
-                let type = WallpaperService.wallpaperFormat(backSource);
-                if (type === "image") return imageComp;
-                if (type === "anmf") return anmfComp;
-                if (type === "video") return videoComp;
-            }
-        }
-
-        // Зображення
-        Component {
-            id: imageComp
-            Wall {
-                source: backSource
-
-                onStatusChanged: {
-                    if (Image.Ready) {
-                        wallpaperReady = true
-                        wallpaperSwith()
-                    }
-                }
-            }
-        }
-
-        // Анімовані зображення
-        Component {
-            id: anmfComp
-            AnimatedImage {
-                anchors.fill: parent
-                source: backSource
-                playing: WallpaperService.isDesktopEmpty
-
-                property int frame: 0
-                onPlayingChanged: {
-                    if (!playing)
-                        frame = currentFrame
-                    else
-                        currentFrame = frame
-                }
-                onStatusChanged: {
-                    if (status === AnimatedImage.Ready) {
-                        wallpaperReady = true
-                        wallpaperSwith()
-                    }
-                }
-            }
-        }
-
-        // Відео
-        Component {
-            id: videoComp
-            Item {
-                anchors.fill: parent
-
-                function mpwControler(player) {
-                    if (WallpaperService.isDesktopEmpty) player.play()
-                    else player.pause()
-                }
-
-                MediaPlayer {
-                    id: player
-                    source: backSource
-                    loops: MediaPlayer.Infinite
-                    videoOutput: videoOutput
-                    Component.onCompleted: mpwControler(player)
-                }
-
-                VideoOutput {
-                    id: videoOutput
-                    anchors.fill: parent
-                    onSourceRectChanged: {
-                        wallpaperReady = true
-                        wallpaperSwith()
-                    }
-                }
-
-                Connections {
-                    target: WallpaperService
-                    function onIsDesktopEmptyChanged() {
-                        mpwControler(player);
-                    }
-                }
-            }
+        content: backSource
+        isPlay: WallpaperService.isDesktopEmpty
+        onContentReady: {
+            wallpaperReady = true
+            wallpaperSwith()
         }
     }
 

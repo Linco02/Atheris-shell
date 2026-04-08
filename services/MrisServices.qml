@@ -27,7 +27,7 @@ Singleton {
     property var cavaBarsData: Array(Global.appearance.cavaBarsCount).fill(0)
 
     function checkIsPlaying(p) {
-        return p.playbackState === MprisPlaybackState.Playing ?? false
+        return p?.playbackState === MprisPlaybackState.Playing ?? false
     }
 
     function nextMris(player) {

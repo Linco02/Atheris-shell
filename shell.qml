@@ -2,21 +2,27 @@ import QtQuick
 import Quickshell
 import qs.config
 import qs.modules.bar
+import qs.modules.session
 import qs.modules.background
 
 ShellRoot {
     LazyLoader {
         active: Global.settings.isBackgroundOn
-        component: Background {}
+        component: Background { }
+    }
+
+    LazyLoader {
+        active: Global.isSessionLock
+        component: Lock { }
     }
 
     LazyLoader {
         active: Global.settings.isBarOn
-        component: Bar {}
+        component: Bar { }
     }
 
-    Loader {
+    LazyLoader {
         active: Global.settings.isShortcutOn
-        sourceComponent: Shortcuts { }
+        component: Shortcuts { }
     }
 }
