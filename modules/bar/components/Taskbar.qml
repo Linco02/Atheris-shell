@@ -9,6 +9,7 @@ import Quickshell.Hyprland
 
 RectForeground {
     id: root
+    visible: ToplevelManager.toplevels.values.length > 0
     height: parent.height; width: programsRow.width
 
     Row {
