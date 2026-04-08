@@ -20,7 +20,7 @@ PopJump {
         }
         active: Global.isCommandCenterOpen
         source: {
-            switch(Global.controlCenterModul) {
+            switch(Global.commandCenterModule) {
                 case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
@@ -32,7 +32,7 @@ PopJump {
 
     Connections {
         target: Global
-        function onIsControlCenterOpenChanged() {
+        function onIsCommandCenterOpenChanged() {
             if (Global.isCommandCenterOpen) mainLoader.active = true
         }
     }

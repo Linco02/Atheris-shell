@@ -12,7 +12,7 @@ Column {
 
     property int brickH: 40
     property var list: {
-        let command = Global.controlCenterModules.filter(m => m.label !== "command")
+        let command = Global.commandCenterModules.filter(m => m.label !== "command")
         const directory = [{label: "directory", icon: "D"}]
         const applications = [{label: "applications", icon: "A"}]
 

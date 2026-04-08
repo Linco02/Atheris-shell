@@ -7,6 +7,7 @@ import qs.components.containers
 import qs.config
 import qs.modules.session
 import qs.modules.commandcenter
+import qs.modules.controlcenter
 import "./components"
 import "./components/buttons"
 
@@ -63,11 +64,15 @@ PanelWindow {
     }
 
     Loader {
+        sourceComponent: Power { panel: root }
+    }
+
+    Loader {
         sourceComponent: CommandCenter { panel: root }
     }
 
     Loader {
-        sourceComponent: Power { panel: root }
+        sourceComponent: ControlCenter { panel: root }
     }
 
     component RowOwn : SpacedRow {

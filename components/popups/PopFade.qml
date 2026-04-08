@@ -21,6 +21,7 @@ PopupWindow {
     property int positionX: Global.padding.normal
     property int rad: Global.radius.large
     property var panel: null
+    property bool isLeft: true
 
     signal closedPop()
 
@@ -37,7 +38,10 @@ PopupWindow {
         id: box
         y: Global.padding.normal
         height: back.height; width: back.width
-        state: "close"
+        anchors {
+            left: isLeft ? parent.left : undefined
+            right: !isLeft ? parent.right : undefined
+        }
 
         HoverHandler {
             onHoveredChanged: {

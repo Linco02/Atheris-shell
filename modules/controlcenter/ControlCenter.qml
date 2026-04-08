@@ -11,8 +11,10 @@ PopFade {
     id: root
     containerH: powerContainer.height
     containerW: powerContainer.width
-    isOpen: Global.isPowerOpen
-    onClosedPop: Global.isPowerOpen = false
+    positionX: panel.width
+    isOpen: Global.isControlCenterOpen
+    onClosedPop: Global.isControlCenterOpen = false
+    isLeft: false
 
     property int buttonW: 40
 

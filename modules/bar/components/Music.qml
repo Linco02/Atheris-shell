@@ -73,7 +73,7 @@ RectForeground {
             TapHandler {
                 onTapped: {
                     Global.dashboardModul = "music"
-                    Global.controlCenterModul = "dashboard"
+                    Global.commandCenterModule = "dashboard"
                     Global.isCommandCenterOpen = !Global.isCommandCenterOpen
                 }
             }
