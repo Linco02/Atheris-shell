@@ -24,6 +24,8 @@ PopJump {
                 case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
+                case "command" : return "Command.qml";
+                return "";
             }
         }
     }

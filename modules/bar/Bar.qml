@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import qs.components.shapes
 import qs.components.animations
 import qs.components.containers
@@ -18,6 +19,7 @@ PanelWindow {
     }
     implicitHeight: Global.appearance.barHeight
     color: "transparent"
+    focusable: Global.isAnythingOpen
 
     Item {
         anchors {

@@ -10,14 +10,22 @@ Singleton {
     readonly property var margine: appearance.margine
     readonly property var settings: Config.settings
 
+    // Popups
+    property bool isAnythingOpen: isPowerOpen || isControlCenterOpen
+
     // Power
     property bool isPowerOpen: false
 
     // Lock
     property bool isSessionLock: false
 
-    // ControlCenter wallpaper/dashboard
+    // ControlCenter
     property bool isControlCenterOpen: false
+    property var controlCenterModules: [
+        {label: "wallpaper", icon: ""},
+        {label: "dashboard", icon: "󰨝"},
+        {label: "command", icon: ""},
+    ]
     property string controlCenterModul: "dashboard"
     property string dashboardModul: "dash"
 

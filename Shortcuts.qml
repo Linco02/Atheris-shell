@@ -22,6 +22,12 @@ Item {
         onPressed: openDashboard("wallpaper")
     }
 
+    GlobalShortcut {
+        name: "programs_selector"
+        description: "Відкрити програму"
+        onPressed: openDashboard("command")
+    }
+
     // GlobalShortcut {
     //     name: "programs_selector"
     //     description: "Відкрити програму"

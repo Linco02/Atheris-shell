@@ -1,0 +1,11 @@
+import QtQuick
+import qs.config
+import qs.components.animations
+
+TextInput {
+    color: Colors.textSurface
+    font.family: Global.appearance.fontFamily
+    font.weight: 600
+
+    Behavior on color { ColorAnim {} }
+}
