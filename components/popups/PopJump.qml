@@ -88,8 +88,14 @@ PopupWindow {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            Behavior on width { NumberAnim { } }
-            Behavior on height { NumberAnim { } }
+            Behavior on width {
+                enabled: container.width > 0
+                NumberAnim { }
+            }
+            Behavior on height {
+                enabled: container.height > 0
+                NumberAnim { }
+            }
         }
 
         states: [
