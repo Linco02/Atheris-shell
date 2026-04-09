@@ -1,55 +1,41 @@
 import QtQuick
-import qs.components
+import QtQuick.Layouts
+// import qs.components
 import qs.components.shapes
 import qs.components.popups
-import qs.components.controls
+// import qs.components.controls
 import qs.components.containers
 import qs.config
-import qs.services
+// import qs.services
+import "./modules"
 
 PopFade {
     id: root
-    containerH: powerContainer.height
-    containerW: powerContainer.width
+    containerH: controlCenterContainer.height
+    containerW: controlCenterContainer.width
     positionX: panel.width - root.width - Global.padding.normal
     isOpen: Global.isControlCenterOpen
     onClosedPop: Global.isControlCenterOpen = false
     isLeft: false
 
-    property int buttonW: 40
+    property int brickH: 40
+    property int brickBH: 60
 
-    ColumnSpaced {
-        id: powerContainer
+    GridLayout {
+        id: controlCenterContainer
+        width: brickBH * 8
+        columns: 2
+        rowSpacing: Global.spacing.normal; columnSpacing: rowSpacing
 
-        Repeater {
-            model: SessionServices.actions
-
-            Rect {
-                id: button
-                height: 30; width: buttonW + Global.padding.normal
-
-                RowSpaced {
-                    id: rowButton
-                    anchors.left: parent.left
-
-                    ButtonStyled {
-                        height: button.height; width: height
-                        text: modelData.icon
-                        radius: button.radius - 5
-                        onLeftClicked: SessionServices.choseAction(modelData)
-                    }
-
-                    TextStyled {
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: modelData.label
-                    }
-                }
-
-                Component.onCompleted: {
-                    if (rowButton.width > buttonW)
-                        buttonW = rowButton.width
-                }
-            }
-        }
+        Top { Layout.columnSpan: 2; Layout.fillWidth: true; height: brickH }
+        Sound { Layout.columnSpan: 2; Layout.fillWidth: true; height: brickH }
+        Brightness { Layout.columnSpan: 2; Layout.fillWidth: true; height: brickH }
+        Wifi { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        Bluetooth { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        PowerMode { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        Disturb { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        Airplane { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        ThemeMod { Layout.columnSpan: 1; Layout.fillWidth: true; height: brickBH }
+        Notifi { Layout.columnSpan: 2; Layout.fillWidth: true; height: 300 }
     }
 }
