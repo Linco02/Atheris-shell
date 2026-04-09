@@ -11,7 +11,7 @@ import qs.services
 
 RectForeground {
     id: root
-    height: parent.height; width: volumeContainer.width + Global.padding.normal
+    height: parent.height; width: volumeContainer.width
 
     readonly property real volume: PipewireServices.volume
     property bool isvolumeSliderOpen: false
@@ -44,10 +44,13 @@ RectForeground {
             id: volumeText
             anchors.verticalCenter: parent.verticalCenter
             height: root.height
-            text: PipewireServices.muted ? "󰖁" : "󰕾"
-            onLeftClicked: isvolumeSliderOpen = !isvolumeSliderOpen
-            onMiddleClicked: PipewireServices.pavucontrolOpen()
-            onRightClicked: PipewireServices.toggleMute()
+            text: PipewireServices.muted ? "󰖁"
+                : volume > 0.7 ? "󰕾"
+                : volume > 0.4 ? "󰖀"
+                : volume > 0 ? "󰕿"
+                : "󰝟" 
+            onLeftClicked: PipewireServices.toggleMute()
+            onRightClicked: isvolumeSliderOpen = !isvolumeSliderOpen
         }
     }
 

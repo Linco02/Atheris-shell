@@ -54,11 +54,7 @@ PanelWindow {
             anchors.right: parent.right
             rightPadding: Global.padding.normal
 
-            Sound { }
-            Battery { }
-            Bluetooth { }
-            Network { }
-            Language { }
+            Status { }
             ControlCenterButton { }
         }
     }
