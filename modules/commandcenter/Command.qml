@@ -81,7 +81,7 @@ Column {
                     text: modelData.icon
                 }
 
-                TextStyled {.
+                TextStyled {
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData.label
                 }
