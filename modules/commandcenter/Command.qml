@@ -81,13 +81,13 @@ Column {
                     text: modelData.icon
                 }
 
-                TextStyled {
+                TextStyled {.
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData.label
                 }
             }
 
-            TapHandler { onTapped: { Global.controlCenterModul = modelData.label } }
+            TapHandler { onTapped: { Global.commandCenterModule = modelData.label } }
         }
     }
 }
