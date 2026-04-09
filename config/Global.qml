@@ -18,6 +18,8 @@ Singleton {
 
     // ControlCenter
     property bool isControlCenterOpen: false
+    property var controlCenterModules: ["sound", "wifi"]
+    property string controlCenterModul: ""
 
     // Lock
     property bool isSessionLock: false

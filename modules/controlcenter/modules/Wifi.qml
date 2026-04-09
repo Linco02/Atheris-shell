@@ -1,12 +1,16 @@
 import QtQuick
 import qs.components
 import qs.components.shapes
+import qs.components.controls
+import qs.config
+import qs.services
 
-RectForeground {
+ButtonTripled {
     width: parent.width
+    icon: network.icon
+    textTop: "Wifi"
+    textBottom: network.ssid
+    onClicked: Global.controlCenterModul = "wifi"
 
-    TextStyled {
-        anchors.centerIn: parent
-        text: "wifi"
-    }
+    readonly property var network: NetworkServices.currentWifi
 }

@@ -44,11 +44,7 @@ RectForeground {
             id: volumeText
             anchors.verticalCenter: parent.verticalCenter
             height: root.height
-            text: PipewireServices.muted ? "󰖁"
-                : volume > 0.7 ? "󰕾"
-                : volume > 0.4 ? "󰖀"
-                : volume > 0 ? "󰕿"
-                : "󰝟" 
+            text: PipewireServices.iconVolume
             onLeftClicked: PipewireServices.toggleMute()
             onRightClicked: isvolumeSliderOpen = !isvolumeSliderOpen
         }

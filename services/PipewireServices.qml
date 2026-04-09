@@ -8,6 +8,11 @@ Singleton {
     property var sink: Pipewire.defaultAudioSink
     property real volume: sink?.audio?.volume ?? 0
     property bool muted: sink?.audio?.muted ?? false
+    property string iconVolume: PipewireServices.muted ? "󰖁"
+        : volume > 0.7 ? "󰕾"
+        : volume > 0.4 ? "󰖀"
+        : volume > 0 ? "󰕿"
+        : "󰝟" 
 
     function pavucontrolOpen() {
         pavucontrol.running = true
