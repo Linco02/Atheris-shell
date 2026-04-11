@@ -13,6 +13,9 @@ Singleton {
     // Popups
     property bool isAnythingOpen: isPowerOpen || isCommandCenterOpen || isControlCenterOpen
 
+    // Floating
+    property bool isAtherisSettingsOpen: false
+
     // Power
     property bool isPowerOpen: false
 
@@ -35,5 +38,5 @@ Singleton {
     property string dashboardModul: "dash"
 
     // Wallpaper
-    property string wallpaperCurrent: "file:///home/linco02/wallpapers/b-003.jpg"
+    property string wallpaperCurrent: "file:///home/linco02/wallpapers/0046遐蝶踏浪寻蝶.mp4"
 }

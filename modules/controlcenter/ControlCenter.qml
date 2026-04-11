@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.components.shapes
-import qs.components.popups
+import qs.components.windows
 import qs.components.controls
 import qs.components.containers
 import qs.components.animations

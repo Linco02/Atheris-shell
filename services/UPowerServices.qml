@@ -6,6 +6,7 @@ import Quickshell.Services.UPower
 Singleton {
     readonly property bool isExist: UPower.displayDevice.isPresent
     readonly property real batteryLevel: UPower.displayDevice.percentage
+    property int batteryLevelRound: batteryLevel * 100
     readonly property real batteryStatus: UPower.displayDevice.state // 1 - заряджається; 2 - розряджається; 4 - повністю заряджена
     property string status: batteryLevel >= 0.2 ? "normal"
         : batteryLevel < 0.1 ? "critical"
@@ -28,12 +29,12 @@ Singleton {
         } else if (batteryLevel < 0.1) {
             if (status != "critical") {
                 status = "critical"
-                Notifications.send("Battery", "Critical level!", "critical")
+                // Notifications.send("Battery", "Critical level!", "critical")
             }
         } else if (batteryLevel < 0.2) {
             if (status != "warning") {
                 status = "warning"
-                Notifications.send("Battery", "Low battery", "normal")
+                // Notifications.send("Battery", "Low battery", "normal")
             }
         }
     }

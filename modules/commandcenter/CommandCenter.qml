@@ -1,5 +1,5 @@
 import QtQuick
-import qs.components.popups
+import qs.components.windows
 import qs.config
 
 PopJump {

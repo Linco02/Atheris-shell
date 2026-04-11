@@ -67,7 +67,11 @@ Singleton {
 
     Connections {
         target: Tick3s
-        function onTick() {networkNameInfo.running = true}
+        function onTick() {
+            networkNameInfo.running = true
+            if (Global.isControlCenterOpen)
+                wifiParce.running = true
+        }
     }
 
     Component.onCompleted: {

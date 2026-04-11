@@ -7,7 +7,7 @@ JsonObject {
     // Задній план //
     property bool isBackgroundOn: true
     property bool isWallpaperOn: true
-    property bool isRandomWallpaperOn: true
+    property bool isRandomWallpaperOn: false
     property string wallpaperFolder: "/home/linco02/wallpapers/"
     property var wallpaperFormat: ["image", "anmf", "video"] // "image", "anmf", "video"
 

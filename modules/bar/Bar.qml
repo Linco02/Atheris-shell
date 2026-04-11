@@ -55,7 +55,6 @@ PanelWindow {
             rightPadding: Global.padding.normal
 
             Status { }
-            ControlCenterButton { }
         }
     }
 

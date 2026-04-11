@@ -19,8 +19,9 @@ RectInactive {
 
     RowSpaced {
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Global.padding.normal
+        leftPadding: Global.padding.normal; rightPadding: Global.padding.normal
         height: parent.height
+        clip: true
 
         TextStyledH {
             anchors.verticalCenter: parent.verticalCenter

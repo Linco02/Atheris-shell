@@ -2,6 +2,7 @@ import QtQuick
 import QtMultimedia
 import Quickshell
 import qs.components
+import qs.components.shapes
 import qs.components.animations
 import qs.config
 import qs.services
@@ -33,10 +34,12 @@ Item {
         }
     }
 
-    Item {
+    RectClip {
         id: forward
-        anchors.fill: parent
+        anchors.centerIn: parent
         opacity: 0
+        height: width; width: 0
+        radius: width / 2
 
         states: State {
             name: "change"
@@ -44,13 +47,14 @@ Item {
             PropertyChanges {
                 target: forward
                 opacity: 1
+                width: root.width * 1.5
             }
         }
 
         transitions: Transition {
             from: ""; to: "change"
 
-            PropertyAnim { properties: "opacity" }
+            NumberAnim { properties: "width"; duration: Global.durations.slow }
 
             onRunningChanged: {
                 if(!running) {
@@ -63,7 +67,13 @@ Item {
             }
         }
 
-        Wall { source: forwardSource }
+        Image {
+            anchors.centerIn: parent
+            height: root.height; width: root.width
+            fillMode: Image.PreserveAspectCrop
+            source: forwardSource
+            asynchronous: true
+        }
     }
 
     Connections {
@@ -84,11 +94,5 @@ Item {
             
             PalitServices.palitCreate(source)
         }
-    }
-
-    component Wall: Image {
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectCrop
-        asynchronous: true
     }
 }
