@@ -5,6 +5,7 @@ import Quickshell.Io
 import qs.config
 
 Singleton {
+    property string powerProfile: ""
     property string gpuType: ""
     property string cpuType: ""
     property var cpu: [0, 0, 0]
@@ -146,6 +147,7 @@ Singleton {
 
     Process {
         id: gpuInit
+        running: true
         command: ["sh", "-c", "lspci | grep -iE 'vga|3d'"]
         
         stdout: StdioCollector {
@@ -160,13 +162,22 @@ Singleton {
         }
     }
 
+    Process {
+        id: powerProfileInit
+        running: true
+        command: ["sh", "-c","powerprofilesctl get"]
+        stdout: StdioCollector {
+            onStreamFinished: powerProfile = this.text
+        }
+    }
+
     Connections {
         target: Tick3s
         function onTick() { runPerfomance() }
     }
 
-    Component.onCompleted: {
-        if (!gpuType) gpuInit.running = true
-        else runPerfomance()
-    }
+    // Component.onCompleted: {
+    //     if (!gpuType) gpuInit.running = true
+    //     else runPerfomance()
+    // }
 }
