@@ -34,7 +34,7 @@ Item {
                         height: width; width: menuMusic.width / 2
                         iconSize: height
                         source: modelData.identity
-                        onLeftClicked: {
+                        onClicked: {
                             playerIndex = index
                             progressBar.value = playerActive?.position ?? 0
                         }
@@ -106,7 +106,7 @@ Item {
                     
                     ButtonOwn {
                         text: "󰙤"
-                        onLeftClicked: {
+                        onClicked: {
                             if (playerExist) {
                                 MrisServices.previousMris(playerActive)
                                 progressBar.value = playerActive?.position
@@ -119,7 +119,7 @@ Item {
 
                         property bool isPlaying: MrisServices.checkIsPlaying(playerActive)
 
-                        onLeftClicked: {
+                        onClicked: {
                             if (playerExist) {
                                 isPlaying ? MrisServices.pauseMris(playerActive) : MrisServices.playMris(playerActive)
                                 progressBar.value = playerActive?.position
@@ -129,7 +129,7 @@ Item {
 
                     ButtonOwn {
                         text: "󰙢"
-                        onLeftClicked: {
+                        onClicked: {
                             if (playerExist) {
                                 MrisServices.nextMris(playerActive)
                                 progressBar.value = playerActive?.position

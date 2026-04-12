@@ -64,7 +64,7 @@ WlSessionLock {
                     ButtonStyled {
                         height: 40; width: height
                         text: modelData.icon
-                        onLeftClicked: SessionServices.choseAction(modelData)
+                        onClicked: SessionServices.choseAction(modelData)
                     }
                 }
             }

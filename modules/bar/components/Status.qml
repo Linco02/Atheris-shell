@@ -5,7 +5,6 @@ import qs.components.containers
 import qs.components.controls
 import qs.config
 import qs.services
-import "./status"
 
 RectForeground {
     id: root

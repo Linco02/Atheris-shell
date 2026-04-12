@@ -24,9 +24,9 @@ RectForeground {
                 source: modelData.appId
                 height: root.height
                 iconSize: root.height - Global.padding.mini * 2
-                onLeftClicked: modelData.activate()
-                onMidleClicked: modelData.close()
-                occupied: modelData.activated
+                onClicked: modelData.activate()
+                // onMidleClicked: modelData.close()
+                active: modelData.activated
             }
         }
     }

@@ -2,6 +2,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
     property string gpuType: ""
@@ -12,10 +13,12 @@ Singleton {
     property var disks: []
 
     function runPerfomance() {
-        gpuPerfomance.running = true
-        cpuPerfomance.running = true
-        memPerfomance.running = true
-        diskUsage.running = true
+        if (Global.isCommandCenterOpen) {
+            gpuPerfomance.running = true
+            cpuPerfomance.running = true
+            memPerfomance.running = true
+            diskUsage.running = true
+        }
     }
 
     Process {

@@ -44,7 +44,7 @@ PopFade {
             sourceComponent: ButtonStyled {
                 anchors.fill: parent
                 text: "󰁠 Назад 󰁠"
-                onLeftClicked: Global.controlCenterModul = ""
+                onClicked: Global.controlCenterModul = ""
             }
         }
     }

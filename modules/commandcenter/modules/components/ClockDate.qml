@@ -13,7 +13,7 @@ RectForeground {
 
         TextStyled {
             anchors.verticalCenter: parent.verticalCenter
-            font.pointSize: root.height / 2 || 20
+            font.pixelSize: root.height / 2 || 20
             text: TimeServices.isDay ? "" : ""
         }
 

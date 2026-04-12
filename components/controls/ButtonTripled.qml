@@ -26,16 +26,19 @@ RectInactive {
         TextStyledH {
             anchors.verticalCenter: parent.verticalCenter
             text: icon
+            color: isActive ? Colors.textAccent : Colors.textSurface
         }
 
         Column {
             anchors.verticalCenter: parent.verticalCenter
-            TextStyled { text: textTop }
-            TextStyled { text: textBottom }
+            TextOwn { text: textTop }
+            TextOwn { text: textBottom }
         }
     }
     
-    
+    component TextOwn: TextStyled {
+        color: isActive ? Colors.textAccent : Colors.textSurface
+    }
 
     HoverHandler { id: hover }
     TapHandler { onTapped: clicked() }

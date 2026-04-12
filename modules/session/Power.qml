@@ -34,7 +34,7 @@ PopFade {
                         height: button.height; width: height
                         text: modelData.icon
                         radius: button.radius - 5
-                        onLeftClicked: SessionServices.choseAction(modelData)
+                        onClicked: SessionServices.choseAction(modelData)
                     }
 
                     TextStyled {

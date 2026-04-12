@@ -16,6 +16,7 @@ JsonObject {
 
     // Палітра //
     property bool isPalitOn: true
+    property string palitMode: "dark" // dark, light
     property bool palitShellOn: true
     property bool palitOpenrgbOn: true
     property bool palitPywalFoxOn: true

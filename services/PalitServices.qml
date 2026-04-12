@@ -7,58 +7,20 @@ import qs.services
 
 Singleton {
     readonly property var jsonData: JSON.parse(jsonFile.text())
-    property var test: []
+    property string lastPalit: ""
 
     function palitCreate(path) {
         if (Global.settings.isPalitOn) {
             paliCreator.command = [
                 "matugen",
                 "image",
+                "--mode", Global.palitMode,
                 "--source-color-index", "0",
                 WallpaperService.wallpaperRawPath(path)
             ]
             paliCreator.running = Global.settings.isPalitOn
+            lastPalit = path
         }
-    }
-
-    Process {
-        id: paliCreator
-        onExited: (exitCode) => {
-            if (exitCode === 0) {
-                if (Global.settings.palitOpenrgbOn) openrgbUpdate.running = true
-                if (Global.settings.palitPywalFoxOn) pywalfoxUpdate.running = true
-                if (Global.settings.palitKittyOn) kittyUpdate.running = true
-                if (Global.settings.palitqt6ctOn) qt6ctUpdate.running = true
-            }
-        }
-    }
-
-    Process {
-        id: openrgbUpdate
-        command: [
-            "sh", "/tmp/atheris/openrgb.sh"
-        ]
-    }
-
-    Process {
-        id: pywalfoxUpdate
-        command: [
-            "sh", "/tmp/atheris/pywalfox.sh"
-        ]
-    }
-
-    Process {
-        id: kittyUpdate
-        command: [
-            "pkill", "-USR1", "kitty"
-        ]
-    }
-
-    Process {
-        id: qt6ctUpdate
-        command: [
-            "sh", "sed -i 's|^color_scheme_path=.*|color_scheme_path=/tmp/atheris/qt6ct.conf|' ~/.config/qt6ct/qt6ct.conf"
-        ]
     }
 
     function applyPalette(data) {
@@ -76,6 +38,40 @@ Singleton {
         Colors.textInactive  = data.textInactive  || Colors.textInactive;
     }
 
+    Process {
+        id: paliCreator
+        onExited: (exitCode) => {
+            if (exitCode === 0) {
+                if (Global.settings.palitOpenrgbOn) openrgbUpdate.running = true
+                if (Global.settings.palitPywalFoxOn) pywalfoxUpdate.running = true
+                if (Global.settings.palitKittyOn) kittyUpdate.running = true
+                if (Global.settings.palitqt6ctOn) qt6ctUpdate.running = true
+            }
+        }
+    }
+
+    Process {
+        id: openrgbUpdate
+        command: [ "sh", "/tmp/atheris/openrgb.sh" ]
+    }
+
+    Process {
+        id: pywalfoxUpdate
+        command: [ "sh", "/tmp/atheris/pywalfox.sh" ]
+    }
+
+    Process {
+        id: kittyUpdate
+        command: [ "pkill", "-USR1", "kitty" ]
+    }
+
+    Process {
+        id: qt6ctUpdate
+        command: [
+            "sh", "sed -i 's|^color_scheme_path=.*|color_scheme_path=/tmp/atheris/qt6ct.conf|' ~/.config/qt6ct/qt6ct.conf"
+        ]
+    }
+
     FileView {
         id: jsonFile
         path: Qt.resolvedUrl("/tmp/atheris/palette.json")
@@ -87,6 +83,13 @@ Singleton {
     onJsonDataChanged: {
         if (jsonData && Global.settings.palitShellOn) {
             applyPalette(jsonData);
+        }
+    }
+
+    Connections {
+        target: Global
+        function onPalitModeChanged() {
+            if (lastPalit !== "") palitCreate(lastPalit)
         }
     }
 }

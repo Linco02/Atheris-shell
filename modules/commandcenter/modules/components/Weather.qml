@@ -24,14 +24,14 @@ RectForeground {
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: root.height / 4 || 20
+                font.pixelSize: root.height / 4 || 20
                 text: WeatherServices.temp
             }
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: root.width / 2
-                font.pointSize: root.height / 10 || 20
+                font.pixelSize: root.height / 10 || 20
                 text: WeatherServices.description
                 wrapMode: Text.Wrap
             }

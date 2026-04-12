@@ -38,5 +38,8 @@ Singleton {
     property string dashboardModul: "dash"
 
     // Wallpaper
-    property string wallpaperCurrent: "file:///home/linco02/wallpapers/0046遐蝶踏浪寻蝶.mp4"
+    property string wallpaperCurrent: "file:///home/linco02/wallpapers/liquid-art-paint-3840x2160-25904.jpg"
+
+    // TEMP
+    property string palitMode: "dark" // Palit.palitCreate()
 }

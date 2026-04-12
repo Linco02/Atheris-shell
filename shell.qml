@@ -27,10 +27,8 @@ ShellRoot {
         component: Shortcuts { }
     }
 
-    // Loader {
-    //     active: Global.isAtherisSettingsOpen
-    //     sourceComponent: "AtherisSettings"
-    // }
-
-    // AtherisSettings {}
+    Loader {
+        active: Global.isAtherisSettingsOpen
+        source: "./modules/atherissettings/AtherisSettings.qml"
+    }
 }

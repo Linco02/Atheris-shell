@@ -11,14 +11,13 @@ Item {
     width: parent.width
 
     readonly property real volume: PipewireServices.volume
-    // property window
 
     RowSpaced {
         ButtonStyled {
             id: leftButton
             height: root.height; width: height
             text: PipewireServices.iconVolume
-            onLeftClicked: PipewireServices.toggleMute()
+            onClicked: PipewireServices.toggleMute()
         }
 
         SliderStyled {
@@ -34,7 +33,7 @@ Item {
             id: rightButton
             height: root.height; width: height
             text: "󰁈"
-            onLeftClicked: Global.controlCenterModul = "sound"
+            onClicked: Global.controlCenterModul = "sound"
         }
     }
 }

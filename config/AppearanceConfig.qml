@@ -23,6 +23,7 @@ JsonObject {
     property int cavaBarsCount: 40
     // шрифт
     property string fontFamily: "FiraCode Nerd Font"
+    property int fontSize: 14
 
     component AnimDurations: JsonObject {
         property int fast: 200 * scale

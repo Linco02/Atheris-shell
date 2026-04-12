@@ -8,20 +8,17 @@ import qs.services
 RectForeground {
     id: root
     height: iconSize; width: height
-    color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
-        : occupied ? Colors.active
+    color: hover && !active ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
+        : active ? Colors.active
         : focused ? Colors.inactive
         : Colors.surfaceRaised
 
     property alias iconSize: buttonIcon.implicitSize
     property string source: ""
-    property bool occupied: false
+    property bool active: false
     property bool focused: false
-    property bool isHovered: false
 
-    signal leftClicked()
-    signal rigthClicked()
-    signal midleClicked()
+    signal clicked()
 
     IconImage {
         id: buttonIcon
@@ -30,16 +27,12 @@ RectForeground {
         implicitSize: root.height - Global.padding.mini + 2
     }
 
-    MouseFill {
-        id: buttonReaction
-        hoverEnabled: true
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-        onEntered: { isHovered = true }
-        onExited: { isHovered = false }
-        onClicked: (mouse) => {
-            if (mouse.button === Qt.MiddleButton) root.midleClicked()
-            else if (mouse.button === Qt.RightButton) root.rigthClicked()
-            else root.leftClicked()
-        }
+    TextStyled {
+        id: buttonText
+        anchors.centerIn: parent
+        font.pixelSize: parent.hedight - Global.padding.small
     }
+
+    HoverHandler { id: hover }
+    TapHandler { onTapped: clicked() }
 }

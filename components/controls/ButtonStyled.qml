@@ -7,36 +7,23 @@ import qs.config
 RectForeground {
     id: root
     width: buttonText.width + Global.padding.large
-    color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
-        : occupied ? Colors.active
-        : focused ? Colors.inactive
-        : Colors.surfaceRaised
+    color: hover.hovered && !isActive ? Qt.lighter(Colors.inactive, Global.appearance.hover)
+        : isActive ? Colors.active
+        : Colors.inactive
 
     property alias text: buttonText.text
-    property alias acceptedButtons: buttonReaction.acceptedButtons
-    property bool occupied: false
-    property bool focused: false
-    property bool isHovered: false
+    property bool isActive: false
+    property bool fullH: true
 
-    signal leftClicked()
-    signal rightClicked()
-    signal middleClicked()
+    signal clicked()
 
-    TextStyledH {
+    TextStyled {
         id: buttonText
         anchors.centerIn: parent
+        font.pixelSize: fullH === true ? parent.height - Global.padding.small : Global.appearance.fontSize
+        color: isActive ? Colors.textAccent : Colors.textSurface
     }
 
-    MouseFill {
-        id: buttonReaction
-        hoverEnabled: true
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-        onEntered: { isHovered = true }
-        onExited: { isHovered = false }
-        onClicked: (mouse) => {
-            if (mouse.button === Qt.MiddleButton) root.middleClicked()
-            else if (mouse.button === Qt.RightButton) root.rightClicked()
-            else root.leftClicked()
-        }
-    }
+    HoverHandler { id: hover }
+    TapHandler { onTapped: clicked() }
 }

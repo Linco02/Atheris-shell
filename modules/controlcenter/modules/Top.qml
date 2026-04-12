@@ -30,13 +30,13 @@ Rect {
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onLeftClicked: Global.isAtherisSettingsOpen = !Global.isAtherisSettingsOpen
+            onClicked: Global.isAtherisSettingsOpen = !Global.isAtherisSettingsOpen
         }
 
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onLeftClicked: Global.isPowerOpen = !Global.isPowerOpen
+            onClicked: Global.isPowerOpen = !Global.isPowerOpen
         }
     }
 }
