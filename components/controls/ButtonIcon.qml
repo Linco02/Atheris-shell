@@ -30,7 +30,7 @@ RectForeground {
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: parent.hedight - Global.padding.small
+        font.pixelSize: parent.height - Global.padding.small
     }
 
     HoverHandler { id: hover }

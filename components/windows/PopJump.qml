@@ -41,7 +41,7 @@ PopupWindow {
             horizontalCenter: parent.horizontalCenter
         }
         height: rad
-        width: back.width + rad * 2
+        width: box.width + rad * 2
 
         Corner {
             isLeft: true; anchors.left: parent.left
@@ -52,11 +52,14 @@ PopupWindow {
         }
     }
 
-    Item {
+    RectBackground {
         id: box
         anchors.horizontalCenter: parent.horizontalCenter
         y: 0
-        height: back.height; width: back.width
+        height: container.height + Global.padding.normal
+        width: container.width + Global.padding.large
+        topLeftRadius: 0; topRightRadius: 0
+        bottomLeftRadius: rad; bottomRightRadius: rad
         state: "close"
 
         HoverHandler {
@@ -67,18 +70,6 @@ PopupWindow {
                     timer.stop()
                 }
             }
-        }
-
-        RectBackground {
-            id: back
-            anchors {
-                top: parent.top
-                horizontalCenter: parent.horizontalCenter
-            }
-            height: container.height + Global.padding.normal
-            width: container.width + Global.padding.large
-            topLeftRadius: 0; topRightRadius: 0
-            bottomLeftRadius: rad; bottomRightRadius: rad
         }
 
         RectClip {
@@ -157,13 +148,12 @@ PopupWindow {
             enabled: true
             samples: 4
         }
-        opacity: Global.appearance.opacity
 
         property bool isLeft: false
 
         ShapePath {
             strokeWidth: 0
-            fillColor: Colors.surface
+            fillColor: Qt.alpha(Colors.surface, Global.appearance.opacity)
             startY: 0; startX: isLeft ? rad : 0
             PathLine { y: rad * percent; x: isLeft ? rad : 0 }
             PathArc {
