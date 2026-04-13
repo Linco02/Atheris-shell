@@ -16,7 +16,7 @@ RectForeground {
         leftPadding: Global.padding.normal; rightPadding: Global.padding.normal
 
         TextOwn { text: PipewireServices.iconVolume }
-        TextOwn { text: UPowerServices.batteryIcon }
+        TextOwn { text: UPowerServices.batteryIcon; visible: UPowerServices.isExist }
         TextOwn { text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn { text: NetworkServices.currentNetworkSimbol }
