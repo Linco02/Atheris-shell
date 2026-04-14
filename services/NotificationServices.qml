@@ -8,6 +8,11 @@ import qs.config
 
 Singleton {
     property alias server: notificationServer
+    property var notificationsUrgents: [
+        {label: "low", icon: "dialog-information"},
+        {label: "normal", icon: "dialog-warning"},
+        {label: "critical", icon: "dialog-error"}
+    ]
 
     NotificationServer {
         id: notificationServer
@@ -15,7 +20,7 @@ Singleton {
         onNotification: (notifi) => {
             notifi.tracked = true;
 
-            if (GlobalStates.isNotifiSoundOn)
+            if (Global.isNotifiSoundOn)
                 notifiSound()
         }
     }

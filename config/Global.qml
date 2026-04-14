@@ -49,4 +49,5 @@ Singleton {
 
     // TEMP
     property string palitMode: "dark" // Palit.palitCreate()
+    property bool isNotifiSoundOn: true
 }
