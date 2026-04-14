@@ -20,6 +20,7 @@ RectForeground {
         TextOwn { text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn { text: NetworkServices.currentNetworkSimbol }
+        TextOwn { text: (Global.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
         TextOwn { text: LanguageServices.currentLayoutName }
     }
 

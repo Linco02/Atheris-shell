@@ -1,13 +1,23 @@
 import QtQuick
-import qs.components
 import qs.components.shapes
+import qs.components.controls
+import qs.config
 import qs.services
 
-RectForeground {
+RectInactive {
+    id: root
     width: parent.width
 
-    TextStyled {
-        anchors.centerIn: parent
-        text: PerfomanceServices.powerProfile
+    Row {
+        Repeater {
+            model: Global.powerModes
+            delegate: ButtonStyled {
+                width: root.width / 3; height: root.height
+                text: modelData.icon
+                onClicked: PerfomanceServices.powerProfile = modelData.label
+                isActive: PerfomanceServices.powerProfile === modelData.label
+                fullH: false
+            }
+        }
     }
 }

@@ -10,12 +10,13 @@ Singleton {
     property string lastPalit: ""
 
     function palitCreate(path) {
+        const colorIndex = Global.palitMode === "dark" ? 0 : 2
         if (Global.settings.isPalitOn) {
             paliCreator.command = [
                 "matugen",
                 "image",
                 "--mode", Global.palitMode,
-                "--source-color-index", "0",
+                "--source-color-index", colorIndex,
                 WallpaperService.wallpaperRawPath(path)
             ]
             paliCreator.running = Global.settings.isPalitOn

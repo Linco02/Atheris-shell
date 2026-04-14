@@ -19,9 +19,16 @@ Singleton {
     // Power
     property bool isPowerOpen: false
 
+    // PowerMode
+    property var powerModes: [
+        {label: "performance", icon: "󰊗"},
+        {label: "balanced", icon: ""},
+        {label: "power-saver", icon: "󰌪"}
+    ]
+
     // ControlCenter
     property bool isControlCenterOpen: false
-    property var controlCenterModules: ["sound", "wifi"]
+    property var controlCenterModules: ["sound", "wifi", "powerMode"]
     property string controlCenterModul: ""
 
     // Lock

@@ -13,6 +13,11 @@ Singleton {
     property var mem: [0, 0, 0]
     property var disks: []
 
+    function powerProfileChange(mode) {
+        powerProfileSwitch.command = ["sh", "-c", `powerprofilesctl set ${mode}`]
+        powerProfileSwitch.running = true
+    }
+
     function runPerfomance() {
         if (Global.isCommandCenterOpen) {
             gpuPerfomance.running = true
@@ -163,21 +168,19 @@ Singleton {
     }
 
     Process {
-        id: powerProfileInit
         running: true
         command: ["sh", "-c","powerprofilesctl get"]
         stdout: StdioCollector {
-            onStreamFinished: powerProfile = this.text
+            onStreamFinished: powerProfile = this.text.trim()
         }
     }
+
+    onPowerProfileChanged: powerProfileChange()
+
+    Process { id: powerProfileSwitch }
 
     Connections {
         target: Tick3s
         function onTick() { runPerfomance() }
     }
-
-    // Component.onCompleted: {
-    //     if (!gpuType) gpuInit.running = true
-    //     else runPerfomance()
-    // }
 }
