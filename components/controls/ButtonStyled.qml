@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import qs.components
 import qs.components.shapes
 import qs.components.animations
@@ -23,6 +24,12 @@ RectForeground {
         font.pixelSize: fullH === true ? parent.height - Global.padding.small : Global.appearance.fontSize
         color: isActive ? Colors.textAccent : Colors.textSurface
     }
+
+    property string test: ""
+
+    ToolTip.visible: hover.hovered
+    ToolTip.delay: 500  // мілісекунди
+    ToolTip.text: test
 
     HoverHandler { id: hover }
     TapHandler { onTapped: clicked() }

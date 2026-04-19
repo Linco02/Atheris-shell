@@ -12,7 +12,10 @@ PopupWindow {
         rect.x: panel.width / 2 - width / 2
         rect.y: panel.height
     }
-    implicitHeight: 1000; implicitWidth: 2000
+    implicitHeight: 1000
+    // implicitWidth: 2000
+    // implicitHeight: Screen.height - 100
+    implicitWidth: Screen.width
     color: "transparent"
 
     default property alias contents: container.data
@@ -134,12 +137,12 @@ PopupWindow {
         onTriggered: box.state = "close"
     }
 
-    mask: Region {
-        x: box.x
-        y: box.y
-        width: box.width
-        height: box.height
-    }
+    // mask: Region {
+    //     x: box.x
+    //     y: box.y
+    //     width: box.width
+    //     height: box.height
+    // }
 
     component Corner: Shape {
         height: rad; width: rad

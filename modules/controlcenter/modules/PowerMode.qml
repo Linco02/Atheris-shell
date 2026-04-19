@@ -17,6 +17,7 @@ RectInactive {
                 onClicked: PerfomanceServices.powerProfile = modelData.label
                 isActive: PerfomanceServices.powerProfile === modelData.label
                 fullH: false
+                test: modelData.label
             }
         }
     }

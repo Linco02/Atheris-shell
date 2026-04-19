@@ -55,6 +55,23 @@ WlSessionLock {
                 TapHandler { onTapped: Global.isSessionLock = false }
             }
 
+            RectForeground {
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: 40; width: 200
+                TextInput {
+                    id: password
+                    anchors.left: parent.left
+                    height: parent.height; width: parent.width / 2
+                    echoMode: TextInput.Password
+                }
+                TapHandler { onTapped: PamServices.authenticate(password.text) }
+                Connections {
+                    target: PamServices
+                    function onCompleted() { Global.isSessionLock = false }
+                    function onError() { console.log("wrong password") }
+                }
+            }
+
             RowSpaced {
                 anchors.horizontalCenter: parent.horizontalCenter
                 
