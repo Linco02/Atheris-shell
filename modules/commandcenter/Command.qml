@@ -55,7 +55,6 @@ Column {
                 id: textInput
                 anchors.verticalCenter: parent.verticalCenter
                 height: parent.height / 2; width: textInputContainer.width
-                autoScroll: false
                 focus: true
                 color: Colors.textAccent
             }

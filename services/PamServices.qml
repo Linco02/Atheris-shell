@@ -6,32 +6,29 @@ import Quickshell.Services.Pam
 Singleton {
     id: root
     
-    property string _password: ""
-    
     signal completed()
     signal error()
 
     function authenticate(password) {
-        _password = password
-        pam.start()
+        if (password === "") return
+        
+        if (pam.responseRequired)
+            pam.respond(password)
     }
+    function start() { pam.start() }
+    function abort() { pam.abort () }
 
     PamContext {
         id: pam
         configDirectory: "/etc/pam.d"
         config: "quickshell"
 
-        onPamMessage: {
-            if (responseRequired) {
-                respond(_password)
-            }
-        }
-
         onCompleted: result => {
-            _password = ""
-
             if (result === PamResult.Success) root.completed()
-            else root.error()
+            else {
+                root.error()
+                start()
+            }
         }
     }
 }

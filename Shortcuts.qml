@@ -28,6 +28,12 @@ Item {
         onPressed: openDashboard("command")
     }
 
+    GlobalShortcut {
+        name: "lock_session"
+        description: "lock session"
+        onPressed: Global.isSessionLock = true
+    }
+
     // GlobalShortcut {
     //     name: "programs_selector"
     //     description: "Відкрити програму"
