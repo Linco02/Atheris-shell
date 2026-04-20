@@ -95,16 +95,16 @@ ScrollView {
                     rightPadding: Global.padding.normal
                     height: parent.height
 
-                    // TextStyled {
-                    //     visible: mode === "command"
-                    //     anchors.verticalCenter: parent.verticalCenter
-                    //     text: modelData.icon
-                    // }
+                    TextStyled {
+                        visible: mode === "command"
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: modelData.icon
+                    }
 
-                    // IconsViewer {
-                    //     visible: mode === "applications"
-                    //     icon: modelData.icon
-                    // }
+                    IconsViewer {
+                        visible: mode === "applications"
+                        icon: modelData.icon
+                    }
 
                     TextStyled {
                         anchors.verticalCenter: parent.verticalCenter
@@ -120,8 +120,13 @@ ScrollView {
                     onTapped: {
                         if (mode === "command")
                             Global.commandCenterModule = modelData.label
-                        else if (mode === "applications")
-                            modelData.execute()
+                        else if (mode === "applications") {
+                            if (modelData.runInTerminal) {
+                                return
+                            } else {
+                                modelData.execute()
+                            }
+                        }
                     }
                 }
             }
