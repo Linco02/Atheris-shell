@@ -90,34 +90,29 @@ ScrollView {
             delegate: RectInactive {
                 height: brickH; width: parent.width
 
-                Loader {
-                    active: mode === "command"
-                    sourceComponent: RowOwn {
-                        TextStyled {
-                            visible: mode === "command"
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: modelData.icon
-                        }
+                RowSpaced {
+                    leftPadding: Global.padding.normal
+                    rightPadding: Global.padding.normal
+                    height: parent.height
 
-                        TextStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: modelData?.label
-                        }
-                    }
-                }
+                    // TextStyled {
+                    //     visible: mode === "command"
+                    //     anchors.verticalCenter: parent.verticalCenter
+                    //     text: modelData.icon
+                    // }
 
-                Loader {
-                    active: mode === "applications"
-                    sourceComponent: RowOwn {
-                        IconsViewer {
-                            visible: mode === "applications"
-                            icon: modelData.icon
-                        }
+                    // IconsViewer {
+                    //     visible: mode === "applications"
+                    //     icon: modelData.icon
+                    // }
 
-                        TextStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: modelData.name
-                        }
+                    TextStyled {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: mode === "command"
+                            ? modelData.label
+                            : mode === "applications"
+                            ? modelData.name
+                            : ""
                     }
                 }
 
@@ -131,11 +126,5 @@ ScrollView {
                 }
             }
         }
-    }
-
-    component RowOwn: RowSpaced {
-        leftPadding: Global.padding.normal
-        rightPadding: Global.padding.normal
-        height: parent.height
     }
 }
