@@ -14,6 +14,7 @@ TextInput {
     property string placeholderText: ""
 
     signal entered()
+    signal exited()
 
     TextStyled {
         anchors.centerIn: parent
@@ -22,6 +23,7 @@ TextInput {
     }
 
     Keys.onReturnPressed: entered()
+    Keys.onEscapePressed: exited()
 
     Behavior on color { ColorAnim {} }
 }

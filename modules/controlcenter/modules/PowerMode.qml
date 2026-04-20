@@ -1,4 +1,5 @@
 import QtQuick
+import qs.components
 import qs.components.shapes
 import qs.components.controls
 import qs.config
@@ -17,7 +18,11 @@ RectInactive {
                 onClicked: PerfomanceServices.powerProfile = modelData.label
                 isActive: PerfomanceServices.powerProfile === modelData.label
                 fullH: false
-                test: modelData.label
+                
+                ToolTipStyled {
+                    visible: parent.hovered
+                    text: modelData.label
+                }
             }
         }
     }

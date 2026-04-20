@@ -8,13 +8,14 @@ import qs.config
 RectForeground {
     id: root
     width: buttonText.width + Global.padding.large
-    color: hover.hovered && !isActive ? Qt.lighter(Colors.inactive, Global.appearance.hover)
+    color: hovered && !isActive ? Qt.lighter(Colors.inactive, Global.appearance.hover)
         : isActive ? Colors.active
         : Colors.inactive
 
     property alias text: buttonText.text
     property bool isActive: false
     property bool fullH: true
+    property bool hovered: hover.hovered
 
     signal clicked()
 
@@ -24,12 +25,6 @@ RectForeground {
         font.pixelSize: fullH === true ? parent.height - Global.padding.small : Global.appearance.fontSize
         color: isActive ? Colors.textAccent : Colors.textSurface
     }
-
-    property string test: ""
-
-    ToolTip.visible: hover.hovered
-    ToolTip.delay: 500  // мілісекунди
-    ToolTip.text: test
 
     HoverHandler { id: hover }
     TapHandler { onTapped: clicked() }

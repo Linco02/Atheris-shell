@@ -11,29 +11,37 @@ Column {
     spacing: 10
 
     property int brickH: 40
+    property var command: Global.commandCenterModules.filter(m => m.label !== "command")
+    property var directory: [{label: "directory", icon: "D"}]
+    property var applications: [{label: "applications", icon: "A"}]
+    property string mode: {
+        const first = textInput.text[0];
+        if (first === ">") return "command"
+        if (first === "/") return "directory"
+        return "applications"
+    }
     property var list: {
-        let command = Global.commandCenterModules.filter(m => m.label !== "command")
-        const directory = [{label: "directory", icon: "D"}]
-        const applications = [{label: "applications", icon: "A"}]
-
         const input = textInput.text;
         if (input.length === 0) return applications;
 
-        const first = input[0];
         const query = input.slice(1).toLowerCase();
 
         let base = [];
-        if (first === ">") {
-            base = command
-        } else if (first === "/") {
-            base = directory
-        } else {
+        if (mode === "command") base = command
+        else if (mode === "directory") base = directory
+        else {
             base = applications
             return base.filter(m => m.label.toLowerCase().includes(input.toLowerCase()));
         }
 
         if (query.length === 0) return base;
         return base.filter(m => m.label.toLowerCase().includes(query));
+    }
+
+    function enterMode(mode) {
+        if (mode === "command") {
+            Global.commandCenterModule = list[0].label
+        }
     }
 
     RectActive {
@@ -57,6 +65,9 @@ Column {
                 height: parent.height / 2; width: textInputContainer.width
                 focus: true
                 color: Colors.textAccent
+                onEntered: enterMode(mode)
+
+                Component.onCompleted: forceActiveFocus()
             }
         }
     }

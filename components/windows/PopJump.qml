@@ -137,13 +137,6 @@ PopupWindow {
         onTriggered: box.state = "close"
     }
 
-    // mask: Region {
-    //     x: box.x
-    //     y: box.y
-    //     width: box.width
-    //     height: box.height
-    // }
-
     component Corner: Shape {
         height: rad; width: rad
         anchors.top: parent.top

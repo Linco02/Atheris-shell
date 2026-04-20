@@ -21,9 +21,9 @@ Singleton {
 
     // PowerMode
     property var powerModes: [
-        {label: "performance", icon: "󰊗"},
+        {label: "power-saver", icon: "󰌪"},
         {label: "balanced", icon: ""},
-        {label: "power-saver", icon: "󰌪"}
+        {label: "performance", icon: "󰊗"}
     ]
 
     // ControlCenter
