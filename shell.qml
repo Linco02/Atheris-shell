@@ -7,19 +7,27 @@ import qs.modules.background
 import qs.modules.atherissettings
 
 ShellRoot {
-    LazyLoader {
-        active: Global.settings.isBackgroundOn
-        component: Background { }
+    Variants {
+        model: Quickshell.screens
+        delegate: LazyLoader {
+            required property var modelData
+            active: Global.settings.isBarOn
+            component: Bar { screen: modelData }
+        }
+    }
+
+    Variants {
+        model: Quickshell.screens
+        delegate: LazyLoader {
+            required property var modelData
+            active: Global.settings.isBackgroundOn
+            component: Background { screen: modelData }
+        }
     }
 
     LazyLoader {
         active: Global.isSessionLock
         component: Lock { }
-    }
-
-    LazyLoader {
-        active: Global.settings.isBarOn
-        component: Bar { }
     }
 
     LazyLoader {

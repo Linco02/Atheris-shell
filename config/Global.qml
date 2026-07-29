@@ -15,6 +15,8 @@ Singleton {
 
     // Floating
     property bool isAtherisSettingsOpen: false
+    property var atherisSettingsModules: ["General", "Display", "Theme"]
+    property string atherisSettingsModule: "Display"
 
     // Power
     property bool isPowerOpen: false

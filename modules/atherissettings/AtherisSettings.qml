@@ -3,23 +3,22 @@ import qs.components
 import qs.components.shapes
 import qs.components.windows
 import qs.components.controls
+import qs.components.containers
 import qs.config
 
 Floating {
     id: root
     onVisibleChanged: if (!visible) Global.isAtherisSettingsOpen = false
 
-    property var settingsList: ["Bar", "Background", "Theme", "General"]
-
-    Row {
+    SpacedRow {
         height: root.height
 
-        Column {
+        SpacedColumn {
             id: settingsChoser
             width: 200
             
             Repeater {
-                model: settingsList
+                model: Global.atherisSettingsModules
                 delegate: ButtonStyled {
                     height: 20; width: parent.width
                     text: modelData
@@ -28,11 +27,19 @@ Floating {
         }
 
         RectForeground {
+            height: root.height; width: 10
+        }
+
+        Item {
             height: root.height; width: root.width - settingsChoser.width
             
-            Column {
-                id: settingsContainer
-            }
+            Display { }
+            
+            // Column {
+            //     id: settingsContainer
+
+            //     Display { }
+            // }
         }
     }
 }
