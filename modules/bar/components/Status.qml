@@ -10,23 +10,23 @@ RectForeground {
     id: root
     height: parent.height; width: statusContainer.width
 
-    RowSpaced {
+    RowStyled {
         id: statusContainer
         height: parent.height
-        leftPadding: Global.padding.normal; rightPadding: Global.padding.normal
+        leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
 
         TextOwn { text: PipewireServices.iconVolume }
         TextOwn { text: UPowerServices.batteryIcon; visible: UPowerServices.isExist }
         TextOwn { text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn { text: NetworkServices.currentNetworkSimbol }
-        TextOwn { text: (Global.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
-        TextOwn { text: LanguageServices.currentLayoutName }
+        // TextOwn { text: (UIState.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
+        TextOwn { text: SLanguage.currentLayoutName }
     }
 
     component TextOwn: TextStyledH {
         height: root.height; width: height
     }
 
-    TapHandler { onTapped: Global.isControlCenterOpen = !Global.isControlCenterOpen }
+    // TapHandler { onTapped: UIState.isControlCenterOpen = !UIState.isControlCenterOpen }
 }

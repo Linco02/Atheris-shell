@@ -24,7 +24,7 @@ Singleton {
             return player[0];
     }
     property real playerActiveProgres: 0
-    property var cavaBarsData: Array(Global.appearance.cavaBarsCount).fill(0)
+    property var cavaBarsData: Array(Style.cavaBarsCount).fill(0)
 
     function checkIsPlaying(p) {
         return p?.playbackState === MprisPlaybackState.Playing ?? false
@@ -52,7 +52,7 @@ Singleton {
 
     Process {
         id: radialBars
-        running: Global.isCommandCenterOpen && Global.dashboardModul === "music"
+        running: UIState.isCommandCenterOpen && UIState.dashboardModul === "music"
         command: [
             "sh", "-c", "cava -p ~/Atheris-shell/assets/cava.ini"
         ]
@@ -61,7 +61,7 @@ Singleton {
             onRead: data => {
                 const raw = data.trim().split(";").map(n => parseInt(n) || 0)
 
-                const normalized = Array(Global.appearance.cavaBarsCount).fill(0).map(
+                const normalized = Array(Style.cavaBarsCount).fill(0).map(
                     (_, i) => raw[i] ?? 0
                 )
                 

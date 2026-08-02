@@ -8,10 +8,10 @@ import qs.services
 RectForeground {
     id: root
     height: iconSize; width: height
-    color: hover && !active ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
-        : active ? Colors.active
-        : focused ? Colors.inactive
-        : Colors.surfaceRaised
+    color: hover && !active ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.hover)
+        : active ? Theme.active
+        : focused ? Theme.inactive
+        : Theme.surfaceRaised
 
     property alias iconSize: buttonIcon.implicitSize
     property string source: ""
@@ -23,14 +23,14 @@ RectForeground {
     IconImage {
         id: buttonIcon
         anchors.centerIn: parent
-        source: AppIcons.getIcon(root.source)
-        implicitSize: root.height - Global.padding.mini + 2
+        source: SAppIcons.getIcon(root.source)
+        implicitSize: root.height - Style.padding.mini + 2
     }
 
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: parent.height - Global.padding.small
+        font.pixelSize: parent.height - Style.padding.small
     }
 
     HoverHandler { id: hover }

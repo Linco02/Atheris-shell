@@ -14,22 +14,22 @@ RectForeground {
     height: parent.height; width: musicContainer.width
     state: playerExist ? "open" : "close"
 
-    property var playerActive: MrisServices.playerActive
-    property bool playerExist: MrisServices.playerExist
-    property bool isPlayerPlay: MrisServices.isplayerActivePlay
+    property var playerActive: SMris.playerActive
+    property bool playerExist: SMris.playerExist
+    property bool isPlayerPlay: SMris.isplayerActivePlay
     property bool isTextFit: firstText.width > trackNameContainer.width
 
-    SpacedRow {
+    RowStyled {
         id: musicContainer
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Global.padding.small; rightPadding: Global.padding.small
+        leftPadding: Style.padding.small; rightPadding: Style.padding.small
 
         IconImage {
             id: programIcons
             anchors.verticalCenter: parent.verticalCenter
-            x: Global.padding.small
+            x: Style.padding.small
             implicitSize: 16
-            source: playerExist ? AppIcons.getIcon(playerActive.identity) : ""
+            source: playerExist ? SAppIcons.getIcon(playerActive.identity) : ""
         }
 
         Item {
@@ -37,12 +37,12 @@ RectForeground {
             height: parent.height
             width: trackNameRow.width < 200 ? trackNameRow.width : 200
             clip: true
-            x: programIcons.width + Global.padding.small * 2
+            x: programIcons.width + Style.padding.small * 2
 
             Row {
                 id: trackNameRow
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: Global.padding.gigant
+                spacing: Style.padding.gigant
 
                 TextOwn {
                     id: firstText
@@ -72,9 +72,9 @@ RectForeground {
 
             TapHandler {
                 onTapped: {
-                    Global.dashboardModul = "music"
-                    Global.commandCenterModule = "dashboard"
-                    Global.isCommandCenterOpen = !Global.isCommandCenterOpen
+                    UIState.dashboardModul = "music"
+                    UIState.commandCenterModule = "dashboard"
+                    UIState.isCommandCenterOpen = !UIState.isCommandCenterOpen
                 }
             }
 
@@ -83,8 +83,8 @@ RectForeground {
 
         ButtonTransparent {
             text: isPlayerPlay ? "" : ""
-            onLeftClicked: isPlayerPlay ? MrisServices.pauseMris(playerActive)
-                : MrisServices.playMris(playerActive)
+            onLeftClicked: isPlayerPlay ? SMris.pauseMris(playerActive)
+                : SMris.playMris(playerActive)
         }
     }
 

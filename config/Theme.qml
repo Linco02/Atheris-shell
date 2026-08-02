@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell
 
 Singleton {
-    property color surface: "#191113"
+    property color surface: Qt.alpha("#191113", Style.opacity)
     property color surfaceRaised: "#261d1f"
     property color outline: "#9e8c8f"
     property color active: "#ffb1c4"

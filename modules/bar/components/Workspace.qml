@@ -9,10 +9,10 @@ RectForeground {
     id: root
     height: parent.height; width: workspaceContainer.width
 
-    property real cornerRadius: Global.radius.normal
-    property var workspaceFocused: WorkspaceService.workspaceFocused
-    property int workspaceExist: WorkspaceService.workspaceExist
-    property list<bool> workspaceOccupied: WorkspaceService.workspaceOccupied
+    property real cornerRadius: Style.radius.normal
+    property var workspaceFocused: SWorkspace.workspaceFocused
+    property int workspaceExist: SWorkspace.workspaceExist
+    property list<bool> workspaceOccupied: SWorkspace.workspaceOccupied
 
     Row {
         id: workspaceContainer
@@ -24,7 +24,7 @@ RectForeground {
                 height: root.height; width: 50
                 topLeftRadius: leftRad ? 0 : cornerRadius; bottomLeftRadius: leftRad ? 0 : cornerRadius
                 topRightRadius: rightRad ? 0 : cornerRadius; bottomRightRadius: rightRad ? 0 : cornerRadius
-                color: isOccupied ? Colors.inactive
+                color: isOccupied ? Theme.inactive
                     : "transparent"
 
                 property bool isFocused: workspaceFocused === index + 1
@@ -32,7 +32,7 @@ RectForeground {
                 property bool leftRad: isOccupied && (index > 0 && workspaceOccupied[index - 1]) === true
                 property bool rightRad: isOccupied && (index < workspaceOccupied.length - 1 && workspaceOccupied[index + 1]) === true
 
-                MouseFill { onClicked: WorkspaceService.workspaceMove(index) }
+                MouseFill { onClicked: SWorkspace.workspaceMove(index) }
 
                 Behavior on color { ColorAnim {} }
                 Behavior on topLeftRadius { NumberAnim { } }
@@ -64,9 +64,9 @@ RectForeground {
                     text: isFocused ? "●" 
                         : isOccupied ? "◉"
                         : "○"
-                    color: isFocused ? Colors.inactive
-                        : isOccupied ? Colors.textSurface
-                        : Colors.inactive
+                    color: isFocused ? Theme.inactive
+                        : isOccupied ? Theme.textSurface
+                        : Theme.inactive
 
                     Behavior on color { ColorAnim {} }
                 }

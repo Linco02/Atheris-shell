@@ -1,7 +1,8 @@
+pragma Singleton
 import Quickshell
 import Quickshell.Io
 
-JsonObject {
+Singleton {
     property AnimDurations durations: AnimDurations {}
     property Padding padding: Padding { }
     property Spacing spacing: Spacing { }
@@ -16,7 +17,7 @@ JsonObject {
     property real opacity: 0.9
     property bool glassEfect: true
     // розмір панелі
-    property real barHeight: 34 * scale
+    property real barWidth: 34 * scale
     // кількість worckspace
     property int workspaceNumber: 5
     // кількість cavaBars
@@ -33,7 +34,7 @@ JsonObject {
 
     component Margine: JsonObject {
         property real scale: 1
-        property int small: 5 * scale
+        property int small: 6 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
         property int gigant: 40 * scale
@@ -42,7 +43,7 @@ JsonObject {
     component Padding: JsonObject {
         property real scale: 1
         property int mini: 3 * scale
-        property int small: 5 * scale
+        property int small: 6 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
         property int gigant: 40 * scale
@@ -50,7 +51,7 @@ JsonObject {
 
     component Spacing: JsonObject {
         property real scale: 1
-        property int small: 5 * scale
+        property int small: 6 * scale
         property int normal: 10 * scale
         property int large: 20 * scale
         property int gigant: 40 * scale

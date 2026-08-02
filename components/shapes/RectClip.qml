@@ -2,6 +2,6 @@ import Quickshell.Widgets
 import qs.config
 
 ClippingRectangle {
-    radius: Global.radius.normal
+    radius: Style.radius.normal
     color: "transparent"
 }

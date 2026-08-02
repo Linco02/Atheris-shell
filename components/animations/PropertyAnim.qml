@@ -2,6 +2,6 @@ import QtQuick
 import qs.config
 
 PropertyAnimation {
-    duration: Global.durations.normal
+    duration: Style.durations.normal
     easing.type: Easing.InOutQuad
 }

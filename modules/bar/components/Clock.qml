@@ -5,12 +5,12 @@ import qs.config
 import qs.services
 
 RectForeground {
-    height: root.height - Global.padding.normal
-    width: clock.width + Global.padding.large
+    height: parent.height
+    width: clock.width + Style.padding.large
     
     TextStyledH {
         id: clock
         anchors.centerIn: parent
-        text: TimeServices.time
+        text: STime.time
     }
 }

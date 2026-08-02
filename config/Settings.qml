@@ -1,8 +1,12 @@
+pragma Singleton
+import Quickshell
 import Quickshell.Io
 
-JsonObject {
+Singleton {
     // Панель //
     property bool isBarOn: true
+    // property bool isDetached: true
+    property string barPosition: "bottom"
 
     // Задній план //
     property bool isBackgroundOn: true

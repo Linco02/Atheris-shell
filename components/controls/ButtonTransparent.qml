@@ -6,7 +6,7 @@ Item {
     id: root
     height: parent.height; width: height
 
-    property alias text: buttonText.text
+    property string text: ""
     property bool occupied: false
     property bool focused: false
     property bool isHovered: false
@@ -19,10 +19,11 @@ Item {
         id: buttonText
         anchors.centerIn: root
         font.pixelSize: root.height
-        color: isHovered && !occupied ? Qt.lighter(focused ? Colors.inactive : Colors.surfaceRaised, Global.appearance.hover)
-            : occupied ? Colors.textAccent
-            : focused ? Colors.textInactive
-            : Colors.textSurface
+        color: isHovered && !occupied ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.appearance.hover)
+            : occupied ? Theme.textAccent
+            : focused ? Theme.textInactive
+            : Theme.textSurface
+        text: root.text
     }
 
     MouseFill {

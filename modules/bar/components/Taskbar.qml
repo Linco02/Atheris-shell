@@ -23,7 +23,7 @@ RectForeground {
             delegate: ButtonIcon {
                 source: modelData.appId
                 height: root.height
-                iconSize: root.height - Global.padding.mini * 2
+                iconSize: root.height - Style.padding.mini * 2
                 onClicked: modelData.activate()
                 // onMidleClicked: modelData.close()
                 active: modelData.activated

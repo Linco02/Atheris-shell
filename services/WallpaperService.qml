@@ -30,7 +30,7 @@ Singleton {
     }
 
     function wallpaperInit() {
-        if (Global.settings.isRandomWallpaperOn) wallpaperRandom()
+        if (Settings.isRandomWallpaperOn) wallpaperRandom()
         else if (Global.wallpaperCurrent !== "") wallpaperChange(Global.wallpaperCurrent)
     }
 

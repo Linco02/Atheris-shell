@@ -3,8 +3,8 @@ import qs.components.animations
 import qs.config
 
 Rectangle {
-    radius: Global.radius.normal
-    color: Colors.surfaceRaised
+    radius: Style.radius.normal
+    color: Theme.surfaceRaised
 
     Behavior on color { ColorAnim { } }
 }

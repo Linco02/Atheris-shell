@@ -14,13 +14,13 @@ PanelWindow {
     }
     WlrLayershell.layer: WlrLayer.Background
     exclusiveZone: -1
-    color: Colors.surface
+    color: Theme.surfaceRaised
 
     Loader {
-        active: Global.settings.isWallpaperOn
+        active: Settings.isWallpaperOn
         anchors.fill: parent
         sourceComponent: Component {
-            Wallpaper {}
+            Wallpaper { }
         }
     }
 

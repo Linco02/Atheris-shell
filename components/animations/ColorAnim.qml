@@ -2,6 +2,6 @@ import QtQuick
 import qs.config
 
 ColorAnimation {
-    duration: Global.durations.normal
+    duration: Style.durations.normal
     easing.type: Easing.InOutQuad
 }
