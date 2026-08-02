@@ -92,7 +92,7 @@ Item {
                 forward.state = "change"
             }
             
-            PalitServices.palitCreate(source)
+            // PalitServices.palitCreate(source)
         }
     }
 }

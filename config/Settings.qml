@@ -28,6 +28,5 @@ Singleton {
     property bool palitqt6ctOn: true
 
     // Служби //  
-    property bool isShortcutOn: true
     property bool isNotifiSoundOn: true
 }

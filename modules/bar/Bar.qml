@@ -52,7 +52,7 @@ PanelWindow {
 
     component RowContainer : Row {
         height: root.height - Style.padding.normal
-        spacing: Style.spacing.large
+        spacing: Style.spacing.normal
     }
 }
 

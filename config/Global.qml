@@ -22,7 +22,4 @@ Singleton {
     // Wallpaper
     // property string wallpaperCurrent: "file:///home/linco02/wallpapers/liquid-art-paint-3840x2160-25904.jpg"
 
-    // TEMP
-    // property string palitMode: "dark"
-    // property bool isNotifiSoundOn: true
 }

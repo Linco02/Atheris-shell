@@ -7,46 +7,46 @@ import qs.services
 
 Singleton {
     readonly property var jsonData: JSON.parse(jsonFile.text())
-    property string lastPalit: ""
+    property string curentPath: ""
 
     function palitCreate(path) {
-        const colorIndex = Global.palitMode === "dark" ? 0 : 2
-        if (Global.settings.isPalitOn) {
+        const colorIndex = Settings.palitMode === "dark" ? 0 : 2
+        if (Settings.isPalitOn) {
             paliCreator.command = [
                 "matugen",
                 "image",
-                "--mode", Global.palitMode,
+                "--mode", Settings.palitMode,
                 "--source-color-index", colorIndex,
                 WallpaperService.wallpaperRawPath(path)
             ]
-            paliCreator.running = Global.settings.isPalitOn
-            lastPalit = path
+            paliCreator.running = true
+            curentPath = path
         }
     }
 
     function applyPalette(data) {
         if (!data) return;
 
-        Colors.surface       = data.surface       || Colors.surface;
-        Colors.surfaceRaised = data.surfaceRaised || Colors.surfaceRaised;
-        Colors.outline       = data.outline       || Colors.outline;
-        Colors.active        = data.active        || Colors.active;
-        Colors.inactive      = data.inactive      || Colors.inactive;
-        Colors.warning       = data.warning       || Colors.warning;
+        Theme.surface       = data.surface       || Theme.surface;
+        Theme.surfaceRaised = data.surfaceRaised || Theme.surfaceRaised;
+        Theme.outline       = data.outline       || Theme.outline;
+        Theme.active        = data.active        || Theme.active;
+        Theme.inactive      = data.inactive      || Theme.inactive;
+        Theme.warning       = data.warning       || Theme.warning;
 
-        Colors.textSurface   = data.textSurface   || Colors.textSurface;
-        Colors.textAccent    = data.textAccent    || Colors.textAccent;
-        Colors.textInactive  = data.textInactive  || Colors.textInactive;
+        Theme.textSurface   = data.textSurface   || Theme.textSurface;
+        Theme.textAccent    = data.textAccent    || Theme.textAccent;
+        Theme.textInactive  = data.textInactive  || Theme.textInactive;
     }
 
     Process {
         id: paliCreator
         onExited: (exitCode) => {
             if (exitCode === 0) {
-                if (Global.settings.palitOpenrgbOn) openrgbUpdate.running = true
-                if (Global.settings.palitPywalFoxOn) pywalfoxUpdate.running = true
-                if (Global.settings.palitKittyOn) kittyUpdate.running = true
-                if (Global.settings.palitqt6ctOn) qt6ctUpdate.running = true
+                if (Settings.palitOpenrgbOn) openrgbUpdate.running = true
+                if (Settings.palitPywalFoxOn) pywalfoxUpdate.running = true
+                if (Settings.palitKittyOn) kittyUpdate.running = true
+                if (Settings.palitqt6ctOn) qt6ctUpdate.running = true
             }
         }
     }
@@ -69,7 +69,7 @@ Singleton {
     Process {
         id: qt6ctUpdate
         command: [
-            "sh", "sed -i 's|^color_scheme_path=.*|color_scheme_path=/tmp/atheris/qt6ct.conf|' ~/.config/qt6ct/qt6ct.conf"
+            "sh", "-c", "sed -i 's|^color_scheme_path=.*|color_scheme_path=/tmp/atheris/qt6ct.conf|' ~/.config/qt6ct/qt6ct.conf"
         ]
     }
 
@@ -82,7 +82,7 @@ Singleton {
     }
 
     onJsonDataChanged: {
-        if (jsonData && Global.settings.palitShellOn) {
+        if (jsonData && Settings.palitShellOn) {
             applyPalette(jsonData);
         }
     }
@@ -90,7 +90,7 @@ Singleton {
     Connections {
         target: Global
         function onPalitModeChanged() {
-            if (lastPalit !== "") palitCreate(lastPalit)
+            if (curentPath !== "") palitCreate(curentPath)
         }
     }
 }
