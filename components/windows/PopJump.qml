@@ -23,7 +23,7 @@ PopupWindow {
     property alias containerW: container.width
     property bool isOpen: false
     property real percent: 1
-    property int rad: Global.radius.large
+    property int rad: Style.radius.large
     property var panel: null
 
     signal closedPop()
@@ -59,8 +59,8 @@ PopupWindow {
         id: box
         anchors.horizontalCenter: parent.horizontalCenter
         y: 0
-        height: container.height + Global.padding.normal
-        width: container.width + Global.padding.large
+        height: container.height + Style.padding.normal
+        width: container.width + Style.padding.large
         topLeftRadius: 0; topRightRadius: 0
         bottomLeftRadius: rad; bottomRightRadius: rad
         state: "close"
@@ -149,7 +149,7 @@ PopupWindow {
 
         ShapePath {
             strokeWidth: 0
-            fillColor: Qt.alpha(Colors.surface, Global.appearance.opacity)
+            fillColor: Qt.alpha(Theme.surface, Style.opacity)
             startY: 0; startX: isLeft ? rad : 0
             PathLine { y: rad * percent; x: isLeft ? rad : 0 }
             PathArc {

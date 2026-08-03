@@ -6,9 +6,9 @@ PopJump {
     id: dashboard
     containerH: mainLoader.height
     containerW: mainLoader.width
-    isOpen: Global.isCommandCenterOpen
+    isOpen: UIState.isCommandCenterOpen
     onClosedPop: {
-        Global.isCommandCenterOpen = false
+        UIState.isCommandCenterOpen = false
         mainLoader.active = false
     }
 
@@ -18,9 +18,9 @@ PopJump {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
         }
-        active: Global.isCommandCenterOpen
+        active: UIState.isCommandCenterOpen
         source: {
-            switch(Global.commandCenterModule) {
+            switch(UIState.commandCenterModule) {
                 case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
@@ -31,9 +31,9 @@ PopJump {
     }
 
     Connections {
-        target: Global
+        target: UIState
         function onIsCommandCenterOpenChanged() {
-            if (Global.isCommandCenterOpen) mainLoader.active = true
+            if (UIState.isCommandCenterOpen) mainLoader.active = true
         }
     }
 }

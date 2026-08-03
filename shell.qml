@@ -5,6 +5,7 @@ import qs.config
 import qs.modules.bar
 import qs.modules.session
 import qs.modules.background
+import qs.modules.atheriscenter
 // import qs.modules.atherissettings
 
 ShellRoot {
@@ -13,7 +14,14 @@ ShellRoot {
         delegate: LazyLoader {
             required property var modelData
             active: Settings.isBarOn
-            component: Bar {screen: modelData}
+            component: Bar {
+                id: bar
+                screen: modelData
+
+                Loader {
+                    sourceComponent: AtherisCenter { panel: bar }
+                }
+            }
         }
     }
 
@@ -32,6 +40,16 @@ ShellRoot {
         active: UIState.isSessionLock
         component: Lock {}
     }
+
+
+
+//     Loader {
+//         sourceComponent: Power { panel: root }
+//     }
+
+//     Loader {
+//         sourceComponent: ControlCenter { panel: root }
+//     }
 
     // Loader {
     //     active: Global.isAtherisSettingsOpen
