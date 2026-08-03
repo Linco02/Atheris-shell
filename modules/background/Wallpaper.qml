@@ -1,11 +1,11 @@
 import QtQuick
 import QtMultimedia
 import Quickshell
+import qs.config
+import qs.services
 import qs.components
 import qs.components.shapes
 import qs.components.animations
-import qs.config
-import qs.services
 
 Item {
     id: root

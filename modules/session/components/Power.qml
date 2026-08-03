@@ -3,7 +3,7 @@ import qs.components.controls
 import qs.components.containers
 import qs.services
 
-RowSpaced {
+RowStyled {
     anchors.horizontalCenter: parent.horizontalCenter
     
     Repeater {

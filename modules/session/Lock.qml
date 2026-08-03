@@ -5,7 +5,7 @@ import qs.services
 import "./components"
 
 WlSessionLock {
-    locked: Global.isSessionLock
+    locked: UIState.isSessionLock
 
     onLockedChanged: {
         if (locked) PamServices.start()
@@ -14,7 +14,7 @@ WlSessionLock {
 
     WlSessionLockSurface {
         id: lockSurface
-        color: Colors.surface
+        color: Theme.surface
 
         Background { }
 

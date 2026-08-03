@@ -20,7 +20,7 @@ RectForeground {
         TextOwn { text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn { text: NetworkServices.currentNetworkSimbol }
-        // TextOwn { text: (UIState.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
+        TextOwn { text: (Icon.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
         TextOwn { text: SLanguage.currentLayoutName }
     }
 

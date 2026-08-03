@@ -17,19 +17,19 @@ RectForeground {
             horizontalAlignment: TextInput.AlignHCenter
             placeholderText: "Enter password"
             focus: true
-            onEntered: PamServices.authenticate(password.text)
+            onEntered: SPam.authenticate(password.text)
         }
 
         ButtonStyled {
             id: enterPassword
             height: root.height; width: height
-            onClicked: PamServices.authenticate(password.text)
+            onClicked: SPam.authenticate(password.text)
             text: "󰿄"
         }
     }
 
     Connections {
-        target: PamServices
+        target: SPam
         function onCompleted() { Global.isSessionLock = false }
         function onError() {
             password.placeholderText = "Invalid password"

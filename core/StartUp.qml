@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Io
 
 Singleton {
-    property bool isWallaperThumbnailCreate: false
+    property bool isWallaperThumbnailDirCreate: false
 
     Process {
         id: makeDir
@@ -13,7 +13,7 @@ Singleton {
         ]
         onExited: (exitCode, exitStatus) => {
             if (exitCode === 0) {
-                isWallaperThumbnailCreate = true
+                isWallaperThumbnailDirCreate = true
             } else {
                 console.warn("StartUp: Failed to create temporary directories with exit code:", exitCode)
             }

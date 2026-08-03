@@ -4,8 +4,8 @@ import qs.config
 
 SmartView {
     anchors.fill: parent
-    content: Global.wallpaperCurrent
-    isPlay: Global.isSessionLock
+    content: SWallpaper.wallpaperCurrent
+    isPlay: UIState.isSessionLock
 
     layer.enabled: true
     layer.effect: MultiEffect {

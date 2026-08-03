@@ -1,7 +1,8 @@
 import Quickshell
 import Quickshell.Wayland
-import qs.components.animations
+import qs.core
 import qs.config
+import qs.components.animations
 import QtQuick
 
 PanelWindow {
@@ -17,11 +18,9 @@ PanelWindow {
     color: Theme.surfaceRaised
 
     Loader {
-        active: Settings.isWallpaperOn
+        active: Settings.isWallpaperOn && StartUp.isWallaperThumbnailDirCreate
         anchors.fill: parent
-        sourceComponent: Component {
-            Wallpaper { }
-        }
+        sourceComponent: Wallpaper { }
     }
 
     Behavior on color { ColorAnim { } }

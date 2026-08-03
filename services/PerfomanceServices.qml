@@ -19,7 +19,7 @@ Singleton {
     }
 
     function runPerfomance() {
-        if (Global.isCommandCenterOpen) {
+        if (UIState.isCommandCenterOpen) {
             gpuPerfomance.running = true
             cpuPerfomance.running = true
             memPerfomance.running = true

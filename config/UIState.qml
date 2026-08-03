@@ -20,11 +20,7 @@ Singleton {
 
     // CommandCenter
     property bool isCommandCenterOpen: false
-    property var commandCenterModules: [
-        {label: "wallpaper", icon: ""},
-        {label: "dashboard", icon: "󰨝"},
-        {label: "command", icon: ""},
-    ]
+
     property string commandCenterModule: "dashboard"
     property string dashboardModul: "dash"
 }

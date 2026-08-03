@@ -7,17 +7,17 @@ Column {
     anchors.horizontalCenter: parent.horizontalCenter
 
     OwnText {
-        text: TimeServices.time
+        text: STime.time
         font.pixelSize: 60
     }
 
     OwnText {
-        text: TimeServices.date
+        text: STime.date
         font.pixelSize: 30
     }
 
     component OwnText: TextStyled {
         anchors.horizontalCenter: parent.horizontalCenter
-        color: Colors.textAccent
+        color: Theme.textAccent
     }
 }

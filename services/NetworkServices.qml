@@ -69,7 +69,7 @@ Singleton {
         target: Tick3s
         function onTick() {
             networkNameInfo.running = true
-            if (Global.isControlCenterOpen)
+            if (UIState.isControlCenterOpen)
                 wifiParce.running = true
         }
     }
