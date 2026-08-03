@@ -1,12 +1,20 @@
 pragma Singleton
+import QtQuick
+import Quickshell
+import Quickshell.Io
 
 Singleton {
-    property var thumbnailQueue: [ ]
+    property var thumbnailQueue: []
     property bool isThumbnailGenerating: false
+    readonly property var format: ({
+        "image" : [".png", ".jpg", ".jpeg"],
+        "anmf" : [".gif"],
+        "video" : [".mp4"]
+    })
 
     onThumbnailQueueChanged: {
-        if (!isFrameGenerating)
-            frameNext();
+        if (!isThumbnailGenerating)
+            nextThumbnail();
     }
 
     function toRawPath(path) {
@@ -16,21 +24,20 @@ Singleton {
     function toThumbnailPath(path) {
         let rawPath = toRawPath(path)
         let fileName = rawPath.split('/').pop().replace(/\.[^/.]+$/, "");
-        let tempPath = "/tmp/atheris/" + fileName + ".png";
+        let tempPath = "/tmp/atheris/wallpaperThumbnail/" + fileName + ".png";
         return tempPath
     }
 
-    property var formatSupported: ({
-        "image" : [".png", ".jpg", ".jpeg"],
-        "anmf" : [".gif"],
-        "video" : [".mp4"]
-    })
-
-    function format(media) {
+    function toFormat(media) {
         let path = media.toString().toLowerCase();
 
-        for (const type in formatSupported)
-            if (formatSupported[type].some(e => path.endsWith(e))) return type
+        for (const type in format)
+            if (format[type].some(e => path.endsWith(e))) return type
+    }
+
+    function makeThunbnail(data) {
+        if (!data || data.length ===0) return
+        thumbnailQueue = [...thumbnailQueue, ...data];
     }
 
     function generateThumbnail(path) {

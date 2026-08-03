@@ -13,7 +13,7 @@ Item {
     Loader {
         anchors.fill: parent
         sourceComponent: {
-            let type = WallpaperService.wallpaperFormat(content);
+            let type = SMedia.toFormat(content);
             if (type === "image") return imageComp;
             if (type === "anmf") return anmfComp;
             if (type === "video") return videoComp;

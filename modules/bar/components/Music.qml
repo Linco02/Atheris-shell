@@ -83,7 +83,7 @@ RectForeground {
 
         ButtonTransparent {
             text: isPlayerPlay ? "" : ""
-            onLeftClicked: isPlayerPlay ? SMris.pauseMris(playerActive)
+            onClicked: isPlayerPlay ? SMris.pauseMris(playerActive)
                 : SMris.playMris(playerActive)
         }
     }

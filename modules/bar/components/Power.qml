@@ -14,7 +14,5 @@ Item {
         color: hover.hovered ? Theme.textAccent : Qt.lighter(Theme.textAccent, Style.hover)
     }
 
-    HoverHandler {
-        id: hover
-    }
+    HoverHandler { id: hover }
 }

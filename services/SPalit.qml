@@ -11,13 +11,14 @@ Singleton {
 
     function palitCreate(path) {
         const colorIndex = Settings.palitMode === "dark" ? 0 : 2
-        if (Settings.isPalitOn) {
+        if (Settings.isAdaptivePalitOn) {
             paliCreator.command = [
                 "matugen",
                 "image",
                 "--mode", Settings.palitMode,
                 "--source-color-index", colorIndex,
-                WallpaperService.wallpaperRawPath(path)
+                path
+                // SMedia.toRawPath(path)
             ]
             paliCreator.running = true
             curentPath = path
@@ -88,7 +89,7 @@ Singleton {
     }
 
     Connections {
-        target: Global
+        target: Settings
         function onPalitModeChanged() {
             if (curentPath !== "") palitCreate(curentPath)
         }

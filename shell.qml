@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import qs.core
 import qs.config
 import qs.modules.bar
 // import qs.modules.session

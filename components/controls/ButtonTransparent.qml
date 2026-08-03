@@ -11,31 +11,19 @@ Item {
     property bool focused: false
     property bool isHovered: false
 
-    signal leftClicked()
-    signal rightClicked()
-    signal middleClicked()
+    signal clicked()
 
     TextStyled {
         id: buttonText
         anchors.centerIn: root
         font.pixelSize: root.height
-        color: isHovered && !occupied ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.appearance.hover)
+        color: hover.hovered && !occupied ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.hover)
             : occupied ? Theme.textAccent
             : focused ? Theme.textInactive
             : Theme.textSurface
         text: root.text
     }
 
-    MouseFill {
-        id: buttonReaction
-        hoverEnabled: true
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
-        onEntered: { isHovered = true }
-        onExited: { isHovered = false }
-        onClicked: (mouse) => {
-            if (mouse.button === Qt.MiddleButton) root.middleClicked()
-            else if (mouse.button === Qt.RightButton) root.rightClicked()
-            else root.leftClicked()
-        }
-    }
+    HoverHandler {id: hover}
+    TapHandler {onTapped: root.clicked()}
 }

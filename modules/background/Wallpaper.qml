@@ -16,7 +16,24 @@ Item {
     property bool wallpaperReady: false
     property bool animationEnd: false
 
-    function wallpaperSwith() {
+    function wallpaperSwitch() {
+        wallpaperReady = false
+
+        let source = SWallpaper.isWallpaperAnimated
+            ? SWallpaper.wallpaperFrame
+            : SWallpaper.wallpaper
+
+        if (backSource === "") {
+            backSource = SWallpaper.wallpaper
+        } else {
+            forwardSource = source
+            forward.state = "change"
+        }
+        
+        // PalitServices.palitCreate(source)
+    }
+
+    function removeThumbnail() {
         if (wallpaperReady && animationEnd) {
             wallpaperReady = false
             animationEnd = false
@@ -27,10 +44,10 @@ Item {
     SmartView {
         anchors.fill: parent
         content: backSource
-        isPlay: WallpaperService.isDesktopEmpty
+        isPlay: SWallpaper.isDesktopEmpty
         onContentReady: {
             wallpaperReady = true
-            wallpaperSwith()
+            removeThumbnail()
         }
     }
 
@@ -59,11 +76,11 @@ Item {
             onRunningChanged: {
                 if(!running) {
                     backSource = null
-                    backSource = WallpaperService.wallpaper
+                    backSource = SWallpaper.wallpaper
                     animationEnd = true
                 }
 
-                wallpaperSwith()
+                removeThumbnail()
             }
         }
 
@@ -77,22 +94,7 @@ Item {
     }
 
     Connections {
-        target: WallpaperService
-        function onWallpaperChanged() {
-            wallpaperReady = false
-
-            let source = WallpaperService.isWallpaperAnimated
-                ? WallpaperService.wallpaperFrame
-                : WallpaperService.wallpaper
-
-            if (backSource === "") {
-                backSource = WallpaperService.wallpaper
-            } else {
-                forwardSource = source
-                forward.state = "change"
-            }
-            
-            // PalitServices.palitCreate(source)
-        }
+        target: SWallpaper
+        function onWallpaperChanged() { wallpaperSwitch() }
     }
 }

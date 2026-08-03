@@ -14,12 +14,16 @@ Singleton {
     property bool isRandomWallpaperOn: true
     property string wallpaperFolder: "/home/linco02/wallpapers/"
     property var wallpaperFormat: ["image", "anmf", "video"] // "image", "anmf", "video"
+    property var chosenWallpapers: ({
+        "HDMI-A-1": "",
+        "eDP-1": ""
+    })
 
     // Блокування //
     property bool isSessionLockOn: false
 
     // Палітра //
-    property bool isPalitOn: true
+    property bool isAdaptivePalitOn: true
     property string palitMode: "dark" // dark, light
     property bool palitShellOn: true
     property bool palitOpenrgbOn: true
