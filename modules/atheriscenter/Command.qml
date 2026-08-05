@@ -16,9 +16,9 @@ ScrollView {
     width: 400
 
     property int brickH: 40
-    property var command: Global.commandCenterModules.filter(m => m.label !== "command")
+    property var command: Icon.atherisCenterModules.filter(m => m.label !== "command")
     property var directory: [{label: "directory", icon: "D"}]
-    property var applications: CommandServices.applications
+    property var applications: SCommand.applications
     property string mode: {
         const first = textInput.text[0];
         if (first === ">") return "command"
@@ -45,11 +45,11 @@ ScrollView {
 
     function enterMode(mode) {
         if (mode === "command") {
-            Global.commandCenterModule = list[0].label
+            UIState.atherisCenterModule = list[0].label
         }
     }
 
-    ColumnSpaced {
+    ColumnStyled {
         id: commandContainer
         width: parent.width
 
@@ -57,14 +57,14 @@ ScrollView {
             id: textInputContainer
             height: brickH; width: parent.width
 
-            RowSpaced {
-                leftPadding: Global.padding.normal
-                rightPadding: Global.padding.normal
+            RowStyled {
+                leftPadding: Style.padding.normal
+                rightPadding: Style.padding.normal
                 height: parent.height
 
                 TextStyled {
                     anchors.verticalCenter: parent.verticalCenter
-                    color: Colors.textAccent
+                    color: Theme.textAccent
                     text: ""
                 }
 
@@ -73,7 +73,7 @@ ScrollView {
                     anchors.verticalCenter: parent.verticalCenter
                     height: parent.height / 2; width: textInputContainer.width
                     focus: true
-                    color: Colors.textAccent
+                    color: Theme.textAccent
                     onEntered: enterMode(mode)
 
                     Component.onCompleted: forceActiveFocus()
@@ -90,9 +90,9 @@ ScrollView {
             delegate: RectInactive {
                 height: brickH; width: parent.width
 
-                RowSpaced {
-                    leftPadding: Global.padding.normal
-                    rightPadding: Global.padding.normal
+                RowStyled {
+                    leftPadding: Style.padding.normal
+                    rightPadding: Style.padding.normal
                     height: parent.height
 
                     TextStyled {
@@ -119,7 +119,7 @@ ScrollView {
                 TapHandler {
                     onTapped: {
                         if (mode === "command")
-                            Global.commandCenterModule = modelData.label
+                            UIState.commandCenterModule = modelData.label
                         else if (mode === "applications") {
                             if (modelData.runInTerminal) {
                                 return

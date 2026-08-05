@@ -11,24 +11,24 @@ Column {
     id: root
     spacing: space
 
-    property int space: Global.spacing.normal
+    property int space: Style.spacing.normal
     property int gap: 60
 
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: Global.spacing.large
+        spacing: Style.spacing.large
    
         ButtonOwn {
             btnText: "󰼄"
-            onClicked: Global.dashboardModul = "music"
+            onClicked: UIState.dashboardModul = "music"
         }
         ButtonOwn {
             btnText: "󰨝"
-            onClicked: Global.dashboardModul = "dash"
+            onClicked: UIState.dashboardModul = "dash"
         }
         ButtonOwn {
             btnText: ""
-            onClicked: Global.dashboardModul = "performance"
+            onClicked: UIState.dashboardModul = "performance"
         }
     }
 
@@ -43,7 +43,7 @@ Column {
         anchors.horizontalCenter: parent.horizontalCenter
         height: dash.height; width: dash.width
         clip: true
-        state: Global.dashboardModul
+        state: UIState.dashboardModul
 
         Row {
             id: pages

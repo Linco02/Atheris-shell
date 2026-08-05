@@ -10,7 +10,7 @@ Singleton {
     ]
     
     // CommandCenter
-    property var commandCenterModules: [
+    property var atherisCenterModules: [
         {label: "wallpaper", icon: ""},
         {label: "dashboard", icon: "󰨝"},
         {label: "command", icon: ""},

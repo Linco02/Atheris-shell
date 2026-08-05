@@ -11,8 +11,8 @@ import qs.components.shapes
 import qs.components.animations
 
 Item {
-    height: imageHeight * rowNum + Global.spacing.normal * (rowNum - 1)
-    width: imageWidth * colNum + Global.spacing.normal * (colNum - 1)
+    height: imageHeight * rowNum + Style.spacing.normal * (rowNum - 1)
+    width: imageWidth * colNum + Style.spacing.normal * (colNum - 1)
 
     property int imageHeight: 135
     property int imageWidth: 240
@@ -33,27 +33,27 @@ Item {
         GridLayout {
             id: wallpaperBox
             columns: colNum
-            rowSpacing: Global.spacing.normal
-            columnSpacing: Global.spacing.normal
+            rowSpacing: Style.spacing.normal
+            columnSpacing: Style.spacing.normal
 
             Repeater {
-                model: WallpaperService.wallpapers
+                model: SWallpaper.wallpapers
 
                 RectClip {
                     id: brick
                     height: imageHeight; width: imageWidth
                     border {
                         width: 2
-                        color: hover.hovered ? Colors.active : Colors.inactive
+                        color: hover.hovered ? Theme.active : Theme.inactive
 
                         Behavior on color { ColorAnim { } }
                     }
 
-                    property string type: WallpaperService.wallpaperFormat(modelData)
+                    property string type: SMedia.toFormat(modelData)
 
                     Item {
                         anchors.fill: parent
-                        OwnImage { source: type === "image" ? modelData : WallpaperService.wallpaperTempPath(modelData)}
+                        OwnImage { source: type === "image" ? modelData : SMedia.toThumbnailPath(modelData)}
                         OwnText { text: type === "image" ? "" : type === "anmf" ? "󰪐" : "" }
                     }
 
@@ -104,7 +104,12 @@ Item {
                     }
 
                     HoverHandler { id: hover }
-                    TapHandler { onTapped: Global.wallpaperCurrent = modelData }
+                    TapHandler {
+                        onTapped: {
+                            const wall = SMedia.toRawPath(modelData)
+                            SWallpaper.wallpaperChange(modelData)
+                        }
+                    }
                 }
             }
         }
@@ -118,7 +123,7 @@ Item {
 
     component OwnText: TextStyled {
         y: 5; x: 5
-        color: Colors.active
+        color: Theme.active
         font.pixelSize: 10
     }
 }

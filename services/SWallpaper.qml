@@ -32,6 +32,7 @@ Singleton {
     }
 
     function wallpaperChange(wall) {
+        // console.log(wall)
         let path = wall.toString().toLowerCase();
         let pathPalit = ""
 

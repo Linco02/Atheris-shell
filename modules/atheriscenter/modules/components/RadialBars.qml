@@ -7,7 +7,7 @@ Item {
     id: root
     
     property int barWidth: 4
-    property real outerRadius: height / 2 - Global.padding.normal
+    property real outerRadius: height / 2 - Style.padding.normal
     property real innerRadius: 0
 
     Canvas {
@@ -18,7 +18,7 @@ Item {
             const ctx = getContext("2d")
             ctx.clearRect(0, 0, width, height)
             
-            const bars = MrisServices.cavaBarsData
+            const bars = SMris.cavaBarsData
             const cx = width / 2
             const cy = height / 2
             const angleStep = (Math.PI * 2) / bars.length
@@ -35,7 +35,7 @@ Item {
                 ctx.beginPath()
                 ctx.moveTo(x1, y1)
                 ctx.lineTo(x2, y2)
-                ctx.strokeStyle = Colors.active
+                ctx.strokeStyle = Theme.active
                 ctx.lineWidth = root.barWidth
                 ctx.lineCap = "round"
                 ctx.stroke()
@@ -44,7 +44,7 @@ Item {
     }
 
     Connections {
-        target: MrisServices
+        target: SMris
         function onCavaBarsDataChanged() { canvas.requestPaint() }
     }
 }

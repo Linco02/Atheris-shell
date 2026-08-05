@@ -11,11 +11,11 @@ Item {
     id: root
     height: perfomanceContainer.height; width: perfomanceContainer.width
 
-    ColumnSpaced {
+    ColumnStyled {
         id: perfomanceContainer
         anchors.horizontalCenter: parent.horizontalCenter
 
-        RowSpaced {
+        RowStyled {
             id: box1
 
             PerfomanceUsage { type: 0 }
@@ -23,9 +23,9 @@ Item {
             PerfomanceUsage { type: 2 }
         }
         
-        ColumnSpaced {
+        ColumnStyled {
             Repeater {
-                model: PerfomanceServices.disks
+                model: SPerfomance.disks
 
                 delegate: DiskUsage {
                     height: 44; width: root.width

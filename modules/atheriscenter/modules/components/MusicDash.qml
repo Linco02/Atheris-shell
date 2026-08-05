@@ -8,8 +8,8 @@ import qs.services
 
 RectForeground {
     id: root
-    property bool playerExist: MrisServices.playerExist
-    property var playerActive: MrisServices.playerActive
+    property bool playerExist: SMris.playerExist
+    property var playerActive: SMris.playerActive
 
     Column {
         anchors.centerIn: parent
@@ -18,12 +18,12 @@ RectForeground {
         CircleProgres {
             anchors.horizontalCenter: parent.horizontalCenter
             height: root.width * 2 / 3
-            progres: MrisServices.playerActiveProgres
+            progres: SMris.playerActiveProgres
             progresW: 10
 
             RectClip {
                 anchors.centerIn: parent
-                height: parent.height - parent.progresW * 2 - Global.padding.normal
+                height: parent.height - parent.progresW * 2 - Style.padding.normal
                 width: height
                 radius: height / 2
 
@@ -44,21 +44,21 @@ RectForeground {
 
             ButtonOwn {
                 text: "󰙤"
-                onClicked: MrisServices.previousMris(playerActive)
+                onClicked: SMris.previousMris(playerActive)
             }
 
             ButtonOwn {
-                text: MrisServices.isplayerActivePlay ? "" : ""
+                text: SMris.isplayerActivePlay ? "" : ""
                 onClicked: {
-                    if (MrisServices.isplayerActivePlay)
-                        MrisServices.pauseMris(playerActive)
-                    else MrisServices.playMris(playerActive)
+                    if (SMris.isplayerActivePlay)
+                        SMris.pauseMris(playerActive)
+                    else SMris.playMris(playerActive)
                 }
             }
 
             ButtonOwn {
                 text: "󰙢"
-                onClicked: MrisServices.nextMris(playerActive)
+                onClicked: SMris.nextMris(playerActive)
             }
         }
     }
@@ -70,8 +70,8 @@ RectForeground {
 
         background: MouseFill {
             hoverEnabled: true
-            onEntered: btnText.color = Colors.textAccent
-            onExited: btnText.color = Colors.textSurface
+            onEntered: btnText.color = Theme.textAccent
+            onExited: btnText.color = Theme.textSurface
         }
 
         contentItem: Item {
@@ -87,7 +87,7 @@ RectForeground {
     }
 
     component TextStyledOwn: TextStyled {
-        width: root.width - Global.padding.large * 2
+        width: root.width - Style.padding.large * 2
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
     }

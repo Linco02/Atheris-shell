@@ -11,22 +11,22 @@ Item {
     id: root
     height: 500; width: musicContainer.width
 
-    property var player: MrisServices.player
-    property bool playerExist: MrisServices.playerExist
+    property var player: SMris.player
+    property bool playerExist: SMris.playerExist
     property int playerIndex: 0
     property var playerActive: playerExist ? player[playerIndex] : null
 
-    RowSpaced {
+    RowStyled {
         id: musicContainer
 
         RectForeground {
             id: menuMusic
             height: root.height; width: 40
 
-            SpacedColumn {
+            ColumnStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: Global.padding.normal
-                topPadding: Global.padding.normal
+                spacing: Style.padding.normal
+                topPadding: Style.padding.normal
 
                 Repeater {
                     model: player
@@ -49,12 +49,12 @@ Item {
 
             Column {
                 anchors.centerIn: parent
-                spacing: Global.padding.normal
+                spacing: Style.padding.normal
 
                 RadialBars {
                     anchors.horizontalCenter: parent.horizontalCenter
                     height: music.height / 3 * 2; width: height
-                    innerRadius: height / 4 + Global.padding.normal
+                    innerRadius: height / 4 + Style.padding.normal
                 
                     RectClip {
                         anchors.centerIn: parent
@@ -89,7 +89,7 @@ Item {
 
                     property var poss: 0
 
-                    onMoved: MrisServices.setPositionMris(playerActive, value)
+                    onMoved: SMris.setPositionMris(playerActive, value)
 
                     Connections {
                         target: Tick1s
@@ -102,13 +102,13 @@ Item {
 
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Global.padding.normal
+                    spacing: Style.padding.normal
                     
                     ButtonOwn {
                         text: "󰙤"
                         onClicked: {
                             if (playerExist) {
-                                MrisServices.previousMris(playerActive)
+                                SMris.previousMris(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }
@@ -117,11 +117,11 @@ Item {
                     ButtonOwn {
                         text: isPlaying ? "" : ""
 
-                        property bool isPlaying: MrisServices.checkIsPlaying(playerActive)
+                        property bool isPlaying: SMris.checkIsPlaying(playerActive)
 
                         onClicked: {
                             if (playerExist) {
-                                isPlaying ? MrisServices.pauseMris(playerActive) : MrisServices.playMris(playerActive)
+                                isPlaying ? SMris.pauseMris(playerActive) : SMris.playMris(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }
@@ -131,7 +131,7 @@ Item {
                         text: "󰙢"
                         onClicked: {
                             if (playerExist) {
-                                MrisServices.nextMris(playerActive)
+                                SMris.nextMris(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }
@@ -154,7 +154,7 @@ Item {
     }
 
     component TextOwn: TextStyled {
-        width: root.width - Global.padding.large * 2
+        width: root.width - Style.padding.large * 2
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
     }

@@ -14,7 +14,7 @@ Item {
 
     ProgressBar { }
     ProgressBar {
-        progresColor: Colors.active
+        progresColor: Theme.active
         progresBar: progres
     }
 
@@ -26,7 +26,7 @@ Item {
             samples: 4
         }
 
-        property color progresColor: Colors.inactive
+        property color progresColor: Theme.inactive
         property real progresBar: 1
 
         ShapePath {

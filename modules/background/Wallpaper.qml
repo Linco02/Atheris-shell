@@ -20,7 +20,7 @@ Item {
         wallpaperReady = false
 
         let source = SWallpaper.isWallpaperAnimated
-            ? SWallpaper.wallpaperFrame
+            ? SWallpaper.wallpaperThumbnail
             : SWallpaper.wallpaper
 
         if (backSource === "") {
@@ -71,7 +71,7 @@ Item {
         transitions: Transition {
             from: ""; to: "change"
 
-            NumberAnim { properties: "width"; duration: Global.durations.slow }
+            NumberAnim { properties: "width"; duration: Style.durations.slow }
 
             onRunningChanged: {
                 if(!running) {
@@ -95,6 +95,8 @@ Item {
 
     Connections {
         target: SWallpaper
-        function onWallpaperChanged() { wallpaperSwitch() }
+        function onWallpaperChanged() {
+            if (SWallpaper.wallpaper) wallpaperSwitch()
+        }
     }
 }

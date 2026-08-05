@@ -15,12 +15,12 @@ RectForeground {
         height: parent.height
         leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
 
-        TextOwn { text: PipewireServices.iconVolume }
-        TextOwn { text: UPowerServices.batteryIcon; visible: UPowerServices.isExist }
+        TextOwn { text: SPipewire.iconVolume }
+        TextOwn { text: SUPower.batteryIcon; visible: SUPower.isExist }
         TextOwn { text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn { text: NetworkServices.currentNetworkSimbol }
-        TextOwn { text: (Icon.powerModes.find(p => p.label === PerfomanceServices.powerProfile) ?? {icon: ""}).icon }
+        TextOwn { text: (Icon.powerModes.find(p => p.label === SPerfomance.powerProfile) ?? {icon: ""}).icon }
         TextOwn { text: SLanguage.currentLayoutName }
     }
 

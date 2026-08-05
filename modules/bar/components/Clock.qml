@@ -13,4 +13,6 @@ RectForeground {
         anchors.centerIn: parent
         text: STime.time
     }
+
+    TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "dash")}}
 }

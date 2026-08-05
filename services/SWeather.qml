@@ -21,7 +21,7 @@ Singleton {
                     temp = current.temp_C
                     description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
                     const icon = getWeatherIcon(current.weatherDesc[0].value)
-                    weatherIcom = AppIcons.getIcon(icon)
+                    weatherIcom = SAppIcons.getIcon(icon)
                 }
             }
         }

@@ -22,7 +22,7 @@ RectForeground {
             text: name
         }
 
-        RowSpaced {
+        RowStyled {
             anchors.horizontalCenter: parent.horizontalCenter
 
             TextStyled {
@@ -32,7 +32,7 @@ RectForeground {
 
             RectInactive {
                 anchors.verticalCenter: parent.verticalCenter
-                height: root.height - diskName.height - Global.padding.normal
+                height: root.height - diskName.height - Style.padding.normal
                 width: root.width / 4 * 3
 
                 RectActive {

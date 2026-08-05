@@ -11,9 +11,9 @@ RectForeground {
 
     property int type: 0
     property var info: {
-        if (type === 0) return PerfomanceServices.cpu
-        if (type === 1) return PerfomanceServices.gpu
-        if (type === 2) return PerfomanceServices.mem
+        if (type === 0) return SPerfomance.cpu
+        if (type === 1) return SPerfomance.gpu
+        if (type === 2) return SPerfomance.mem
     }
 
     Column {

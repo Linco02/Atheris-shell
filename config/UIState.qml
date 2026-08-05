@@ -18,9 +18,8 @@ Singleton {
     property var controlCenterModules: ["sound", "wifi", "powerMode"]
     property string controlCenterModul: ""
 
-    // CommandCenter
-    property bool isCommandCenterOpen: false
-
-    property string commandCenterModule: "dashboard"
-    property string dashboardModul: "dash"
+    // AtherisCenter
+    property bool isAtherisCenterOpen: false
+    property string atherisCenterModule: "dashboard" // "dashboard", "wallpaper", "command"
+    property string dashboardModul: "dash" // "dash", "music", "performance"
 }

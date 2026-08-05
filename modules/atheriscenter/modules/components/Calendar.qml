@@ -9,14 +9,14 @@ import qs.services
 RectForeground {
     id: root
 
-    property int today: TimeServices.today
+    property int today: STime.today
 
     Column {
         anchors.centerIn: parent
 
         TextStyled {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: TimeServices.mounth
+            text: STime.mounth
         }
 
         GridView {
@@ -39,19 +39,19 @@ RectForeground {
             height: cellHeight * 6; width: cellWidth * 7
             cellHeight: cellWidth; cellWidth: root.width / 8
             
-            model: TimeServices.getCalendarDays()
+            model: STime.getCalendarDays()
             delegate: Rectangle {
                 width: 35
                 height: 35
-                color: (modelData.day === today && modelData.isCurrent) ? Colors.surface : "transparent"
-                radius: Global.radius.normal
+                color: (modelData.day === today && modelData.isCurrent) ? Theme.surface : "transparent"
+                radius: Style.radius.normal
 
                 TextStyled {
                     anchors.centerIn: parent
                     text: modelData.day
                     color: {
-                        if (modelData.day === today && modelData.isCurrent) return Colors.textAccent;
-                        return modelData.isCurrent ? Colors.textSurface : Colors.textInactive;
+                        if (modelData.day === today && modelData.isCurrent) return Theme.textAccent;
+                        return modelData.isCurrent ? Theme.textSurface : Theme.textInactive;
                     }
                 }
             }

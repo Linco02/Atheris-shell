@@ -13,12 +13,12 @@ Item {
         return brick * span + (span - 1) * spacing
     }
 
-    SpacedRow {
+    RowStyled {
         anchors.horizontalCenter: parent.horizontalCenter
         id: container
 
-        SpacedColumn {
-            SpacedRow {
+        ColumnStyled {
+            RowStyled {
                 ClockDate {
                     height: b(1) || brick; width: b(2)
                 }
@@ -28,7 +28,7 @@ Item {
                 }
             }
 
-            SpacedRow {
+            RowStyled {
                 Calendar {
                     height: b(3) || brick; width: b(3)
                 }

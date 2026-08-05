@@ -70,15 +70,9 @@ RectForeground {
                 }
             }
 
-            TapHandler {
-                onTapped: {
-                    UIState.dashboardModul = "music"
-                    UIState.commandCenterModule = "dashboard"
-                    UIState.isCommandCenterOpen = !UIState.isCommandCenterOpen
-                }
-            }
+            TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "music")}}
 
-            Behavior on width { NumberAnim { } }
+            Behavior on width {NumberAnim {}}
         }
 
         ButtonTransparent {
@@ -113,16 +107,16 @@ RectForeground {
         Transition {
             from: "close"; to: "open"
             ParallelAnimation {
-                NumberAnim { property: "width" }
-                NumberAnim { property: "opacity" }
+                NumberAnim {property: "width"}
+                NumberAnim {property: "opacity"}
             }
         },
         Transition {
             from: "open"; to: "close"
             SequentialAnimation {
                 ParallelAnimation {
-                    NumberAnim { property: "width" }
-                    NumberAnim { property: "opacity" }
+                    NumberAnim {property: "width"}
+                    NumberAnim {property: "opacity"}
                 }
                 PropertyAction {
                     target: root

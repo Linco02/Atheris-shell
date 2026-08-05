@@ -11,11 +11,11 @@ RectForeground {
     Row {
         id: weather
         anchors.centerIn: parent
-        spacing: Global.spacing.normal
+        spacing: Style.spacing.normal
 
         IconImage {
             anchors.verticalCenter: parent.verticalCenter
-            source: WeatherServices.weatherIcom
+            source: SWeather.weatherIcom
             implicitSize: root.height / 2
         }
 
@@ -25,14 +25,14 @@ RectForeground {
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: root.height / 4 || 20
-                text: WeatherServices.temp
+                text: SWeather.temp
             }
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: root.width / 2
                 font.pixelSize: root.height / 10 || 20
-                text: WeatherServices.description
+                text: SWeather.description
                 wrapMode: Text.Wrap
             }
         }

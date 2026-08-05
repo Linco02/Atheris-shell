@@ -14,19 +14,19 @@ Item {
     GlobalShortcut {
         name: "dashboard_menu"
         description: "Відкрити дошку"
-        onPressed: openDashboard("dashboard")
+        onPressed: SWManager.controlAtherisCenter("dashboard", "dash")
     }
 
     GlobalShortcut {
         name: "wallpaper_selector"
         description: "Відкрити вибір шпалер"
-        onPressed: openDashboard("wallpaper")
+        onPressed: SWManager.controlAtherisCenter("wallpaper", "")
     }
 
     GlobalShortcut {
         name: "programs_selector"
         description: "Відкрити програму"
-        onPressed: openDashboard("command")
+        onPressed: SWManager.controlAtherisCenter("command", "")
     }
 
     GlobalShortcut {

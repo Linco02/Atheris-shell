@@ -26,7 +26,7 @@ Slider {
         x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
         implicitHeight: 20; implicitWidth: 6
         radius: implicitHeight / 2
-        color: Colors.warning
+        color: Theme.warning
     }
 
     Behavior on width { NumberAnim { } }
