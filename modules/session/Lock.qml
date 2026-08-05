@@ -8,8 +8,8 @@ WlSessionLock {
     locked: UIState.isSessionLock
 
     onLockedChanged: {
-        if (locked) PamServices.start()
-        else PamServices.abort()
+        if (locked) SPam.start()
+        else SPam.abort()
     }
 
     WlSessionLockSurface {

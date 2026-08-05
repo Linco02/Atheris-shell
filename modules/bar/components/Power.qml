@@ -5,7 +5,6 @@ import qs.components
 Item {
     id: root
     height: parent.height; width: height
-    // onLeftClicked: UIState.isPowerOpen = !UIState.isPowerOpen
 
     TextStyled {
         anchors.centerIn: parent
@@ -14,5 +13,6 @@ Item {
         color: hover.hovered ? Theme.textAccent : Qt.lighter(Theme.textAccent, Style.hover)
     }
 
-    HoverHandler { id: hover }
+    HoverHandler {id: hover}
+    TapHandler {onTapped: UIState.isPowerOpen = !UIState.isPowerOpen}
 }

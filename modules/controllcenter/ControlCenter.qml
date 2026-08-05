@@ -15,7 +15,7 @@ PopFade {
     positionX: panel.width - root.width - Style.padding.normal
     isOpen: UIState.isControlCenterOpen
     onClosedPop: UIState.isControlCenterOpen = false
-    isLeft: false
+    position: "right"
 
 
     ColumnStyled {

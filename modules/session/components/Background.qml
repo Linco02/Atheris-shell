@@ -4,7 +4,7 @@ import qs.config
 
 SmartView {
     anchors.fill: parent
-    content: SWallpaper.wallpaperCurrent
+    content: SWallpaper.wallpaper
     isPlay: UIState.isSessionLock
 
     layer.enabled: true

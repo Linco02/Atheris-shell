@@ -21,7 +21,9 @@ PopupWindow {
     property int positionX: Style.padding.normal
     property int rad: Style.radius.large
     property var panel: null
-    property bool isLeft: true
+    property string position: "top"
+    property bool isHorizontalCenter: false
+    property bool isVerticalCenter: false
 
     signal closedPop()
 
@@ -41,8 +43,12 @@ PopupWindow {
         width: container.width + Style.padding.large
         state: "close"
         anchors {
-            left: isLeft ? parent.left : undefined
-            right: !isLeft ? parent.right : undefined
+            left: position === "left" ? parent.left : undefined
+            right: position === "right" ? parent.right : undefined
+            top: possition === "top" ? parent.top : undefined
+            bottom: position === "bottom" ? parent.bottom : undefined
+            horizontalCenter: isHorizontalCenter ? parent.horizontalCenter : undefined
+            verticalCenter: isVerticalCenter ? parent.verticalCenter : undefined
         }
 
         HoverHandler {

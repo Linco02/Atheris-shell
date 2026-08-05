@@ -3,6 +3,7 @@ import Quickshell
 import qs.core
 import qs.config
 import qs.modules.bar
+import qs.modules.power
 import qs.modules.session
 import qs.modules.background
 import qs.modules.atheriscenter
@@ -10,6 +11,8 @@ import qs.modules.controllcenter
 import qs.modules.atherissettings
 
 ShellRoot {
+    id: root
+
     Variants {
         model: Quickshell.screens
         delegate: LazyLoader {
@@ -19,8 +22,16 @@ ShellRoot {
                 id: bar
                 screen: modelData
 
-                Loader {sourceComponent: AtherisCenter {panel: bar}}
-                Loader {sourceComponent: ControlCenter {panel: bar}}
+                Loader {
+                    sourceComponent: AtherisCenter {panel: bar}
+                }
+                Loader {
+                    sourceComponent: ControlCenter {panel: bar}
+                }
+                Loader {
+                    // active: UIState.isPowerOpen
+                    sourceComponent: Power {panel: bar}
+                }
             }
         }
     }
@@ -45,6 +56,8 @@ ShellRoot {
         active: UIState.isAtherisSettingsOpen
         sourceComponent: AtherisSettings {}
     }
+
+    
 
 
 

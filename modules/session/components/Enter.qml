@@ -30,7 +30,7 @@ RectForeground {
 
     Connections {
         target: SPam
-        function onCompleted() { Global.isSessionLock = false }
+        function onCompleted() { UIState.isSessionLock = false }
         function onError() {
             password.placeholderText = "Invalid password"
         }
