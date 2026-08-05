@@ -28,16 +28,16 @@ Singleton {
     function applyPalette(data) {
         if (!data) return;
 
-        Theme.surface       = data.surface       || Theme.surface;
+        Theme.surface = Qt.alpha(data.surface, Style.opacity) || Theme.surface;
         Theme.surfaceRaised = data.surfaceRaised || Theme.surfaceRaised;
-        Theme.outline       = data.outline       || Theme.outline;
-        Theme.active        = data.active        || Theme.active;
-        Theme.inactive      = data.inactive      || Theme.inactive;
-        Theme.warning       = data.warning       || Theme.warning;
+        Theme.outline = data.outline || Theme.outline;
+        Theme.active = data.active || Theme.active;
+        Theme.inactive = data.inactive || Theme.inactive;
+        Theme.warning = data.warning || Theme.warning;
 
-        Theme.textSurface   = data.textSurface   || Theme.textSurface;
-        Theme.textAccent    = data.textAccent    || Theme.textAccent;
-        Theme.textInactive  = data.textInactive  || Theme.textInactive;
+        Theme.textSurface = data.textSurface || Theme.textSurface;
+        Theme.textAccent = data.textAccent || Theme.textAccent;
+        Theme.textInactive = data.textInactive || Theme.textInactive;
     }
 
     Process {

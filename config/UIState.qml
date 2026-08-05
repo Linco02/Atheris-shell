@@ -8,6 +8,9 @@ Singleton {
     // Power
     property bool isPowerOpen: false
 
+    // Auntefication
+    property bool isAuthenficatorOpen: false
+
     // AtherisSettings
     property bool isAtherisSettingsOpen: false
     property var atherisSettingsModules: ["general", "display", "theme"]

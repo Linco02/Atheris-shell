@@ -149,7 +149,7 @@ PopupWindow {
 
         ShapePath {
             strokeWidth: 0
-            fillColor: Qt.alpha(Theme.surface, Style.opacity)
+            fillColor: Theme.surface
             startY: 0; startX: isLeft ? rad : 0
             PathLine { y: rad * percent; x: isLeft ? rad : 0 }
             PathArc {

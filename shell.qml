@@ -6,6 +6,7 @@ import qs.modules.bar
 import qs.modules.power
 import qs.modules.session
 import qs.modules.background
+import qs.modules.authenficator
 import qs.modules.atheriscenter
 import qs.modules.controllcenter
 import qs.modules.atherissettings
@@ -31,6 +32,10 @@ ShellRoot {
                 Loader {
                     // active: UIState.isPowerOpen
                     sourceComponent: Power {panel: bar}
+                }
+                Loader {
+                    // active: UIState.isPowerOpen
+                    sourceComponent: Authenficator {panel: bar}
                 }
             }
         }

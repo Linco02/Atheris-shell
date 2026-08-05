@@ -11,9 +11,31 @@ Singleton {
         return list.length > 0 ? list[0] : { ssid: "", signal: 0, icon: "󰤯" }
     }
     property var wifiList: []
+    property string __wifiConnect: ""
 
     function getWifiList() {
         wifiParce.running = true
+    }
+
+    function connectWifi(ssid, password) {
+        __wifiConnect = ssid
+        if (password) {
+            wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid, "password", password]
+        } else {
+            wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid]
+        }
+        wifiConnect.running = true
+    }
+
+    Process {
+        id: wifiConnect
+        onExited: {
+            if (exitCode === 4) {
+                SAuthenficator.requestPassword("wifi" ,__wifiConnect)
+            } else {
+                __wifiConnect = ""
+            }
+        }
     }
 
     Process {

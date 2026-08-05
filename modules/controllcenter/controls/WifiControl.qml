@@ -71,6 +71,8 @@ RectForeground {
                             text: modelData.ssid
                         }
                     }
+
+                    TapHandler {onTapped: SNetwork.connectWifi(modelData.ssid, "")}
                 }
             }
         }

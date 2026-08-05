@@ -21,7 +21,7 @@ PopupWindow {
     property int positionX: Style.padding.normal
     property int rad: Style.radius.large
     property var panel: null
-    property string position: "top"
+    property string position: ""
     property bool isHorizontalCenter: false
     property bool isVerticalCenter: false
 
@@ -45,7 +45,7 @@ PopupWindow {
         anchors {
             left: position === "left" ? parent.left : undefined
             right: position === "right" ? parent.right : undefined
-            top: possition === "top" ? parent.top : undefined
+            top: position === "top" ? parent.top : undefined
             bottom: position === "bottom" ? parent.bottom : undefined
             horizontalCenter: isHorizontalCenter ? parent.horizontalCenter : undefined
             verticalCenter: isVerticalCenter ? parent.verticalCenter : undefined

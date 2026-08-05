@@ -11,7 +11,6 @@ PopFade {
     containerH: powerContainer.height
     containerW: powerContainer.width
     positionX: panel.width / 2 - root.width / 2
-    position: "top"
     isHorizontalCenter: true
     isOpen: UIState.isPowerOpen
     onClosedPop: UIState.isPowerOpen = false
