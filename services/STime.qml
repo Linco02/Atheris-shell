@@ -74,13 +74,14 @@ Singleton {
     }
 
     Connections {
-        target: Tick30s
-        function onTick() { 
+        target: STick
+        function onTick30s() { 
             clockUpdate()
         }
     }
 
     Component.onCompleted: {
+        clockUpdate()
         dayCycleInit()
         getCalendarDays()
     }

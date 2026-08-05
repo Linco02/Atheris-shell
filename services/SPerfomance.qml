@@ -180,7 +180,7 @@ Singleton {
     Process { id: powerProfileSwitch }
 
     Connections {
-        target: Tick3s
-        function onTick() { runPerfomance() }
+        target: STick
+        function onTick3s() { runPerfomance() }
     }
 }

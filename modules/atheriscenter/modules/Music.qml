@@ -92,8 +92,8 @@ Item {
                     onMoved: SMris.setPositionMris(playerActive, value)
 
                     Connections {
-                        target: Tick1s
-                        function onTick() {
+                        target: STick
+                        function onTick1s() {
                             if (playerExist && !progressBar.pressed)
                                 progressBar.value = playerActive?.position
                         }

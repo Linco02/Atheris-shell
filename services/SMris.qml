@@ -52,7 +52,7 @@ Singleton {
 
     Process {
         id: radialBars
-        running: UIState.isCommandCenterOpen && UIState.dashboardModul === "music"
+        running: UIState.isAtherisCenterOpen && UIState.dashboardModul === "music"
         command: [
             "sh", "-c", "cava -p ~/Atheris-shell/assets/cava.ini"
         ]
@@ -71,9 +71,9 @@ Singleton {
     }
 
     Connections {
-        target: Tick1s
+        target: STick
         enabled: playerExist
-        function onTick() {
+        function onTick1s() {
             playerActiveProgres = playerActive.position / playerActive.length
         }
     }

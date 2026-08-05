@@ -68,8 +68,8 @@ Singleton {
     }
 
     Connections {
-        target: Tick3s
-        function onTick() {
+        target: STick
+        function onTick3s() {
             networkNameInfo.running = true
             if (UIState.isControlCenterOpen)
                 wifiParce.running = true
