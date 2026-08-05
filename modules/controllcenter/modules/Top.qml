@@ -30,7 +30,7 @@ Rect {
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onClicked: UIState.isAtherisSettingsOpen = !UIState.isAtherisSettingsOpen
+            onClicked: SWManager.atherisSettings("general")
         }
 
         ButtonStyled {

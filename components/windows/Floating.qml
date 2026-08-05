@@ -39,8 +39,8 @@ FloatingWindow {
                 horizontalCenter: parent.horizontalCenter
             }
             clip: true
-            height: parent.height - Global.padding.large
-            width: parent.width - Global.padding.large
+            height: parent.height - Style.padding.large
+            width: parent.width - Style.padding.large
         }
     }
 }

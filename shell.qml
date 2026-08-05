@@ -7,7 +7,7 @@ import qs.modules.session
 import qs.modules.background
 import qs.modules.atheriscenter
 import qs.modules.controllcenter
-// import qs.modules.atherissettings
+import qs.modules.atherissettings
 
 ShellRoot {
     Variants {
@@ -39,6 +39,11 @@ ShellRoot {
     LazyLoader {
         active: UIState.isSessionLock
         component: Lock {}
+    }
+
+    Loader {
+        active: UIState.isAtherisSettingsOpen
+        sourceComponent: AtherisSettings {}
     }
 
 

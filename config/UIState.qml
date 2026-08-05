@@ -10,8 +10,8 @@ Singleton {
 
     // AtherisSettings
     property bool isAtherisSettingsOpen: false
-    property var atherisSettingsModules: ["General", "Display", "Theme"]
-    property string atherisSettingsModule: "Display"
+    property var atherisSettingsModules: ["general", "display", "theme"]
+    property string atherisSettingsModule: "display"
 
     // ControlCenter
     property bool isControlCenterOpen: false

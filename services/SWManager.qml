@@ -30,5 +30,10 @@ Singleton {
     }
     
     // AtherisSettings
+    function atherisSettings(targetMenu) {
+        if (targetMenu) UIState.atherisSettingsModule = targetMenu
+        else return
+        UIState.isAtherisSettingsOpen = true
+    }
 
 }

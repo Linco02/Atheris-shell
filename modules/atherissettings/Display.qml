@@ -8,7 +8,7 @@ Item {
     id: root
     height: parent.height; width: parent.width
 
-    property var displays: DisplayServices.displays
+    property var displays: SDisplay.displays
 
     Column {
 
@@ -24,12 +24,12 @@ Item {
                     delegate: Rect {
                         height: modelData.physicalHeight
                         width: modelData.physicalWidth
-                        color: modelData.focused ? Colors.inactive : Colors.active
+                        color: modelData.focused ? Theme.inactive : Theme.active
                         
                         TextStyled {
                             text: modelData.activeWorkspace.name
                         }
-                        Component.onCompleted: {console.log(modelData.name)}
+                        // Component.onCompleted: {console.log(modelData.name)}
                     }
                 }
             }
