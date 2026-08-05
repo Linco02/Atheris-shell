@@ -6,9 +6,9 @@ import qs.config
 
 RectInactive {
     id: root
-    color: hover.hovered && !isActive ? Qt.lighter(Colors.inactive, Global.appearance.hover)
-        : isActive ? Colors.active
-        : Colors.inactive
+    color: hover.hovered && !isActive ? Qt.lighter(Theme.inactive, Style.hover)
+        : isActive ? Theme.active
+        : Theme.inactive
 
     property string icon: ""
     property string textTop: ""
@@ -17,16 +17,16 @@ RectInactive {
 
     signal clicked()
 
-    RowSpaced {
+    RowStyled {
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Global.padding.normal; rightPadding: Global.padding.normal
+        leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
         height: parent.height
         clip: true
 
         TextStyledH {
             anchors.verticalCenter: parent.verticalCenter
             text: icon
-            color: isActive ? Colors.textAccent : Colors.textSurface
+            color: isActive ? Theme.textAccent : Theme.textSurface
         }
 
         Column {
@@ -37,7 +37,7 @@ RectInactive {
     }
     
     component TextOwn: TextStyled {
-        color: isActive ? Colors.textAccent : Colors.textSurface
+        color: isActive ? Theme.textAccent : Theme.textSurface
     }
 
     HoverHandler { id: hover }

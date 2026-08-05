@@ -10,30 +10,30 @@ Item {
     id: root
     width: parent.width
 
-    readonly property real volume: PipewireServices.volume
+    readonly property real volume: SPipewire.volume
 
-    RowSpaced {
+    RowStyled {
         ButtonStyled {
             id: leftButton
             height: root.height; width: height
-            text: PipewireServices.iconVolume
-            onClicked: PipewireServices.toggleMute()
+            text: SPipewire.iconVolume
+            onClicked: SPipewire.toggleMute()
         }
 
         SliderStyled {
             height: root.height
-            width: root.width - leftButton.width - rightButton.width - Global.spacing.large
+            width: root.width - leftButton.width - rightButton.width - Style.spacing.large
             from: 0
             to: 1
             value: volume
-            onValueChanged: PipewireServices.setVolume(value)
+            onValueChanged: SPipewire.setVolume(value)
         }
 
         ButtonStyled {
             id: rightButton
             height: root.height; width: height
             text: "󰁈"
-            onClicked: Global.controlCenterModul = "sound"
+            onClicked: UIState.controlCenterModul = "sound"
         }
     }
 }

@@ -12,9 +12,12 @@ Singleton {
     }
     property var wifiList: []
 
+    function getWifiList() {
+        wifiParce.running = true
+    }
+
     Process {
         id: wifiParce
-        running: Global.isControlCenterOpen
         command: ["sh", "-c", "nmcli -t -f SSID,SIGNAL,ACTIVE device wifi list"]
         stdout: StdioCollector {
             onStreamFinished: {
@@ -42,7 +45,6 @@ Singleton {
 
     Process {
         id: networkNameInfo
-        running: true
         command: [ "sh", "-c", "nmcli -t -f DEVICE,STATE,CONNECTION device status" ]
         stdout: StdioCollector {
             onStreamFinished: {

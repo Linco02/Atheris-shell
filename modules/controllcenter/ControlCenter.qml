@@ -12,13 +12,13 @@ PopFade {
     id: root
     containerH: controlCenterContainer.height
     containerW: controlCenterContainer.width
-    positionX: panel.width - root.width - Global.padding.normal
-    isOpen: Global.isControlCenterOpen
-    onClosedPop: Global.isControlCenterOpen = false
+    positionX: panel.width - root.width - Style.padding.normal
+    isOpen: UIState.isControlCenterOpen
+    onClosedPop: UIState.isControlCenterOpen = false
     isLeft: false
 
 
-    ColumnSpaced {
+    ColumnStyled {
         id: controlCenterContainer
 
         Loader {
@@ -26,10 +26,10 @@ PopFade {
             height: 600; width: 400
             active: true
             source: {
-                switch(Global.controlCenterModul) {
+                switch(UIState.controlCenterModul) {
                     case "sound": return "./controls/SoundControl.qml";
                     case "wifi": return "./controls/WifiControl.qml";
-                    case "": return "MainCenter.qml";
+                    case "main": return "MainCenter.qml";
                     return "";
                 }
             }
@@ -40,11 +40,11 @@ PopFade {
         Loader {
             id: controlCenterButton
             height: 40; width: parent.width
-            active: Global.controlCenterModul !== ""
+            active: UIState.controlCenterModul !== "main"
             sourceComponent: ButtonStyled {
                 anchors.fill: parent
                 text: "󰁠 Назад 󰁠"
-                onClicked: Global.controlCenterModul = ""
+                onClicked: UIState.controlCenterModul = "main"
             }
         }
     }

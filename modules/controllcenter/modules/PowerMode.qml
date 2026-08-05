@@ -11,12 +11,12 @@ RectInactive {
 
     Row {
         Repeater {
-            model: Global.powerModes
+            model: Icon.powerModes
             delegate: ButtonStyled {
                 width: root.width / 3; height: root.height
                 text: modelData.icon
-                onClicked: PerfomanceServices.powerProfile = modelData.label
-                isActive: PerfomanceServices.powerProfile === modelData.label
+                onClicked: SPerfomance.powerProfile = modelData.label
+                isActive: SPerfomance.powerProfile === modelData.label
                 fullH: false
                 
                 ToolTipStyled {

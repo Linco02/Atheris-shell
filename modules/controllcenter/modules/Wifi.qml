@@ -11,7 +11,7 @@ ButtonTripled {
     textTop: "Wifi"
     textBottom: network.ssid
     isActive: network !== null
-    onClicked: Global.controlCenterModul = "wifi"
+    onClicked: UIState.controlCenterModul = "wifi"
 
-    readonly property var network: NetworkServices.currentWifi
+    readonly property var network: SNetwork.currentWifi
 }

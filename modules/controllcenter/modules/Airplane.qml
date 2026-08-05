@@ -7,7 +7,7 @@ import qs.services
 ButtonStyled {
     width: parent.width
     text: "Airplane"
-    onClicked: AirplaneServices.toggle()
-    isActive: AirplaneServices.isAirplaneOn 
+    onClicked: SAirplane.toggle()
+    isActive: SAirplane.isAirplaneOn 
     fullH: false
 }

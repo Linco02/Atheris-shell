@@ -16,15 +16,15 @@ RectForeground {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
-        ColumnSpaced {
+        ColumnStyled {
             anchors.fill: parent
 
             Repeater {
-                model: NotificationServices.server.trackedNotifications.values
+                model: SNotification.server.trackedNotifications.values
                 delegate: RectInactive {
                     height: 50; width: parent.width
 
-                    RowSpaced {
+                    RowStyled {
                         height: parent.height
 
                         IconImage {
@@ -36,7 +36,7 @@ RectForeground {
                                     : "critical"
 
                                 if (ico === "") {
-                                    ico = NotificationServices.notificationsUrgents
+                                    ico = SNotification.notificationsUrgents
                                         .find(i => i.label === urg).icon
                                 }
                                 return AppIcons.getIcon(ico)

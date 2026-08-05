@@ -6,12 +6,12 @@ import qs.config
 ButtonStyled {
     width: parent.width
     fullH: false
-    isActive: Global.palitMode === "dark"
-    text: Global.palitMode === "dark"
+    isActive: Settings.palitMode === "dark"
+    text: Settings.palitMode === "dark"
         ? "Dark mode"
         : "Light mode"
     onClicked: {
-        if (Global.palitMode === "dark") Global.palitMode = "light"
-        else Global.palitMode = "dark"
+        if (Settings.palitMode === "dark") Settings.palitMode = "light"
+        else Settings.palitMode = "dark"
     }
 }

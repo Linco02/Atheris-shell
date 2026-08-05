@@ -11,32 +11,32 @@ Rect {
     width: parent.width
 
     RectInactive {
-        visible: UPowerServices.isExist
+        visible: SUPower.isExist
         height: parent.height
-        width: buttery.width + Global.padding.large
+        width: buttery.width + Style.padding.large
 
         TextStyled {
             id: buttery
             anchors.centerIn: parent
-            font.pixelSize: parent.height - Global.padding.large
-            text: UPowerServices.batteryLevelRound + "% " + UPowerServices.batteryIcon
+            font.pixelSize: parent.height - Style.padding.large
+            text: SUPower.batteryLevelRound + "% " + SUPower.batteryIcon
         }
     }
 
-    RowSpaced {
+    RowStyled {
         anchors.right: parent.right
         height: parent.height
 
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onClicked: Global.isAtherisSettingsOpen = !Global.isAtherisSettingsOpen
+            onClicked: UIState.isAtherisSettingsOpen = !UIState.isAtherisSettingsOpen
         }
 
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onClicked: Global.isPowerOpen = !Global.isPowerOpen
+            onClicked: UIState.isPowerOpen = !UIState.isPowerOpen
         }
     }
 }

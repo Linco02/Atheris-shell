@@ -15,18 +15,18 @@ RectForeground {
         height: parent.height
         leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
 
-        TextOwn { text: SPipewire.iconVolume }
-        TextOwn { text: SUPower.batteryIcon; visible: SUPower.isExist }
-        TextOwn { text: "󰂯" }
+        TextOwn {text: SPipewire.iconVolume}
+        TextOwn {text: SUPower.batteryIcon; visible: SUPower.isExist}
+        TextOwn {text: "󰂯" }
          // 󰂰 󰂲 }
-        TextOwn { text: NetworkServices.currentNetworkSimbol }
-        TextOwn { text: (Icon.powerModes.find(p => p.label === SPerfomance.powerProfile) ?? {icon: ""}).icon }
-        TextOwn { text: SLanguage.currentLayoutName }
+        TextOwn {text: SNetwork.currentNetworkSimbol}
+        TextOwn {text: (Icon.powerModes.find(p => p.label === SPerfomance.powerProfile) ?? {icon: ""}).icon}
+        TextOwn {text: SLanguage.currentLayoutName}
     }
 
     component TextOwn: TextStyledH {
         height: root.height; width: height
     }
 
-    // TapHandler { onTapped: UIState.isControlCenterOpen = !UIState.isControlCenterOpen }
+    TapHandler {onTapped: SWManager.controlCenter("main")}
 }

@@ -17,8 +17,8 @@ RectForeground {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AlwaysOff
         
-        ColumnSpaced {
-            topPadding: Global.padding.normal
+        ColumnStyled {
+            topPadding: Style.padding.normal
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -28,13 +28,13 @@ RectForeground {
 
             Repeater {
                 id: activeWifi
-                model: NetworkServices.wifiList.filter(w => w.ssid !== undefined && w.active === "так")
+                model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "так")
                 delegate: RectInactive {
                     height: 40; width: root.width
 
-                    RowSpaced {
+                    RowStyled {
                         anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Global.padding.normal
+                        leftPadding: Style.padding.normal
 
                         TextStyled {
                             text: modelData.icon
@@ -55,13 +55,13 @@ RectForeground {
             
             Repeater {
                 id: avalibleWifi
-                model: NetworkServices.wifiList.filter(w => w.ssid !== undefined && w.active === "ні")
+                model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "ні")
                 delegate: RectInactive {
                     height: 40; width: root.width
 
-                    RowSpaced {
+                    RowStyled {
                         anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Global.padding.normal
+                        leftPadding: Style.padding.normal
 
                         TextStyled {
                             text: modelData.icon

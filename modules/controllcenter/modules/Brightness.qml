@@ -8,26 +8,26 @@ import qs.services
 
 Item {
     id: root
-    visible: BrightnessServices.isExist
+    visible: SBrightness.isExist
     height: parent.height; width: parent.width
 
-    RowSpaced {
+    RowStyled {
         height: parent.height
 
         ButtonStyled {
             id: brightnessMin
             height: parent.height; width: height
             text: "󰃞"
-            onClicked: BrightnessServices.brightnessSet(0)
+            onClicked: SBrightness.brightnessSet(0)
         }
 
         SliderStyled {
             height: parent.height
-            width: root.width - brightnessMin.width - brightnessMax.width - Global.spacing.large
-            value: BrightnessServices.currentBrigtness
+            width: root.width - brightnessMin.width - brightnessMax.width - Style.spacing.large
+            value: SBrightness.currentBrigtness
             from: 0; to: 100
             onMoved: {
-                BrightnessServices.brightnessSet(value)
+                SBrightness.brightnessSet(value)
             }
         }
 
@@ -35,7 +35,7 @@ Item {
             id: brightnessMax
             height: parent.height; width: height
             text: "󰃠"
-            onClicked: BrightnessServices.brightnessSet(100)
+            onClicked: SBrightness.brightnessSet(100)
         }
     }
 }

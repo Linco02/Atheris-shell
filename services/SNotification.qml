@@ -20,7 +20,7 @@ Singleton {
         onNotification: (notifi) => {
             notifi.tracked = true;
 
-            if (Global.isNotifiSoundOn)
+            if (Settings.isNotifiSoundOn)
                 notifiSound()
         }
     }

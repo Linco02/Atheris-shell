@@ -18,6 +18,17 @@ Singleton {
         UIState.isAtherisCenterOpen = true
     }
 
-    // AtherisSettings
+    // ControllCenter
+    function controlCenter(targetMenu) {
+        if (UIState.isControlCenterOpen) {
+            UIState.isControlCenterOpen = false
+            return
+        }
+
+        if (targetMenu) UIState.controlCenterModul = targetMenu
+        UIState.isControlCenterOpen = true
+    }
     
+    // AtherisSettings
+
 }
