@@ -15,7 +15,7 @@ PopFade {
     position: "top"
     isHorizontalCenter: true
     isOpen: UIState.isAuthenficatorOpen
-    onClosedPop: UIState.isAuthenfi catorOpen = false
+    onClosedPop: UIState.isAuthenficatorOpen = false
 
     ColumnStyled {
         id: authenficatorContainer
