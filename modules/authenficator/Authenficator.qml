@@ -15,7 +15,7 @@ PopFade {
     position: "top"
     isHorizontalCenter: true
     isOpen: UIState.isAuthenficatorOpen
-    onClosedPop: UIState.isAuthenficatorOpen = false
+    onClosedPop: UIState.isAuthenfi catorOpen = false
 
     ColumnStyled {
         id: authenficatorContainer
@@ -28,7 +28,8 @@ PopFade {
                 height: 40; width: 200
                 echoMode: TextInput.Password
                 horizontalAlignment: TextInput.AlignHCenter
-                placeholderText: "Enter password"
+                placeholderText: SAuthenficator.placeholder
+                color: SAuthenficator.isRetry ? Theme.textAccent : Theme.textSurface
                 focus: true
                 onEntered: SAuthenficator.enterPassword(password.text)
             }

@@ -8,33 +8,16 @@ import qs.config
 
 Singleton {
     property alias server: notificationServer
-    property var notificationsUrgents: [
-        {label: "low", icon: "dialog-information"},
-        {label: "normal", icon: "dialog-warning"},
-        {label: "critical", icon: "dialog-error"}
-    ]
 
-    NotificationServer {
-        id: notificationServer
-        
-        onNotification: (notifi) => {
-            notifi.tracked = true;
-
-            if (Settings.isNotifiSoundOn)
-                notifiSound()
-        }
-    }
-
-    Process {
-        id: notifiSend
-    }
-
-    // urgency(low/normal/critical)
-    function send(name, text, urgency) {
+    function nitifiSend(appName, summary, body, iconName, urgency, timeout, replacesId) {
         notifiSend.command = [
             "notify-send",
-            name, text,
-            "-u", urgency
+            summary, body,
+            "-a", appName,
+            "-r", replacesId,
+            "-i", iconName,
+            "-u", urgency,
+            "-t", timeout
         ]
         notifiSend.running = true
     }
@@ -48,5 +31,20 @@ Singleton {
         playNotifi.play()
     }
 
-    SoundEffect { id: playNotifi }
+    SoundEffect {id: playNotifi}
+
+    NotificationServer {
+        id: notificationServer
+        
+        onNotification: (notification) => {
+            notification.tracked = true;
+
+            if (Settings.isNotifiSoundOn)
+                notifiSound()
+        }
+    }
+
+    Process {
+        id: notifiSend
+    }
 }

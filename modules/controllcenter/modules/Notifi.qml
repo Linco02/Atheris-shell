@@ -21,43 +21,38 @@ RectForeground {
 
             Repeater {
                 model: SNotification.server.trackedNotifications.values
-                delegate: RectInactive {
-                    height: 50; width: parent.width
-
-                    RowStyled {
-                        height: parent.height
-
-                        IconImage {
-                            implicitSize: parent.height
-                            source: {
-                                let ico = modelData.image
-                                const urg = modelData.urgency === 0 ? "low"
-                                    : modelData.urgency === 1 ? "normal"
-                                    : "critical"
-
-                                if (ico === "") {
-                                    ico = SNotification.notificationsUrgents
-                                        .find(i => i.label === urg).icon
-                                }
-                                return AppIcons.getIcon(ico)
-                            }
-                        }
-
-                        Column {
-                            anchors.verticalCenter: parent.verticalCenter
-                            
-                            TextStyled {
-                                text: modelData ? modelData.summary : ""
-                            }
-                            TextStyled {
-                                text: modelData ? modelData.body : ""
-                            }
-                        }
-                    }
-
-                    TapHandler { onTapped: dismiss() }
-                }
+                delegate: Notifi {}
             }
         }
+    }
+
+    component Notifi: RectInactive {
+        height: 50; width: parent.width
+
+        RowStyled {
+            height: parent.height
+
+            IconImage {
+                implicitSize: parent.height
+                source: {
+                    const iconName = modelData.image.replace("image://icon/", "")
+                    SAppIcons.getIcon(iconName)
+                }
+            }
+
+            Column {
+                anchors.verticalCenter: parent.verticalCenter
+
+                TextStyled {text: modelData ? modelData.appName : ""}
+                TextStyled {text: modelData ? modelData.summary : ""}
+                TextStyled {text: modelData ? modelData.body : ""}
+            }
+
+            // SmartViewer {
+            //     content: modelData.image
+            // }
+        }
+
+        TapHandler {onTapped: dismiss()}
     }
 }

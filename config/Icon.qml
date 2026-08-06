@@ -15,4 +15,11 @@ Singleton {
         {label: "dashboard", icon: "󰨝"},
         {label: "command", icon: ""},
     ]
+
+    // Notification
+    property var notificationsUrgents: [
+        {label: "low", icon: "dialog-information"},
+        {label: "normal", icon: "dialog-warning"},
+        {label: "critical", icon: "dialog-error"}
+    ]
 }

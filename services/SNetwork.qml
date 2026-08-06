@@ -12,6 +12,7 @@ Singleton {
     }
     property var wifiList: []
     property string __wifiConnect: ""
+    property bool isRetry: false
 
     function getWifiList() {
         wifiParce.running = true
@@ -29,12 +30,18 @@ Singleton {
 
     Process {
         id: wifiConnect
-        onExited: {
+        onExited: (exitCode, status) => {
             if (exitCode === 4) {
-                SAuthenficator.requestPassword("wifi" ,__wifiConnect)
-            } else {
+                // const isRetry = __wifiConnect !== ""
+                SAuthenficator.requestPassword("wifi" ,__wifiConnect, isRetry)
+                isRetry = true
+            } else if (exitCode === 0){
+                SNotification.nitifiSend("Wifi", "Під'єднано до мережі", __wifiConnect, "network-wireless", "normal", 0, 0)
                 __wifiConnect = ""
+            } else {
+                console.log("SNetwork", exitCode)
             }
+            getWifiList()
         }
     }
 
