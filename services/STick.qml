@@ -19,8 +19,8 @@ Singleton {
             tick1s()
             
             if (_secondCount % 3 === 0) tick3s()
-            if (_secondCount % 10 === 0) tick3s()
-            if (_secondCount % 30 === 0) tick3s()
+            if (_secondCount % 10 === 0) tick10s()
+            if (_secondCount % 30 === 0) tick30s()
 
             if (_secondCount % 60 === 0) {
                 tick1m()

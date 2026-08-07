@@ -75,9 +75,7 @@ Singleton {
 
     Connections {
         target: STick
-        function onTick30s() { 
-            clockUpdate()
-        }
+        function onTick30s() {clockUpdate()}
     }
 
     Component.onCompleted: {
