@@ -7,72 +7,85 @@ import qs.components.containers
 import qs.config
 import qs.services
 
-RectForeground {
+Item {
     id: root
     anchors.fill: parent
 
-    ScrollView {
-        anchors.fill: parent
-        contentWidth: -1
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-        
-        ColumnStyled {
-            topPadding: Style.padding.normal
+    ButtonStyled {
+        id: button
+        onClicked: SNetwork.isWifiOn = !SNetwork.isWifiOn
+        isActive: SNetwork.isWifiOn
+        height: 40
+        text: "wifi"
+    }
 
-            TextStyled {
-                anchors.horizontalCenter: parent.horizontalCenter
-                visible: activeWifi.count > 0
-                text: activeWifi.count > 1 ? "Активні мережі" : "Активна мережа"
-            }
+    RectForeground {
+        height: root.height - button.height; width: root.width
+        anchors.bottom: parent.bottom
 
-            Repeater {
-                id: activeWifi
-                model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "так")
-                delegate: RectInactive {
-                    height: 40; width: root.width
+        ScrollView {
+            anchors.fill: parent
+            contentWidth: -1
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+            
+            ColumnStyled {
+                topPadding: Style.padding.normal
 
-                    RowStyled {
-                        anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Style.padding.normal
+                TextStyled {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: activeWifi.count > 0
+                    text: activeWifi.count > 1 ? "Активні мережі" : "Активна мережа"
+                }
 
-                        TextStyled {
-                            text: modelData.icon
-                        }
+                Repeater {
+                    id: activeWifi
+                    model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "так")
+                    delegate: RectInactive {
+                        height: 40; width: root.width
 
-                        TextStyled {
-                            text: modelData.ssid
+                        RowStyled {
+                            anchors.verticalCenter: parent.verticalCenter
+                            leftPadding: Style.padding.normal
+
+                            TextStyled {
+                                text: modelData.icon
+                            }
+
+                            TextStyled {
+                                text: modelData.ssid
+                            }
                         }
                     }
                 }
-            }
 
-            TextStyled {
-                anchors.horizontalCenter: parent.horizontalCenter
-                visible: avalibleWifi.count > 0
-                text: avalibleWifi.count > 1 ? "Доступні мережі" : "Доступна мережа"
-            }
-            
-            Repeater {
-                id: avalibleWifi
-                model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "ні")
-                delegate: RectInactive {
-                    height: 40; width: root.width
+                TextStyled {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: avalibleWifi.count > 0
+                    text: avalibleWifi.count > 1 ? "Доступні мережі" : "Доступна мережа"
+                }
+                
+                Repeater {
+                    id: avalibleWifi
+                    model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "ні")
+                    delegate: RectInactive {
+                        height: 40; width: root.width
 
-                    RowStyled {
-                        anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Style.padding.normal
+                        RowStyled {
+                            anchors.verticalCenter: parent.verticalCenter
+                            leftPadding: Style.padding.normal
 
-                        TextStyled {
-                            text: modelData.icon
+                            TextStyled {
+                                text: modelData.icon
+                            }
+
+                            TextStyled {
+                                text: modelData.ssid
+                            }
                         }
 
-                        TextStyled {
-                            text: modelData.ssid
-                        }
+                        TapHandler {onTapped: SNetwork.connectWifi(modelData.ssid, "")}
                     }
-
-                    TapHandler {onTapped: SNetwork.connectWifi(modelData.ssid, "")}
                 }
             }
         }

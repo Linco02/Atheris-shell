@@ -5,6 +5,7 @@ import Quickshell.Io
 import qs.config
 
 Singleton {
+    property bool isWifiOn: true
     property string currentNetworkSimbol: ""
     property var currentWifi: {
         const list = wifiList.filter(w => w.ssid !== undefined && w.active === "так")
@@ -13,6 +14,15 @@ Singleton {
     property var wifiList: []
     property string __wifiConnect: ""
     property bool isRetry: false
+
+    onIsWifiOnChanged: {
+        wifiControl()
+    }
+
+    function wifiControl() {
+        wifiRadio.command = ["nmcli", "radio", "wifi", isWifiOn ? "on" : "off"]
+        wifiRadio.running = true
+    }
 
     function getWifiList() {
         wifiParce.running = true
@@ -94,6 +104,10 @@ Singleton {
                 }
             }
         }
+    }
+
+    Process {
+        id: wifiRadio
     }
 
     Connections {
