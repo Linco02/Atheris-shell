@@ -9,7 +9,7 @@ ButtonTripled {
     width: parent.width
     icon: "󰂯"
     textTop: "Bluetooth"
-    textBottom: SBluetooth.connectedDevices[0].name || ""
+    textBottom: SBluetooth.connectedDevices[0]?.name || ""
     isActive: SBluetooth.isBluetoothOn
     onClicked: UIState.controlCenterModul = "bluetooth"
 }
