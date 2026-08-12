@@ -92,6 +92,8 @@ ColumnStyled {
                                 text: modelData.connected
                             }
                         }
+                        
+                        TapHandler {onTapped: modelData.disconnect()}
                     }
                 }
 
