@@ -20,19 +20,24 @@ Singleton {
 
     function wallpaperInit() {
         if (!Settings.isWallpaperOn) return
-        if (Settings.isRandomWallpaperOn) wallpaperRandom()
-        // else if (Settings.chosenWallpapers !== "") wallpaperChange(Settings.chosenWallpapers)
+
+        if (Settings.isRandomWallpaperOn) {
+            const currentWallpaper = wallpaper.toString()
+            let isWallExist = wallpapers.some(w => w.toString() === currentWallpaper)
+
+            if (isWallExist) return
+        }
+
+        wallpaperRandom()
     }
 
     function wallpaperRandom() {
         let index = Math.floor(Math.random() * wallpapers.length)
         let wall = wallpapers[index]
-        // Global.wallpaperCurrent = wall
         wallpaperChange(wall)
     }
 
     function wallpaperChange(wall) {
-        // console.log(wall)
         let path = wall.toString().toLowerCase();
         let pathPalit = ""
 
@@ -62,8 +67,6 @@ Singleton {
             })
             return result
         }
-
-        // property string pathToWall: "file:/" + Settings.wallpaperFolder
 
         function updateFiles() {
             const wallList = [];
