@@ -21,12 +21,10 @@ Slider {
         }
     }
 
-    handle: Rect {
+    handle: RectWarning {
         y: root.topPadding + root.availableHeight / 2 - height / 2
         x: root.leftPadding + root.visualPosition * (root.availableWidth - width)
-        implicitHeight: 20; implicitWidth: 6
-        radius: implicitHeight / 2
-        color: Theme.warning
+        height: 20; width: 6
     }
 
     Behavior on width { NumberAnim { } }

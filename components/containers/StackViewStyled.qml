@@ -4,8 +4,6 @@ import QtQuick.Controls
 StackView {
     id: stack
     anchors.fill: parent
-    // height: currentItem ? currentItem.implicitHeight : 200
-    // width: currentItem ? currentItem.implicitWidth : 200
     
     property int gap: 20 // Твій відступ
 

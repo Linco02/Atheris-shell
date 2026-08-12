@@ -32,7 +32,7 @@ RectForeground {
                 property bool leftRad: isOccupied && (index > 0 && workspaceOccupied[index - 1]) === true
                 property bool rightRad: isOccupied && (index < workspaceOccupied.length - 1 && workspaceOccupied[index + 1]) === true
 
-                MouseFill { onClicked: SWorkspace.workspaceMove(index) }
+                TapHandler {onTapped: SWorkspace.workspaceMove(index)}
 
                 Behavior on color { ColorAnim {} }
                 Behavior on topLeftRadius { NumberAnim { } }

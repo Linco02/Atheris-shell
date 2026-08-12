@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import qs.components
 import qs.components.shapes
+import qs.components.controls
 import qs.components.indicators
 import qs.config
 import qs.services
@@ -42,12 +43,12 @@ RectForeground {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 20
 
-            ButtonOwn {
+            ButtonStyled {
                 text: "󰙤"
                 onClicked: SMris.previousMris(playerActive)
             }
 
-            ButtonOwn {
+            ButtonStyled {
                 text: SMris.isplayerActivePlay ? "" : ""
                 onClicked: {
                     if (SMris.isplayerActivePlay)
@@ -56,32 +57,9 @@ RectForeground {
                 }
             }
 
-            ButtonOwn {
+            ButtonStyled {
                 text: "󰙢"
                 onClicked: SMris.nextMris(playerActive)
-            }
-        }
-    }
-
-    component ButtonOwn: Button {
-        id: btn
-        height: width; width: 40
-        enabled: playerExist
-
-        background: MouseFill {
-            hoverEnabled: true
-            onEntered: btnText.color = Theme.textAccent
-            onExited: btnText.color = Theme.textSurface
-        }
-
-        contentItem: Item {
-            anchors.fill: parent
-
-            TextStyled {
-                id: btnText
-                anchors.centerIn: parent
-                text: btn.text
-                font.pixelSize: btn.height
             }
         }
     }

@@ -15,7 +15,7 @@ RectForeground {
     property alias text: buttonText.text
     property bool isActive: false
     property bool fullH: true
-    property bool hovered: hover.hovered
+    property bool hoзолvered: hover.hovered
 
     signal clicked()
 

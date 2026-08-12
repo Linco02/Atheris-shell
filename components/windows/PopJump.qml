@@ -13,8 +13,6 @@ PopupWindow {
         rect.y: panel.height
     }
     implicitHeight: 1000
-    // implicitWidth: 2000
-    // implicitHeight: Screen.height - 100
     implicitWidth: Screen.width
     color: "transparent"
 
