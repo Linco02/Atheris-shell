@@ -61,7 +61,7 @@ RectForeground {
 
                     PauseAnimation { duration: 5000 }
 
-                    NumberAnim {
+                    NumberAnimation {
                         from: 0
                         to: - (firstText.width + trackNameRow.spacing)
                         easing.type: Easing.Linear

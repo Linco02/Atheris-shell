@@ -10,11 +10,6 @@ Singleton {
     property int workspaceExist: workspaceNumber
     property list<bool> workspaceOccupied: []
 
-    Connections {
-        target: Hyprland.workspaces
-        function onValuesChanged() { updateExist() }
-    }
-
     function updateExist() {
         let maxId = Hyprland.workspaces.values.reduce((max, ws) => {
             return (ws.id > max) ? ws.id : max
@@ -32,6 +27,11 @@ Singleton {
 
     function workspaceMove(ws) {
         Hyprland.dispatch(`workspace ${ws + 1}`)
+    }
+
+    Connections {
+        target: Hyprland.workspaces
+        function onValuesChanged() { updateExist() }
     }
 
     Component.onCompleted: { updateExist() }

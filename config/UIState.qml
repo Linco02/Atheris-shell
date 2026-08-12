@@ -18,7 +18,7 @@ Singleton {
 
     // ControlCenter
     property bool isControlCenterOpen: false
-    property var controlCenterModules: ["main", "sound", "wifi", "powerMode"]
+    property var controlCenterModules: ["main", "sound", "wifi", "powerMode", "bluetooth"]
     property string controlCenterModul: "main"
 
     // AtherisCenter

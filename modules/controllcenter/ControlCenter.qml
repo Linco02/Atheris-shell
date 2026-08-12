@@ -30,6 +30,7 @@ PopFade {
                     case "sound": return "./controls/SoundControl.qml";
                     case "wifi": return "./controls/WifiControl.qml";
                     case "main": return "MainCenter.qml";
+                    case "bluetooth": return "./controls/BluetoothControl.qml"
                     return "";
                 }
             }
