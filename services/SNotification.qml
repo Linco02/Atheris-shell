@@ -1,6 +1,5 @@
 pragma Singleton
 import QtQuick
-import QtMultimedia
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
@@ -22,17 +21,6 @@ Singleton {
         notifiSend.running = true
     }
 
-    function notifiSound(urgency) {
-        if (urgency === "critical")
-            playNotifi.source = "../assets/notifiAllert.wav"
-        else
-            playNotifi.source = "../assets/notifiNormal.wav"
-
-        playNotifi.play()
-    }
-
-    SoundEffect {id: playNotifi}
-
     NotificationServer {
         id: notificationServer
         
@@ -40,7 +28,7 @@ Singleton {
             notification.tracked = true;
 
             if (Settings.isNotifiSoundOn)
-                notifiSound()
+                SSystemSound.playNotification()
         }
     }
 

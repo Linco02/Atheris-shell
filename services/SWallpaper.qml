@@ -53,6 +53,10 @@ Singleton {
             pathPalit = wallTumb
         }
 
+        if (wallpaper)
+            SNotification.nitifiSend("Wallpaper", "Змінено шпалери", SFiles.toName(wall), "preferences-desktop-wallpaper", "normal", 5000, 0)
+
+
         SPalit.palitCreate(pathPalit)
         wallpaper = wall
     }

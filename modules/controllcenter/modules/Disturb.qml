@@ -1,12 +1,14 @@
 import QtQuick
 import qs.components
 import qs.components.shapes
+import qs.components.controls
+import qs.config
+import qs.services
 
-RectForeground {
+ButtonStyled {
     width: parent.width
-
-    TextStyled {
-        anchors.centerIn: parent
-        text: "disturb"
-    }
+    text: "Disturb"
+    onClicked: SDnd.dndToggle()
+    isActive: Settings.isDndOn 
+    fillH: false
 }
