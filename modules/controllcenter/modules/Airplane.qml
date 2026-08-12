@@ -9,5 +9,5 @@ ButtonStyled {
     text: "Airplane"
     onClicked: SAirplane.toggle()
     isActive: SAirplane.isAirplaneOn 
-    fullH: false
+    fillH: false
 }

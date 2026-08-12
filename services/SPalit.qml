@@ -18,7 +18,6 @@ Singleton {
                 "--mode", Settings.palitMode,
                 "--source-color-index", colorIndex,
                 path
-                // SMedia.toRawPath(path)
             ]
             paliCreator.running = true
             curentPath = path

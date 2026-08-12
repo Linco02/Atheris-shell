@@ -15,13 +15,11 @@ Singleton {
     property string __wifiConnect: ""
     property bool isRetry: false
 
-    onIsWifiOnChanged: {
-        wifiControl()
-    }
-
-    function wifiControl() {
-        wifiRadio.command = ["nmcli", "radio", "wifi", isWifiOn ? "on" : "off"]
+    function toggleWifi() {
+        wifiRadio.command = ["nmcli", "radio", "wifi", isWifiOn ? "off" : "on"]
         wifiRadio.running = true
+
+        isWifiOn = !isWifiOn
     }
 
     function getWifiList() {
@@ -30,11 +28,10 @@ Singleton {
 
     function connectWifi(ssid, password) {
         __wifiConnect = ssid
-        if (password) {
-            wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid, "password", password]
-        } else {
-            wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid]
-        }
+        
+        wifiConnect.command = password
+            ? wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid, "password", password]
+            : wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid]
         wifiConnect.running = true
     }
 

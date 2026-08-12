@@ -7,21 +7,20 @@ import qs.components.containers
 import qs.config
 import qs.services
 
-Item {
+ColumnStyled {
     id: root
     anchors.fill: parent
 
-    ButtonStyled {
+    ButtonToggle {
         id: button
-        onClicked: SNetwork.isWifiOn = !SNetwork.isWifiOn
+        anchors.right: parent.right
+        height: 30
+        onClicked: SNetwork.toggleWifi()
         isActive: SNetwork.isWifiOn
-        height: 40
-        text: "wifi"
     }
 
     RectForeground {
         height: root.height - button.height; width: root.width
-        anchors.bottom: parent.bottom
 
         ScrollView {
             anchors.fill: parent

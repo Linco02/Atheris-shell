@@ -5,7 +5,7 @@ import qs.config
 
 ButtonStyled {
     width: parent.width
-    fullH: false
+    fillH: false
     isActive: Settings.palitMode === "dark"
     text: Settings.palitMode === "dark"
         ? "Dark mode"

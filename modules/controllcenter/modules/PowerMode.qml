@@ -17,7 +17,7 @@ RectInactive {
                 text: modelData.icon
                 onClicked: SPerfomance.powerProfile = modelData.label
                 isActive: SPerfomance.powerProfile === modelData.label
-                fullH: false
+                fillH: false
                 
                 ToolTipStyled {
                     visible: parent.hovered

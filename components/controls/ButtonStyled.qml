@@ -14,7 +14,7 @@ RectForeground {
 
     property alias text: buttonText.text
     property bool isActive: false
-    property bool fullH: true
+    property bool fillH: true
     property bool hovered: hover.hovered
 
     signal clicked()
@@ -22,7 +22,7 @@ RectForeground {
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: fullH === true ? parent.height - Style.padding.small : Style.fontSize
+        font.pixelSize: fillH === true ? parent.height - Style.padding.small : Style.fontSize
         color: isActive ? Theme.textAccent : Theme.textSurface
     }
 
