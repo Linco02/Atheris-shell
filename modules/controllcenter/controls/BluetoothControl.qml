@@ -71,11 +71,11 @@ ColumnStyled {
                 
                 TextStyled {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Під'єднані пристрої"
+                    text: "Сполучені пристрої"
                 }
 
                 Repeater {
-                    model: SBluetooth.connectedDevices
+                    model: SBluetooth.pairedDevices
                     
                     delegate: RectInactive {
                         height: 40; width: root.width

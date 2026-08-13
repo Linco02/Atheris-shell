@@ -13,6 +13,7 @@ RectForeground {
         : Theme.inactive
 
     property alias text: buttonText.text
+    property int fontSize: fillH === true ? root.height - Style.padding.small : Style.fontSize
     property bool isActive: false
     property bool fillH: true
     property bool hovered: hover.hovered
@@ -22,7 +23,7 @@ RectForeground {
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: fillH === true ? parent.height - Style.padding.small : Style.fontSize
+        font.pixelSize: fontSize
         color: isActive ? Theme.textAccent : Theme.textSurface
     }
 

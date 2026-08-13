@@ -15,141 +15,157 @@ ScrollView {
     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
     ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
+    property var adapter: SBluetooth?.adapter
+
     ColumnStyled {
-        anchors.fill: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: parent.height
+        width: root.width * 0.9
+
+        TextStyled {leftPadding: Style.padding.large; text: adapter?.name || ""}
 
         RectForeground {
-            id: bluetoothContainer
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: 40 + Style.padding.large * 2; width: root.width * 0.9
-        
-            TextStyled {
-                anchors.verticalCenter: parent.verticalCenter
-                x: Style.padding.large
-                text: "Bluetooth"
-                font.pixelSize: bluetoothContainer.height - Style.padding.large * 2
-            }
+            id: settingsContainer
+            height: settingsGrid.height; width: parent.width
+            clip: true
 
-            ButtonToggle {
-                anchors.verticalCenter: parent.verticalCenter
-                x: bluetoothContainer.width - width - Style.padding.large
-                height: bluetoothContainer.height - Style.padding.large * 2
-                onClicked: SBluetooth.bluetoothToggle()
-                isActive: SBluetooth.isBluetoothOn
+            Grid {
+                id: settingsGrid
+                width: parent.width
+                columns: 2
+                padding: Style.padding.large
+                spacing: Style.padding.large
+
+                TextStyledB {
+                    id: name
+                    width: parent.width - toggle.width - Style.padding.large * 3
+                    text: "Bluetooth"
+                }
+                ButtonToggle {
+                    id: toggle
+                    height: name.height
+                    isActive: SBluetooth?.isBluetoothOn
+                    onClicked: SBluetooth.bluetoothToggle()
+                }
+
+                TextStyledB {width: name.width; text: "Сканування пристроїв"}
+                ButtonToggle {
+                    height: toggle.height
+                    isActive: adapter?.discovering
+                    onClicked: SBluetooth.discoveringToggle()
+                }
+
+                TextStyledB {width: name.width; text: "Виявлення іншими пристроями"}
+                ButtonToggle {
+                    height: toggle.height
+                    isActive: adapter?.discoverable
+                    onClicked: SBluetooth.discoverableToogle()
+                }
+
+                TextStyledB {width: name.width; text: "Дозволено сполучення іншим пристроям"}
+                ButtonToggle {
+                    height: toggle.height
+                    isActive: adapter?.pairable
+                    onClicked: SBluetooth.pairableTggle()
+                }
             }
         }
 
-        RectForeground {
-            id: connectedDevicesContainer
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: connectedDevicesColumn.height + Style.padding.large * 2; width: root.width * 0.9
+        TextStyled {leftPadding: Style.padding.large; text: "Сполучені пристрої"}
 
-            ColumnStyled {
-                id: connectedDevicesColumn
-                anchors.centerIn: parent
-                TextStyled {text: "Підключені пристрої"}
+        Repeater {
+            model: SBluetooth?.pairedDevices
+            delegate: RectForeground {
+                id: pairedDevicesTemplate
+                height: 100; width: parent.width
+                clip: true
 
-                Repeater {
-                    model: SBluetooth.connectedDevices
-                    delegate: Rect {
-                        id: connectedDevicesTemplate
-                        height: 80
-                        width: connectedDevicesContainer.width - Style.padding.large * 2
-                        clip: true
-                        color: Theme.surfaceTop
+                RowStyled {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        leftMargin: Style.padding.large
+                    }
 
-                        RowStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: Style.padding.normal
+                    IconImage {
+                        id: buttonIcon
+                        source: SAppIcons.getIcon(modelData.icon)
+                        implicitSize: pairedDevicesTemplate.height - Style.padding.large * 2
+                    }
 
-                            IconImage {
-                                id: buttonIcon
-                                source: SAppIcons.getIcon(modelData.icon)
-                                implicitSize: connectedDevicesTemplate.height - Style.padding.normal * 2
-                            }
+                    ColumnStyled {
+                        anchors.verticalCenter: parent.verticalCenter
 
-                            ColumnStyled {
-                                anchors.verticalCenter: parent.verticalCenter
-
-                                TextStyled {
-                                    text: modelData.name || modelData.deviceName
-                                    font.pixelSize: connectedDevicesTemplate.height / 2 - Style.padding.normal * 2
-                                }
-                                Loader {
-                                    active: modelData.batteryAvailable
-                                    sourceComponent: TextStyled {
-                                        text: (modelData.battery * 100) + "%"
-                                        font.pixelSize: connectedDevicesTemplate.height / 2 - Style.padding.normal * 2
-                                    }
-                                }
-                            }
+                        TextStyledB {
+                            text: modelData.name || modelData.deviceName
+                            color: modelData.connected ? Theme.textAccent : Theme.textSurface
                         }
-
-                        RowStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: connectedDevicesTemplate.width - Style.padding.large - width
-                            layoutDirection: Qt.RightToLeft
-
-                            ButtonStyled {
-                                height: connectedDevicesTemplate.height - Style.padding.large * 2
-                                text: "Від'єднатися"
-                                onClicked: modelData.disconnect()
-                            }
-
-                            ButtonStyled {
-                                height: connectedDevicesTemplate.height - Style.padding.large * 2
-                                text: "Налаштування"
-                            }
+                        Loader {
+                            active: modelData.batteryAvailable
+                            sourceComponent: TextStyledB {text: (modelData.battery * 100) + "%"}
                         }
+                    }
+                }
+
+                RowStyled {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        rightMargin: Style.padding.large
+                    }
+
+                    ButtonStyled {
+                        height: pairedDevicesTemplate.height - Style.padding.large * 2
+                        text: modelData.connected ? "Від'єднатися" : "Під'єднатися"
+                        fontSize: Theme.fontSize * 1.6
+                        onClicked: modelData.connected ? modelData.disconnect() : modelData.connect()
+                    }
+
+                    ButtonStyled {
+                        height: pairedDevicesTemplate.height - Style.padding.large * 2
+                        width: height
+                        text: ""
+                        fontSize: Theme.fontSize * 1.6
                     }
                 }
             }
         }
 
-        RectForeground {
-            id: avalibleDevicesContainer
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: avalibleDevicesColumn.height + Style.padding.large * 2; width: root.width * 0.9
+        TextStyled {leftPadding: Style.padding.large; text: "Доступні пристрої"}
 
-            ColumnStyled {
-                id: avalibleDevicesColumn
-                anchors.centerIn: parent
+        Repeater {
+            model: SBluetooth?.avalibleDevices
+            delegate: RectForeground {
+                id: avalibleDevicesTemplate
+                height: 100; width: parent.width
+                clip: true
 
-                TextStyled {text: "Доступні пристрої"}
-
-                Repeater {
-                    model: SBluetooth.avalibleDevices
-                    delegate: Rect {
-                        id: avalibleDevicesTemplate
-                        height: 80
-                        width: avalibleDevicesContainer.width - Style.padding.large * 2
-                        clip: true
-                        color: Theme.surfaceTop
-
-                        RowStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: Style.padding.normal
-
-                            IconImage {
-                                id: buttonIcon
-                                source: SAppIcons.getIcon(modelData.icon)
-                                implicitSize: avalibleDevicesTemplate.height - Style.padding.normal * 2
-                            }
-
-                            TextStyled {
-                                text: modelData.name || modelData.deviceName
-                                font.pixelSize: avalibleDevicesTemplate.height / 2 - Style.padding.normal * 2
-                            }
-                        }
-
-                        ButtonStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            x: avalibleDevicesTemplate.width - Style.padding.large - width
-                            height: avalibleDevicesTemplate.height - Style.padding.large * 2
-                            text: "Під'єднатися"
-                            onClicked: modelData.connect()
-                        }
+                RowStyled {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        leftMargin: Style.padding.large
                     }
+
+                    IconImage {
+                        id: buttonIcon
+                        source: SAppIcons.getIcon(modelData.icon)
+                        implicitSize: avalibleDevicesTemplate.height - Style.padding.large * 2
+                    }
+
+                    TextStyledB {text: modelData.name || modelData.deviceName}
+                }
+
+                ButtonStyled {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        rightMargin: Style.padding.large
+                    }
+                    height: avalibleDevicesTemplate.height - Style.padding.large * 2
+                    text: "Під'єднатися"
+                    fontSize: Theme.fontSize * 1.6
+                    onClicked: modelData.connect()
                 }
             }
         }

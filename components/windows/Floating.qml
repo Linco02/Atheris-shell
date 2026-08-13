@@ -7,30 +7,25 @@ import qs.config
 FloatingWindow {
     id: root
     implicitHeight: 400; implicitWidth: 400
-    color: "transparent"
+    color: Theme.surface
 
     default property alias contents: container.data
 
-    RectBackground {
-        anchors.fill: parent
-    }
-
     Item {
-        id: title
+        id: name
         anchors.top: parent.top
-        height: 30
-        width: root.width
+        height: 30; width: root.width
 
         TextStyled {
             anchors.centerIn: parent
-            text: "Settings"
+            text: root.title
         }
     }
 
     Item {
         id: box
-        anchors.top: title.bottom
-        height: root.height - title.height; width: root.width
+        anchors.top: name.bottom
+        height: root.height - name.height; width: root.width
 
         Item {
             id: container

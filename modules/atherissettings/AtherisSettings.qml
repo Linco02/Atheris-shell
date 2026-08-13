@@ -9,7 +9,8 @@ import qs.config
 Floating {
     id: root
     title: "Atheris-Settings"
-    minimumSize: "700x500"
+    minimumSize: "1000x700"
+    implicitHeight: 800; implicitWidth: 1400
     onVisibleChanged: {
         if (!visible) {
             UIState.isAtherisSettingsOpen = false
