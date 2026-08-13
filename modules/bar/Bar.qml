@@ -33,23 +33,24 @@ PanelWindow {
             anchors.left: parent.left
             leftPadding: Style.padding.normal
 
-            Power { }
-            Workspace { }
-            Taskbar { }
+            Power {}
+            Workspace {}
+            Taskbar {}
         }
 
         RowContainer {
             anchors.horizontalCenter: parent.horizontalCenter
 
-            Clock { }
-            Music { }
+            Clock {}
+            Music {}
+            Bluetooth {}
         }
 
         RowContainer {
             anchors.right: parent.right
             rightPadding: Style.padding.normal
 
-            Status { }
+            Status {}
         }
     }
 
