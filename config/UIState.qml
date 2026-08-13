@@ -12,9 +12,9 @@ Singleton {
     property bool isAuthenficatorOpen: false
 
     // AtherisSettings
-    property bool isAtherisSettingsOpen: false
+    property bool isAtherisSettingsOpen: true
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth"]
-    property string atherisSettingsModule: "display"
+    property string atherisSettingsModule: "bluetooth"
 
     // ControlCenter
     property bool isControlCenterOpen: false

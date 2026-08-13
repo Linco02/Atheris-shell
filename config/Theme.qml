@@ -5,6 +5,7 @@ import Quickshell
 Singleton {
     property color surface: Qt.alpha("#191113", Style.opacity)
     property color surfaceRaised: "#261d1f"
+    property color surfaceTop: Qt.lighter(surfaceRaised, 1.4)
     property color outline: "#9e8c8f"
     property color active: "#ffb1c4"
     property color inactive: "#514346"

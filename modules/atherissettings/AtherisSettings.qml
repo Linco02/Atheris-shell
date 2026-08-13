@@ -8,6 +8,8 @@ import qs.config
 
 Floating {
     id: root
+    title: "Atheris-Settings"
+    minimumSize: "700x500"
     onVisibleChanged: {
         if (!visible) {
             UIState.isAtherisSettingsOpen = false
@@ -15,42 +17,37 @@ Floating {
         }
     }
 
-    RowStyled {
-        height: root.height
-
-        ColumnStyled {
+    Row {
+        RectForeground {
             id: settingsChoser
-            width: 200
-            
-            Repeater {
-                model: UIState.atherisSettingsModules
-                delegate: ButtonStyled {
-                    height: 20; width: parent.width
-                    text: modelData
-                    onClicked: UIState.atherisSettingsModule = modelData
-                    isActive: UIState.atherisSettingsModule === modelData
+            height: root.height; width: 200
+
+            ColumnStyled {
+                anchors.fill: parent
+                
+                Repeater {
+                    model: UIState.atherisSettingsModules
+                    delegate: ButtonStyled {
+                        height: 20; width: parent.width
+                        text: modelData
+                        onClicked: UIState.atherisSettingsModule = modelData
+                        isActive: UIState.atherisSettingsModule === modelData
+                    }
                 }
             }
         }
 
-        RectForeground {
-            height: root.height; width: 10
-        }
-
-        Item {
+        Loader {
+            id: mainLoader
             height: root.height; width: root.width - settingsChoser.width
-
-            Loader {
-                id: mainLoader
-                active: UIState.isAtherisSettingsOpen
-                source: {
-                    switch(UIState.atherisSettingsModule) {
-                        case "general": return "General.qml";
-                        case "display": return "Display.qml";
-                        case "theme": return "Theme.qml";
-                        case "bluetooth": return "Bluetooth.qml";
-                        return "";
-                    }
+            active: UIState.isAtherisSettingsOpen
+            source: {
+                switch(UIState.atherisSettingsModule) {
+                    case "general": return "General.qml";
+                    case "display": return "Display.qml";
+                    case "theme": return "Theme.qml";
+                    case "bluetooth": return "Bluetooth.qml";
+                    return "";
                 }
             }
         }

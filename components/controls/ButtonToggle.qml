@@ -5,11 +5,12 @@ import qs.components.shapes
 import qs.components.animations
 import qs.config
 
-RectForeground {
+RectInactive {
     id: root
     width: height * 2
-    color: hovered ? Qt.lighter(Theme.surfaceRaised, Style.hover)
-        : Theme.surfaceRaised
+    color: hovered ? Qt.lighter(isActive ? Theme.active : Theme.inactive, Style.hover)
+        : isActive ? Theme.active
+        : Theme.inactive
 
     property bool isActive: false
     property bool fillH: true
@@ -17,7 +18,7 @@ RectForeground {
 
     signal clicked()
 
-    RectActive {
+    RectForeground {
         anchors {
             verticalCenter: parent.verticalCenter
         }
