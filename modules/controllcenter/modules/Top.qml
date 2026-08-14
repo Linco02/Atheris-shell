@@ -10,18 +10,18 @@ Rect {
     id: root
     width: parent.width
 
-    RectInactive {
-        visible: SUPower.isExist
-        height: parent.height
-        width: buttery.width + Style.padding.large
+    // RectInactive {
+    //     visible: SUPower.isExist
+    //     height: parent.height
+    //     width: buttery.width + Style.padding.large
 
-        TextStyled {
-            id: buttery
-            anchors.centerIn: parent
-            font.pixelSize: parent.height - Style.padding.large
-            text: SUPower.batteryLevelRound + "% " + SUPower.batteryIcon
-        }
-    }
+    //     TextStyled {
+    //         id: buttery
+    //         anchors.centerIn: parent
+    //         font.pixelSize: parent.height - Style.padding.large
+    //         text: SUPower.batteryLevelRound + "% " + SUPower.batteryIcon
+    //     }
+    // }
 
     RowStyled {
         anchors.right: parent.right

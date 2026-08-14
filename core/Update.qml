@@ -8,7 +8,7 @@ Singleton {
 
     Process {
         id: shellUpdate
-        command: ["git", "-C", SystemUtils.homeDir + "/Atheris-shell", "pull"]
+        command: ["git", "-C", "~/Atheris-shell", "pull"]
         onExited: (exitCode, exitStatus) => {
             if (exitCode === 0) {
                 SNotification.nitifiSend("Update", "Оновлення успішне", "", "software-installed-symbolic", "normal", 5000, 0)

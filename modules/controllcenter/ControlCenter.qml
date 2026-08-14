@@ -37,17 +37,6 @@ PopFade {
 
             onLoaded: flash.start()
         }
-
-        Loader {
-            id: controlCenterButton
-            height: 40; width: parent.width
-            active: UIState.controlCenterModul !== "main"
-            sourceComponent: ButtonStyled {
-                anchors.fill: parent
-                text: "󰁠 Назад 󰁠"
-                onClicked: UIState.controlCenterModul = "main"
-            }
-        }
     }
 
     NumberAnim {

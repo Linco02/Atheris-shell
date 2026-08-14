@@ -15,7 +15,7 @@ Singleton {
             "-a", appName,
             "-r", replacesId,
             "-i", iconName,
-            "-u", urgency,
+            "-u", urgency, //low, normal, critical
             "-t", timeout
         ]
         notifiSend.running = true

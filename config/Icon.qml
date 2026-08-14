@@ -3,10 +3,10 @@ import Quickshell
 
 Singleton {
     // PowerMode
-    property var powerModes: [
-        {label: "power-saver", icon: "󰌪"},
-        {label: "balanced", icon: ""},
-        {label: "performance", icon: "󰊗"}
+    property var powerProfilesIcon: [
+        {label: "PowerSaver", icon: "󰌪"},
+        {label: "Balanced", icon: ""},
+        {label: "Performance", icon: "󰊗"}
     ]
     
     // CommandCenter

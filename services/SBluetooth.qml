@@ -15,13 +15,17 @@ Singleton {
         if(!pairedDevices) return [];
         return pairedDevices.filter(d => d.connected);
     }
-    property var avalibleDevices: {
+    property var availableDevices: {
         if(!devices) return [];
         return devices.values.filter(d => !d.paired);
     }
 
-    function bluetoothToggle() {adapter.enabled = !adapter.enabled}
-    function discoverableToogle() {adapter.discoverable = !adapter.discoverable} // Пошук цього пристрою
-    function discoveringToggle() {adapter.discovering = !adapter.discovering} // Пошук інших пристроїв
-    function pairableTggle() {adapter.pairable = !adapter.pairable}
+    function toggleBluetooth() {adapter.enabled = !adapter.enabled}
+    function toggleDiscoverable() {adapter.discoverable = !adapter.discoverable} // Пошук цього пристрою
+    function toggleDiscovering() {adapter.discovering = !adapter.discovering} // Пошук інших пристроїв
+    function togglePairable() {adapter.pairable = !adapter.pairable}
+    function getDeviceStatus(dev) {
+        if (!dev) return "";
+        return BluetoothDeviceState.toString(dev.state);
+    }
 }

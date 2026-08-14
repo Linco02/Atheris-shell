@@ -20,7 +20,9 @@ Singleton {
 
     // ControllCenter
     function controlCenter(targetMenu) {
-        if (UIState.isControlCenterOpen) {
+        const isSameMenu = targetMenu === UIState.controlCenterModul || !targetMenu
+
+        if (UIState.isControlCenterOpen && isSameMenu) {
             UIState.isControlCenterOpen = false
             return
         }

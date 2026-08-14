@@ -16,11 +16,11 @@ RectForeground {
         leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
 
         TextOwn {text: SPipewire.iconVolume}
-        TextOwn {text: SUPower.batteryIcon; visible: SUPower.isExist}
+        // TextOwn {text: SUPower.batteryIcon; visible: SUPower.isExist}
         TextOwn {text: "󰂯" }
          // 󰂰 󰂲 }
         TextOwn {text: SNetwork.currentNetworkSimbol}
-        TextOwn {text: (Icon.powerModes.find(p => p.label === SPerfomance.powerProfile) ?? {icon: ""}).icon}
+        TextOwn {text: (Icon.powerProfilesIcon.find(p => p.label === SUPower.powerProfile) ?? {icon: ""}).icon}
         TextOwn {text: SLanguage.currentLayoutName}
     }
 

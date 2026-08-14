@@ -45,28 +45,28 @@ ScrollView {
                     id: toggle
                     height: name.height
                     isActive: SBluetooth?.isBluetoothOn
-                    onClicked: SBluetooth.bluetoothToggle()
+                    onClicked: SBluetooth.toggleBluetooth()
                 }
 
                 TextStyledB {width: name.width; text: "Сканування пристроїв"}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.discovering
-                    onClicked: SBluetooth.discoveringToggle()
+                    onClicked: SBluetooth.toggleDiscovering()
                 }
 
                 TextStyledB {width: name.width; text: "Виявлення іншими пристроями"}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.discoverable
-                    onClicked: SBluetooth.discoverableToogle()
+                    onClicked: SBluetooth.toggleDiscoverable()
                 }
 
                 TextStyledB {width: name.width; text: "Дозволено сполучення іншим пристроям"}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.pairable
-                    onClicked: SBluetooth.pairableTggle()
+                    onClicked: SBluetooth.togglePairable()
                 }
             }
         }
@@ -134,9 +134,9 @@ ScrollView {
         TextStyled {leftPadding: Style.padding.large; text: "Доступні пристрої"}
 
         Repeater {
-            model: SBluetooth?.avalibleDevices
+            model: SBluetooth?.availableDevices
             delegate: RectForeground {
-                id: avalibleDevicesTemplate
+                id: availableDevicesTemplate
                 height: 100; width: parent.width
                 clip: true
 
@@ -150,7 +150,7 @@ ScrollView {
                     IconImage {
                         id: buttonIcon
                         source: SAppIcons.getIcon(modelData.icon)
-                        implicitSize: avalibleDevicesTemplate.height - Style.padding.large * 2
+                        implicitSize: availableDevicesTemplate.height - Style.padding.large * 2
                     }
 
                     TextStyledB {text: modelData.name || modelData.deviceName}
@@ -162,7 +162,7 @@ ScrollView {
                         right: parent.right
                         rightMargin: Style.padding.large
                     }
-                    height: avalibleDevicesTemplate.height - Style.padding.large * 2
+                    height: availableDevicesTemplate.height - Style.padding.large * 2
                     text: "Під'єднатися"
                     fontSize: Theme.fontSize * 1.6
                     onClicked: modelData.connect()

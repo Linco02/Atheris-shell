@@ -7,124 +7,94 @@ import qs.components.containers
 import qs.config
 import qs.services
 
-ColumnStyled {
-    id: root
-    anchors.fill: parent
+ScrollStyled {
+    padding: Style.padding.normal
 
-    RowStyled {
+    ColumnStyled {
         width: parent.width
-        layoutDirection: Qt.RightToLeft
 
-        ButtonToggle {
-            id: button
-            height: 30
-            onClicked: SBluetooth.bluetoothToggle()
-            isActive: SBluetooth.isBluetoothOn
+        Item {
+            height: 30; width: parent.width
+
+            ButtonStyled {
+                anchors.left: parent.left
+                height: parent.height; width: height
+                text: ""
+                onClicked: SWManager.controlCenter("main")
+            }
+
+            ButtonStyled {
+                anchors {
+                    right: bluetoothToggle.left
+                    rightMargin: Style.margine.normal
+                }
+                height: parent.height; width: height
+                text: ""
+                onClicked: SBluetooth.toggleDiscovering()
+
+                NumberAnimation on rotation {
+                    id: spinAnimation
+                    running: false
+                    from: 0; to: 360
+                    duration: 1500
+                    loops: 1
+                    easing.type: Easing.Linear
+
+                    onFinished: {
+                        parent.rotation = 0
+                        if (SBluetooth.adapter.discovering) {
+                            spinAnimation.start()
+                        }
+                    }
+                }
+
+                Connections {
+                    target: SBluetooth.adapter
+                    function onDiscoveringChanged() {
+                        if (SBluetooth.adapter.discovering && !spinAnimation.running) {
+                            spinAnimation.start()
+                        }
+                    }
+                }
+            }
+
+            ButtonToggle {
+                id: bluetoothToggle
+                anchors.right: parent.right
+                height: parent.height
+                onClicked: SBluetooth.toggleBluetooth()
+                isActive: SBluetooth.isBluetoothOn
+            }
         }
-        
-        ButtonStyled {
-            id: refreshBtn
-            height: 30; width: height
-            text: ""
-            onClicked: SBluetooth.adapter.discovering = !SBluetooth.adapter.discovering
 
-            NumberAnimation on rotation {
-                id: spinAnimation
-                running: false
-                from: 0
-                to: 360
-                duration: 1500
-                easing.type: Easing.Linear
-                loops: 1
+        TextStyled {
+            text: "Сполучені пристрої"
+            leftPadding: Style.padding.normal
+        }
 
-                onFinished: {
-                    refreshBtn.rotation = 0
-                    if (SBluetooth.adapter.discovering) {
-                        spinAnimation.start()
-                    }
-                }
-            }
+        Repeater {
+            model: SBluetooth.pairedDevices
+            delegate: DeviceButton {}
+        }
 
-            Connections {
-                target: SBluetooth.adapter
-                function onDiscoveringChanged() {
-                    if (SBluetooth.adapter.discovering && !spinAnimation.running) {
-                        spinAnimation.start()
-                    }
-                }
-            }
+        TextStyled {
+            text: "Доступні пристрої"
+            leftPadding: Style.padding.normal
+        }
+
+        Repeater {
+            model: SBluetooth.availableDevices
+            delegate: DeviceButton {}
         }
     }
 
-
-    RectForeground {
-        height: root.height - button.height; width: root.width
-
-        ScrollView {
-            anchors.fill: parent
-            contentWidth: -1
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-            
-            ColumnStyled {
-                topPadding: Style.padding.normal
-                
-                TextStyled {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Сполучені пристрої"
-                }
-
-                Repeater {
-                    model: SBluetooth.pairedDevices
-                    
-                    delegate: RectInactive {
-                        height: 40; width: root.width
-
-                        RowStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            leftPadding: Style.padding.normal
-
-                            TextStyled {
-                                text: modelData.name
-                            }
-
-                            TextStyled {
-                                text: modelData.connected
-                            }
-                        }
-                        
-                        TapHandler {onTapped: modelData.disconnect()}
-                    }
-                }
-
-                TextStyled {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Доступні пристрої"
-                }
-
-                Repeater {
-                    model: SBluetooth.avalibleDevices
-
-                    delegate: RectInactive {
-                        height: 40; width: root.width
-
-                        RowStyled {
-                            anchors.verticalCenter: parent.verticalCenter
-                            leftPadding: Style.padding.normal
-
-                            TextStyled {
-                                text: modelData.name
-                            }
-
-                            TextStyled {
-                                text: modelData.connected
-                            }
-                        }
-
-                        TapHandler {onTapped: modelData.connect()}
-                    }
-                }
-            }
-        }
+    component DeviceButton: ButtonCompound {
+        height: 40; width: parent.width
+        icon: modelData?.icon
+        textTop: modelData?.deviceName
+        textBottom: SBluetooth?.getDeviceStatus(modelData)
+        isActive: modelData?.connected
+        onClicked: modelData?.connected ? modelData.disconnect()
+            : modelData.connect()
     }
 }
