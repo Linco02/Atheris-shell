@@ -26,7 +26,7 @@ RectForeground {
 
         TextOwn {text: SBluetooth?.isBluetoothOn ? "󰂯" : "󰂲"}
         
-        TextOwn {text: SNetwork.currentNetworkSimbol}
+        // TextOwn {text: SNetwork.currentNetworkSimbol}
 
         Loader {
             active: SUPower?.power.hasPerformanceProfile

@@ -43,7 +43,7 @@ PanelWindow {
 
             Clock {}
             Music {}
-            Bluetooth {}
+            Device {}
         }
 
         RowContainer {

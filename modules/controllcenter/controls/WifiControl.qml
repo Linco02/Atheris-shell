@@ -33,6 +33,13 @@ ScrollStyled {
                 isActive: SNetwork.isWifiOn
             }
         }
+
+        TextStyled {
+            leftPadding: Style.padding.normal
+            text: "Активна мережа"
+        }
+
+
     }
 }
 

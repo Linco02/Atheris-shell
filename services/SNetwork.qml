@@ -4,6 +4,16 @@ import Quickshell
 import Quickshell.Io
 import qs.config
 
+// import Quickshell.Networking
+
+// Singleton {
+//     property var network: Networking
+//     property var device: network.device
+//     property var devices: network.devices
+//     property bool isWifiOn: network.wifiEnabled
+
+
+// }
 Singleton {
     property bool isWifiOn: true
     property string currentNetworkSimbol: ""

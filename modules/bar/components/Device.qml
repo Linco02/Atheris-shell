@@ -8,10 +8,10 @@ import qs.components.containers
 
 Item {
     id: root
-    height: parent.height; width: bluetoothContainer.width
+    height: parent.height; width: deviceContainer.width
 
     RowStyled {
-        id: bluetoothContainer
+        id: deviceContainer
 
         Repeater {
             model: SBluetooth.connectedDevices
