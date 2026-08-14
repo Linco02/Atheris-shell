@@ -16,11 +16,25 @@ RectForeground {
         leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
 
         TextOwn {text: SPipewire.iconVolume}
-        // TextOwn {text: SUPower.batteryIcon; visible: SUPower.isExist}
-        TextOwn {text: "󰂯" }
-         // 󰂰 󰂲 }
+
+        Loader {
+            active: SUPower.displayDevice.isLaptopBattery
+            sourceComponent: TextOwn {
+                text: SUPower.batteryIcon
+            }
+        }
+
+        TextOwn {text: SBluetooth?.isBluetoothOn ? "󰂯" : "󰂲"}
+        
         TextOwn {text: SNetwork.currentNetworkSimbol}
-        TextOwn {text: (Icon.powerProfilesIcon.find(p => p.label === SUPower.powerProfile) ?? {icon: ""}).icon}
+
+        Loader {
+            active: SUPower?.power.hasPerformanceProfile
+            sourceComponent: TextOwn {
+                text: (Icon.powerProfilesIcon.find(p => p.label === SUPower?.powerProfile) ?? {icon: ""}).icon
+            }
+        }
+        
         TextOwn {text: SLanguage.currentLayoutName}
     }
 

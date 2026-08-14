@@ -15,7 +15,7 @@ Singleton {
             } else {
                 SNotification.nitifiSend("Update", "Помилка під час оновлення", exitCode, "software-update-urgent-symbolic", "critical", 5000, 0)
             }
-            console.log(exitCode)
+            console.log("Update", exitCode)
         }
     }
 }

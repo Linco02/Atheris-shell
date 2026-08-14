@@ -16,13 +16,8 @@ RectInactive {
                 width: root.width / 3; height: root.height
                 text: modelData.icon
                 onClicked: SUPower.changePowerProfile(modelData.label)
-                isActive: SUPower.powerProfile === modelData.label
+                isActive: SUPower?.powerProfile === modelData.label
                 fillH: false
-                
-                ToolTipStyled {
-                    visible: parent.hovered
-                    text: modelData.label
-                }
             }
         }
     }

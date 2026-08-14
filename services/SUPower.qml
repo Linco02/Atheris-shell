@@ -41,10 +41,14 @@ Singleton {
 
     Component.onCompleted: { statusChange() }
 
+
     property var power: PowerProfiles
     property var degradation: power.degradationReason
     property string powerProfile: PowerProfile.toString(power.profile)
     property string degradationReason: PerformanceDegradationReason.toString(degradation)
+
+    property var displayDevice: UPower.displayDevice
+    property var devices: UPower.devices
 
     onDegradationChanged: {
         if (degradation === 0) return
@@ -53,7 +57,7 @@ Singleton {
     }
 
     function changePowerProfile(profile) {
-        // const parse = profile === ""
-        
+        if (!power.hasPerformanceProfile) return
+        power.profile = profile
     }
 }
