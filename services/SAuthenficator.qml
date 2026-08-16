@@ -3,7 +3,7 @@ import Quickshell
 import qs.config
 
 Singleton {
-    property string __data: ""
+    property var __data: ""
     property string __client: ""
     property bool isRetry: false
     property string titleText: ""
@@ -15,7 +15,7 @@ Singleton {
         isRetry = status
 
         if (client === "wifi") {
-            titleText = "Підключення до wifi", data
+            titleText = "Підключення до wifi", data.name
 
             if (!status) {
                 placeholder = "Введіть пароль"
@@ -29,7 +29,7 @@ Singleton {
 
     function enterPassword(password) {
         if (__client === "wifi") {
-            SNetwork.connectWifi(__data, password)
+            SNetwork.connectNetworkWithPsk(__data, password)
         }
 
         UIState.isAuthenficatorOpen = false

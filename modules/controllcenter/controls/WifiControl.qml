@@ -39,8 +39,41 @@ ScrollStyled {
             text: "Активна мережа"
         }
 
+        Loader {
+            active: SNetwork?.currentNetwork?.connected || false
+            width: active ? parent.width : 0
+            sourceComponent: ButtonCompound {
+                height: 40; width: parent.width
+                icon: ""
+                textTop: SNetwork?.currentNetwork?.name || ""
+                textBottom: SNetwork.getDeviceStatus(SNetwork?.currentNetwork)
+                isActive: true
+                onClicked: SNetwork.disconnectNetwork(SNetwork?.currentNetwork)
+            }
+        }
 
+        TextStyled {
+            leftPadding: Style.padding.normal
+            text: "Доступні мережі"
+            color: SNetwork?.networking.canCheckConnectivity ? Theme.textAccent : Theme.textSurface
+        }
+
+        Repeater {
+            model: SNetwork.anotherNetworks
+            delegate: DeviceButton {}
+        }
     }
+
+    component DeviceButton: ButtonCompound {
+        height: 40; width: parent.width
+        icon: ""
+        textTop: modelData?.name
+        textBottom: SNetwork?.getDeviceStatus(modelData)
+        isActive: false
+        onClicked: SNetwork.connectNetwork(modelData)
+    }
+
+    Component.onCompleted: SNetwork.checkConnectivity()
 }
 
 // ColumnStyled {

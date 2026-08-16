@@ -5,13 +5,22 @@ import qs.components.controls
 import qs.config
 import qs.services
 
+// ButtonTripled {
+//     width: parent.width
+//     icon: network.icon
+//     textTop: "Wifi"
+//     textBottom: network.ssid
+//     isActive: network !== null
+//     onClicked: UIState.controlCenterModul = "wifi"
+
+//     readonly property var network: SNetwork.currentWifi
+// }
+
 ButtonTripled {
     width: parent.width
-    icon: network.icon
+    icon: "W"
     textTop: "Wifi"
-    textBottom: network.ssid
-    isActive: network !== null
+    textBottom: SNetwork.currentNetwork?.name || ""
+    isActive: SNetwork.isWifiOn
     onClicked: UIState.controlCenterModul = "wifi"
-
-    readonly property var network: SNetwork.currentWifi
 }
