@@ -38,13 +38,12 @@ Singleton {
     }
 
     function wallpaperChange(wall) {
-        let path = wall.toString().toLowerCase();
         let pathPalit = ""
 
         if (SMedia.toFormat(wall) === "image") {
             isWallpaperAnimated = false
 
-            pathPalit = wall
+            pathPalit = SMedia.toRawPath(wall)
         } else {
             isWallpaperAnimated = true
             const wallTumb = SMedia.toThumbnailPath(wall)

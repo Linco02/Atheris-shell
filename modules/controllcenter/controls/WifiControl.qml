@@ -35,7 +35,7 @@ ScrollStyled {
         }
 
         TextStyled {
-            leftPadding: Style.padding.normal
+            leftPadding: Style.padding.large
             text: "Активна мережа"
         }
 
@@ -53,9 +53,8 @@ ScrollStyled {
         }
 
         TextStyled {
-            leftPadding: Style.padding.normal
+            leftPadding: Style.padding.large
             text: "Доступні мережі"
-            color: SNetwork?.networking.canCheckConnectivity ? Theme.textAccent : Theme.textSurface
         }
 
         Repeater {
@@ -75,79 +74,3 @@ ScrollStyled {
 
     Component.onCompleted: SNetwork.checkConnectivity()
 }
-
-// ColumnStyled {
-//     id: root
-//     anchors.fill: parent
-
-//     RectForeground {
-//         height: root.height - button.height; width: root.width
-
-//         ScrollView {
-//             anchors.fill: parent
-//             contentWidth: -1
-//             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//             ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-            
-//             ColumnStyled {
-//                 topPadding: Style.padding.normal
-
-//                 TextStyled {
-//                     anchors.horizontalCenter: parent.horizontalCenter
-//                     visible: activeWifi.count > 0
-//                     text: activeWifi.count > 1 ? "Активні мережі" : "Активна мережа"
-//                 }
-
-//                 Repeater {
-//                     id: activeWifi
-//                     model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "так")
-//                     delegate: RectInactive {
-//                         height: 40; width: root.width
-
-//                         RowStyled {
-//                             anchors.verticalCenter: parent.verticalCenter
-//                             leftPadding: Style.padding.normal
-
-//                             TextStyled {
-//                                 text: modelData.icon
-//                             }
-
-//                             TextStyled {
-//                                 text: modelData.ssid
-//                             }
-//                         }
-//                     }
-//                 }
-
-//                 TextStyled {
-//                     anchors.horizontalCenter: parent.horizontalCenter
-//                     visible: avalibleWifi.count > 0
-//                     text: avalibleWifi.count > 1 ? "Доступні мережі" : "Доступна мережа"
-//                 }
-                
-//                 Repeater {
-//                     id: avalibleWifi
-//                     model: SNetwork.wifiList.filter(w => w.ssid !== undefined && w.active === "ні")
-//                     delegate: RectInactive {
-//                         height: 40; width: root.width
-
-//                         RowStyled {
-//                             anchors.verticalCenter: parent.verticalCenter
-//                             leftPadding: Style.padding.normal
-
-//                             TextStyled {
-//                                 text: modelData.icon
-//                             }
-
-//                             TextStyled {
-//                                 text: modelData.ssid
-//                             }
-//                         }
-
-//                         TapHandler {onTapped: SNetwork.connectWifi(modelData.ssid, "")}
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }

@@ -68,8 +68,8 @@ ScrollStyled {
         }
 
         TextStyled {
+            leftPadding: Style.padding.large
             text: "Сполучені пристрої"
-            leftPadding: Style.padding.normal
         }
 
         Repeater {
@@ -79,7 +79,7 @@ ScrollStyled {
 
         TextStyled {
             text: "Доступні пристрої"
-            leftPadding: Style.padding.normal
+            leftPadding: Style.padding.large
         }
 
         Repeater {

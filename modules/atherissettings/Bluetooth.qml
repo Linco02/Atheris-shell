@@ -89,7 +89,7 @@ ScrollView {
 
                     IconImage {
                         id: buttonIcon
-                        source: SAppIcons.getIcon(modelData.icon)
+                        source: SIcon.getIcon(modelData.icon)
                         implicitSize: pairedDevicesTemplate.height - Style.padding.large * 2
                     }
 
@@ -149,7 +149,7 @@ ScrollView {
 
                     IconImage {
                         id: buttonIcon
-                        source: SAppIcons.getIcon(modelData.icon)
+                        source: SIcon.getIcon(modelData.icon)
                         implicitSize: availableDevicesTemplate.height - Style.padding.large * 2
                     }
 

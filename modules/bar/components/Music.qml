@@ -29,7 +29,7 @@ RectForeground {
             anchors.verticalCenter: parent.verticalCenter
             x: Style.padding.small
             implicitSize: 16
-            source: playerExist ? SAppIcons.getIcon(playerActive.identity) : ""
+            source: playerExist ? SIcon.getIcon(playerActive.identity) : ""
         }
 
         Item {

@@ -36,7 +36,7 @@ RectForeground {
                 implicitSize: parent.height
                 source: {
                     const iconName = modelData.image.replace("image://icon/", "")
-                    SAppIcons.getIcon(iconName)
+                    SIcon.getIcon(iconName)
                 }
             }
 

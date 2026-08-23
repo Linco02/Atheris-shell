@@ -27,7 +27,7 @@ RectForeground {
 
         IconImage {
             id: buttonIcon
-            source: SAppIcons.getIcon(root.icon)
+            source: SIcon.getIcon(root.icon)
             implicitSize: iconSize 
         }
 

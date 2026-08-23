@@ -25,7 +25,7 @@ Item {
                     anchors.centerIn: parent
 
                     IconImage {
-                        source: SAppIcons.getIcon(modelData.icon)
+                        source: SIcon.getIcon(modelData.icon)
                         implicitSize: root.height - Style.padding.small
                     }
 

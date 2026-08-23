@@ -23,7 +23,7 @@ RectForeground {
     IconImage {
         id: buttonIcon
         anchors.centerIn: parent
-        source: SAppIcons.getIcon(root.source)
+        source: SIcon.getIcon(root.source)
         implicitSize: root.height - Style.padding.mini + 2
     }
 
