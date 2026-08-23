@@ -10,7 +10,7 @@ RectForeground {
     height: 40; width: 300
 
     Row {
-        TextInputStyled {
+        TextInputPassword {
             id: password
             height: root.height; width: root.width - enterPassword.height
             echoMode: TextInput.Password

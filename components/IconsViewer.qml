@@ -5,6 +5,6 @@ import qs.services
 IconImage {
     property string icon: ""
 
-    implicitSize: parent.height - Style.padding.mini + 2
+    implicitSize: parent.height
     source: SIcon.getIcon(icon)
 }

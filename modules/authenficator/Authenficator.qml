@@ -23,7 +23,7 @@ PopFade {
         TextStyled {text: SAuthenficator.titleText}
 
         RowStyled {
-            TextInputStyled {
+            TextInputPassword {
                 id: password
                 height: 40; width: 200
                 echoMode: TextInput.Password

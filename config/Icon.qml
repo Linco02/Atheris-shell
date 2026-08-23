@@ -10,6 +10,13 @@ Singleton {
     ]
     
     // CommandCenter
+    property var commandCenterModules: [
+        {label: "wallpaper", icon: ""},
+        {label: "dashboard", icon: "󰨝"},
+        {label: "command", icon: ""},
+    ]
+
+    // AtherisCenter
     property var atherisCenterModules: [
         {label: "wallpaper", icon: ""},
         {label: "dashboard", icon: "󰨝"},

@@ -8,6 +8,7 @@ import qs.config
 import qs.services
 
 ScrollStyled {
+    anchors.fill: parent
     padding: Style.padding.normal
 
     ColumnStyled {

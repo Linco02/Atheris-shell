@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import Quickshell.Widgets
 import qs.components
 import qs.components.shapes
 import qs.components.controls
@@ -7,124 +8,83 @@ import qs.components.containers
 import qs.config
 import qs.services
 
-ScrollView {
+Item {
     id: root
-    contentWidth: -1
-    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-    height: commandContainer.height > 600 ? 600 : commandContainer.height
+    height: commandContainer.height > 600
+        ? 600
+        : commandContainer.height < 300
+        ? 300
+        : commandContainer.height
     width: 400
 
-    property int brickH: 40
-    property var command: Icon.atherisCenterModules.filter(m => m.label !== "command")
-    property var directory: [{label: "directory", icon: "D"}]
-    property var applications: SCommand.applications
-    property string mode: {
-        const first = textInput.text[0];
-        if (first === ">") return "command"
-        if (first === "/") return "directory"
-        return "applications"
-    }
-    property var list: {
-        const input = textInput.text;
-        if (input.length === 0) return applications;
+    readonly property string currentMode: SCommand.currentMode
 
-        const query = input.slice(1).toLowerCase();
-
-        let base = [];
-        if (mode === "command") base = command
-        else if (mode === "directory") base = directory
-        else {
-            base = applications
-            return base.filter(m => m.label.toLowerCase().includes(input.toLowerCase()));
+    TextInputStyled {
+        id: textInput
+        anchors {
+            top: parent.top
+            topMargin: Style.padding.normal
         }
+        height: 40; width: root.width
+        inputFocus: true
+        beforeText: ""
+        placeholderText: "Поле пошуку"
 
-        if (query.length === 0) return base;
-        return base.filter(m => m.label.toLowerCase().includes(query));
+        onEnteredTextChanged: SCommand.updateList(enteredText)
     }
 
-    function enterMode(mode) {
-        if (mode === "command") {
-            UIState.atherisCenterModule = list[0].label
+    ScrollStyled {
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: Style.padding.normal
         }
-    }
+        height: root.height - textInput.height - Style.padding.normal * 3
+        width: root.width
 
-    ColumnStyled {
-        id: commandContainer
-        width: parent.width
+        ColumnStyled {
+            id: commandContainer
 
-        RectActive {
-            id: textInputContainer
-            height: brickH; width: parent.width
+            Repeater {
+                model: SCommand.currentList
+                delegate: RectInactive {
+                    height: 40; width: root.width
 
-            RowStyled {
-                leftPadding: Style.padding.normal
-                rightPadding: Style.padding.normal
-                height: parent.height
-
-                TextStyled {
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: Theme.textAccent
-                    text: ""
-                }
-
-                TextInputStyled {
-                    id: textInput
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height / 2; width: textInputContainer.width
-                    focus: true
-                    color: Theme.textAccent
-                    onEntered: enterMode(mode)
-
-                    Component.onCompleted: forceActiveFocus()
-                }
-            }
-        }
-
-        RectForeground {
-            height: 4; width: parent.width
-        }
-
-        Repeater {
-            model: list
-            delegate: RectInactive {
-                height: brickH; width: parent.width
-
-                RowStyled {
-                    leftPadding: Style.padding.normal
-                    rightPadding: Style.padding.normal
-                    height: parent.height
-
-                    TextStyled {
-                        visible: mode === "command"
+                    RowStyled {
                         anchors.verticalCenter: parent.verticalCenter
-                        text: modelData.icon
+                        leftPadding: Style.padding.normal
+                        rightPadding: Style.padding.normal
+
+                        TextStyled {
+                            visible: currentMode === "command" || currentMode === "directory"
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: currentMode === "command" || currentMode === "directory"
+                                ? modelData.icon || ""
+                                : ""
+                            
+                        }
+
+                        IconImage {
+                            visible: currentMode === "applications"
+                            asynchronous: true
+                            implicitSize: parent.parent.height - Style.padding.normal
+                            source: currentMode === "applications"
+                                ? SIcon.getIcon(modelData.icon) || ""
+                                : ""
+                        }
+
+                        TextStyled {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: modelData.name || modelData.label || ""
+                        }
                     }
 
-                    IconsViewer {
-                        visible: mode === "applications"
-                        icon: modelData.icon
-                    }
-
-                    TextStyled {
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: mode === "command"
-                            ? modelData.label
-                            : mode === "applications"
-                            ? modelData.name
-                            : ""
-                    }
-                }
-
-                TapHandler {
-                    onTapped: {
-                        if (mode === "command")
-                            UIState.commandCenterModule = modelData.label
-                        else if (mode === "applications") {
-                            if (modelData.runInTerminal) {
-                                return
+                    TapHandler {
+                        onTapped: {
+                            if (currentMode === "applications") {
+                                if(!modelData.runInTerminal) modelData.execute()
+                                else return
                             } else {
-                                modelData.execute()
+                                return
                             }
                         }
                     }
