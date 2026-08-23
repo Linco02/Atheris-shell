@@ -20,6 +20,8 @@ Singleton {
     property bool isControlCenterOpen: false
     property var controlCenterModules: ["main", "sound", "wifi", "powerMode", "bluetooth"]
     property string controlCenterModul: "main"
+    property var timerHubModules: ["timer", "stopWatch", "alarmСlock"]
+    property string timerHubModule: "stopWatch"
 
     // AtherisCenter
     property bool isAtherisCenterOpen: false

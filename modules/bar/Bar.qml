@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import qs.config
+import qs.services
 import "./components"
 
 import qs.modules.atheriscenter
@@ -42,6 +43,13 @@ PanelWindow {
             anchors.horizontalCenter: parent.horizontalCenter
 
             Clock {}
+            Loader {
+                active: STime.stopWatchCount > 0
+                height: STime.stopWatchCount > 0
+                    ? parent.height
+                    : 0
+                sourceComponent: StopWatch {}
+            }
             Music {}
             Device {}
         }

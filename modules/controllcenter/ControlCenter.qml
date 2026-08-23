@@ -23,7 +23,7 @@ PopFade {
 
         Loader {
             id: controlCenterModules
-            height: 600; width: 400
+            height: 900; width: 400
             active: true
             source: {
                 switch(UIState.controlCenterModul) {

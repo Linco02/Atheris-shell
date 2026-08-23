@@ -73,6 +73,45 @@ Singleton {
         return days;
     }
 
+    property int stopWatchCount: 0
+    property bool isStopWatchRunning: false
+    property string stopWatchMinutes: Math.floor(stopWatchCount / 60).toString().padStart(2, '0')
+    property string stopWatchSeconds: (stopWatchCount % 60).toString().padStart(2, '0')
+    property string stopWatchTime: stopWatchMinutes + ":" + stopWatchSeconds
+
+    function setTimer(interval) {
+        timer.interval = interval
+        timer.running = true
+    }
+
+    function startStopWatch(interval) {
+        stopWatch.start()
+        isStopWatchRunning = true
+    }
+
+    function stopStopWatch(interval) {
+        stopWatch.stop()
+        isStopWatchRunning = false
+    }
+
+    function restartStopWatch(interval) {
+        stopWatch.stop()
+        stopWatchCount = 0
+        isStopWatchRunning = false
+    }
+
+    Timer {
+        id: timer
+        onTriggered: console.log("timer")
+    }
+
+    Timer {
+        id: stopWatch
+        repeat: true
+        interval: 1000
+        onTriggered: stopWatchCount++
+    }
+
     Connections {
         target: STick
         function onTick30s() {clockUpdate()}
