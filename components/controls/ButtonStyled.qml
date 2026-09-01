@@ -23,7 +23,7 @@ RectForeground {
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: fontSize
+        font.pixelSize: root.fontSize
         color: isActive ? Theme.textAccent : Theme.textSurface
     }
 

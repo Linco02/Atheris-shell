@@ -43,9 +43,9 @@ ScrollStyled {
         Loader {
             active: SNetwork?.currentNetwork?.connected || false
             width: active ? parent.width : 0
-            sourceComponent: ButtonCompound {
+            sourceComponent: ButtonTripled {
                 height: 40; width: parent.width
-                icon: ""
+                icon: SNetwork.getNerdIcon(SNetwork?.currentNetwork)
                 textTop: SNetwork?.currentNetwork?.name || ""
                 textBottom: SNetwork.getDeviceStatus(SNetwork?.currentNetwork)
                 isActive: true
@@ -64,9 +64,9 @@ ScrollStyled {
         }
     }
 
-    component DeviceButton: ButtonCompound {
+    component DeviceButton: ButtonTripled {
         height: 40; width: parent.width
-        icon: ""
+        icon: SNetwork.getNerdIcon(modelData)
         textTop: modelData?.name
         textBottom: SNetwork?.getDeviceStatus(modelData)
         isActive: false

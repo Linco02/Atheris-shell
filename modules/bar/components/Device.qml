@@ -17,12 +17,13 @@ Item {
             model: SBluetooth.connectedDevices
 
             delegate: RectForeground {
-                height: root.height; width: deviceContainer.width + Style.padding.normal
+                height: root.height; width: deviceContainer.width
                 visible: true
 
                 RowStyled {
                     id: deviceContainer
                     anchors.centerIn: parent
+                    leftPadding: Style.padding.small; rightPadding: Style.padding.normal
 
                     IconImage {
                         source: SIcon.getIcon(modelData.icon)
@@ -30,7 +31,8 @@ Item {
                     }
 
                     TextStyled {
-                        text: (modelData.battery * 100).toString() + "%"
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: Math.floor(modelData.battery * 100).toString() + "%"
                     }
                 }
             }

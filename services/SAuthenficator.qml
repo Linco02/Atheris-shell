@@ -33,6 +33,14 @@ Singleton {
         }
 
         UIState.isAuthenficatorOpen = false
+        clear()
+    }
+
+    function clear() {
         __data = ""
+        __client = ""
+        isRetry = false
+        titleText = ""
+        placeholder = ""
     }
 }

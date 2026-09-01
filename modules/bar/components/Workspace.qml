@@ -64,7 +64,7 @@ RectForeground {
                     text: isFocused ? "●" 
                         : isOccupied ? "◉"
                         : "○"
-                    color: isFocused ? Theme.inactive
+                    color: isFocused ? Theme.textAccent
                         : isOccupied ? Theme.textSurface
                         : Theme.inactive
 

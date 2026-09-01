@@ -8,12 +8,9 @@ import qs.components.controls
 import qs.services
 import qs.config
 
-ScrollView {
+ScrollStyled {
     id: root
     anchors.fill: parent
-    contentWidth: -1
-    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-    ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
     property var adapter: SBluetooth?.adapter
 
@@ -79,6 +76,9 @@ ScrollView {
                 id: pairedDevicesTemplate
                 height: 100; width: parent.width
                 clip: true
+                color: isConnect ? Theme.active : Theme.surfaceRaised
+
+                property bool isConnect: modelData.connected
 
                 RowStyled {
                     anchors {
@@ -98,11 +98,14 @@ ScrollView {
 
                         TextStyledB {
                             text: modelData.name || modelData.deviceName
-                            color: modelData.connected ? Theme.textAccent : Theme.textSurface
+                            color: isConnect ? Theme.textAccent : Theme.textSurface
                         }
                         Loader {
                             active: modelData.batteryAvailable
-                            sourceComponent: TextStyledB {text: (modelData.battery * 100) + "%"}
+                            sourceComponent: TextStyledB {
+                                color: isConnect ? Theme.textAccent : Theme.textSurface
+                                text: (modelData.battery * 100) + "%"
+                            }
                         }
                     }
                 }

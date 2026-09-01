@@ -10,11 +10,8 @@ import qs.services
 RectForeground {
     width: parent.width
 
-    ScrollView {
+    ScrollStyled {
         anchors.fill: parent
-        contentWidth: -1
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
 
         ColumnStyled {
             anchors.fill: parent

@@ -48,6 +48,7 @@ Floating {
                     case "display": return "Display.qml";
                     case "theme": return "Theme.qml";
                     case "bluetooth": return "Bluetooth.qml";
+                    case "network": return "Network.qml";
                     return "";
                 }
             }

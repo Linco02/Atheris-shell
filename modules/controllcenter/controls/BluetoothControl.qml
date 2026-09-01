@@ -89,7 +89,7 @@ ScrollStyled {
         }
     }
 
-    component DeviceButton: ButtonCompound {
+    component DeviceButton: ButtonTripledI {
         height: 40; width: parent.width
         icon: modelData?.icon
         textTop: modelData?.deviceName

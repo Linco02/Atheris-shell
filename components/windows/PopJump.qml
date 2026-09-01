@@ -131,7 +131,7 @@ PopupWindow {
 
     Timer {
         id: timer
-        interval: 100
+        interval: 400
         onTriggered: box.state = "close"
     }
 

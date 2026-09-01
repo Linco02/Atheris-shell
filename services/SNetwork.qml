@@ -1,14 +1,13 @@
 pragma Singleton
 import QtQuick
 import Quickshell
-import Quickshell.Io
+import Quickshell.Networking
 import qs.config
 
-import Quickshell.Networking
 
 Singleton {
-    property bool isWifiOn: Networking.wifiEnabled
-    property var networking: Networking
+    property bool isWifiOn: Networking.wifiEnabled || false
+    // property bool scannerState: WifiDevice.scannerEnabled
     property var devices: Networking.devices.values
     property var currentDevice: {
         if (!devices) return [];
@@ -24,6 +23,32 @@ Singleton {
         return networks.filter(n => n.connected !== true);
     }
 
+    function getIcon(network) {
+        // if (!network) return Quickshell.iconPath("network-wireless-offline-symbolic")
+        
+        const strength = network.signalStrength || 0
+        let mapedIcon = "network-wireless-signal-none-symbolic"
+
+        if (strength > 0.8) mapedIcon = "network-wireless-signal-excellent-symbolic"
+        else if (strength > 0.6) mapedIcon = "network-wireless-signal-good-symbolic"
+        else if (strength > 0.4) mapedIcon = "network-wireless-signal-ok-symbolic"
+        else if (strength > 0.2) mapedIcon = "network-wireless-signal-weak-symbolic"
+
+        return Quickshell.iconPath(mapedIcon);
+    }
+
+    function getNerdIcon(network) {
+        const strength = network.signalStrength || 0
+        let mapedIcon = "󰤯"
+
+        if (strength > 0.8) mapedIcon = "󰤨"
+        else if (strength > 0.6) mapedIcon = "󰤥"
+        else if (strength > 0.4) mapedIcon = "󰤢"
+        else if (strength > 0.2) mapedIcon = "󰤟"
+
+        return mapedIcon;
+    }
+
     function getDeviceStatus(device) {
         if (!device) return "";
         return ConnectionState.toString(device.state);
@@ -31,23 +56,26 @@ Singleton {
 
     function toggleWifi() {
         Networking.wifiEnabled = !isWifiOn;
-        checkConnectivity();
-    }  
+    }
+
+    // function toggleScan() {
+    //     WifiDevice.scannerEnabled = !scannerState
+    // }
+
 
     function connectNetwork(network) {
         errorDetector.target = network;
-        network.connect();
-        checkConnectivity();
+
+        if (network.known) network.connect();
+        else SAuthenficator.requestPassword("wifi", network, false);
     }
 
     function connectNetworkWithPsk(network, password) {
         network.connectWithPsk(password)
-        checkConnectivity();
     }
 
     function disconnectNetwork(network) {
-        network.disconnect();
-        checkConnectivity();
+        network.device.disconnect();
     }
 
     function checkConnectivity() {Networking.checkConnectivity()}
@@ -64,121 +92,3 @@ Singleton {
         }
     }
 }
-
-// Singleton {
-//     property bool isWifiOn: true
-//     property string currentNetworkSimbol: ""
-//     property var currentWifi: {
-//         const list = wifiList.filter(w => w.ssid !== undefined && w.active === "так")
-//         return list.length > 0 ? list[0] : { ssid: "", signal: 0, icon: "󰤯" }
-//     }
-//     property var wifiList: []
-//     property string __wifiConnect: ""
-//     property bool isRetry: false
-
-//     function toggleWifi() {
-//         wifiRadio.command = ["nmcli", "radio", "wifi", isWifiOn ? "off" : "on"]
-//         wifiRadio.running = true
-
-//         isWifiOn = !isWifiOn
-//     }
-
-//     function getWifiList() {
-//         wifiParce.running = true
-//     }
-
-//     function connectWifi(ssid, password) {
-//         __wifiConnect = ssid
-        
-//         wifiConnect.command = password
-//             ? wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid, "password", password]
-//             : wifiConnect.command = ["nmcli", "dev", "wifi", "connect", ssid]
-//         wifiConnect.running = true
-//     }
-
-//     Process {
-//         id: wifiConnect
-//         onExited: (exitCode, status) => {
-//             if (exitCode === 4) {
-//                 // const isRetry = __wifiConnect !== ""
-//                 SAuthenficator.requestPassword("wifi" ,__wifiConnect, isRetry)
-//                 isRetry = true
-//             } else if (exitCode === 0){
-//                 SNotification.nitifiSend("Wifi", "Під'єднано до мережі", __wifiConnect, "network-wireless", "normal", 0, 0)
-//                 __wifiConnect = ""
-//             } else {
-//                 console.log("SNetwork", exitCode)
-//             }
-//             getWifiList()
-//         }
-//     }
-
-//     Process {
-//         id: wifiParce
-//         command: ["sh", "-c", "nmcli -t -f SSID,SIGNAL,ACTIVE device wifi list"]
-//         stdout: StdioCollector {
-//             onStreamFinished: {
-//                 const list = this.text.split("\n")
-//                 const parce = list
-//                     .filter(l => l.trim() !== "")
-//                     .filter(l => l.split(":")[0] !== "" && l.split(":")[1] !== "" && l.split(":")[2] !== "")
-//                     .map(l => {
-//                         const part = l.split(":")
-//                         return {
-//                             ssid: part[0],
-//                             signal: part[1],
-//                             active: part[2], 
-//                             icon: part[1] > 80 ? "󰤨"
-//                                 : part[1] > 60 ? "󰤥"
-//                                 : part[1] > 40 ? "󰤢"
-//                                 : part[1] > 20 ? "󰤟"
-//                                 : "󰤯"
-//                         }
-//                     })
-//                 wifiList = parce
-//             }
-//         }
-//     }
-
-//     Process {
-//         id: networkNameInfo
-//         command: [ "sh", "-c", "nmcli -t -f DEVICE,STATE,CONNECTION device status" ]
-//         stdout: StdioCollector {
-//             onStreamFinished: {
-//                 const networString = this.text.split("\n")
-//                 for (const networkList of networString) {
-//                     const parts = networkList.split(":")
-//                     if (parts[1] === "connected") {
-//                         if (parts[0][0] === "e") {
-//                             currentNetworkSimbol = ""
-//                             return
-//                         } else if (parts[0][0] === "w") {
-//                             currentNetworkSimbol = "󰖩"
-//                             return
-//                         } else {
-//                             currentNetworkSimbol = "󰖪"
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     Process {
-//         id: wifiRadio
-//     }
-
-//     Connections {
-//         target: STick
-//         function onTick3s() {
-//             networkNameInfo.running = true
-//             if (UIState.isControlCenterOpen)
-//                 wifiParce.running = true
-//         }
-//     }
-
-//     Component.onCompleted: {
-//         networkNameInfo.running = true
-//         wifiParce.running = true
-//     }
-// }

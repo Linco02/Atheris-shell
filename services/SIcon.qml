@@ -8,17 +8,17 @@ Singleton {
         "mozilla firefox": "firefox"
     })
 
-    property var networlIconMap: ({
-        "wifi-excellent": "network-wireless-signal-excellent-symbolic",
-        "wifi-good":      "network-wireless-signal-good-symbolic",
-        "wifi-ok":        "network-wireless-signal-ok-symbolic",
-        "wifi-weak":      "network-wireless-signal-weak-symbolic",
-        "wifi-none":      "network-wireless-signal-none-symbolic",
-        "ethernet":       "network-wired-symbolic",
-        // "vpn":            "network-vpn-symbolic",
-        "no-internet":    "network-wired-no-route-symbolic",
-        "offline":        "network-offline-symbolic"
-    })
+    // property var networlIconMap: ({
+    //     "wifi-excellent": "network-wireless-signal-excellent-symbolic",
+    //     "wifi-good":      "network-wireless-signal-good-symbolic",
+    //     "wifi-ok":        "network-wireless-signal-ok-symbolic",
+    //     "wifi-weak":      "network-wireless-signal-weak-symbolic",
+    //     "wifi-none":      "network-wireless-signal-none-symbolic",
+    //     "ethernet":       "network-wired-symbolic",
+    //     // "vpn":            "network-vpn-symbolic",
+    //     "no-internet":    "network-wired-no-route-symbolic",
+    //     "offline":        "network-offline-symbolic"
+    // })
 
     function mapIcon(icon, service) {
         if (!icon || !service) return Quickshell.iconPath("image-missing");
