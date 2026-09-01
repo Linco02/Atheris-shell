@@ -15,7 +15,11 @@ RectForeground {
         ButtonMutable {
             height: 40; width: root.width
             buttons: UIState.timerHubModules
-            buttonsNames: ["Таймер", "Секундомір", "Будильник"]
+            buttonsNames: [
+                STranslations.tr("clock_timer"),
+                STranslations.tr("clock_stopwatch"),
+                STranslations.tr("clock_alarm")
+            ]
             activeButton: UIState.timerHubModule
             onClicked: UIState.timerHubModule = activeButton
         }
@@ -40,7 +44,7 @@ RectForeground {
             anchors.fill: parent
 
             TextStyled {
-                text: "Таймер"
+                text: STranslations.tr("clock_timer")
             }
         }
     }
@@ -62,8 +66,10 @@ RectForeground {
                     // visible: !STime.isStopWatchRunning
                     height: parent.height / 3
                     text: !STime.isStopWatchRunning
-                        ? STime.stopWatchCount > 0 ? "Продовжити" : "Запустити"
-                        : "Стоп"
+                        ? STime.stopWatchCount > 0
+                            ? STranslations.tr("resume")
+                            : STranslations.tr("start")
+                        : STranslations.tr("stop")
                     onClicked: !STime.isStopWatchRunning
                         ? STime.startStopWatch()
                         : STime.stopStopWatch()
@@ -72,7 +78,7 @@ RectForeground {
                 ButtonStyled {
                     visible: STime.isStopWatchRunning || STime.stopWatchCount > 0
                     height: parent.height / 3
-                    text: "Скинути"
+                    text: STranslations.tr("Скинути")
                     onClicked: STime.restartStopWatch()
                 }
             }
@@ -86,7 +92,7 @@ RectForeground {
             anchors.fill: parent
 
             TextStyled {
-                text: "Будильник"
+                text:  STranslations.tr("clock_alarm")
             }
         }
     }

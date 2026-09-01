@@ -15,12 +15,12 @@ Singleton {
         isRetry = status
 
         if (client === "wifi") {
-            titleText = "Підключення до wifi", data.name
+            titleText = STranslations.tr("wifi_connecting_title"), data.name
 
             if (!status) {
-                placeholder = "Введіть пароль"
+                placeholder = STranslations.tr("enter_password")
             } else {
-                placeholder = "Неправельний пароль"
+                placeholder = STranslations.tr("invalid_password")
             }
         }
 

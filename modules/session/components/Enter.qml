@@ -15,7 +15,7 @@ RectForeground {
             height: root.height; width: root.width - enterPassword.height
             echoMode: TextInput.Password
             horizontalAlignment: TextInput.AlignHCenter
-            placeholderText: "Enter password"
+            placeholderText: STranslations.tr("enter_password")
             focus: true
             onEntered: SPam.authenticate(password.text)
         }
@@ -32,7 +32,7 @@ RectForeground {
         target: SPam
         function onCompleted() { UIState.isSessionLock = false }
         function onError() {
-            password.placeholderText = "Invalid password"
+            password.placeholderText = STranslations.tr("invalid_password")
         }
     }
 }

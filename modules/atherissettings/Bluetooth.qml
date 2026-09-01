@@ -36,7 +36,7 @@ ScrollStyled {
                 TextStyledB {
                     id: name
                     width: parent.width - toggle.width - Style.padding.large * 3
-                    text: "Bluetooth"
+                    text: STranslations.tr("bluetooth")
                 }
                 ButtonToggle {
                     id: toggle
@@ -45,21 +45,21 @@ ScrollStyled {
                     onClicked: SBluetooth.toggleBluetooth()
                 }
 
-                TextStyledB {width: name.width; text: "Сканування пристроїв"}
+                TextStyledB {width: name.width; text: STranslations.tr("scanning")}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.discovering
                     onClicked: SBluetooth.toggleDiscovering()
                 }
 
-                TextStyledB {width: name.width; text: "Виявлення іншими пристроями"}
+                TextStyledB {width: name.width; text: STranslations.tr("bluetooth_discoverable")}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.discoverable
                     onClicked: SBluetooth.toggleDiscoverable()
                 }
 
-                TextStyledB {width: name.width; text: "Дозволено сполучення іншим пристроям"}
+                TextStyledB {width: name.width; text: STranslations.tr("bluetooth_pairable")}
                 ButtonToggle {
                     height: toggle.height
                     isActive: adapter?.pairable
@@ -68,7 +68,7 @@ ScrollStyled {
             }
         }
 
-        TextStyled {leftPadding: Style.padding.large; text: "Сполучені пристрої"}
+        TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("paired_devices")}
 
         Repeater {
             model: SBluetooth?.pairedDevices
@@ -119,7 +119,9 @@ ScrollStyled {
 
                     ButtonStyled {
                         height: pairedDevicesTemplate.height - Style.padding.large * 2
-                        text: modelData.connected ? "Від'єднатися" : "Під'єднатися"
+                        text: modelData.connected
+                            ? STranslations.tr("disconnect")
+                            : STranslations.tr("connect")
                         fontSize: Theme.fontSize * 1.6
                         onClicked: modelData.connected ? modelData.disconnect() : modelData.connect()
                     }
@@ -134,7 +136,10 @@ ScrollStyled {
             }
         }
 
-        TextStyled {leftPadding: Style.padding.large; text: "Доступні пристрої"}
+        TextStyled {
+            leftPadding: Style.padding.large
+            text: STranslations.tr("available_devices")
+        }
 
         Repeater {
             model: SBluetooth?.availableDevices
@@ -166,7 +171,7 @@ ScrollStyled {
                         rightMargin: Style.padding.large
                     }
                     height: availableDevicesTemplate.height - Style.padding.large * 2
-                    text: "Під'єднатися"
+                    text: STranslations.tr("connect")
                     fontSize: Theme.fontSize * 1.6
                     onClicked: modelData.connect()
                 }

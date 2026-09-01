@@ -37,7 +37,7 @@ ScrollStyled {
 
         TextStyled {
             leftPadding: Style.padding.large
-            text: "Активна мережа"
+            text: STranslations.tr("wifi_active_network")
         }
 
         Loader {
@@ -55,7 +55,7 @@ ScrollStyled {
 
         TextStyled {
             leftPadding: Style.padding.large
-            text: "Доступні мережі"
+            text: STranslations.tr("wifi_available_networks")
         }
 
         Repeater {

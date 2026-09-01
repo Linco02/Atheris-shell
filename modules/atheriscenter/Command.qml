@@ -28,7 +28,7 @@ Item {
         height: 40; width: root.width
         inputFocus: true
         beforeText: ""
-        placeholderText: "Поле пошуку"
+        placeholderText: STranslations.tr("search_placeholder")
 
         onEnteredTextChanged: SCommand.updateList(enteredText)
     }

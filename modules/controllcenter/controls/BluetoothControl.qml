@@ -70,7 +70,7 @@ ScrollStyled {
 
         TextStyled {
             leftPadding: Style.padding.large
-            text: "Сполучені пристрої"
+            text: STranslations.tr("paired_devices")
         }
 
         Repeater {
@@ -79,7 +79,7 @@ ScrollStyled {
         }
 
         TextStyled {
-            text: "Доступні пристрої"
+            text: STranslations.tr("available_devices")
             leftPadding: Style.padding.large
         }
 

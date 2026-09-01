@@ -34,7 +34,7 @@ ScrollStyled {
                 TextStyledB {
                     id: name
                     width: parent.width - toggle.width - Style.padding.large * 3
-                    text: "Wifi"
+                    text: STranslations.tr("wifi")
                 }
                 ButtonToggle {
                     id: toggle
@@ -55,7 +55,7 @@ ScrollStyled {
             }
         }
 
-        TextStyled {leftPadding: Style.padding.large; text: "Активна мережа"}
+        TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("wifi_active_network")}
 
         RectActive {
             id: currentNetwork
@@ -92,13 +92,13 @@ ScrollStyled {
                     rightMargin: Style.padding.large
                 }
                 height: currentNetwork.height - Style.padding.large * 2
-                text: "Від'єднатися"
+                text: STranslations.tr("disconnect")
                 fontSize: Theme.fontSize * 1.6
                 onClicked: SNetwork.disconnectNetwork(SNetwork.currentNetwork)
             }
         }
 
-        TextStyled {leftPadding: Style.padding.large; text: "Доступні мережі"}
+        TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("wifi_available_networks")}
 
         Repeater {
             model: SNetwork?.anotherNetworks
@@ -133,7 +133,7 @@ ScrollStyled {
                         rightMargin: Style.padding.large
                     }
                     height: currentNetwork.height - Style.padding.large * 2
-                    text: "Під'єднатися"
+                    text: STranslations.tr("connect")
                     fontSize: Theme.fontSize * 1.6
                     onClicked: SNetwork.connectNetwork(modelData)
                 }

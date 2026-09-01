@@ -1,5 +1,6 @@
 import QtQuick
 import qs.core
+import qs.services
 import qs.components
 import qs.components.controls
 import qs.components.containers
@@ -15,7 +16,7 @@ Item {
         }
 
         TextStyled {
-            text: "Оновлення"
+            text: STranslations.tr("update")
         }
     }
 }

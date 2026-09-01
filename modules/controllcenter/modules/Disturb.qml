@@ -7,7 +7,7 @@ import qs.services
 
 ButtonStyled {
     width: parent.width
-    text: "Disturb"
+    text: STranslations.tr("disturb")
     onClicked: SDnd.dndToggle()
     isActive: Settings.isDndOn 
     fillH: false
