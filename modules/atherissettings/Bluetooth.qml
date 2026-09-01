@@ -104,7 +104,7 @@ ScrollStyled {
                             active: modelData.batteryAvailable
                             sourceComponent: TextStyledB {
                                 color: isConnect ? Theme.textAccent : Theme.textSurface
-                                text: (modelData.battery * 100) + "%"
+                                text: Math.floor(modelData.battery * 100) + "%"
                             }
                         }
                     }
