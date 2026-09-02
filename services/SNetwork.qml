@@ -24,7 +24,7 @@ Singleton {
     }
 
     function getIcon(network) {
-        // if (!network) return Quickshell.iconPath("network-wireless-offline-symbolic")
+        if (!network) return Quickshell.iconPath("network-wireless-offline-symbolic")
         
         const strength = network.signalStrength || 0
         let mapedIcon = "network-wireless-signal-none-symbolic"
@@ -38,6 +38,8 @@ Singleton {
     }
 
     function getNerdIcon(network) {
+        if (!network) return Quickshell.iconPath("network-wireless-offline-symbolic")
+        
         const strength = network.signalStrength || 0
         let mapedIcon = "󰤯"
 

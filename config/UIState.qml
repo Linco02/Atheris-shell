@@ -14,7 +14,7 @@ Singleton {
     // AtherisSettings
     property bool isAtherisSettingsOpen: true
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
-    property string atherisSettingsModule: "network"
+    property string atherisSettingsModule: "general"
 
     // ControlCenter
     property bool isControlCenterOpen: false

@@ -38,18 +38,24 @@ Floating {
             }
         }
 
-        Loader {
-            id: mainLoader
+        ScrollStyled {
             height: root.height; width: root.width - settingsChoser.width
-            active: UIState.isAtherisSettingsOpen
-            source: {
-                switch(UIState.atherisSettingsModule) {
-                    case "general": return "General.qml";
-                    case "display": return "Display.qml";
-                    case "theme": return "Theme.qml";
-                    case "bluetooth": return "Bluetooth.qml";
-                    case "network": return "Network.qml";
-                    return "";
+
+            Loader {
+                id: mainLoader
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: parent.height; width: parent.width * 0.9
+
+                active: UIState.isAtherisSettingsOpen
+                source: {
+                    switch(UIState.atherisSettingsModule) {
+                        case "general": return "General.qml";
+                        case "display": return "Display.qml";
+                        case "theme": return "Theme.qml";
+                        case "bluetooth": return "Bluetooth.qml";
+                        case "network": return "Network.qml";
+                        return "";
+                    }
                 }
             }
         }

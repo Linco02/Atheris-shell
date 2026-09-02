@@ -21,6 +21,14 @@ Singleton {
             "start": "Запустити",
             "stop": "Зупинити",
 
+            // update
+            "update_success": "Оновлення успішне",
+            "update_error": "Помилка під час оновлення",
+            "update_version_title": "Версія та оновлення",
+            "update_shell_version": "Версія шелу",
+            "update_system_version": "Версія системи",
+            "update_date": "Дата оновлення",
+
             // password
             "enter_password": "Введіть пароль",
             "invalid_password": "Невірний пароль",
@@ -59,6 +67,14 @@ Singleton {
             "resume": "Resume",
             "start": "Start",
             "stop": "Stop",
+
+            // update
+            "update_success": "Update successful",
+            "update_error": "Update error",
+            "update_version_title": "Version & updates",
+            "update_shell_version": "Shell version",
+            "update_system_version": "System version",
+            "update_date": "Update date",
 
             // password
             "enter_password": "Enter password",
