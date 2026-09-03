@@ -8,7 +8,7 @@ import qs.services
 
 Item {
     id: root
-    visible: SBrightness.isExist
+    visible: SBrightness.isExist && SBrightness.maxBrightness > 1
     height: parent.height; width: parent.width
 
     RowStyled {
