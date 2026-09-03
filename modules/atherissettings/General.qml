@@ -35,11 +35,6 @@ ColumnStyled {
                 rightText: Update.shellVersion
             }
 
-            InformationBlock {
-                leftText: "Дата оновлення"
-                rightText: STime.organizeDate(Update.systemDateUpdate, "-") || ""
-            }
-
             Item{
                 height: 40; width: parent.width - Style.padding.large * 2
 
