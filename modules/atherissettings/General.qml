@@ -23,61 +23,74 @@ ColumnStyled {
         ColumnStyled {
             id: updateInfo
             width: parent.width
+            padding: Style.padding.large
 
             InformationBlock {
                 leftText: "Nixos Версія"
-                rightText: "dsahjk123"
+                rightText: Update.systemVersion
             }
 
             InformationBlock {
                 leftText: "Shell вресія"
-                rightText: "usd43d"
+                rightText: Update.shellVersion
             }
 
             InformationBlock {
                 leftText: "Дата оновлення"
-                rightText: "2026-19-23"
+                rightText: STime.organizeDate(Update.systemDateUpdate, "-") || ""
+            }
+
+            Item{
+                height: 40; width: parent.width - Style.padding.large * 2
+
+                TextStyledB {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                    }
+                    text: "Дата оновлення"
+                }
+
+                RowStyled {
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                    }
+
+                    TextStyledB {
+                        text: STime.organizeDate(Update.systemDateUpdate, "-") || ""
+                    }
+
+                    ButtonStyled {
+                        height: parent.height; width: height
+                        text: ""
+                        onClicked: Update.updateShell()
+                    }
+                }
             }
         }
-
-        // Grid {
-        //     id: updateGrid
-
-        //     TextStyledB {
-        //         id: name
-        //         width: parent.width - toggle.width - Style.padding.large * 3
-        //         text: STranslations.tr("bluetooth")
-        //     }
-        //     ButtonToggle {
-        //         id: toggle
-        //         height: name.height
-        //         isActive: SBluetooth?.isBluetoothOn
-        //         onClicked: SBluetooth.toggleBluetooth()
-        //     }
-
-        //     TextStyledB {width: name.width; text: STranslations.tr("scanning")}
-        //     ButtonToggle {
-        //         height: toggle.height
-        //         isActive: adapter?.discovering
-        //         onClicked: SBluetooth.toggleDiscovering()
-        //     }
-        // }
     }
 
-    RowStyled {
-        ButtonStyled {
-            height: 40; width: height
-            text: ""
-            onClicked: Update.updateShell()
-        }
+    TextStyled {
+        leftPadding: Style.padding.large
+        text: STranslations.tr("update_version_title")
+    }
 
-        TextStyled {
-            text: STranslations.tr("update")
+
+    RectForeground {
+        height: updateInfo.height; width: parent.width
+        clip: true
+
+        ColumnStyled {
+            id: pcInfo
+            width: parent.width
+            height: 200
+            padding: Style.padding.large
         }
     }
 
     component InformationBlock: Item{
-        height: 40; width: parent.width
+        height: 40; width: parent.width - Style.padding.large * 2
 
         property alias leftText: left.text
         property alias rightText: right.text
@@ -87,7 +100,6 @@ ColumnStyled {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Style.margine.normal
             }
         }
         TextStyledB {
@@ -95,7 +107,6 @@ ColumnStyled {
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
-                rightMargin: Style.margine.normal
             }
         }
     }

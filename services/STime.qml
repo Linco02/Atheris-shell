@@ -21,6 +21,11 @@ Singleton {
         time = Qt.formatTime(currentDate, "hh:mm")
     }
 
+    function organizeDate(date, marker) {
+        const splitDate = date.split(marker)
+        return splitDate[2] + "/" + splitDate[1] + "/" + splitDate[0]
+    }
+    
     function dayCycleInit() {
         let month = parseInt(date.split("/")[1])
         

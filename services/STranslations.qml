@@ -45,7 +45,7 @@ Singleton {
             "wifi_available_networks": "Доступні мережі",
 
             // Airplane
-            "airplane": "Режим літака",
+            "airplane": "Авіарежим",
 
             // Disturb
             "disturb": "Не турбувати",
