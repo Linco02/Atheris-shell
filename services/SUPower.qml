@@ -53,7 +53,7 @@ Singleton {
     onDegradationChanged: {
         if (degradation === 0) return
         console.log("Power", "Проблеми з продуктивністю", degradationReason)
-        SNotification.nitifiSend("Power", "Проблеми з продуктивністю", degradationReason, "system-error-symbolic", critical, 0, 0)
+        SNotification.sendNotification("Power", "Проблеми з продуктивністю", degradationReason, "system-error-symbolic", critical, 0, 0)
     }
 
     function changePowerProfile(profile) {

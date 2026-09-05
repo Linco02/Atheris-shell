@@ -103,8 +103,10 @@ Item {
                     HoverHandler { id: hover }
                     TapHandler {
                         onTapped: {
-                            const wall = SMedia.toRawPath(modelData)
-                            SWallpaper.wallpaperChange(modelData)
+                            if (UIState.isWallpaperChange) {
+                                const wall = SMedia.toRawPath(modelData)
+                                SWallpaper.wallpaperChange(modelData)
+                            }
                         }
                     }
                 }

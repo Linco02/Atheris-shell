@@ -11,10 +11,13 @@ Singleton {
     // Auntefication
     property bool isAuthenficatorOpen: false
 
+    // Background
+    property bool isWallpaperChange: false
+
     // AtherisSettings
     property bool isAtherisSettingsOpen: true
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
-    property string atherisSettingsModule: "general"
+    property string atherisSettingsModule: "display"
 
     // ControlCenter
     property bool isControlCenterOpen: false

@@ -9,7 +9,7 @@ import qs.components.containers
 
 RectForeground {
     id: root
-    height: 200; width: parent.width
+    width: parent.width
 
     ColumnStyled {
         ButtonMutable {

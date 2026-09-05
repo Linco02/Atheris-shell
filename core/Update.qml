@@ -31,7 +31,7 @@ Singleton {
         command: ["git pull"]
         onExited: (exitCode, exitStatus) => {
             if (exitCode === 0) {
-                SNotification.nitifiSend(
+                SNotification.sendNotification(
                     "Update",
                     STranslations.tr("update_success"),
                     "",
@@ -41,7 +41,7 @@ Singleton {
                     0
                 )
             } else {
-                SNotification.nitifiSend(
+                SNotification.sendNotification(
                     "Update",
                     STranslations.tr("update_error"),
                     exitCode,

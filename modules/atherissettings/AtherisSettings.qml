@@ -18,44 +18,48 @@ Floating {
         }
     }
 
-    Row {
-        RectForeground {
-            id: settingsChoser
-            height: root.height; width: 200
+    RectForeground {
+        id: settingsChoser
+        anchors {
+            left: parent.left
+            leftMargin: Style.padding.large
+        }
+        height: root.height - Style.padding.large * 2; width: 200
 
-            ColumnStyled {
-                anchors.fill: parent
-                
-                Repeater {
-                    model: UIState.atherisSettingsModules
-                    delegate: ButtonStyled {
-                        height: 20; width: parent.width
-                        text: modelData
-                        onClicked: UIState.atherisSettingsModule = modelData
-                        isActive: UIState.atherisSettingsModule === modelData
-                    }
+        ColumnStyled {
+            anchors.fill: parent
+            
+            Repeater {
+                model: UIState.atherisSettingsModules
+                delegate: ButtonStyled {
+                    height: 20; width: parent.width
+                    text: modelData
+                    onClicked: UIState.atherisSettingsModule = modelData
+                    isActive: UIState.atherisSettingsModule === modelData
                 }
             }
         }
+    }
 
-        ScrollStyled {
-            height: root.height; width: root.width - settingsChoser.width
+    ScrollStyled {
+        anchors.left: settingsChoser.right
+        height: root.height - Style.padding.large * 2
+        width: root.width - settingsChoser.width
 
-            Loader {
-                id: mainLoader
-                anchors.horizontalCenter: parent.horizontalCenter
-                height: parent.height; width: parent.width * 0.9
+        Loader {
+            id: mainLoader
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: parent.height; width: parent.width * 0.9
 
-                active: UIState.isAtherisSettingsOpen
-                source: {
-                    switch(UIState.atherisSettingsModule) {
-                        case "general": return "General.qml";
-                        case "display": return "Display.qml";
-                        case "theme": return "Theme.qml";
-                        case "bluetooth": return "Bluetooth.qml";
-                        case "network": return "Network.qml";
-                        return "";
-                    }
+            active: UIState.isAtherisSettingsOpen
+            source: {
+                switch(UIState.atherisSettingsModule) {
+                    case "general": return "General.qml";
+                    case "display": return "Display.qml";
+                    case "theme": return "Theme.qml";
+                    case "bluetooth": return "Bluetooth.qml";
+                    case "network": return "Network.qml";
+                    return "";
                 }
             }
         }

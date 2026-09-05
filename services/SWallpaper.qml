@@ -53,7 +53,7 @@ Singleton {
         }
 
         if (wallpaper)
-            SNotification.nitifiSend("Wallpaper", "Змінено шпалери", SFiles.toName(wall), "preferences-desktop-wallpaper", "normal", 5000, 0)
+            SNotification.sendNotification("Wallpaper", "Змінено шпалери", SFiles.toName(wall), "preferences-desktop-wallpaper", "normal", 5000, 0)
 
 
         SPalit.palitCreate(pathPalit)

@@ -1,117 +1,45 @@
 pragma Singleton
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
 
     readonly property var languages: ["en", "uk"]
     property string currentLanguage: "uk"
-
-    property var dict: ({
-        "uk": {
-            "search_placeholder": "Поле пошуку",
-            "scanning": "Сканування пристроїв",
-            "connect": "Під'єднатися",
-            "disconnect": "Від'єднатися",
-            "paired_devices": "Сполучені пристрої",
-            "available_devices": "Доступні пристрої",
-            "update": "Оновлення",
-            "reset": "Скинути",
-            "resume": "Продовжити",
-            "start": "Запустити",
-            "stop": "Зупинити",
-
-            // update
-            "update_success": "Оновлення успішне",
-            "update_error": "Помилка під час оновлення",
-            "update_version_title": "Версія та оновлення",
-            "update_shell_version": "Версія шелу",
-            "update_system_version": "Версія системи",
-            "update_date": "Дата оновлення",
-
-            // password
-            "enter_password": "Введіть пароль",
-            "invalid_password": "Невірний пароль",
-
-            // Bluetooth
-            "bluetooth": "Bluetooth",
-            "bluetooth_discoverable": "Виявлення іншими пристроями",
-            "bluetooth_pairable": "Дозволено сполучення іншим пристроям",
-
-            // Wifi
-            "wifi": "Wifi",
-            "wifi_connecting_title": "Підключення до wifi",
-            "wifi_active_network": "Активна мережа",
-            "wifi_available_networks": "Доступні мережі",
-
-            // Airplane
-            "airplane": "Авіарежим",
-
-            // Disturb
-            "disturb": "Не турбувати",
-
-            // Time
-            "clock_timer": "Таймер",
-            "clock_stopwatch": "Секундомір",
-            "clock_alarm": "Будильник",
-        },
-        "en": {
-            "search_placeholder": "Search field",
-            "scanning": "Scanning devices",
-            "connect": "Connect",
-            "disconnect": "Disconnect",
-            "paired_devices": "Paired devices",
-            "available_devices": "Available devices",
-            "update": "Update",
-            "reset": "Reset",
-            "resume": "Resume",
-            "start": "Start",
-            "stop": "Stop",
-
-            // update
-            "update_success": "Update successful",
-            "update_error": "Update error",
-            "update_version_title": "Version & updates",
-            "update_shell_version": "Shell version",
-            "update_system_version": "System version",
-            "update_date": "Update date",
-
-            // password
-            "enter_password": "Enter password",
-            "invalid_password": "Invalid password",
-
-            // Bluetooth
-            "bluetooth": "Bluetooth",
-            "bluetooth_discoverable": "Discoverable by other devices",
-            "bluetooth_pairable": "Allow pairing from other devices",
-
-            // Wifi
-            "wifi": "Wifi",
-            "wifi_connecting_title": "Connecting to wifi",
-            "wifi_active_network": "Active network",
-            "wifi_available_networks": "Available networks",
-
-            // Airplane
-            "airplane": "Airplane",
-
-            // Disturb
-            "disturb": "Disturb",
-
-            // Time
-            "clock_timer": "Timer",
-            "clock_stopwatch": "Stopwatch",
-            "clock_alarm": "Alarm",
-        }
-    })
+    property var dict: ({})
 
     function tr(key) {
-        const d = dict[currentLanguage]
-        return (d && d[key] !== undefined) ? d[key] : key
+        const value = dict[key]
+        if (value === undefined) {
+            // console.warn("Translations: missing key:", key)
+            return key
+        }
+        return value
     }
 
     function setLanguage(language) {
         if (languages.includes(language)) {
             currentLanguage = language
+        }
+    }
+
+    FileView {
+        id: i18n
+        path: Qt.resolvedUrl("../i18n/" + currentLanguage + ".js")
+        watchChanges: true
+
+        onLoaded: {
+            try {
+                const content = text()
+                root.dict = (new Function("return " + content))()
+            } catch (e) {
+                console.warn("Translations: failed to parse", path, e)
+            }
+        }
+
+        onLoadFailed: (error) => {
+            console.warn("Translations: failed to load", path, error)
         }
     }
 }

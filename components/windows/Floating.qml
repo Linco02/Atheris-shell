@@ -13,8 +13,7 @@ FloatingWindow {
 
     Item {
         id: name
-        anchors.top: parent.top
-        height: 30; width: root.width
+        height: Style.padding.large; width: root.width
 
         TextStyled {
             anchors.centerIn: parent
@@ -23,19 +22,31 @@ FloatingWindow {
     }
 
     Item {
-        id: box
-        anchors.top: name.bottom
-        height: root.height - name.height; width: root.width
-
-        Item {
-            id: container
-            anchors {
-                top: parent.top
-                horizontalCenter: parent.horizontalCenter
-            }
-            clip: true
-            height: parent.height - Style.padding.large
-            width: parent.width - Style.padding.large
+        id: container
+        anchors {
+            top: name.bottom
+            horizontalCenter: parent.horizontalCenter
         }
+        height: root.height - Style.padding.large * 2
+        width: root.width
+        clip: true
     }
+
+        // Item {
+        //     id: box
+        //     height: root.height - name.height - Style.padding.large * 2
+        //     width: root.width - Style.padding.large * 2
+
+        //     Item {
+        //         id: container
+        //         anchors {
+        //             top: parent.top
+        //             horizontalCenter: parent.horizontalCenter
+        //         }
+        //         clip: true
+        //         height: parent.height - Style.padding.large
+        //         width: parent.width - Style.padding.large
+        //     }
+        // }
+    // }
 }

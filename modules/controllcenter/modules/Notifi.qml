@@ -3,22 +3,49 @@ import QtQuick.Controls
 import Quickshell.Widgets
 import qs.components
 import qs.components.shapes
+import qs.components.controls
+import qs.components.animations
 import qs.components.containers
 import qs.config
 import qs.services
 
-RectForeground {
+RectClip {
+    id: root
     width: parent.width
+    // color: Theme.surfaceRaised
 
-    ScrollStyled {
+    RectForeground {anchors.fill: parent}
+
+    ColumnStyled {
+        id: notifiContainer
         anchors.fill: parent
 
-        ColumnStyled {
-            anchors.fill: parent
+        RowStyled {
+            id: head
 
-            Repeater {
-                model: SNotification.server.trackedNotifications.values
-                delegate: Notifi {}
+            TextStyled {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "--- notifi"
+            }
+
+            ButtonStyled {
+                height: 40; width: height
+                text: ""
+                onClicked: SNotification.clearNotifications()
+            }
+        }
+
+        ScrollStyled {
+            id: body
+            height: root.height - head.height; width: parent.width
+
+            ColumnStyled {
+                anchors.fill: parent
+
+                Repeater {
+                    model: SNotification.server.trackedNotifications.values
+                    delegate: Notifi {}
+                }
             }
         }
     }

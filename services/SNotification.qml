@@ -7,9 +7,10 @@ import qs.config
 
 Singleton {
     property alias server: notificationServer
+    property var notifations: server.trackedNotifications.values
 
-    function nitifiSend(appName, summary, body, iconName, urgency, timeout, replacesId) {
-        notifiSend.command = [
+    function sendNotification (appName, summary, body, iconName, urgency, timeout, replacesId) {
+        notifi.command = [
             "notify-send",
             summary, body,
             "-a", appName,
@@ -18,21 +19,37 @@ Singleton {
             "-u", urgency, //low, normal, critical
             "-t", timeout
         ]
-        notifiSend.running = true
+        notifi.running = true
+    }
+
+    function clearNotification (notifi) {
+        notifi.dismiss()
+    }
+
+    function clearNotifications () {
+        cleatTime.running = true
+    }
+
+    Timer {
+        id: cleatTime
+        interval: 100; repeat: true
+        onTriggered: {
+            if (notifations.length > 0) clearNotification(notifations[0])
+            else running = false
+        }
     }
 
     NotificationServer {
         id: notificationServer
         
         onNotification: (notification) => {
-            notification.tracked = true;
+            notification.tracked = true
 
-            if (Settings.isNotifiSoundOn)
-                SSystemSound.playNotification()
+            if (Settings.isNotifiSoundOn) SSystemSound.playNotification()
         }
     }
 
     Process {
-        id: notifiSend
+        id: notifi
     }
 }
