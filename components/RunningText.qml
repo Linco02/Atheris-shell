@@ -10,11 +10,17 @@ RowStyled {
     property bool runText: false
     property bool isTextFit: root.width > textLength
     property string text: ""
-    property int scrollDistance: textLength + Style.padding.normal
-    property int scrollSpeed: 50
     property int textLength: firstText.width
+    property int scrollSpeed: 50
+    readonly property int scrollDistance: textLength + Style.padding.normal
 
-    onTextChanged: x = 0
+    onTextChanged: {
+        anim.stop()
+        x = 0
+        if (!isTextFit && runText) {
+            anim.start()
+        }
+    }
 
     TextStyled {
         id: firstText
@@ -27,17 +33,17 @@ RowStyled {
     }
 
     SequentialAnimation on x {
+        id: anim
         running: !isTextFit && runText
         loops: Animation.Infinite
-        alwaysRunToEnd: true
 
-        PauseAnimation {duration: Style.durations.slow * 5}
+        PauseAnimation {duration: Style.durations.slow * 1}
 
         NumberAnimation {
             from: 0
             to: -scrollDistance
             easing.type: Easing.Linear
-            duration: (scrollDistance / scrollSpeed) * Style.durations.slow
+            duration: Math.max(1, (scrollDistance / scrollSpeed) * Style.durations.slow)
         }
     }
 }

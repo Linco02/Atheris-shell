@@ -77,64 +77,21 @@ ColumnStyled {
             width: parent.width
             padding: Style.padding.large
 
-            LabelButton {
-                text: STranslations.tr("palette_shell")
-                isActive: Settings.palitShellOn
-                onClicked: Settings.palitShellOn = !Settings.palitShellOn
+            Repeater {
+                model: [
+                    {label: "palette_shell", settingKey: "palitShellOn"},
+                    {label: "palette_openrgb", settingKey: "palitOpenrgbOn"},
+                    {label: "palette_pywalfox", settingKey: "palitPywalFoxOn"},
+                    {label: "palette_kitty", settingKey: "palitKittyOn"},
+                    {label: "palette_qt6ct", settingKey: "palitqt6ctOn"},
+                ]
+
+                delegate: ButtonLabelToggle {
+                    text: STranslations.tr(modelData.label)
+                    isActive: Settings[modelData.settingKey]
+                    onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+                }
             }
-
-            LabelButton {
-                text: STranslations.tr("palette_openrgb")
-                isActive: Settings.palitOpenrgbOn
-                onClicked: Settings.palitOpenrgbOn = !Settings.palitOpenrgbOn
-            }
-
-            LabelButton {
-                text: STranslations.tr("palette_pywalfox")
-                isActive: Settings.palitPywalFoxOn
-                onClicked: Settings.palitPywalFoxOn = !Settings.palitPywalFoxOn
-            }
-
-            LabelButton {
-                text: STranslations.tr("palette_kitty")
-                isActive: Settings.palitKittyOn
-                onClicked: Settings.palitKittyOn = !Settings.palitKittyOn
-            }
-
-            LabelButton {
-                text: STranslations.tr("palette_qt6ct")
-                isActive: Settings.palitqt6ctOn
-                onClicked: Settings.palitqt6ctOn = !Settings.palitqt6ctOn
-            }
-        }
-    }
-
-    component LabelButton: Item {
-        id: btn
-        height: label.height; width: parent.width - Style.padding.large * 2
-
-        property alias text: label.text
-        property alias isActive: toggle.isActive
-
-        signal clicked()
-
-        TextStyledB {
-            id: label
-            anchors {
-                left: parent.left
-                leftMargin: Style.padding.normal
-            }
-            width: parent.width - toggle.width - Style.padding.large
-        }
-
-        ButtonToggle {
-            id: toggle
-            anchors {
-                right: parent.right
-                // rightMargin: Style.padding.large
-            }
-            height: label.height
-            onClicked: btn.clicked()
         }
     }
 }

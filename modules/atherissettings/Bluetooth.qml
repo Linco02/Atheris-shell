@@ -18,47 +18,27 @@ ColumnStyled {
 
     RectForeground {
         id: settingsContainer
-        height: settingsGrid.height; width: parent.width
+        height: wifiSettings.height; width: parent.width
         clip: true
 
-        Grid {
-            id: settingsGrid
+        ColumnStyled {
+            id: wifiSettings
             width: parent.width
-            columns: 2
             padding: Style.padding.large
-            spacing: Style.padding.large
 
-            TextStyledB {
-                id: name
-                width: parent.width - toggle.width - Style.padding.large * 3
-                text: STranslations.tr("bluetooth")
-            }
-            ButtonToggle {
-                id: toggle
-                height: name.height
-                isActive: SBluetooth?.isBluetoothOn
-                onClicked: SBluetooth.toggleBluetooth()
-            }
+            Repeater {
+                model: [
+                    {label: "bluetooth", settingKey: "enabled", actionName: "toggleBluetooth"},
+                    {label: "scanning", settingKey: "discovering", actionName: "toggleDiscovering"},
+                    {label: "bluetooth_discoverable", settingKey: "discoverable", actionName: "toggleDiscoverable"},
+                    {label: "bluetooth_pairable", settingKey: "pairable", actionName: "togglePairable"}
+                ]
 
-            TextStyledB {width: name.width; text: STranslations.tr("scanning")}
-            ButtonToggle {
-                height: toggle.height
-                isActive: adapter?.discovering
-                onClicked: SBluetooth.toggleDiscovering()
-            }
-
-            TextStyledB {width: name.width; text: STranslations.tr("bluetooth_discoverable")}
-            ButtonToggle {
-                height: toggle.height
-                isActive: adapter?.discoverable
-                onClicked: SBluetooth.toggleDiscoverable()
-            }
-
-            TextStyledB {width: name.width; text: STranslations.tr("bluetooth_pairable")}
-            ButtonToggle {
-                height: toggle.height
-                isActive: adapter?.pairable
-                onClicked: SBluetooth.togglePairable()
+                delegate: ButtonLabelToggle {
+                    text: STranslations.tr(modelData.label)
+                    isActive: SBluetooth.adapter[modelData.settingKey]
+                    onClicked: SBluetooth[modelData.actionName]()
+                }
             }
         }
     }
