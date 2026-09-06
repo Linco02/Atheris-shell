@@ -24,27 +24,11 @@ ColumnStyled {
             padding: Style.padding.large
             spacing: Style.padding.large
 
-            TextStyledB {
-                id: name
-                width: parent.width - toggle.width - Style.padding.large * 3
+            ButtonLabelToggle {
                 text: STranslations.tr("wifi")
-            }
-            ButtonToggle {
-                id: toggle
-                height: name.height
                 isActive: SNetwork?.isWifiOn
                 onClicked: SNetwork.toggleWifi()
             }
-
-            // TextStyledB {
-            //     width: name.width
-            //     text: "Scan"
-            // }
-            // ButtonToggle {
-            //     height: name.height
-            //     isActive: SNetwork?.scannerState
-            //     onClicked: SNetwork.toggleScan()
-            // }
         }
     }
 
