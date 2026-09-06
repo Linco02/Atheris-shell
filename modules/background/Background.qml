@@ -17,11 +17,14 @@ PanelWindow {
     exclusiveZone: -1
     color: Theme.surfaceRaised
 
+    property bool isLoad: false
+
     Loader {
-        active: Settings.isWallpaperOn && StartUp.isWallaperThumbnailDirCreate
+        active: Settings.isWallpaperOn && StartUp.isWallaperThumbnailDirCreate && isLoad
         anchors.fill: parent
-        sourceComponent: Wallpaper { }
+        sourceComponent: Wallpaper {}
     }
 
-    Behavior on color { ColorAnim { } }
+    Behavior on color {ColorAnim {}}
+    Component.onCompleted: isLoad = true
 }

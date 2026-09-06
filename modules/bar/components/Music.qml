@@ -17,7 +17,6 @@ RectForeground {
     property var playerActive: SMris.playerActive
     property bool playerExist: SMris.playerExist
     property bool isPlayerPlay: SMris.isplayerActivePlay
-    property bool isTextFit: firstText.width > trackNameContainer.width
 
     RowStyled {
         id: musicContainer
@@ -35,39 +34,16 @@ RectForeground {
         Item {
             id: trackNameContainer
             height: parent.height
-            width: trackNameRow.width < 200 ? trackNameRow.width : 200
+            width: runningName.textLength < 200 ? runningName.textLength : 200
             clip: true
             x: programIcons.width + Style.padding.small * 2
 
-            Row {
-                id: trackNameRow
+            RunningText {
+                id: runningName
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: Style.padding.gigant
-
-                TextOwn {
-                    id: firstText
-                    onTextChanged: { trackNameRow.x = 0 }
-                }
-
-                TextOwn {
-                    id: secondText
-                    visible: isTextFit
-                }
-
-                SequentialAnimation on x {
-                    id: runningText
-                    running: isTextFit && isPlayerPlay
-                    loops: Animation.Infinite
-
-                    PauseAnimation { duration: 5000 }
-
-                    NumberAnimation {
-                        from: 0
-                        to: - (firstText.width + trackNameRow.spacing)
-                        easing.type: Easing.Linear
-                        duration: 10000
-                    }
-                }
+                width: parent.width
+                text: playerActive.trackTitle || "..."
+                runText: isPlayerPlay && textLength >= 200
             }
 
             TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "music")}}
@@ -126,9 +102,4 @@ RectForeground {
             }
         }
     ]
-
-    component TextOwn: TextStyled {
-        anchors.verticalCenter: parent.verticalCenter
-        text: playerExist ? playerActive.trackTitle : "..."
-    }
 }

@@ -4,7 +4,8 @@ import qs.config
 import qs.services
 import "./components"
 
-import qs.modules.atheriscenter
+import qs.components
+// import qs.modules.atheriscenter
 
 PanelWindow {
     id: root
@@ -52,6 +53,16 @@ PanelWindow {
             }
             Music {}
             Device {}
+            Item {
+                clip: true
+                height: 20
+                width: 100
+
+                RunningText {
+                    width: 100
+                    // text: "test test test test"
+                }
+            }
         }
 
         RowContainer {
