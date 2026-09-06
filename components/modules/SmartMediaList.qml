@@ -14,8 +14,8 @@ ScrollStyled {
     anchors.fill: parent
 
 
-    property int imageHeight: 135
-    property int imageWidth: 240
+    property int imageHeight: 90
+    property int imageWidth: imageHeight / 9 * 16
     property int colNum: Math.max(1, Math.floor((width + Style.padding.normal) / (imageWidth + + Style.padding.normal)))
     property alias model: repeaterMedia.model
 

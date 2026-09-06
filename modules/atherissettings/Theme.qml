@@ -16,7 +16,6 @@ ColumnStyled {
     anchors.fill: parent
 
     RowStyled {
-        id: wallpaperMonitors
         anchors.horizontalCenter: parent.horizontalCenter
 
         Repeater {
@@ -43,10 +42,33 @@ ColumnStyled {
             }
         }
     }
-    
+
     TextStyled {
         leftPadding: Style.padding.large
         text: STranslations.tr("theme_wallpaper_title")
+    }
+
+    RectForeground {
+        height: wallpaperSettings.height; width: parent.width
+
+        ColumnStyled {
+            id: wallpaperSettings
+            width: parent.width
+            padding: Style.padding.large
+
+            ButtonLabelToggle {
+                text: "Шпалери"
+                // text: STranslations.tr(modelData.label)
+                // isActive: Settings[modelData.settingKey]
+                // onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+            }
+            ButtonLabelToggle {
+                text: "Випадкові шпалери при увімкнені"
+                // text: STranslations.tr(modelData.label)
+                // isActive: Settings[modelData.settingKey]
+                // onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+            }
+        }
     }
 
     RectClip {
@@ -57,6 +79,7 @@ ColumnStyled {
         SmartMediaList {
             id: wallpaperList
             model: SWallpaper.wallpapers
+            imageHeight: 120
             onClicked: pathMedia => {
                 if (UIState.isWallpaperChange) SWallpaper.wallpaperChange(pathMedia)
             }
@@ -69,7 +92,6 @@ ColumnStyled {
     }
 
     RectForeground {
-        id: settingsContainer
         height: palitSettings.height; width: parent.width
 
         ColumnStyled {
