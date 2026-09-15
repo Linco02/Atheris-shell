@@ -27,16 +27,28 @@ Singleton {
     function applyPalette(data) {
         if (!data) return;
 
-        Theme.surface = Qt.alpha(data.surface, Style.opacity) || Theme.surface;
-        Theme.surfaceRaised = data.surfaceRaised || Theme.surfaceRaised;
-        Theme.outline = data.outline || Theme.outline;
-        Theme.active = data.active || Theme.active;
-        Theme.inactive = data.inactive || Theme.inactive;
-        Theme.warning = data.warning || Theme.warning;
+        Theme.colors.surface = Qt.alpha(data.surface, Style.opacity) || Theme.colors.surface;
+        Theme.colors.surfaceRaised = data.surfaceRaised || Theme.colors.surfaceRaised;
+        Theme.colors.outline = data.outline || Theme.colors.outline;
+        Theme.colors.active = data.active || Theme.colors.active;
+        Theme.colors.inactive = data.inactive || Theme.colors.inactive;
+        Theme.colors.warning = data.warning || Theme.colors.warning;
 
-        Theme.textSurface = data.textSurface || Theme.textSurface;
-        Theme.textAccent = data.textAccent || Theme.textAccent;
-        Theme.textInactive = data.textInactive || Theme.textInactive;
+        Theme.colors.textSurface = data.textSurface || Theme.colors.textSurface;
+        Theme.colors.textAccent = data.textAccent || Theme.colors.textAccent;
+        Theme.colors.textInactive = data.textInactive || Theme.colors.textInactive;
+        
+        console.log(
+            data.surface,
+            data.surfaceRaised,
+            data.outline,
+            data.active,
+            data.inactive,
+            data.warning,
+            data.textSurface,
+            data.textAccent,
+            data.textInactive
+        )
     }
 
     Process {

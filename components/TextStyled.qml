@@ -5,7 +5,7 @@ import qs.components.animations
 Text {
     property int fontSize: Style.fontSize
 
-    color: Theme.textSurface
+    color: Theme.colors.textSurface
     font.pixelSize: fontSize
     font.family: Style.fontFamily
     font.weight: 600

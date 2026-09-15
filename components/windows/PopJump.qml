@@ -147,7 +147,7 @@ PopupWindow {
 
         ShapePath {
             strokeWidth: 0
-            fillColor: Theme.surface
+            fillColor: Theme.colors.surface
             startY: 0; startX: isLeft ? rad : 0
             PathLine { y: rad * percent; x: isLeft ? rad : 0 }
             PathArc {

@@ -43,15 +43,15 @@ RectForeground {
             delegate: Rectangle {
                 width: 35
                 height: 35
-                color: (modelData.day === today && modelData.isCurrent) ? Theme.surface : "transparent"
+                color: (modelData.day === today && modelData.isCurrent) ? Theme.colors.surface : "transparent"
                 radius: Style.radius.normal
 
                 TextStyled {
                     anchors.centerIn: parent
                     text: modelData.day
                     color: {
-                        if (modelData.day === today && modelData.isCurrent) return Theme.textAccent;
-                        return modelData.isCurrent ? Theme.textSurface : Theme.textInactive;
+                        if (modelData.day === today && modelData.isCurrent) return Theme.colors.textAccent;
+                        return modelData.isCurrent ? Theme.colors.textSurface : Theme.colors.textInactive;
                     }
                 }
             }

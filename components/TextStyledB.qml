@@ -3,7 +3,7 @@ import qs.config
 import qs.components.animations
 
 Text {
-    color: Theme.textSurface
+    color: Theme.colors.textSurface
     font.pixelSize: Style.fontSize * 1.6
     font.family: Style.fontFamily
     font.weight: 600

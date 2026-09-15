@@ -15,7 +15,7 @@ PanelWindow {
     }
     WlrLayershell.layer: WlrLayer.Background
     exclusiveZone: -1
-    color: Theme.surfaceRaised
+    color: Theme.colors.surfaceRaised
 
     property bool isLoad: false
 

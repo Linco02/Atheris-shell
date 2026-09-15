@@ -51,7 +51,7 @@ ColumnStyled {
             id: pairedDevicesTemplate
             height: 100; width: parent.width
             clip: true
-            color: isConnect ? Theme.active : Theme.surfaceRaised
+            color: isConnect ? Theme.colors.active : Theme.colors.surfaceRaised
 
             property bool isConnect: modelData.connected
 
@@ -73,12 +73,12 @@ ColumnStyled {
 
                     TextStyledB {
                         text: modelData.name || modelData.deviceName
-                        color: isConnect ? Theme.textAccent : Theme.textSurface
+                        color: isConnect ? Theme.colors.textAccent : Theme.colors.textSurface
                     }
                     Loader {
                         active: modelData.batteryAvailable
                         sourceComponent: TextStyledB {
-                            color: isConnect ? Theme.textAccent : Theme.textSurface
+                            color: isConnect ? Theme.colors.textAccent : Theme.colors.textSurface
                             text: Math.floor(modelData.battery * 100) + "%"
                         }
                     }

@@ -24,7 +24,7 @@ RectForeground {
                 height: root.height; width: 50
                 topLeftRadius: leftRad ? 0 : cornerRadius; bottomLeftRadius: leftRad ? 0 : cornerRadius
                 topRightRadius: rightRad ? 0 : cornerRadius; bottomRightRadius: rightRad ? 0 : cornerRadius
-                color: isOccupied ? Theme.inactive
+                color: isOccupied ? Theme.colors.inactive
                     : "transparent"
 
                 property bool isFocused: workspaceFocused === index + 1
@@ -64,9 +64,9 @@ RectForeground {
                     text: isFocused ? "●" 
                         : isOccupied ? "◉"
                         : "○"
-                    color: isFocused ? Theme.textAccent
-                        : isOccupied ? Theme.textSurface
-                        : Theme.inactive
+                    color: isFocused ? Theme.colors.textAccent
+                        : isOccupied ? Theme.colors.textSurface
+                        : Theme.colors.inactive
 
                     Behavior on color { ColorAnim {} }
                 }

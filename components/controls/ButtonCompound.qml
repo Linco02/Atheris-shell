@@ -8,8 +8,8 @@ import qs.components.containers
 
 RectForeground {
     id: root
-    color: hover.hovered ? Qt.lighter(Theme.surfaceRaised, Style.hover)
-        : Theme.surfaceRaised
+    color: hover.hovered ? Qt.lighter(Theme.colors.surfaceRaised, Style.hover)
+        : Theme.colors.surfaceRaised
 
     property string icon: ""
     property string textTop: ""
@@ -36,7 +36,7 @@ RectForeground {
 
             TextStyled {
                 text: textTop
-                color: isActive ? Theme.textAccent : Theme.textSurface
+                color: isActive ? Theme.colors.textAccent : Theme.colors.textSurface
             }
             TextStyled {
                 text: textBottom

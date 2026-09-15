@@ -8,9 +8,9 @@ import qs.config
 RectForeground {
     id: root
     width: buttonText.width + Style.padding.large
-    color: hovered && !isActive ? Qt.lighter(Theme.inactive, Style.hover)
-        : isActive ? Theme.active
-        : Theme.inactive
+    color: hovered && !isActive ? Qt.lighter(Theme.colors.inactive, Style.hover)
+        : isActive ? Theme.colors.active
+        : Theme.colors.inactive
 
     property alias text: buttonText.text
     property int fontSize: fillH === true ? root.height - Style.padding.small : Style.fontSize
@@ -24,7 +24,7 @@ RectForeground {
         id: buttonText
         anchors.centerIn: parent
         font.pixelSize: root.fontSize
-        color: isActive ? Theme.textAccent : Theme.textSurface
+        color: isActive ? Theme.colors.textAccent : Theme.colors.textSurface
     }
 
     HoverHandler { id: hover }

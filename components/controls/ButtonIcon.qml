@@ -8,10 +8,10 @@ import qs.services
 RectForeground {
     id: root
     height: iconSize; width: height
-    color: hover && !active ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.hover)
-        : active ? Theme.active
-        : focused ? Theme.inactive
-        : Theme.surfaceRaised
+    color: hover && !active ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Style.hover)
+        : active ? Theme.colors.active
+        : focused ? Theme.colors.inactive
+        : Theme.colors.surfaceRaised
 
     property alias iconSize: buttonIcon.implicitSize
     property string source: ""

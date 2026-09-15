@@ -32,7 +32,7 @@ PopFade {
                 echoMode: TextInput.Password
                 horizontalAlignment: TextInput.AlignHCenter
                 placeholderText: SAuthenficator.placeholder
-                color: SAuthenficator.isRetry ? Theme.textAccent : Theme.textSurface
+                color: SAuthenficator.isRetry ? Theme.colors.textAccent : Theme.colors.textSurface
                 focus: true
                 onEntered: SAuthenficator.enterPassword(password.text)
             }

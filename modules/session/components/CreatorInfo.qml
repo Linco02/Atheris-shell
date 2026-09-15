@@ -8,6 +8,6 @@ Column {
 
     component OwnText: TextStyled {
         anchors.horizontalCenter: parent.horizontalCenter
-        color: Theme.textAccent
+        color: Theme.colors.textAccent
     }
 }

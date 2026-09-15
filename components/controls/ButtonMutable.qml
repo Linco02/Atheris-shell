@@ -18,8 +18,8 @@ RectInactive {
             delegate: RectInactive {
                 height: root.height; width: root.width / buttons.length
                 color: isActive
-                    ? Theme.active
-                    : Theme.inactive
+                    ? Theme.colors.active
+                    : Theme.colors.inactive
                 
                 property bool isActive: activeButton === buttons[modelData]
 
@@ -27,8 +27,8 @@ RectInactive {
                     anchors.centerIn: parent
                     text: buttonsNames[modelData] || buttons[modelData]
                     color: isActive
-                        ? Theme.textAccent
-                        : Theme.textSurface
+                        ? Theme.colors.textAccent
+                        : Theme.colors.textSurface
                 }
 
                 TapHandler {

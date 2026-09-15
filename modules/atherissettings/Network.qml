@@ -52,13 +52,13 @@ ColumnStyled {
                 id: buttonIcon
                 fontSize: currentNetwork.height - Style.padding.large * 2
                 text: SNetwork.getNerdIcon(SNetwork.currentNetwork)
-                color: Theme.textAccent
+                color: Theme.colors.textAccent
             }
 
             TextStyledB {
                 anchors.verticalCenter: parent.verticalCenter
                 text: SNetwork.currentNetwork?.name || ""
-                color: Theme.textAccent
+                color: Theme.colors.textAccent
             }
         }
 

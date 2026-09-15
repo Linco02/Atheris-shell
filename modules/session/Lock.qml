@@ -14,7 +14,7 @@ WlSessionLock {
 
     WlSessionLockSurface {
         id: lockSurface
-        color: Theme.surface
+        color: Theme.colors.surface
 
         Background { }
 

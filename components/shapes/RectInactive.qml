@@ -4,7 +4,7 @@ import qs.config
 
 Rectangle {
     radius: Style.radius.normal
-    color: Theme.inactive
+    color: Theme.colors.inactive
 
     Behavior on color { ColorAnim { } }
 }

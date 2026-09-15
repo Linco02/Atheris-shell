@@ -40,7 +40,7 @@ ScrollStyled {
                 height: imageHeight; width: imageWidth
                 border {
                     width: 2
-                    color: hover.hovered ? Theme.active : Theme.inactive
+                    color: hover.hovered ? Theme.colors.active : Theme.colors.inactive
 
                     Behavior on color { ColorAnim { } }
                 }
@@ -57,7 +57,7 @@ ScrollStyled {
                     }
                     TextStyled {
                         y: 5; x: 5
-                        color: Theme.active
+                        color: Theme.colors.active
                         font.pixelSize: 10
                         text: type === "image" ? "" : type === "anmf" ? "󰪐" : ""
                     }

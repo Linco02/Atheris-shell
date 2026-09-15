@@ -14,7 +14,7 @@ Singleton {
     // hover ефект
     property real hover: 1.5
     // Задній фон
-    property real opacity: 0.95
+    property real opacity: 0.8
     property bool glassEfect: true
     // розмір панелі
     property real barWidth: 34 * scale

@@ -1,16 +1,16 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import qs.themes
 
 Singleton {
-    property color surface: Qt.alpha("#191113", Style.opacity)
-    property color surfaceRaised: "#261d1f"
-    property color outline: "#9e8c8f"
-    property color active: "#ffb1c4"
-    property color inactive: "#514346"
-    property color warning: "#ffb4ab"
+    property string currentTheme: "Base"
+    property var avalibleThemes: ["Base", "Atheris"]
 
-    property color textSurface: "#efdfe1"
-    property color textAccent: "#703345"
-    property color textInactive: "#d6c2c5"
+    readonly property BaseTheme baseTheme: BaseTheme {}
+    readonly property AtherisTheme atherisTheme: AtherisTheme {}
+    readonly property QtObject theme: currentTheme === "Base"
+        ? baseTheme : atherisTheme
+
+    readonly property QtObject colors: baseTheme.colors
 }

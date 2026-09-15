@@ -7,7 +7,7 @@ import qs.config
 FloatingWindow {
     id: root
     implicitHeight: 400; implicitWidth: 400
-    color: Theme.surface
+    color: Theme.colors.surface
 
     default property alias contents: container.data
 

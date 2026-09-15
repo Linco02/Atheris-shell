@@ -8,9 +8,9 @@ import qs.config
 RectInactive {
     id: root
     width: height * 2
-    color: hovered ? Qt.lighter(isActive ? Theme.active : Theme.inactive, Style.hover)
-        : isActive ? Theme.active
-        : Theme.inactive
+    color: hovered ? Qt.lighter(isActive ? Theme.colors.active : Theme.colors.inactive, Style.hover)
+        : isActive ? Theme.colors.active
+        : Theme.colors.inactive
 
     property bool isActive: false
     property bool fillH: true

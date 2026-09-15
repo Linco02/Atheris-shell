@@ -24,7 +24,7 @@ ColumnStyled {
                 height: 200; width: height / 9 * 16
                 border {
                     width: 4
-                    color: Theme.active
+                    color: Theme.colors.active
 
                     Behavior on color{NumberAnim{}}
                 }

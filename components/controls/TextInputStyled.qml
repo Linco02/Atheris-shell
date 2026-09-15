@@ -37,7 +37,7 @@ RectForeground {
             family: Style.fontFamily
             weight: 600
         }
-        color: Theme.textSurface
+        color: Theme.colors.textSurface
         autoScroll: false
         clip: true
         verticalAlignment: TextInput.AlignVCenter

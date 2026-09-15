@@ -24,7 +24,7 @@ Item {
                     delegate: Rect {
                         height: modelData.physicalHeight
                         width: modelData.physicalWidth
-                        color: modelData.focused ? Theme.inactive : Theme.active
+                        color: modelData.focused ? Theme.colors.inactive : Theme.colors.active
                         
                         TextStyled {
                             text: modelData.activeWorkspace.name

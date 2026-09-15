@@ -12,7 +12,7 @@ import qs.services
 RectClip {
     id: root
     width: parent.width
-    // color: Theme.surfaceRaised
+    // color: Theme.colors.surfaceRaised
 
     RectForeground {anchors.fill: parent}
 

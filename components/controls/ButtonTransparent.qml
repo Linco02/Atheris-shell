@@ -17,10 +17,10 @@ Item {
         id: buttonText
         anchors.centerIn: root
         font.pixelSize: root.height
-        color: hover.hovered && !occupied ? Qt.lighter(focused ? Theme.inactive : Theme.surfaceRaised, Style.hover)
-            : occupied ? Theme.textAccent
-            : focused ? Theme.textInactive
-            : Theme.textSurface
+        color: hover.hovered && !occupied ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Style.hover)
+            : occupied ? Theme.colors.textAccent
+            : focused ? Theme.colors.textInactive
+            : Theme.colors.textSurface
         text: root.text
     }
 
