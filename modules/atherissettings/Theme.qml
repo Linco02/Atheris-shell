@@ -61,6 +61,8 @@ ColumnStyled {
                 // text: STranslations.tr(modelData.label)
                 // isActive: Settings[modelData.settingKey]
                 // onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+                isActive: Settings.isWallpaperOn
+                onClicked: Settings.isWallpaperOn = !Settings.isWallpaperOn
             }
             ButtonLabelToggle {
                 text: "Випадкові шпалери при увімкнені"

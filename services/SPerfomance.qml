@@ -5,18 +5,12 @@ import Quickshell.Io
 import qs.config
 
 Singleton {
-    property string powerProfile: ""
     property string gpuType: ""
     property string cpuType: ""
     property var cpu: [0, 0, 0]
     property var gpu: [0, 0, 0]
     property var mem: [0, 0, 0]
     property var disks: []
-
-    function powerProfileChange(mode) {
-        powerProfileSwitch.command = ["sh", "-c", `powerprofilesctl set ${mode}`]
-        powerProfileSwitch.running = true
-    }
 
     function runPerfomance() {
         if (UIState.isAtherisCenterOpen) {
@@ -27,26 +21,34 @@ Singleton {
         }
     }
 
+    function trackGpu() {
+        if (gpuType === "none" || gpuType === "") return
+
+        let command = []
+        let stdout = []
+
+        if (gpuType === "amd") {
+            command = [
+                "sh", "-c",
+                "cat /sys/class/drm/card1/device/gpu_busy_percent" +
+                "&&" +
+                "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input"
+            ]
+        } else if (gpuType === "nvidia") {
+            command = [
+                "sh", "-c",
+                "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits"
+            ]
+        } else if (gpuType === "intel") {
+            command = ["true"]
+        } else command = ["true"]
+
+        gpuPerfomance.command = command
+        gpuPerfomance.running = true
+    }
+
     Process {
         id: gpuPerfomance
-        command: {
-            if (gpuType === "amd") {
-                return [
-                    "sh", "-c",
-                    "cat /sys/class/drm/card1/device/gpu_busy_percent" +
-                    "&&" +
-                    "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input"
-                ]
-            } else if (gpuType === "nvidia") {
-                return [
-                    "sh", "-c",
-                    "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits"
-                ]
-            } else if (gpuType === "intel") {
-                return ["true"]
-            } else return ["true"]
-        }
-
         stdout: StdioCollector {
             onStreamFinished: {
                 if (gpuType === "amd") {
@@ -161,26 +163,15 @@ Singleton {
                 if (gpuInfo.includes("nvidia")) gpuType = "nvidia"
                 else if (gpuInfo.includes("amd") || gpuInfo.includes("ati")) gpuType = "amd"
                 else if (gpuInfo.includes("intel")) gpuType = "intel"
+                else gpuType = "none"
 
-                runPerfomance()          
+                trackGpu()
             }
         }
     }
 
-    Process {
-        running: true
-        command: ["sh", "-c","powerprofilesctl get"]
-        stdout: StdioCollector {
-            onStreamFinished: powerProfile = this.text.trim()
-        }
-    }
-
-    onPowerProfileChanged: powerProfileChange()
-
-    Process { id: powerProfileSwitch }
-
     Connections {
         target: STick
-        function onTick3s() { runPerfomance() }
+        function onTick3s() {runPerfomance()}
     }
 }

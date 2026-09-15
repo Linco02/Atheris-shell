@@ -53,16 +53,6 @@ PanelWindow {
             }
             Music {}
             Device {}
-            Item {
-                clip: true
-                height: 20
-                width: 100
-
-                RunningText {
-                    width: 100
-                    // text: "test test test test"
-                }
-            }
         }
 
         RowContainer {

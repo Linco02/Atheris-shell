@@ -14,8 +14,11 @@ Singleton {
     // Background
     property bool isWallpaperChange: false
 
+    // CheatSheet
+    property bool ischeatsheetopen: true
+
     // AtherisSettings
-    property bool isAtherisSettingsOpen: true
+    property bool isAtherisSettingsOpen: false
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
     property string atherisSettingsModule: "display"
 

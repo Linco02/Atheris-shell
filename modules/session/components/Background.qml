@@ -1,6 +1,7 @@
 import QtQuick.Effects
 import qs.components
 import qs.config
+import qs.services
 
 SmartView {
     anchors.fill: parent
@@ -11,6 +12,6 @@ SmartView {
     layer.effect: MultiEffect {
         blurEnabled: true
         blurMax: 32
-        blur: 1.0
+        blur: 2.0
     }
 }

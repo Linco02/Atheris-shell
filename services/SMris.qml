@@ -25,6 +25,7 @@ Singleton {
     }
     property real playerActiveProgres: 0
     property var cavaBarsData: Array(Style.cavaBarsCount).fill(0)
+    property bool isCavaBarOn: UIState.isAtherisCenterOpen
 
     function checkIsPlaying(p) {
         return p?.playbackState === MprisPlaybackState.Playing ?? false
@@ -52,7 +53,7 @@ Singleton {
 
     Process {
         id: radialBars
-        running: UIState.isAtherisCenterOpen && UIState.dashboardModul === "music"
+        running: isCavaBarOn
         command: [
             "sh", "-c", "cava -p ~/Atheris-shell/assets/cava.ini"
         ]
