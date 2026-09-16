@@ -12,7 +12,7 @@ RowStyled {
     property string text: ""
     property int textLength: firstText.width
     property int scrollSpeed: 50
-    readonly property int scrollDistance: textLength + Style.padding.normal
+    readonly property int scrollDistance: textLength + Theme.padding.normal
 
     onTextChanged: {
         anim.stop()
@@ -37,13 +37,13 @@ RowStyled {
         running: !isTextFit && runText
         loops: Animation.Infinite
 
-        PauseAnimation {duration: Style.durations.slow * 1}
+        PauseAnimation {duration: Theme.durations.slow * 1}
 
         NumberAnimation {
             from: 0
             to: -scrollDistance
             easing.type: Easing.Linear
-            duration: Math.max(1, (scrollDistance / scrollSpeed) * Style.durations.slow)
+            duration: Math.max(1, (scrollDistance / scrollSpeed) * Theme.durations.slow)
         }
     }
 }

@@ -24,7 +24,7 @@ RectForeground {
 
             RectClip {
                 anchors.centerIn: parent
-                height: parent.height - parent.progresW * 2 - Style.padding.normal
+                height: parent.height - parent.progresW * 2 - Theme.padding.normal
                 width: height
                 radius: height / 2
 
@@ -65,7 +65,7 @@ RectForeground {
     }
 
     component TextStyledOwn: TextStyled {
-        width: root.width - Style.padding.large * 2
+        width: root.width - Theme.padding.large * 2
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
     }

@@ -8,7 +8,7 @@ import qs.config
 RectInactive {
     id: root
     width: height * 2
-    color: hovered ? Qt.lighter(isActive ? Theme.colors.active : Theme.colors.inactive, Style.hover)
+    color: hovered ? Qt.lighter(isActive ? Theme.colors.active : Theme.colors.inactive, Theme.hover)
         : isActive ? Theme.colors.active
         : Theme.colors.inactive
 
@@ -22,10 +22,10 @@ RectInactive {
         anchors {
             verticalCenter: parent.verticalCenter
         }
-        height: parent.height - Style.padding.normal; width: height
+        height: parent.height - Theme.padding.normal; width: height
         x: {
-            isActive ? parent.width - width - Style.padding.normal / 2
-            : Style.padding.normal / 2
+            isActive ? parent.width - width - Theme.padding.normal / 2
+            : Theme.padding.normal / 2
         }
 
         Behavior on x {NumberAnim{}}

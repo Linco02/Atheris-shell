@@ -10,7 +10,7 @@ RectForeground {
 
     Row {
         anchors.centerIn: parent
-        spacing: Style.spacing.normal
+        spacing: Theme.spacing.normal
 
         GliphOwn { type: 0 }
         GliphOwn { type: 1 }
@@ -19,7 +19,7 @@ RectForeground {
 
     component GliphOwn: Column {
         anchors.verticalCenter: parent.verticalCenter
-        spacing: Style.spacing.normal
+        spacing: Theme.spacing.normal
 
         property int type: 0
         property real percent: type === 0 ? SPerfomance.cpu[0]
@@ -28,7 +28,7 @@ RectForeground {
 
         RectInactive {
             anchors.horizontalCenter: parent.horizontalCenter
-            height: root.height - name.height - Style.spacing.large * 2
+            height: root.height - name.height - Theme.spacing.large * 2
             width: 20
             
             RectActive {

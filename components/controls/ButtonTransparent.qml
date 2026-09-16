@@ -17,7 +17,7 @@ Item {
         id: buttonText
         anchors.centerIn: root
         font.pixelSize: root.height
-        color: hover.hovered && !occupied ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Style.hover)
+        color: hover.hovered && !occupied ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Theme.hover)
             : occupied ? Theme.colors.textAccent
             : focused ? Theme.colors.textInactive
             : Theme.colors.textSurface

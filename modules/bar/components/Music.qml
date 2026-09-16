@@ -21,12 +21,12 @@ RectForeground {
     RowStyled {
         id: musicContainer
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Style.padding.small; rightPadding: Style.padding.small
+        leftPadding: Theme.padding.small; rightPadding: Theme.padding.small
 
         IconImage {
             id: programIcons
             anchors.verticalCenter: parent.verticalCenter
-            x: Style.padding.small
+            x: Theme.padding.small
             implicitSize: 16
             source: playerExist ? SIcon.getIcon(playerActive.identity) : ""
         }
@@ -36,7 +36,7 @@ RectForeground {
             height: parent.height
             width: runningName.textLength < 200 ? runningName.textLength : 200
             clip: true
-            x: programIcons.width + Style.padding.small * 2
+            x: programIcons.width + Theme.padding.small * 2
 
             RunningText {
                 id: runningName

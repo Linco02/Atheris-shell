@@ -7,7 +7,7 @@ Item {
     id: root
     
     property int barWidth: 4
-    property real outerRadius: height / 2 - Style.padding.normal
+    property real outerRadius: height / 2 - Theme.padding.normal
     property real innerRadius: 0
 
     Canvas {

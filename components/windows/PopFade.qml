@@ -18,8 +18,8 @@ PopupWindow {
     property alias containerH: container.height
     property alias containerW: container.width
     property bool isOpen: false
-    property int positionX: Style.padding.normal
-    property int rad: Style.radius.large
+    property int positionX: Theme.padding.normal
+    property int rad: Theme.radius.large
     property var panel: null
     property string position: ""
     property bool isHorizontalCenter: false
@@ -38,9 +38,9 @@ PopupWindow {
 
     RectBackground {
         id: box
-        y: Style.padding.normal
-        height: container.height + Style.padding.large
-        width: container.width + Style.padding.large
+        y: Theme.padding.normal
+        height: container.height + Theme.padding.large
+        width: container.width + Theme.padding.large
         state: "close"
         anchors {
             left: position === "left" ? parent.left : undefined
@@ -82,7 +82,7 @@ PopupWindow {
             },
             State {
                 name: "open"
-                PropertyChanges { target: box; y: Style.padding.normal }
+                PropertyChanges { target: box; y: Theme.padding.normal }
             }
         ]
 

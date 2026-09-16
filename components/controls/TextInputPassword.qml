@@ -5,7 +5,7 @@ import qs.components.animations
 
 TextInput {
     color: Theme.colors.textSurface
-    font.family: Style.fontFamily
+    font.family: Theme.fontFamily
     font.weight: 600
     autoScroll: false
     clip: true

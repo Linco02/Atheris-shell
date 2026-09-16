@@ -3,11 +3,11 @@ import qs.config
 import qs.components.animations
 
 Text {
-    property int fontSize: Style.fontSize
+    property int fontSize: Theme.fontSize
 
     color: Theme.colors.textSurface
     font.pixelSize: fontSize
-    font.family: Style.fontFamily
+    font.family: Theme.fontFamily
     font.weight: 600
 
     Behavior on color { ColorAnim {} }

@@ -24,7 +24,7 @@ Singleton {
             return player[0];
     }
     property real playerActiveProgres: 0
-    property var cavaBarsData: Array(Style.cavaBarsCount).fill(0)
+    property var cavaBarsData: Array(Theme.cavaBarsCount).fill(0)
     property bool isCavaBarOn: UIState.isAtherisCenterOpen
 
     function checkIsPlaying(p) {
@@ -62,7 +62,7 @@ Singleton {
             onRead: data => {
                 const raw = data.trim().split(";").map(n => parseInt(n) || 0)
 
-                const normalized = Array(Style.cavaBarsCount).fill(0).map(
+                const normalized = Array(Theme.cavaBarsCount).fill(0).map(
                     (_, i) => raw[i] ?? 0
                 )
                 

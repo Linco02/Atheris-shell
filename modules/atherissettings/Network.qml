@@ -21,8 +21,8 @@ ColumnStyled {
             id: settingsGrid
             width: parent.width
             columns: 2
-            padding: Style.padding.large
-            spacing: Style.padding.large
+            padding: Theme.padding.large
+            spacing: Theme.padding.large
 
             ButtonLabelToggle {
                 text: STranslations.tr("wifi")
@@ -32,7 +32,7 @@ ColumnStyled {
         }
     }
 
-    TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("wifi_active_network")}
+    TextStyled {leftPadding: Theme.padding.large; text: STranslations.tr("wifi_active_network")}
 
     RectActive {
         id: currentNetwork
@@ -45,12 +45,12 @@ ColumnStyled {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Style.padding.large
+                leftMargin: Theme.padding.large
             }
 
             TextStyled {
                 id: buttonIcon
-                fontSize: currentNetwork.height - Style.padding.large * 2
+                fontSize: currentNetwork.height - Theme.padding.large * 2
                 text: SNetwork.getNerdIcon(SNetwork.currentNetwork)
                 color: Theme.colors.textAccent
             }
@@ -66,16 +66,16 @@ ColumnStyled {
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
-                rightMargin: Style.padding.large
+                rightMargin: Theme.padding.large
             }
-            height: currentNetwork.height - Style.padding.large * 2
+            height: currentNetwork.height - Theme.padding.large * 2
             text: STranslations.tr("disconnect")
             fontSize: Theme.fontSize * 1.6
             onClicked: SNetwork.disconnectNetwork(SNetwork.currentNetwork)
         }
     }
 
-    TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("wifi_available_networks")}
+    TextStyled {leftPadding: Theme.padding.large; text: STranslations.tr("wifi_available_networks")}
 
     Repeater {
         model: SNetwork?.anotherNetworks
@@ -88,12 +88,12 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: parent.left
-                    leftMargin: Style.padding.large
+                    leftMargin: Theme.padding.large
                 }
 
                 TextStyled {
                     id: buttonIcon
-                    fontSize: currentNetwork.height - Style.padding.large * 2
+                    fontSize: currentNetwork.height - Theme.padding.large * 2
                     text: SNetwork.getNerdIcon(modelData)
                 }
 
@@ -107,9 +107,9 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
-                    rightMargin: Style.padding.large
+                    rightMargin: Theme.padding.large
                 }
-                height: currentNetwork.height - Style.padding.large * 2
+                height: currentNetwork.height - Theme.padding.large * 2
                 text: STranslations.tr("connect")
                 fontSize: Theme.fontSize * 1.6
                 onClicked: SNetwork.connectNetwork(modelData)

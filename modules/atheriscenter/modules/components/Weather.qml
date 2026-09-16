@@ -11,7 +11,7 @@ RectForeground {
     Row {
         id: weather
         anchors.centerIn: parent
-        spacing: Style.spacing.normal
+        spacing: Theme.spacing.normal
 
         IconImage {
             anchors.verticalCenter: parent.verticalCenter

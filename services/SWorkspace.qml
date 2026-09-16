@@ -6,7 +6,7 @@ import qs.config
 
 Singleton {
     property var workspaceFocused: Hyprland.focusedWorkspace?.id ?? 1
-    property int workspaceNumber: Style.workspaceNumber
+    property int workspaceNumber: Theme.workspaceNumber
     property int workspaceExist: workspaceNumber
     property list<bool> workspaceOccupied: []
 

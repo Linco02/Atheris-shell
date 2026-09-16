@@ -12,7 +12,7 @@ ColumnStyled {
     anchors.fill: parent
 
     TextStyled {
-        leftPadding: Style.padding.large
+        leftPadding: Theme.padding.large
         text: STranslations.tr("update_version_title")
     }
 
@@ -23,7 +23,7 @@ ColumnStyled {
         ColumnStyled {
             id: updateInfo
             width: parent.width
-            padding: Style.padding.large
+            padding: Theme.padding.large
 
             InformationBlock {
                 leftText: "Nixos Версія"
@@ -36,7 +36,7 @@ ColumnStyled {
             }
 
             Item{
-                height: 40; width: parent.width - Style.padding.large * 2
+                height: 40; width: parent.width - Theme.padding.large * 2
 
                 TextStyledB {
                     anchors {
@@ -67,7 +67,7 @@ ColumnStyled {
     }
 
     TextStyled {
-        leftPadding: Style.padding.large
+        leftPadding: Theme.padding.large
         text: STranslations.tr("update_version_title")
     }
 
@@ -80,12 +80,12 @@ ColumnStyled {
             id: pcInfo
             width: parent.width
             height: 200
-            padding: Style.padding.large
+            padding: Theme.padding.large
         }
     }
 
     component InformationBlock: Item{
-        height: 40; width: parent.width - Style.padding.large * 2
+        height: 40; width: parent.width - Theme.padding.large * 2
 
         property alias leftText: left.text
         property alias rightText: right.text

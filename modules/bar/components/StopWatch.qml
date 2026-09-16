@@ -6,7 +6,7 @@ import qs.services
 
 RectForeground {
     height: parent.height
-    width: timer.width + Style.padding.large
+    width: timer.width + Theme.padding.large
     
     TextStyledH {
         id: timer

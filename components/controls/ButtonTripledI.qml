@@ -8,7 +8,7 @@ import qs.config
 
 RectInactive {
     id: root
-    color: hover.hovered && !isActive ? Qt.lighter(Theme.colors.inactive, Style.hover)
+    color: hover.hovered && !isActive ? Qt.lighter(Theme.colors.inactive, Theme.hover)
         : isActive ? Theme.colors.active
         : Theme.colors.inactive
 
@@ -21,14 +21,14 @@ RectInactive {
 
     RowStyled {
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
+        leftPadding: Theme.padding.normal; rightPadding: Theme.padding.normal
         height: parent.height
         clip: true
 
         IconImage {
             anchors.verticalCenter: parent.verticalCenter
             source: Quickshell.iconPath(icon)
-            implicitSize: parent.height - Style.padding.small
+            implicitSize: parent.height - Theme.padding.small
         }
 
         Column {

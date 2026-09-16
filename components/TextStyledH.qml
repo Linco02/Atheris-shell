@@ -4,8 +4,8 @@ import qs.components.animations
 
 Text {
     color: Theme.colors.textSurface
-    font.pixelSize: parent.height - Style.padding.small
-    font.family: Style.fontFamily
+    font.pixelSize: parent.height - Theme.padding.small
+    font.family: Theme.fontFamily
     font.weight: 600
 
     Behavior on color { ColorAnim {} }

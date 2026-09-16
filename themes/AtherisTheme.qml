@@ -1,12 +1,15 @@
 import QtQuick
 
-QtObject {
+BaseTheme {
     property real cornerRadius: 0
     property real buttonRadius: 0
     property bool useAngledShapes: false
     property real skewAngle: 0
-    
-    property QtObject colors: QtObject {
+    property int durations: 400
+    property int indents: 10
+    property int radius: 0
+
+    colors: QtObject {
         property color surface: "#101410"
         property color surfaceRaised: "#1c211b"
         property color outline: "#8c9389"

@@ -23,11 +23,11 @@ Item {
                 RowStyled {
                     id: deviceContainer
                     anchors.centerIn: parent
-                    leftPadding: Style.padding.small; rightPadding: Style.padding.normal
+                    leftPadding: Theme.padding.small; rightPadding: Theme.padding.normal
 
                     IconImage {
                         source: SIcon.getIcon(modelData.icon)
-                        implicitSize: root.height - Style.padding.small
+                        implicitSize: root.height - Theme.padding.small
                     }
 
                     TextStyled {

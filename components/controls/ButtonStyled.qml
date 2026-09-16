@@ -7,13 +7,13 @@ import qs.config
 
 RectForeground {
     id: root
-    width: buttonText.width + Style.padding.large
-    color: hovered && !isActive ? Qt.lighter(Theme.colors.inactive, Style.hover)
+    width: buttonText.width + Theme.padding.large
+    color: hovered && !isActive ? Qt.lighter(Theme.colors.inactive, Theme.hover)
         : isActive ? Theme.colors.active
         : Theme.colors.inactive
 
     property alias text: buttonText.text
-    property int fontSize: fillH === true ? root.height - Style.padding.small : Style.fontSize
+    property int fontSize: fillH === true ? root.height - Theme.padding.small : Theme.fontSize
     property bool isActive: false
     property bool fillH: true
     property bool hovered: hover.hovered

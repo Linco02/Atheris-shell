@@ -5,6 +5,9 @@ QtObject {
     property real buttonRadius: 0
     property bool useAngledShapes: false
     property real skewAngle: 0
+    property int durations: 0
+    property int indents: 0
+    property int radius: 0
     
     property QtObject colors: QtObject {
         property color surface: "#191113"

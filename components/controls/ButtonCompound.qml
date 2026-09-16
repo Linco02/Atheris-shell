@@ -8,20 +8,20 @@ import qs.components.containers
 
 RectForeground {
     id: root
-    color: hover.hovered ? Qt.lighter(Theme.colors.surfaceRaised, Style.hover)
+    color: hover.hovered ? Qt.lighter(Theme.colors.surfaceRaised, Theme.hover)
         : Theme.colors.surfaceRaised
 
     property string icon: ""
     property string textTop: ""
     property string textBottom: ""
-    property int iconSize: root.height - Style.padding.mini + 2
+    property int iconSize: root.height - Theme.padding.mini + 2
     property bool isActive: false
 
     signal clicked()
 
     RowStyled {
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
+        leftPadding: Theme.padding.normal; rightPadding: Theme.padding.normal
         height: parent.height
         clip: true
 

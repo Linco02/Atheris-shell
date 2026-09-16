@@ -13,12 +13,12 @@ Rect {
     // RectInactive {
     //     visible: SUPower.isExist
     //     height: parent.height
-    //     width: buttery.width + Style.padding.large
+    //     width: buttery.width + Theme.padding.large
 
     //     TextStyled {
     //         id: buttery
     //         anchors.centerIn: parent
-    //         font.pixelSize: parent.height - Style.padding.large
+    //         font.pixelSize: parent.height - Theme.padding.large
     //         text: SUPower.batteryLevelRound + "% " + SUPower.batteryIcon
     //     }
     // }

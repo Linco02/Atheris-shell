@@ -73,7 +73,7 @@ Item {
         transitions: Transition {
             from: ""; to: "change"
 
-            NumberAnim { properties: "width"; duration: Style.durations.slow }
+            NumberAnim { properties: "width"; duration: Theme.durations.slow }
 
             onRunningChanged: {
                 if(!running) {

@@ -21,7 +21,7 @@ PopupWindow {
     property alias containerW: container.width
     property bool isOpen: false
     property real percent: 1
-    property int rad: Style.radius.large
+    property int rad: Theme.radius.large
     property var panel: null
 
     signal closedPop()
@@ -57,8 +57,8 @@ PopupWindow {
         id: box
         anchors.horizontalCenter: parent.horizontalCenter
         y: 0
-        height: container.height + Style.padding.normal
-        width: container.width + Style.padding.large
+        height: container.height + Theme.padding.normal
+        width: container.width + Theme.padding.large
         topLeftRadius: 0; topRightRadius: 0
         bottomLeftRadius: rad; bottomRightRadius: rad
         state: "close"

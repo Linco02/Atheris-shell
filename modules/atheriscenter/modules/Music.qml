@@ -25,8 +25,8 @@ Item {
 
             ColumnStyled {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: Style.padding.normal
-                topPadding: Style.padding.normal
+                spacing: Theme.padding.normal
+                topPadding: Theme.padding.normal
 
                 Repeater {
                     model: player
@@ -49,12 +49,12 @@ Item {
 
             Column {
                 anchors.centerIn: parent
-                spacing: Style.padding.normal
+                spacing: Theme.padding.normal
 
                 RadialBars {
                     anchors.horizontalCenter: parent.horizontalCenter
                     height: music.height / 3 * 2; width: height
-                    innerRadius: height / 4 + Style.padding.normal
+                    innerRadius: height / 4 + Theme.padding.normal
                 
                     RectClip {
                         anchors.centerIn: parent
@@ -102,7 +102,7 @@ Item {
 
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: Style.padding.normal
+                    spacing: Theme.padding.normal
                     
                     ButtonOwn {
                         text: "󰙤"
@@ -154,7 +154,7 @@ Item {
     }
 
     component TextOwn: TextStyled {
-        width: root.width - Style.padding.large * 2
+        width: root.width - Theme.padding.large * 2
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
     }

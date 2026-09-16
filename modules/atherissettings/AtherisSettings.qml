@@ -22,9 +22,9 @@ Floating {
         id: settingsChoser
         anchors {
             left: parent.left
-            leftMargin: Style.padding.large
+            leftMargin: Theme.padding.large
         }
-        height: root.height - Style.padding.large * 2; width: 200
+        height: root.height - Theme.padding.large * 2; width: 200
 
         ColumnStyled {
             anchors.fill: parent
@@ -43,7 +43,7 @@ Floating {
 
     ScrollStyled {
         anchors.left: settingsChoser.right
-        height: root.height - Style.padding.large * 2
+        height: root.height - Theme.padding.large * 2
         width: root.width - settingsChoser.width
 
         Loader {

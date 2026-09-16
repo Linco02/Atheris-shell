@@ -9,7 +9,7 @@ import qs.services
 
 ScrollStyled {
     anchors.fill: parent
-    padding: Style.padding.normal
+    padding: Theme.padding.normal
 
     ColumnStyled {
         width: parent.width
@@ -36,7 +36,7 @@ ScrollStyled {
         }
 
         TextStyled {
-            leftPadding: Style.padding.large
+            leftPadding: Theme.padding.large
             text: STranslations.tr("wifi_active_network")
         }
 
@@ -54,7 +54,7 @@ ScrollStyled {
         }
 
         TextStyled {
-            leftPadding: Style.padding.large
+            leftPadding: Theme.padding.large
             text: STranslations.tr("wifi_available_networks")
         }
 

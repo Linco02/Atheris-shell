@@ -6,7 +6,7 @@ import qs.services
 
 RectForeground {
     height: parent.height
-    width: clock.width + Style.padding.large
+    width: clock.width + Theme.padding.large
     
     TextStyledH {
         id: clock

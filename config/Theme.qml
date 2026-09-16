@@ -2,15 +2,24 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import qs.themes
+import qs.services
 
 Singleton {
-    property string currentTheme: "Base"
-    property var avalibleThemes: ["Base", "Atheris"]
+    property real opacity: 0.99
 
-    readonly property BaseTheme baseTheme: BaseTheme {}
-    readonly property AtherisTheme atherisTheme: AtherisTheme {}
-    readonly property QtObject theme: currentTheme === "Base"
-        ? baseTheme : atherisTheme
+    property real barWidth: 34
 
-    readonly property QtObject colors: baseTheme.colors
+    property int workspaceNumber: 5
+
+    property string fontFamily: "FiraCode Nerd Font"
+    property int fontSize: 14
+
+    readonly property var colors: STheme.colors
+    readonly property var durations: STheme.durations
+    readonly property var padding: STheme.padding
+    readonly property var margine: STheme.margine
+    readonly property var spacing: STheme.spacing
+    readonly property var radius: STheme.radius
+
+    property int cavaBarsCount: 40
 }

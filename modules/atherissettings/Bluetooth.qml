@@ -14,7 +14,7 @@ ColumnStyled {
 
     property var adapter: SBluetooth?.adapter
 
-    TextStyled {leftPadding: Style.padding.large; text: adapter?.name || ""}
+    TextStyled {leftPadding: Theme.padding.large; text: adapter?.name || ""}
 
     RectForeground {
         id: settingsContainer
@@ -24,7 +24,7 @@ ColumnStyled {
         ColumnStyled {
             id: wifiSettings
             width: parent.width
-            padding: Style.padding.large
+            padding: Theme.padding.large
 
             Repeater {
                 model: [
@@ -43,7 +43,7 @@ ColumnStyled {
         }
     }
 
-    TextStyled {leftPadding: Style.padding.large; text: STranslations.tr("paired_devices")}
+    TextStyled {leftPadding: Theme.padding.large; text: STranslations.tr("paired_devices")}
 
     Repeater {
         model: SBluetooth?.pairedDevices
@@ -59,13 +59,13 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: parent.left
-                    leftMargin: Style.padding.large
+                    leftMargin: Theme.padding.large
                 }
 
                 IconImage {
                     id: buttonIcon
                     source: SIcon.getIcon(modelData.icon)
-                    implicitSize: pairedDevicesTemplate.height - Style.padding.large * 2
+                    implicitSize: pairedDevicesTemplate.height - Theme.padding.large * 2
                 }
 
                 ColumnStyled {
@@ -89,11 +89,11 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
-                    rightMargin: Style.padding.large
+                    rightMargin: Theme.padding.large
                 }
 
                 ButtonStyled {
-                    height: pairedDevicesTemplate.height - Style.padding.large * 2
+                    height: pairedDevicesTemplate.height - Theme.padding.large * 2
                     text: modelData.connected
                         ? STranslations.tr("disconnect")
                         : STranslations.tr("connect")
@@ -102,7 +102,7 @@ ColumnStyled {
                 }
 
                 ButtonStyled {
-                    height: pairedDevicesTemplate.height - Style.padding.large * 2
+                    height: pairedDevicesTemplate.height - Theme.padding.large * 2
                     width: height
                     text: ""
                     fontSize: Theme.fontSize * 1.6
@@ -112,7 +112,7 @@ ColumnStyled {
     }
 
     TextStyled {
-        leftPadding: Style.padding.large
+        leftPadding: Theme.padding.large
         text: STranslations.tr("available_devices")
     }
 
@@ -127,13 +127,13 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: parent.left
-                    leftMargin: Style.padding.large
+                    leftMargin: Theme.padding.large
                 }
 
                 IconImage {
                     id: buttonIcon
                     source: SIcon.getIcon(modelData.icon)
-                    implicitSize: availableDevicesTemplate.height - Style.padding.large * 2
+                    implicitSize: availableDevicesTemplate.height - Theme.padding.large * 2
                 }
 
                 TextStyledB {text: modelData.name || modelData.deviceName}
@@ -143,9 +143,9 @@ ColumnStyled {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
-                    rightMargin: Style.padding.large
+                    rightMargin: Theme.padding.large
                 }
-                height: availableDevicesTemplate.height - Style.padding.large * 2
+                height: availableDevicesTemplate.height - Theme.padding.large * 2
                 text: STranslations.tr("connect")
                 fontSize: Theme.fontSize * 1.6
                 onClicked: modelData.connect()

@@ -32,7 +32,7 @@ RectForeground {
 
             RectInactive {
                 anchors.verticalCenter: parent.verticalCenter
-                height: root.height - diskName.height - Style.padding.normal
+                height: root.height - diskName.height - Theme.padding.normal
                 width: root.width / 4 * 3
 
                 RectActive {

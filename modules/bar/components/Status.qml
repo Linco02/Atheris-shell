@@ -13,7 +13,7 @@ RectForeground {
     RowStyled {
         id: statusContainer
         height: parent.height
-        leftPadding: Style.padding.normal; rightPadding: Style.padding.normal
+        leftPadding: Theme.padding.normal; rightPadding: Theme.padding.normal
 
         TextOwn {text: SPipewire.iconVolume}
 
@@ -26,7 +26,7 @@ RectForeground {
 
         TextOwn {text: SBluetooth?.isBluetoothOn ? "󰂯" : "󰂲"}
         
-        // TextOwn {text: SNetwork.currentNetworkSimbol}
+        TextOwn {text: SNetwork.getNerdIcon(SNetwork.currentNetwork)}
 
         Loader {
             active: SUPower?.power.hasPerformanceProfile

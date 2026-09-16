@@ -8,6 +8,18 @@ import qs.services
 Singleton {
     readonly property var jsonData: JSON.parse(jsonFile.text())
     property string curentPath: ""
+    property QtObject colors: QtObject {
+        property color surface: "#fff"
+        property color surfaceRaised: "#fff"
+        property color outline: "#fff"
+        property color active: "#fff"
+        property color inactive: "#fff"
+        property color warning: "#fff"
+
+        property color textSurface: "#fff"
+        property color textAccent: "#fff"
+        property color textInactive: "#fff"
+    }
 
     function palitCreate(path) {
         const colorIndex = Settings.palitMode === "dark" ? 0 : 2
@@ -27,28 +39,16 @@ Singleton {
     function applyPalette(data) {
         if (!data) return;
 
-        Theme.colors.surface = Qt.alpha(data.surface, Style.opacity) || Theme.colors.surface;
-        Theme.colors.surfaceRaised = data.surfaceRaised || Theme.colors.surfaceRaised;
-        Theme.colors.outline = data.outline || Theme.colors.outline;
-        Theme.colors.active = data.active || Theme.colors.active;
-        Theme.colors.inactive = data.inactive || Theme.colors.inactive;
-        Theme.colors.warning = data.warning || Theme.colors.warning;
+        colors.surface = Qt.alpha(data.surface, Theme.opacity);
+        colors.surfaceRaised = data.surfaceRaised;
+        colors.outline = data.outline;
+        colors.active = data.active;
+        colors.inactive = data.inactive;
+        colors.warning = data.warning;
 
-        Theme.colors.textSurface = data.textSurface || Theme.colors.textSurface;
-        Theme.colors.textAccent = data.textAccent || Theme.colors.textAccent;
-        Theme.colors.textInactive = data.textInactive || Theme.colors.textInactive;
-        
-        console.log(
-            data.surface,
-            data.surfaceRaised,
-            data.outline,
-            data.active,
-            data.inactive,
-            data.warning,
-            data.textSurface,
-            data.textAccent,
-            data.textInactive
-        )
+        colors.textSurface = data.textSurface;
+        colors.textAccent = data.textAccent;
+        colors.textInactive = data.textInactive;
     }
 
     Process {

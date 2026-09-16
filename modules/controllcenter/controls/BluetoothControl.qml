@@ -9,7 +9,7 @@ import qs.services
 
 ScrollStyled {
     anchors.fill: parent
-    padding: Style.padding.normal
+    padding: Theme.padding.normal
 
     ColumnStyled {
         width: parent.width
@@ -27,7 +27,7 @@ ScrollStyled {
             ButtonStyled {
                 anchors {
                     right: bluetoothToggle.left
-                    rightMargin: Style.margine.normal
+                    rightMargin: Theme.margine.normal
                 }
                 height: parent.height; width: height
                 text: ""
@@ -69,7 +69,7 @@ ScrollStyled {
         }
 
         TextStyled {
-            leftPadding: Style.padding.large
+            leftPadding: Theme.padding.large
             text: STranslations.tr("paired_devices")
         }
 
@@ -80,7 +80,7 @@ ScrollStyled {
 
         TextStyled {
             text: STranslations.tr("available_devices")
-            leftPadding: Style.padding.large
+            leftPadding: Theme.padding.large
         }
 
         Repeater {

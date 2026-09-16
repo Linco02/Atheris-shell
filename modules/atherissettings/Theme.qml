@@ -44,7 +44,7 @@ ColumnStyled {
     }
 
     TextStyled {
-        leftPadding: Style.padding.large
+        leftPadding: Theme.padding.large
         text: STranslations.tr("theme_wallpaper_title")
     }
 
@@ -54,7 +54,7 @@ ColumnStyled {
         ColumnStyled {
             id: wallpaperSettings
             width: parent.width
-            padding: Style.padding.large
+            padding: Theme.padding.large
 
             ButtonLabelToggle {
                 text: "Шпалери"
@@ -89,7 +89,32 @@ ColumnStyled {
     }
 
     TextStyled {
-        leftPadding: Style.padding.large
+        leftPadding: Theme.padding.large
+        text: STranslations.tr("theme_palit_title")
+    }
+
+    RectForeground {
+        height: themeSettings.height; width: parent.width
+
+        ColumnStyled {
+            id: themeSettings
+            width: parent.width
+            padding: Theme.padding.large
+
+            Repeater {
+                model: Theme.avalibleThemes
+
+                delegate: ButtonLabelToggle {
+                    text: modelData
+                    isActive: Theme.currentTheme === modelData
+                    onClicked: Theme.currentTheme = modelData
+                }
+            }
+        }
+    }
+
+    TextStyled {
+        leftPadding: Theme.padding.large
         text: STranslations.tr("theme_palit_title")
     }
 
@@ -99,7 +124,7 @@ ColumnStyled {
         ColumnStyled {
             id: palitSettings
             width: parent.width
-            padding: Style.padding.large
+            padding: Theme.padding.large
 
             Repeater {
                 model: [

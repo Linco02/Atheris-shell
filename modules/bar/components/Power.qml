@@ -10,7 +10,7 @@ Item {
         anchors.centerIn: parent
         font.pixelSize: parent.height
         text: ""
-        // color: hover.hovered ? Theme.colors.textAccent : Qt.lighter(Theme.colors.textAccent, Style.hover)
+        // color: hover.hovered ? Theme.colors.textAccent : Qt.lighter(Theme.colors.textAccent, Theme.hover)
     }
 
     HoverHandler {id: hover}

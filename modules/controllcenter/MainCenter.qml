@@ -7,7 +7,7 @@ GridLayout {
     id: root
     anchors.fill: parent
     columns: 2
-    rowSpacing: Style.spacing.normal; columnSpacing: rowSpacing
+    rowSpacing: Theme.spacing.normal; columnSpacing: rowSpacing
 
     property int brickH: 40
     property int brickBH: 60

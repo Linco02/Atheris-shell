@@ -8,7 +8,7 @@ import qs.services
 RectForeground {
     id: root
     height: iconSize; width: height
-    color: hover && !active ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Style.hover)
+    color: hover && !active ? Qt.lighter(focused ? Theme.colors.inactive : Theme.colors.surfaceRaised, Theme.hover)
         : active ? Theme.colors.active
         : focused ? Theme.colors.inactive
         : Theme.colors.surfaceRaised
@@ -24,13 +24,13 @@ RectForeground {
         id: buttonIcon
         anchors.centerIn: parent
         source: SIcon.getIcon(root.source)
-        implicitSize: root.height - Style.padding.mini + 2
+        implicitSize: root.height - Theme.padding.mini + 2
     }
 
     TextStyled {
         id: buttonText
         anchors.centerIn: parent
-        font.pixelSize: parent.height - Style.padding.small
+        font.pixelSize: parent.height - Theme.padding.small
     }
 
     HoverHandler { id: hover }

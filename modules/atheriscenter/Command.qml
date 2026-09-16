@@ -23,7 +23,7 @@ Item {
         id: textInput
         anchors {
             top: parent.top
-            topMargin: Style.padding.normal
+            topMargin: Theme.padding.normal
         }
         height: 40; width: root.width
         inputFocus: true
@@ -36,9 +36,9 @@ Item {
     ScrollStyled {
         anchors {
             bottom: parent.bottom
-            bottomMargin: Style.padding.normal
+            bottomMargin: Theme.padding.normal
         }
-        height: root.height - textInput.height - Style.padding.normal * 3
+        height: root.height - textInput.height - Theme.padding.normal * 3
         width: root.width
 
         ColumnStyled {
@@ -51,8 +51,8 @@ Item {
 
                     RowStyled {
                         anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Style.padding.normal
-                        rightPadding: Style.padding.normal
+                        leftPadding: Theme.padding.normal
+                        rightPadding: Theme.padding.normal
 
                         TextStyled {
                             visible: currentMode === "command" || currentMode === "directory"
@@ -66,7 +66,7 @@ Item {
                         IconImage {
                             visible: currentMode === "applications"
                             asynchronous: true
-                            implicitSize: parent.parent.height - Style.padding.normal
+                            implicitSize: parent.parent.height - Theme.padding.normal
                             source: currentMode === "applications"
                                 ? SIcon.getIcon(modelData.icon) || ""
                                 : ""

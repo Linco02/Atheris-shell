@@ -16,7 +16,7 @@ ScrollStyled {
 
     property int imageHeight: 90
     property int imageWidth: imageHeight / 9 * 16
-    property int colNum: Math.max(1, Math.floor((width + Style.padding.normal) / (imageWidth + + Style.padding.normal)))
+    property int colNum: Math.max(1, Math.floor((width + Theme.padding.normal) / (imageWidth + + Theme.padding.normal)))
     property alias model: repeaterMedia.model
 
     signal clicked(url pathMedia)
@@ -29,8 +29,8 @@ ScrollStyled {
     GridLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         columns: colNum
-        rowSpacing: Style.spacing.normal
-        columnSpacing: Style.spacing.normal
+        rowSpacing: Theme.spacing.normal
+        columnSpacing: Theme.spacing.normal
 
         Repeater {
             id: repeaterMedia

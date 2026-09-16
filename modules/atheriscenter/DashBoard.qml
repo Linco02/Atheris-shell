@@ -11,12 +11,12 @@ Column {
     id: root
     spacing: space
 
-    property int space: Style.spacing.normal
+    property int space: Theme.spacing.normal
     property int gap: 60
 
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: Style.spacing.large
+        spacing: Theme.spacing.large
    
         ButtonOwn {
             btnText: "󰼄"

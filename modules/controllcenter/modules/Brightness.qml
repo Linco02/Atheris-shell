@@ -23,7 +23,7 @@ Item {
 
         SliderStyled {
             height: parent.height
-            width: root.width - brightnessMin.width - brightnessMax.width - Style.spacing.large
+            width: root.width - brightnessMin.width - brightnessMax.width - Theme.spacing.large
             value: SBrightness.currentBrigtness
             from: 0; to: 100
             onMoved: {

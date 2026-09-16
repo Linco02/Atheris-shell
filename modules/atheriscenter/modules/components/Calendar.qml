@@ -44,7 +44,7 @@ RectForeground {
                 width: 35
                 height: 35
                 color: (modelData.day === today && modelData.isCurrent) ? Theme.colors.surface : "transparent"
-                radius: Style.radius.normal
+                radius: Theme.radius.normal
 
                 TextStyled {
                     anchors.centerIn: parent

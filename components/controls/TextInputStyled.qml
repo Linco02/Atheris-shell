@@ -20,7 +20,7 @@ RectForeground {
         anchors {
             left: parent.left
             verticalCenter: parent.verticalCenter
-            leftMargin: Style.padding.normal
+            leftMargin: Theme.padding.normal
         }
         text: beforeText
     }
@@ -29,12 +29,12 @@ RectForeground {
         id: textInput
         anchors {
             right: parent.right
-            rightMargin: Style.padding.normal
+            rightMargin: Theme.padding.normal
         }
         height: root.height
-        width: root.width - textBefore.width - Style.padding.normal * 3
+        width: root.width - textBefore.width - Theme.padding.normal * 3
         font {
-            family: Style.fontFamily
+            family: Theme.fontFamily
             weight: 600
         }
         color: Theme.colors.textSurface

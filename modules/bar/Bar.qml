@@ -15,8 +15,8 @@ PanelWindow {
         top: barPosition !== "bottom"
         bottom: barPosition !== "top"
     }
-    implicitHeight: isHorizontal ? Style.barWidth : 0
-    implicitWidth: isHorizontal ? 0 : Style.barWidth
+    implicitHeight: isHorizontal ? Theme.barWidth : 0
+    implicitWidth: isHorizontal ? 0 : Theme.barWidth
     focusable: UIState.isAtherisCenterOpen || UIState.isAuthenficatorOpen
     color: Theme.colors.surface
 
@@ -28,12 +28,12 @@ PanelWindow {
             verticalCenter: isHorizontal ? parent.verticalCenter : undefined
             horizontalCenter: isHorizontal ? undefined : parent.verticalCenter
         }
-        height: root.height - Style.padding.normal
+        height: root.height - Theme.padding.normal
         width: root.width
 
         RowContainer {
             anchors.left: parent.left
-            leftPadding: Style.padding.normal
+            leftPadding: Theme.padding.normal
 
             Power {}
             Workspace {}
@@ -57,14 +57,14 @@ PanelWindow {
 
         RowContainer {
             anchors.right: parent.right
-            rightPadding: Style.padding.normal
+            rightPadding: Theme.padding.normal
 
             Status {}
         }
     }
 
     component RowContainer : Row {
-        height: root.height - Style.padding.normal
-        spacing: Style.spacing.normal
+        height: root.height - Theme.padding.normal
+        spacing: Theme.spacing.normal
     }
 }

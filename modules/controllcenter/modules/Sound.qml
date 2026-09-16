@@ -22,7 +22,7 @@ Item {
 
         SliderStyled {
             height: root.height
-            width: root.width - leftButton.width - rightButton.width - Style.spacing.large
+            width: root.width - leftButton.width - rightButton.width - Theme.spacing.large
             from: 0
             to: 1
             value: volume

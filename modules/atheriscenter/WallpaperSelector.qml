@@ -11,8 +11,8 @@ import qs.components.shapes
 import qs.components.animations
 
 Item {
-    height: imageHeight * rowNum + Style.spacing.normal * (rowNum - 1)
-    width: imageWidth * colNum + Style.spacing.normal * (colNum - 1)
+    height: imageHeight * rowNum + Theme.spacing.normal * (rowNum - 1)
+    width: imageWidth * colNum + Theme.spacing.normal * (colNum - 1)
 
     property int imageHeight: 135
     property int imageWidth: 240
@@ -30,8 +30,8 @@ Item {
         GridLayout {
             id: wallpaperBox
             columns: colNum
-            rowSpacing: Style.spacing.normal
-            columnSpacing: Style.spacing.normal
+            rowSpacing: Theme.spacing.normal
+            columnSpacing: Theme.spacing.normal
 
             Repeater {
                 model: SWallpaper.wallpapers

@@ -9,7 +9,7 @@ RectForeground {
 
     Row {
         anchors.centerIn: parent
-        spacing: Style.spacing.normal
+        spacing: Theme.spacing.normal
 
         TextStyled {
             anchors.verticalCenter: parent.verticalCenter
@@ -19,7 +19,7 @@ RectForeground {
 
         Column {
             anchors.verticalCenter: parent.verticalCenter
-            spacing: Style.spacing.normal
+            spacing: Theme.spacing.normal
 
             TextStyled {
                 anchors.horizontalCenter: parent.horizontalCenter

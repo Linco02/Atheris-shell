@@ -9,7 +9,7 @@ RectForeground {
     id: root
     height: parent.height; width: workspaceContainer.width
 
-    property real cornerRadius: Style.radius.normal
+    property real cornerRadius: Theme.radius.normal
     property var workspaceFocused: SWorkspace.workspaceFocused
     property int workspaceExist: SWorkspace.workspaceExist
     property list<bool> workspaceOccupied: SWorkspace.workspaceOccupied

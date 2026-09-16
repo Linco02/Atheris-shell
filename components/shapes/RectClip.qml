@@ -1,7 +1,12 @@
+import QtQuick
 import Quickshell.Widgets
+import qs.components.animations
 import qs.config
 
 ClippingRectangle {
-    radius: Style.radius.normal
+    radius: Theme.radius.normal
     color: "transparent"
+
+    Behavior on color {ColorAnim {}}
+    Behavior on radius {NumberAnim {}}
 }

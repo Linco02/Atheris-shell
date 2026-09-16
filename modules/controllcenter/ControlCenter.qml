@@ -12,7 +12,7 @@ PopFade {
     id: root
     containerH: controlCenterContainer.height
     containerW: controlCenterContainer.width
-    positionX: panel.width - root.width - Style.padding.normal
+    positionX: panel.width - root.width - Theme.padding.normal
     isOpen: UIState.isControlCenterOpen
     onClosedPop: UIState.isControlCenterOpen = false
     position: "right"
