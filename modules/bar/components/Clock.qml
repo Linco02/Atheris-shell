@@ -5,7 +5,7 @@ import qs.config
 import qs.services
 
 RectForeground {
-    height: parent.height
+    height: Theme.barWidth - Theme.padding.small * 2
     width: clock.width + Theme.padding.large
     
     TextStyledH {

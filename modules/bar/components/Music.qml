@@ -11,7 +11,7 @@ import qs.services
 RectForeground {
     id: root
     visible: false
-    height: parent.height; width: musicContainer.width
+    height: Theme.barWidth - Theme.padding.small * 2; width: musicContainer.width
     state: playerExist ? "open" : "close"
 
     property var playerActive: SMris.playerActive

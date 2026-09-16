@@ -1,11 +1,12 @@
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import qs.config
 import qs.services
+import qs.components.containers
 import "./components"
 
 import qs.components
-// import qs.modules.atheriscenter
 
 PanelWindow {
     id: root
@@ -23,25 +24,23 @@ PanelWindow {
     property string barPosition: Settings.barPosition || "top"
     property bool isHorizontal: (barPosition === "top" || barPosition === "bottom")
 
-    Item {
-        anchors {
-            verticalCenter: isHorizontal ? parent.verticalCenter : undefined
-            horizontalCenter: isHorizontal ? undefined : parent.verticalCenter
-        }
-        height: root.height - Theme.padding.normal
-        width: root.width
+    GridLayout {
+        anchors.fill: parent
+        columns: isHorizontal ? 3 : 1
+        rows: isHorizontal ? 1 : 3
 
-        RowContainer {
-            anchors.left: parent.left
-            leftPadding: Theme.padding.normal
+        RowStyled {
+            Layout.alignment: isHorizontal ? Qt.AlignLeft : Qt.AlignTop
+            Layout.leftMargin: isHorizontal ? Theme.margine.large : 0
+            Layout.topMargin: isHorizontal ? 0 : Theme.margine.large
 
             Power {}
             Workspace {}
             Taskbar {}
         }
 
-        RowContainer {
-            anchors.horizontalCenter: parent.horizontalCenter
+        RowStyled {
+            Layout.alignment: !isHorizontal ? Qt.AlignHCenter : Qt.AlignVCenter
 
             Clock {}
             Loader {
@@ -55,15 +54,17 @@ PanelWindow {
             Device {}
         }
 
-        RowContainer {
-            anchors.right: parent.right
-            rightPadding: Theme.padding.normal
+        RowStyled {
+            Layout.alignment: root.isHorizontal ? Qt.AlignRight : Qt.AlignBottom
+            Layout.rightMargin: isHorizontal ? Theme.margine.large : 0
+            Layout.bottomMargin: isHorizontal ? 0 : Theme.margine.large
 
             Status {}
         }
     }
 
     component RowContainer : Row {
+        // anchors.verticalCenter: parent.verticalCenter
         height: root.height - Theme.padding.normal
         spacing: Theme.spacing.normal
     }

@@ -8,7 +8,7 @@ import qs.components.containers
 
 Item {
     id: root
-    height: parent.height; width: deviceContainer.width
+    height: Theme.barWidth - Theme.padding.small * 2; width: deviceContainer.width
 
     RowStyled {
         id: deviceContainer

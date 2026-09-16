@@ -8,7 +8,7 @@ import qs.services
 
 RectForeground {
     id: root
-    height: parent.height; width: statusContainer.width
+    height: Theme.barWidth - Theme.padding.small * 2; width: statusContainer.width
 
     RowStyled {
         id: statusContainer
