@@ -11,7 +11,7 @@ import qs.services
 RectForeground {
     id: root
     visible: false
-    height: Theme.barWidth - Theme.padding.small * 2; width: musicContainer.width
+    width: musicContainer.width
     state: playerExist ? "open" : "close"
 
     property var playerActive: SMris.playerActive
@@ -42,7 +42,7 @@ RectForeground {
                 id: runningName
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width
-                text: playerActive.trackTitle || "..."
+                text: playerActive?.trackTitle || "..."
                 runText: isPlayerPlay && textLength >= 200
             }
 

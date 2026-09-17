@@ -3,7 +3,7 @@ import QtQuick
 BaseTheme {
     property real cornerRadius: 0
     property real buttonRadius: 0
-    property bool useAngledShapes: false
+    property bool useAngledShapes: true
     property real skewAngle: 0
     property int durations: 400
     property int indents: 10

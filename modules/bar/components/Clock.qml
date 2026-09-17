@@ -5,8 +5,7 @@ import qs.config
 import qs.services
 
 RectForeground {
-    height: Theme.barWidth - Theme.padding.small * 2
-    width: clock.width + Theme.padding.large
+    width: clock.width + Theme.padding.normal + (!Theme.theme.useAngledShapes ? Theme.padding.normal : 0)
     
     TextStyledH {
         id: clock

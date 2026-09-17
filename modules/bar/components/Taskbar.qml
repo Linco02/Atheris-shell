@@ -10,13 +10,13 @@ import Quickshell.Hyprland
 RectForeground {
     id: root
     visible: ToplevelManager.toplevels.values.length > 0
-    height: Theme.barWidth - Theme.padding.small * 2; width: programsRow.width
+    width: programsRow.width
 
     Row {
         id: programsRow
-        anchors.centerIn: parent
-        spacing: 5
-        leftPadding: 5; rightPadding: 5
+        anchors.horizontalCenter: parent.horizontalCenter
+        leftPadding: (!Theme.theme.useAngledShapes ? Theme.padding.small * 2: 0)
+        rightPadding: leftPadding
 
         Repeater {
             model: ToplevelManager.toplevels
@@ -25,7 +25,6 @@ RectForeground {
                 height: root.height
                 iconSize: root.height - Theme.padding.small
                 onClicked: modelData.activate()
-                // onMidleClicked: modelData.close()
                 active: modelData.activated
             }
         }

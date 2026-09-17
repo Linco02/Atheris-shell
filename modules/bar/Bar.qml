@@ -24,6 +24,8 @@ PanelWindow {
     property string barPosition: Settings.barPosition || "top"
     property bool isHorizontal: (barPosition === "top" || barPosition === "bottom")
 
+    property int componentsHeight: Theme.barWidth - (!Theme.theme.useAngledShapes ? Theme.padding.small * 2 : 0)
+
     GridLayout {
         anchors.fill: parent
         columns: isHorizontal ? 3 : 1
@@ -34,15 +36,15 @@ PanelWindow {
             Layout.leftMargin: isHorizontal ? Theme.margine.large : 0
             Layout.topMargin: isHorizontal ? 0 : Theme.margine.large
 
-            Power {}
-            Workspace {}
-            Taskbar {}
+            Power {height: componentsHeight}
+            Workspace {height: componentsHeight}
+            Taskbar {height: componentsHeight}
         }
 
         RowStyled {
             Layout.alignment: !isHorizontal ? Qt.AlignHCenter : Qt.AlignVCenter
 
-            Clock {}
+            Clock {height: componentsHeight}
             Loader {
                 active: STime.stopWatchCount > 0
                 height: STime.stopWatchCount > 0
@@ -50,8 +52,8 @@ PanelWindow {
                     : 0
                 sourceComponent: StopWatch {}
             }
-            Music {}
-            Device {}
+            Music {height: componentsHeight}
+            Device {height: componentsHeight}
         }
 
         RowStyled {
@@ -59,7 +61,7 @@ PanelWindow {
             Layout.rightMargin: isHorizontal ? Theme.margine.large : 0
             Layout.bottomMargin: isHorizontal ? 0 : Theme.margine.large
 
-            Status {}
+            Status {height: componentsHeight}
         }
     }
 

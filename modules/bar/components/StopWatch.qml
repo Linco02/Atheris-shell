@@ -5,7 +5,6 @@ import qs.config
 import qs.services
 
 RectForeground {
-    height: parent.height
     width: timer.width + Theme.padding.large
     
     TextStyledH {

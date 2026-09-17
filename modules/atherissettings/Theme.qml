@@ -102,12 +102,12 @@ ColumnStyled {
             padding: Theme.padding.large
 
             Repeater {
-                model: Theme.avalibleThemes
+                model: STheme.avalibleThemes
 
                 delegate: ButtonLabelToggle {
                     text: modelData
-                    isActive: Theme.currentTheme === modelData
-                    onClicked: Theme.currentTheme = modelData
+                    isActive: STheme.currentTheme === modelData
+                    onClicked: STheme.currentTheme = modelData
                 }
             }
         }

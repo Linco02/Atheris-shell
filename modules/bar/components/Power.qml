@@ -4,7 +4,7 @@ import qs.components
 
 Item {
     id: root
-    height: Theme.barWidth - Theme.padding.small * 2; width: height
+    width: height
 
     TextStyled {
         anchors.centerIn: parent

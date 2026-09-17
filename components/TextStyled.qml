@@ -6,9 +6,11 @@ Text {
     property int fontSize: Theme.fontSize
 
     color: Theme.colors.textSurface
-    font.pixelSize: fontSize
-    font.family: Theme.fontFamily
-    font.weight: 600
+    font {
+        pixelSize: fontSize
+        family: Theme.fontFamily
+        weight: 600
+    }
 
-    Behavior on color { ColorAnim {} }
+    Behavior on color {ColorAnim {}}
 }
