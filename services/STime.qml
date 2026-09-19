@@ -5,6 +5,8 @@ import qs.config
 
 Singleton {
     property string time: ""
+    property string hour: ""
+    property string minute: ""
     property string date: ""
     property int today: new Date().getDate()
     property string mounth: Qt.formatDateTime(new Date(), "MMMM")
@@ -18,6 +20,8 @@ Singleton {
     function clockUpdate() {
         let currentDate = new Date()
         date = Qt.formatDateTime(currentDate, "dd/MM/yyyy")
+        hour = Qt.formatTime(currentDate, "hh")
+        minute = Qt.formatTime(currentDate, "mm")
         time = Qt.formatTime(currentDate, "hh:mm")
     }
 

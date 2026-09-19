@@ -5,34 +5,54 @@ import Quickshell.Hyprland
 import qs.config
 
 Singleton {
-    property var workspaceFocused: Hyprland.focusedWorkspace?.id ?? 1
-    property int workspaceNumber: Theme.workspaceNumber
-    property int workspaceExist: workspaceNumber
-    property list<bool> workspaceOccupied: []
+    property int desiredQuantityWorkspaces: 5
+    property int existingQuantityWorkspaces: Math.max(...workspaces.map(w => w.id), desiredQuantityWorkspaces)
+    property bool showSpecialWorkspace: false
+    property var workspaces: Hyprland?.workspaces.values
+        .filter(w => w.name !== (showSpecialWorkspace ? "" : "special:magic")) ?? []
+    property var eworkspaces: {
+        return Array.from({length: existingQuantityWorkspaces}, (_, i) => {
+            const id = i + 1;
+            const found = workspaces.find(w => w.id === id);
 
-    function updateExist() {
-        let maxId = Hyprland.workspaces.values.reduce((max, ws) => {
-            return (ws.id > max) ? ws.id : max
-        }, 1);
-        workspaceExist = Math.max(maxId, workspaceNumber)
+            const neighbor = {
+                previous: workspaces.some(w => w.id === id - 1),
+                following: workspaces.some(w => w.id === id + 1)
+            }
+            
+            if (found) {
+                return {
+                    workspace: found,
+                    id: found.id,
+                    name: found.name,
+                    focused: found.focused,
+                    occupied: true,
+                    neighbor
+                };
+            }
 
-        updateOccupied()
-    }
-
-    function updateOccupied() {
-        workspaceOccupied = Array.from({length: workspaceExist}, (_,i) => {
-            return Hyprland.workspaces.values.some(ws => ws.id === (i + 1));
+            return {
+                id: id,
+                name: id.toString(),
+                occupied: false,
+                neighbor
+            };
         })
     }
 
-    function workspaceMove(ws) {
-        Hyprland.dispatch(`workspace ${ws + 1}`)
-    }
+    // function getWorkspace(name) {
+    //     if (!workspaces) return null;
+    //     return workspaces.find(
+    //         w => w.name.toString() === name.toString() || w.id === name
+    //     ) || null;
+    // }
 
-    Connections {
-        target: Hyprland.workspaces
-        function onValuesChanged() { updateExist() }
+    function moveToWorkspace(ws) {
+        if (ws.name === "special:magic") {
+            Hyprland.dispatch("togglespecialworkspace magic");
+        } else {
+            if (ws.focused) return;
+            Hyprland.dispatch(`workspace ${ws.name}`);
+        };
     }
-
-    Component.onCompleted: { updateExist() }
 }

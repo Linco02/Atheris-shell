@@ -1,78 +1,59 @@
 import QtQuick
 import qs.components
 import qs.components.shapes
+import qs.components.containers
 import qs.components.animations
 import qs.config
 import qs.services
 
 RectForeground {
     id: root
-    width: workspaceContainer.width
+    height: isHorizontal ? barWidth - Theme.stock.small: workspaceContainer.height
+    width: isHorizontal ? workspaceContainer.width : barWidth - Theme.stock.small
 
-    property real cornerRadius: Theme.radius.normal
-    property var workspaceFocused: SWorkspace.workspaceFocused
-    property int workspaceExist: SWorkspace.workspaceExist
-    property list<bool> workspaceOccupied: SWorkspace.workspaceOccupied
+    readonly property int cornerRadius: Theme.radius.normal
+    property bool isHorizontal: true
+    property int barWidth: Theme.barWidth
+    property int count: SWorkspace.existingQuantityWorkspaces
 
-    Row {
+    ListView {
         id: workspaceContainer
-        
-        Repeater {
-            model: workspaceExist
+        anchors.centerIn: parent
+        width: isHorizontal ? count * (barWidth * 1.5) : (root.width)
+        height: isHorizontal ? (root.height) : count * (barWidth * 1.5)
+        orientation: isHorizontal ? ListView.Horizontal : ListView.Vertical
+        interactive: false
 
-            Rectangle {
-                height: root.height; width: 50
-                topLeftRadius: leftRad ? 0 : cornerRadius; bottomLeftRadius: leftRad ? 0 : cornerRadius
-                topRightRadius: rightRad ? 0 : cornerRadius; bottomRightRadius: rightRad ? 0 : cornerRadius
-                color: isOccupied ? Theme.colors.inactive
-                    : "transparent"
+        model: SWorkspace.eworkspaces
 
-                property bool isFocused: workspaceFocused === index + 1
-                property bool isOccupied: workspaceOccupied[index] || false
-                property bool leftRad: isOccupied && (index > 0 && workspaceOccupied[index - 1]) === true
-                property bool rightRad: isOccupied && (index < workspaceOccupied.length - 1 && workspaceOccupied[index + 1]) === true
+        delegate: Rect {
+            height: isHorizontal ? barWidth - Theme.stock.small : barWidth * 1.5
+            width: isHorizontal ? barWidth * 1.5 : barWidth - Theme.stock.small
 
-                TapHandler {onTapped: SWorkspace.workspaceMove(index)}
+            radius: 0
+            color: modelData.focused
+                ? Theme.colors.active : modelData.occupied
+                ? Theme.colors.inactive : "transparent"
+            topLeftRadius: modelData.neighbor.previous ? 0 : cornerRadius
+            bottomRightRadius: modelData.neighbor.following ? 0 : cornerRadius
+            topRightRadius: isHorizontal
+                ? (modelData.neighbor.following ? 0 : cornerRadius)
+                : (modelData.neighbor.previous ? 0 : cornerRadius)
+            bottomLeftRadius: isHorizontal
+                ? (modelData.neighbor.previous ? 0 : cornerRadius)
+                : (modelData.neighbor.following ? 0 : cornerRadius)
 
-                Behavior on color { ColorAnim {} }
-                Behavior on topLeftRadius { NumberAnim { } }
-                Behavior on bottomLeftRadius { NumberAnim { } }
-                Behavior on topRightRadius { NumberAnim { } }
-                Behavior on bottomRightRadius { NumberAnim { } }
+
+            TextStyledH {
+                anchors.centerIn: parent
+                text: modelData.focused ? "●" 
+                    : modelData.occupied ? "◉"
+                    : "○"
             }
+
+            TapHandler {onTapped: SWorkspace.moveToWorkspace(modelData)}
         }
     }
 
-    RectActive {
-        height: root.height; width: 50
-        x: workspaceFocused > 0 ? (workspaceFocused - 1) * 50 : 0
-        Behavior on x { NumberAnim {} }
-    }
 
-    Row {
-        Repeater {
-            model: workspaceExist
-
-            Item {
-                property bool isFocused: workspaceFocused === index + 1
-                property bool isOccupied: workspaceOccupied[index] || false
-                height: root.height; width: 50
-
-                TextStyledH {
-                    anchors.centerIn: parent
-                    z: 3
-                    text: isFocused ? "●" 
-                        : isOccupied ? "◉"
-                        : "○"
-                    color: isFocused ? Theme.colors.textAccent
-                        : isOccupied ? Theme.colors.textSurface
-                        : Theme.colors.inactive
-
-                    Behavior on color { ColorAnim {} }
-                }
-            }
-        }
-    }
-
-    Behavior on width { NumberAnim { } }
 }

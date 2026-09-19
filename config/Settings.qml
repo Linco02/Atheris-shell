@@ -7,6 +7,7 @@ Singleton {
     property bool isBarOn: true
     // property bool isDetached: true
     property string barPosition: "top"
+    // property string barPosition: "left"
 
     // Задній план //
     property bool isBackgroundOn: true

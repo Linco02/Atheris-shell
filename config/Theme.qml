@@ -7,7 +7,7 @@ import qs.services
 Singleton {
     property real opacity: 0.99
 
-    property real barWidth: 28
+    property real barWidth: 34
 
     property int workspaceNumber: 5
 
@@ -21,6 +21,7 @@ Singleton {
     readonly property var margine: STheme.margine
     readonly property var spacing: STheme.spacing
     readonly property var radius: STheme.radius
+    readonly property var stock: STheme.stock
 
     property int cavaBarsCount: 40
 }

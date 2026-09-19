@@ -7,7 +7,7 @@ import qs.themes
 Singleton {
     id: root
 
-    property string currentTheme: "Atheris"
+    property string currentTheme: "Celend-4"
     property var avalibleThemes: ["Atheris", "Celend-4"]
     readonly property AtherisTheme atherisTheme: AtherisTheme {}
     readonly property Celend4 celend4Theme: Celend4 {}
@@ -40,5 +40,11 @@ Singleton {
         property int small: theme.radius * 0.5
         property int normal: theme.radius
         property int large: theme.radius * 2
+    }
+
+    readonly property QtObject stock: QtObject {
+        property int small: theme.useAngledShapes ? 0 : padding.small * 2
+        property int normal: theme.useAngledShapes ? 0 : padding.normal * 2
+        property int large: theme.useAngledShapes ? 0 : padding.large * 2
     }
 }

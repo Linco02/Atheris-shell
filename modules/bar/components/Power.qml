@@ -3,14 +3,13 @@ import qs.config
 import qs.components
 
 Item {
-    id: root
-    width: height
+    height: Theme.barWidth - Theme.stock.small; width: height
 
     TextStyled {
+        id: powerButton
         anchors.centerIn: parent
-        font.pixelSize: parent.height
+        fontSize: Theme.barWidth - Theme.stock.small
         text: ""
-        // color: hover.hovered ? Theme.colors.textAccent : Qt.lighter(Theme.colors.textAccent, Theme.hover)
     }
 
     HoverHandler {id: hover}

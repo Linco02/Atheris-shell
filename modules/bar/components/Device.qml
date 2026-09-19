@@ -8,6 +8,7 @@ import qs.components.containers
 
 Item {
     id: root
+    height: !isHorizontal ? deviceContainer.height: Theme.barWidth
     width: deviceContainer.width
 
     RowStyled {
