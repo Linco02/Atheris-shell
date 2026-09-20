@@ -36,7 +36,7 @@ PanelWindow {
 
         Power {}
         Workspace {isHorizontal: root.isHorizontal}
-        // Taskbar {isHorizontal: root.isHorizontal}
+        Taskbar {isHorizontal: root.isHorizontal}
     }
 
     GridRotable {

@@ -19,8 +19,8 @@ RectForeground {
     ListView {
         id: workspaceContainer
         anchors.centerIn: parent
-        width: isHorizontal ? count * (barWidth * 1.5) : (root.width)
-        height: isHorizontal ? (root.height) : count * (barWidth * 1.5)
+        width: isHorizontal ? count * (barWidth * 1.5) : root.width
+        height: isHorizontal ? root.height : count * (barWidth * 1.5)
         orientation: isHorizontal ? ListView.Horizontal : ListView.Vertical
         interactive: false
 
