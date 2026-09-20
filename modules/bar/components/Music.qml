@@ -32,15 +32,12 @@ RectForeground {
         }
 
         RunningText {
-            // height: isHorizontal ? root.height - Theme.padding.small : (textLength > 200 ? 200 : textLength)
-            // width: isHorizontal ? (textLength > 200 ? 200 : textLength) : root.width - Theme.padding.small
-            height: isHorizontal ? root.height - Theme.padding.small : textLength
-            width: isHorizontal ? textLength : root.width - Theme.padding.small
+            height: isHorizontal ? root.height - Theme.padding.small : (textLength > 200 ? 200 : textLength)
+            width: isHorizontal ? (textLength > 200 ? 200 : textLength) : root.width - Theme.padding.small
             isHorizontal: root.isHorizontal
             text: playerActive?.trackTitle ?? "..."
-            // runText: textLength > 200
-            runText: true
-            // clip: true
+            runText: textLength > 200
+            clip: true
 
             TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "music")}}
             Behavior on width {NumberAnim {}}

@@ -14,60 +14,35 @@ Item {
     property int scrollSpeed: 50
     property string text: ""
 
-    readonly property int textLength: 100
+    readonly property int textLength: firstText.width
     readonly property int scrollDistance: textLength + Theme.spacing.normal
-
-    // readonly property real firstTextY: isHorizontal ? 0 / 2 : root.height
-    // readonly property real firstTextX: isHorizontal ? 0 : (root.width - implicitHeight) / 2
-    // readonly property real containerX: isHorizontal ? 0 : 120
 
     onTextChanged: {
         anim.stop()
-
-        // textContainer.y = firstTextY
-        // textContainer.x = firstTextX
-        // textContainer.y = Qt.binding(() => isHorizontal ? textLength * 2 : 0)
-        // textContainer.x = Qt.binding(() => isHorizontal ? 0 : (root.width - textContainer.width) / 2)
-
+        firstText.x = textLength * 2
         if (runText)
             anim.start()
     }
 
     Item {
         id: textContainer
-        height: isHorizontal ? root.height : root.width
-        width: isHorizontal ? root.width : root.height
+        anchors.centerIn: parent
+        width: root.isHorizontal ? root.width : root.height
+        height: root.isHorizontal ? root.height : root.width
         rotation: isHorizontal ? 0 : 270
         transformOrigin: Item.Center
 
-        RectActive {
+        TextRunn {
             id: firstText
-            height: isHorizontal ? root.height : root.width
-            width: 100
-            opacity: 0.5
         }
 
-        RectActive {
-            height: isHorizontal ? root.height : root.width
-            width: 100
+        TextRunn {
+            id: secondText
             anchors {
                 left: firstText.right
                 leftMargin: Theme.spacing.normal
             }
-            opacity: 0.5
         }
-
-        // TextRunn {
-        //     id: firstText
-        // }
-
-        // TextRunn {
-        //     id: secondText
-        //     anchors {
-        //         left: firstText.right
-        //         leftMargin: Theme.spacing.normal
-        //     }
-        // }
     }
 
     SequentialAnimation {
@@ -78,10 +53,10 @@ Item {
         PauseAnimation {duration: Theme.durations.slow * 1}
 
         NumberAnimation {
-            target: textContainer
-            property: isHorizontal ? "x" : "y"
+            target: firstText
+            property: "x"
             from: 0
-            to: isHorizontal ? -scrollDistance : scrollDistance
+            to: -scrollDistance
             easing.type: Easing.Linear
             duration: Math.max(1, (scrollDistance / scrollSpeed) * Theme.durations.slow)
         }
@@ -89,7 +64,6 @@ Item {
 
     component TextRunn: TextStyled {
         text: root.text
-        anchors.verticalCenter: isHorizontal ? parent.verticalCenter : undefined
-        anchors.horizontalCenter: isHorizontal ? undefined : parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 }
