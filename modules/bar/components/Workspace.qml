@@ -24,36 +24,48 @@ RectForeground {
         orientation: isHorizontal ? ListView.Horizontal : ListView.Vertical
         interactive: false
 
-        model: SWorkspace.eworkspaces
+        model: SWorkspace.existingQuantityWorkspaces
 
         delegate: Rect {
             height: isHorizontal ? barWidth - Theme.stock.small : barWidth * 1.5
             width: isHorizontal ? barWidth * 1.5 : barWidth - Theme.stock.small
-
             radius: 0
-            color: modelData.focused
-                ? Theme.colors.active : modelData.occupied
-                ? Theme.colors.inactive : "transparent"
-            topLeftRadius: modelData.neighbor.previous ? 0 : cornerRadius
-            bottomRightRadius: modelData.neighbor.following ? 0 : cornerRadius
-            topRightRadius: isHorizontal
-                ? (modelData.neighbor.following ? 0 : cornerRadius)
-                : (modelData.neighbor.previous ? 0 : cornerRadius)
-            bottomLeftRadius: isHorizontal
-                ? (modelData.neighbor.previous ? 0 : cornerRadius)
-                : (modelData.neighbor.following ? 0 : cornerRadius)
 
+            color: isFocused
+                ? Theme.colors.active : isOccupied
+                ? Theme.colors.inactive : "transparent"
+
+            topLeftRadius: neighbor.previous ? 0 : cornerRadius
+            bottomRightRadius: neighbor.following ? 0 : cornerRadius
+            topRightRadius: isHorizontal
+                ? (neighbor.following ? 0 : cornerRadius)
+                : (neighbor.previous ? 0 : cornerRadius)
+            bottomLeftRadius: isHorizontal
+                ? (neighbor.previous ? 0 : cornerRadius)
+                : (neighbor.following ? 0 : cornerRadius)
+
+            property int idWorkspace: modelData + 1
+            property var workspace: SWorkspace.getWorkspace(idWorkspace)
+            property var neighbor: SWorkspace.hasNeighbor(idWorkspace)
+            property bool isOccupied: SWorkspace.getOccupied(workspace)
+            property bool isFocused: workspace?.focused ?? false
 
             TextStyledH {
                 anchors.centerIn: parent
-                text: modelData.focused ? "●" 
-                    : modelData.occupied ? "◉"
+                isHorizontal: root.isHorizontal
+                text: isFocused ? "●" 
+                    : isOccupied ? "◉"
                     : "○"
             }
 
-            TapHandler {onTapped: SWorkspace.moveToWorkspace(modelData)}
+            TapHandler {onTapped: SWorkspace.moveToWorkspace(idWorkspace, isFocused)}
+
+            Behavior on topLeftRadius{NumberAnim{}}
+            Behavior on bottomRightRadius{NumberAnim{}}
+            Behavior on topRightRadius{NumberAnim{}}
+            Behavior on bottomLeftRadius{NumberAnim{}}
         }
+
+        Behavior on width{NumberAnim{}}
     }
-
-
 }

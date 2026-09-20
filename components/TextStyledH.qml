@@ -4,5 +4,9 @@ import qs.components
 import qs.components.animations
 
 TextStyled {
-    font.pixelSize: parent.height - Theme.padding.small
+    font.pixelSize: isHorizontal
+        ? parent.height - Theme.padding.small
+        : parent.width - Theme.padding.small
+
+    property bool isHorizontal: true
 }
