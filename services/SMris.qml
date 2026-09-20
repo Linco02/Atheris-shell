@@ -7,8 +7,8 @@ import qs.config
 import QtQuick
 
 Singleton {
-    property var player: Mpris.players.values
-    property bool playerExist: player.length > 0 ? true : false
+    property var player: Mpris.players.values ?? []
+    property bool playerExist: player?.length > 0
     property bool isplayerActivePlay: checkIsPlaying(playerActive)
     property var playerActive: {
         if (!playerExist)

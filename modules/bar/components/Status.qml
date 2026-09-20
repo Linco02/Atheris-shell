@@ -42,7 +42,7 @@ RectForeground {
             text: modelData
             isHorizontal: root.isHorizontal
             width: root.isHorizontal ? implicitWidth : statusContainer.width
-            height: root.isHorizontal ? statusContainer.height : implicitHeight
+            height: root.isHorizontal ? statusContainer.height : statusContainer.width
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }

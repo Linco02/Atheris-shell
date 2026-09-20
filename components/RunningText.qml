@@ -19,7 +19,7 @@ Item {
 
     onTextChanged: {
         anim.stop()
-        firstText.x = textLength * 2
+        firstText.x = 0
         if (runText)
             anim.start()
     }

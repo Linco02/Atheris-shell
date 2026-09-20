@@ -11,7 +11,7 @@ Singleton {
 
     property int workspaceNumber: 5
 
-    property string fontFamily: "FiraCode Nerd Font"
+    property string fontFamily: "FiraCode Nerd Font Propo"
     property int fontSize: 14
 
     readonly property var theme: STheme.theme

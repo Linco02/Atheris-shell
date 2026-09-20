@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import qs.services
 
 Singleton {
@@ -8,31 +9,21 @@ Singleton {
     property string description: "Завантаження"
     property string weatherIcom: ""
 
-    function fetchWeather() {
-        let xhr = new XMLHttpRequest();
+    function parceWeather(response) {
+        let data = JSON.parse(response.content)
+        let current = data.current_condition[0]
 
-        xhr.open("GET", "https://wttr.in/Cherkasy?format=j1"); 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    let data = JSON.parse(xhr.responseText)
-                    let current = data.current_condition[0]
-
-                    temp = current.temp_C
-                    description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
-                    const icon = getWeatherIcon(current.weatherDesc[0].value)
-                    weatherIcom = SIcon.getIcon(icon)
-                }
-            }
-        }
-        xhr.send()
+        temp = current.temp_C
+        description = current.lang_uk ? current.lang_uk[0].value : current.weatherDesc[0].value
+        weatherIcom = SIcon.getIcon(getWeatherIcon(current.weatherDesc[0].value))
     }
 
     Timer {
         interval: 1800000; running: true; repeat: true
         triggeredOnStart: true
-        onTriggered: { fetchWeather() }
+        onTriggered: {SNetwork.sendRequest("https://wttr.in/Cherkasy?format=j1", parceWeather)}
     }
+
 
     function getWeatherIcon(iconName) {
         const desc = iconName.toLowerCase();
