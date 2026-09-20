@@ -41,8 +41,8 @@ RectForeground {
         delegate: TextStyledH {
             text: modelData
             isHorizontal: root.isHorizontal
-            width: root.isHorizontal ? implicitWidth : statusContainer.width
-            height: root.isHorizontal ? statusContainer.height : statusContainer.width
+            width: root.isHorizontal ? implicitWidth + Theme.stock.small : statusContainer.width
+            height: root.isHorizontal ? statusContainer.height : statusContainer.width + Theme.stock.small
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }

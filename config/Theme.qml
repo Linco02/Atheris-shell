@@ -7,7 +7,7 @@ import qs.services
 Singleton {
     property real opacity: 0.8
 
-    property real barWidth: 34
+    property real barWidth: 36
 
     property int workspaceNumber: 5
 
