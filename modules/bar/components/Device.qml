@@ -6,37 +6,76 @@ import qs.components
 import qs.components.shapes
 import qs.components.containers
 
-Item {
+RectForeground {
     id: root
-    height: !isHorizontal ? deviceContainer.height: Theme.barWidth
-    width: deviceContainer.width
+    height: isHorizontal ? barWidth - Theme.stock.small: deviceContainer.height + Theme.stock.small
+    width: isHorizontal ? deviceContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 
-    RowStyled {
+    property bool isHorizontal: true
+    property int barWidth: Theme.barWidth
+
+    ListViewMutable {
         id: deviceContainer
+        anchors.centerIn: parent
+        isHorizontal: root.isHorizontal
+        height: isHorizontal ? root.height : contentHeight
+        width: isHorizontal ? contentWidth : root.width
+        spacing: Theme.spacing.normal
 
-        Repeater {
-            model: SBluetooth.connectedDevices
+        model: SBluetooth.connectedDevices
+        delegate: GridRotable {
+            isHorizontal: root.isHorizontal
+            spacing: 0
+            count: 2
 
-            delegate: RectForeground {
-                height: root.height; width: deviceContainer.width
-                visible: true
+            Item {
+                height: root.isHorizontal ? root.height : root.width
+                width: height
 
-                RowStyled {
-                    id: deviceContainer
+                IconImage {
                     anchors.centerIn: parent
-                    leftPadding: Theme.padding.small; rightPadding: Theme.padding.normal
-
-                    IconImage {
-                        source: SIcon.getIcon(modelData.icon)
-                        implicitSize: root.height - Theme.padding.small
-                    }
-
-                    TextStyled {
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: Math.floor(modelData.battery * 100).toString() + "%"
-                    }
+                    source: SIcon.getIcon(modelData.icon)
+                    implicitSize: parent.height - Theme.padding.small
                 }
+            }
+
+            TextStyledH {
+                text: Math.floor(modelData.battery * 100) + (isHorizontal ? "%" : "")
+                isHorizontal: root.isHorizontal
+                height: root.isHorizontal ? deviceContainer.height : implicitHeight
+                width: root.isHorizontal ? implicitWidth : deviceContainer.width
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
         }
     }
+
+    // RowStyled {
+    //     id: deviceContainer
+
+    //     Repeater {
+    //         model: SBluetooth.connectedDevices
+
+    //         delegate: RectForeground {
+    //             height: root.height; width: deviceContainer.width
+    //             visible: true
+
+    //             RowStyled {
+    //                 id: deviceContainer
+    //                 anchors.centerIn: parent
+    //                 leftPadding: Theme.padding.small; rightPadding: Theme.padding.normal
+
+    //                 IconImage {
+    //                     source: SIcon.getIcon(modelData.icon)
+    //                     implicitSize: root.height - Theme.padding.small
+    //                 }
+
+    //                 TextStyled {
+    //                     anchors.verticalCenter: parent.verticalCenter
+    //                     text: Math.floor(modelData.battery * 100).toString() + "%"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }

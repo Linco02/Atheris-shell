@@ -7,36 +7,31 @@ import qs.services
 
 RectForeground {
     id: root
-    height: !isHorizontal ? clockContainer.height + Theme.padding.normal * 2: Theme.barWidth
-    width: isHorizontal ? clockContainer.width + Theme.padding.normal * 2 : Theme.barWidth
+    height: isHorizontal ? barWidth - Theme.stock.small : clockContainer.height + Theme.stock.small
+    width: isHorizontal ? clockContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 
+    property int barWidth: Theme.barWidth
     property bool isHorizontal: true
+    property var cloclList: isHorizontal
+        ? [STime.hour, ":", STime.minute]
+        : [STime.hour, STime.minute]
 
-    GridRotable {
+    ListViewMutable {
         id: clockContainer
         anchors.centerIn: parent
-        count: 3
+        height: isHorizontal ? parent.height : contentHeight
+        width: isHorizontal ? contentWidth : parent.width
         isHorizontal: root.isHorizontal
 
-        TextClock {
-            id: clock
-            text: STime.hour
+        model: cloclList
+        delegate: TextStyledH {
+            text: modelData
+            isHorizontal: root.isHorizontal
+            width: root.isHorizontal ? implicitWidth : clockContainer.width
+            height: root.isHorizontal ? clockContainer.height : implicitHeight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
-
-        TextClock {
-            visible: isHorizontal
-            text: ":"
-        }
-
-        TextClock {
-            text: STime.minute
-        }
-    }
-
-    component TextClock: TextStyled {
-        // height: !isHorizontal ? Theme.barWidth : width
-        // width: isHorizontal ? Theme.barWidth : height
-        fontSize: Theme.barWidth - Theme.padding.small * 2
     }
 
     TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "dash")}}

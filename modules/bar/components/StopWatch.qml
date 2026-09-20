@@ -1,15 +1,37 @@
-// import QtQuick
+import QtQuick
 import qs.components
 import qs.components.shapes
+import qs.components.containers
 import qs.config
 import qs.services
 
 RectForeground {
-    width: timer.width + Theme.padding.large
-    
-    TextStyledH {
-        id: timer
+    id: root
+    visible: STime.stopWatchCount > 0
+    height: isHorizontal ? barWidth - Theme.stock.small : clockContainer.height + Theme.stock.small
+    width: isHorizontal ? clockContainer.width + Theme.stock.small : barWidth - Theme.stock.small
+
+    property int barWidth: Theme.barWidth
+    property bool isHorizontal: true
+    property var cloclList: isHorizontal
+        ? STime.stopWatchTime
+        : [STime.stopWatchMinutes, STime.stopWatchSeconds]
+
+    ListViewMutable {
+        id: clockContainer
         anchors.centerIn: parent
-        text: " " + STime.stopWatchTime + " "
+        height: isHorizontal ? parent.height : contentHeight
+        width: isHorizontal ? contentWidth : parent.width
+        isHorizontal: root.isHorizontal
+
+        model: cloclList
+        delegate: TextStyledH {
+            text: modelData
+            isHorizontal: root.isHorizontal
+            width: root.isHorizontal ? implicitWidth : clockContainer.width
+            height: root.isHorizontal ? clockContainer.height : implicitHeight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
     }
 }

@@ -5,7 +5,7 @@ import qs.themes
 import qs.services
 
 Singleton {
-    property real opacity: 0.99
+    property real opacity: 0.8
 
     property real barWidth: 34
 

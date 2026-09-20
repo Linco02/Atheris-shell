@@ -1,12 +1,12 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import qs.config
 import qs.services
+import qs.components
 import qs.components.containers
 import "./components"
 
-import qs.components
 
 PanelWindow {
     id: root
@@ -21,7 +21,7 @@ PanelWindow {
     focusable: UIState.isAtherisCenterOpen || UIState.isAuthenficatorOpen
     color: Theme.colors.surface
 
-    property string barPosition: Settings.barPosition || "top"
+    property string barPosition: Settings.barPosition ?? "top"
     property bool isHorizontal: (barPosition === "top" || barPosition === "bottom")
     property int horizontalMargine: isHorizontal ? Theme.margine.large : 0
     property int verticalMargine: !isHorizontal ? Theme.margine.large : 0
@@ -39,32 +39,24 @@ PanelWindow {
         Taskbar {isHorizontal: root.isHorizontal}
     }
 
-    GridRotable {
+    BarGrid {
         anchors.centerIn: parent
-        isHorizontal: root.isHorizontal
 
         Clock {isHorizontal: root.isHorizontal}
-        // Loader {
-        //     active: STime.stopWatchCount > 0
-        //     height: STime.stopWatchCount > 0
-        //         ? parent.height
-        //         : 0
-        //     sourceComponent: StopWatch {}
-        // }
+        StopWatch {isHorizontal: root.isHorizontal}
         // Music {isHorizontal: root.isHorizontal}
-        // Device {isHorizontal: root.isHorizontal}
+        Device {isHorizontal: root.isHorizontal}
     }
 
-    GridRotable {
+    BarGrid {
         anchors {
             bottom: parent.bottom
             right: parent.right
             bottomMargin: verticalMargine
             rightMargin: horizontalMargine
         }
-        isHorizontal: root.isHorizontal
 
-        // Status {isHorizontal: root.isHorizontal}
+        Status {isHorizontal: root.isHorizontal}
     }
 
     component BarGrid: GridRotable {

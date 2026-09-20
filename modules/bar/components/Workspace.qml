@@ -16,13 +16,12 @@ RectForeground {
     property int barWidth: Theme.barWidth
     property int count: SWorkspace.existingQuantityWorkspaces
 
-    ListView {
+    ListViewMutable {
         id: workspaceContainer
         anchors.centerIn: parent
+        isHorizontal: root.isHorizontal
         width: isHorizontal ? count * (barWidth * 1.5) : root.width
         height: isHorizontal ? root.height : count * (barWidth * 1.5)
-        orientation: isHorizontal ? ListView.Horizontal : ListView.Vertical
-        interactive: false
 
         model: SWorkspace.existingQuantityWorkspaces
 

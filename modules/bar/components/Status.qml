@@ -8,38 +8,44 @@ import qs.services
 
 RectForeground {
     id: root
-    width: statusContainer.width
+    height: isHorizontal ? barWidth - Theme.stock.small : statusContainer.height + Theme.stock.small
+    width: isHorizontal ?  statusContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 
-    RowStyled {
+    property bool isHorizontal: true
+    property int barWidth: Theme.barWidth
+
+    ListViewMutable {
         id: statusContainer
-        height: parent.height
-        leftPadding: Theme.padding.normal; rightPadding: Theme.padding.normal
+        anchors.centerIn: parent
+        isHorizontal: root.isHorizontal
+        height: isHorizontal ? root.height : contentHeight
+        width: isHorizontal ? contentWidth : root.width
+        spacing: Theme.spacing.normal
 
-        TextOwn {text: SPipewire.iconVolume}
+        model: [
+            SPipewire.iconVolume,
 
-        Loader {
-            active: SUPower.displayDevice.isLaptopBattery
-            sourceComponent: TextOwn {
-                text: SUPower.batteryIcon
-            }
+            SUPower?.displayDevice?.isLaptopBattery ? SUPower.batteryIcon : null,
+
+            SBluetooth?.isBluetoothOn ? "󰂯" : "󰂲",
+
+            SNetwork.getNerdIcon(SNetwork.currentNetwork),
+
+            SUPower?.power?.hasPerformanceProfile
+                ? (Icon.powerProfilesIcon.find(p => p.label === SUPower?.powerProfile) ?? {icon: ""}).icon
+                : null,
+            
+            SLanguage.currentLayoutName
+        ].filter(Boolean)
+
+        delegate: TextStyledH {
+            text: modelData
+            isHorizontal: root.isHorizontal
+            width: root.isHorizontal ? implicitWidth : statusContainer.width
+            height: root.isHorizontal ? statusContainer.height : implicitHeight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
         }
-
-        TextOwn {text: SBluetooth?.isBluetoothOn ? "󰂯" : "󰂲"}
-        
-        TextOwn {text: SNetwork.getNerdIcon(SNetwork.currentNetwork)}
-
-        Loader {
-            active: SUPower?.power.hasPerformanceProfile
-            sourceComponent: TextOwn {
-                text: (Icon.powerProfilesIcon.find(p => p.label === SUPower?.powerProfile) ?? {icon: ""}).icon
-            }
-        }
-        
-        TextOwn {text: SLanguage.currentLayoutName}
-    }
-
-    component TextOwn: TextStyledH {
-        height: root.height; width: height
     }
 
     TapHandler {onTapped: SWManager.controlCenter("main")}

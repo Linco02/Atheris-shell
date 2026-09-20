@@ -3,15 +3,14 @@ import qs.config
 import qs.components
 
 Item {
+    id: root
     height: Theme.barWidth - Theme.stock.small; width: height
 
     TextStyled {
-        id: powerButton
         anchors.centerIn: parent
-        fontSize: Theme.barWidth - Theme.stock.small
+        fontSize: root.height
         text: ""
     }
 
-    HoverHandler {id: hover}
     TapHandler {onTapped: UIState.isPowerOpen = !UIState.isPowerOpen}
 }
