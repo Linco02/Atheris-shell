@@ -10,96 +10,49 @@ import qs.services
 
 RectForeground {
     id: root
-    visible: false
-    width: musicContainer.width
-    state: playerExist ? "open" : "close"
+    height: isHorizontal ? barWidth - Theme.stock.small: musicContainer.height + Theme.stock.small
+    width: isHorizontal ? musicContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 
-    property var playerActive: SMris.playerActive
+    property bool isHorizontal: true
+    property int barWidth: Theme.barWidth
+
     property bool playerExist: SMris.playerExist
     property bool isPlayerPlay: SMris.isplayerActivePlay
+    property var playerActive: SMris.playerActive
 
-    RowStyled {
+    GridRotable {
         id: musicContainer
-        anchors.verticalCenter: parent.verticalCenter
-        leftPadding: Theme.padding.small; rightPadding: Theme.padding.small
+        anchors.centerIn: parent
+        isHorizontal: root.isHorizontal
+        count: 3
 
         IconImage {
-            id: programIcons
-            anchors.verticalCenter: parent.verticalCenter
-            x: Theme.padding.small
-            implicitSize: 16
+            implicitSize: (isHorizontal ? root.height : root.width) - Theme.padding.small
             source: playerExist ? SIcon.getIcon(playerActive.identity) : ""
         }
 
-        Item {
-            id: trackNameContainer
-            height: parent.height
-            width: runningName.textLength < 200 ? runningName.textLength : 200
-            clip: true
-            x: programIcons.width + Theme.padding.small * 2
-
-            RunningText {
-                id: runningName
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width
-                text: playerActive?.trackTitle || "..."
-                runText: isPlayerPlay && textLength >= 200
-            }
+        RunningText {
+            // height: isHorizontal ? root.height - Theme.padding.small : (textLength > 200 ? 200 : textLength)
+            // width: isHorizontal ? (textLength > 200 ? 200 : textLength) : root.width - Theme.padding.small
+            height: isHorizontal ? root.height - Theme.padding.small : textLength
+            width: isHorizontal ? textLength : root.width - Theme.padding.small
+            isHorizontal: root.isHorizontal
+            text: playerActive?.trackTitle ?? "..."
+            // runText: textLength > 200
+            runText: true
+            // clip: true
 
             TapHandler {onTapped: {SWManager.controlAtherisCenter("dashboard", "music")}}
-
             Behavior on width {NumberAnim {}}
+            Behavior on height {NumberAnim {}}
         }
 
         ButtonTransparent {
+            height: (isHorizontal ? root.height : root.width) - Theme.padding.small
+            width: height
             text: isPlayerPlay ? "" : ""
             onClicked: isPlayerPlay ? SMris.pauseMris(playerActive)
                 : SMris.playMris(playerActive)
         }
     }
-
-    states: [
-        State {
-            name: "close"
-            PropertyChanges {
-                target: root
-                visible: false
-                opacity: 0
-                width: 0
-            }
-        },
-        State {
-            name: "open"
-            PropertyChanges {
-                target: root
-                visible: true
-                opacity: 1
-                width: musicContainer.width
-            }
-        }
-    ]
-
-    transitions: [
-        Transition {
-            from: "close"; to: "open"
-            ParallelAnimation {
-                NumberAnim {property: "width"}
-                NumberAnim {property: "opacity"}
-            }
-        },
-        Transition {
-            from: "open"; to: "close"
-            SequentialAnimation {
-                ParallelAnimation {
-                    NumberAnim {property: "width"}
-                    NumberAnim {property: "opacity"}
-                }
-                PropertyAction {
-                    target: root
-                    property: "visible"
-                    value: false
-                }
-            }
-        }
-    ]
 }

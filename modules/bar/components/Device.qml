@@ -8,6 +8,7 @@ import qs.components.containers
 
 RectForeground {
     id: root
+    visible: SBluetooth.connectedDevices.length > 0
     height: isHorizontal ? barWidth - Theme.stock.small: deviceContainer.height + Theme.stock.small
     width: isHorizontal ? deviceContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 
@@ -49,33 +50,4 @@ RectForeground {
             }
         }
     }
-
-    // RowStyled {
-    //     id: deviceContainer
-
-    //     Repeater {
-    //         model: SBluetooth.connectedDevices
-
-    //         delegate: RectForeground {
-    //             height: root.height; width: deviceContainer.width
-    //             visible: true
-
-    //             RowStyled {
-    //                 id: deviceContainer
-    //                 anchors.centerIn: parent
-    //                 leftPadding: Theme.padding.small; rightPadding: Theme.padding.normal
-
-    //                 IconImage {
-    //                     source: SIcon.getIcon(modelData.icon)
-    //                     implicitSize: root.height - Theme.padding.small
-    //                 }
-
-    //                 TextStyled {
-    //                     anchors.verticalCenter: parent.verticalCenter
-    //                     text: Math.floor(modelData.battery * 100).toString() + "%"
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 }

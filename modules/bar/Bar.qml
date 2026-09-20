@@ -44,7 +44,7 @@ PanelWindow {
 
         Clock {isHorizontal: root.isHorizontal}
         StopWatch {isHorizontal: root.isHorizontal}
-        // Music {isHorizontal: root.isHorizontal}
+        Music {isHorizontal: root.isHorizontal}
         Device {isHorizontal: root.isHorizontal}
     }
 
