@@ -10,6 +10,7 @@ import qs.services
 
 RectForeground {
     id: root
+    visible: playerExist
     height: isHorizontal ? barWidth - Theme.stock.small: musicContainer.height + Theme.stock.small
     width: isHorizontal ? musicContainer.width + Theme.stock.small : barWidth - Theme.stock.small
 

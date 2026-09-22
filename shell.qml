@@ -11,6 +11,7 @@ import qs.modules.authenficator
 import qs.modules.atheriscenter
 import qs.modules.controllcenter
 import qs.modules.atherissettings
+import qs.modules.atherisbase
 
 ShellRoot {
     id: root
@@ -66,6 +67,11 @@ ShellRoot {
     Loader {
         active: UIState.isAtherisSettingsOpen
         sourceComponent: AtherisSettings {}
+    }
+
+    Loader {
+        active: UIState.isAtherisBaseOpen
+        sourceComponent: AtherisBase {}
     }
 
     

@@ -22,6 +22,7 @@ Singleton {
     readonly property var spacing: STheme.spacing
     readonly property var radius: STheme.radius
     readonly property var stock: STheme.stock
+    readonly property var unitSize: STheme.unitSize
 
     property int cavaBarsCount: 40
 }

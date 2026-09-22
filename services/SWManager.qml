@@ -38,4 +38,7 @@ Singleton {
         UIState.isAtherisSettingsOpen = true
     }
 
+    function atherisbase() {
+        UIState.isAtherisBaseOpen = !UIState.isAtherisBaseOpen
+    }
 }

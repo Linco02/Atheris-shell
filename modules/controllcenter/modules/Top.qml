@@ -29,6 +29,12 @@ Rect {
 
         ButtonStyled {
             height: parent.height; width: height
+            text: "󰆼"
+            onClicked: SWManager.atherisbase()
+        }
+
+        ButtonStyled {
+            height: parent.height; width: height
             text: ""
             onClicked: SWManager.atherisSettings("general")
         }

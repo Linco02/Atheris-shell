@@ -8,6 +8,7 @@ QtObject {
     property int durations: 0
     property int indents: 0
     property int radius: 0
+    property int unitSize: 16
     
     property QtObject colors: QtObject {
         property color surface: "#191113"

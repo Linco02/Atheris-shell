@@ -8,5 +8,5 @@ ClippingRectangle {
     color: "transparent"
 
     Behavior on color {ColorAnim {}}
-    Behavior on radius {NumberAnim {}}
+    // Behavior on radius {NumberAnim {}}
 }

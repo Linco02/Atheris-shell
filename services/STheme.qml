@@ -47,4 +47,10 @@ Singleton {
         property int normal: theme.useAngledShapes ? 0 : padding.normal * 2
         property int large: theme.useAngledShapes ? 0 : padding.large * 2
     }
+
+    readonly property QtObject unitSize: QtObject {
+        property int small: theme.unitSize
+        property int normal: theme.unitSize * 2
+        property int large: theme.unitSize * 4
+    }
 }

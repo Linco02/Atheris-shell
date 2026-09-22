@@ -18,9 +18,9 @@ Singleton {
     property bool ischeatsheetopen: true
 
     // AtherisSettings
-    property bool isAtherisSettingsOpen: true
+    property bool isAtherisSettingsOpen: false
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
-    property string atherisSettingsModule: "display"
+    property string atherisSettingsModule: "general"
 
     // ControlCenter
     property bool isControlCenterOpen: false
@@ -33,4 +33,7 @@ Singleton {
     property bool isAtherisCenterOpen: false
     property string atherisCenterModule: "dashboard" // "dashboard", "wallpaper", "command"
     property string dashboardModul: "dash" // "dash", "music", "performance"
+
+    // AtherisBase
+    property bool isAtherisBaseOpen: true
 }
