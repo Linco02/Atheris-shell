@@ -14,11 +14,12 @@ Floating {
     onVisibleChanged: {
         if (!visible) {
             UIState.isAtherisBaseOpen = false
-            mainLoader.active = false
+            // mainLoader.active = false
         }
     }
 
     readonly property int unitSize: Theme.unitSize.normal
+    readonly property int margine: Theme.margine.large
 
     RectForeground {
         id: leftMenu
@@ -30,12 +31,13 @@ Floating {
 
         ListView {
             id: navMenu
+            visible: !SDataBase.listBase
             height: parent.height; width: unitSize * 8
             orientation: ListView.Vertical
             interactive: true
             spacing: Theme.spacing.normal
 
-            model: SDataBase.listBase
+            model: SDataBase?.listBase
             delegate: ButtonStyled {
                 height: unitSize; width: parent.width
                 text: modelData
@@ -44,7 +46,7 @@ Floating {
         }
     }
 
-    RectForeground {
+    Rect {
         id: rightMenu
         anchors {
             top: root.top
@@ -62,13 +64,47 @@ Floating {
             interactive: true
             spacing: Theme.spacing.normal
 
-            delegate: TextStyled {
-                text: modelData.key
+            delegate: RectForeground {
+                height: rowContainer.height + margine * 2; width: parent.width
+
+                Row {
+                    id: rowContainer
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        leftMargin: margine
+                    }
+                    spacing: Theme.spacing.large
+
+                    Repeater {
+                        model: modelData
+                            ? Object.keys(modelData)
+                                .filter(i => i.startsWith("image"))
+                                .map(i => modelData[i])
+                            : []
+
+                        delegate: Image {
+                            height: Theme.unitSize.large
+                            width: implicitHeight > implicitWidth ? height / 16 * 9 : height / 9 * 16
+                            source: modelData
+                        }
+                    }
+
+                    Column {
+                        Repeater {
+                            model: modelData
+                                ? Object.keys(modelData)
+                                    .filter(i => i.startsWith("label") || i.startsWith("state"))
+                                    .map(i => modelData[i])
+                                : []
+                            
+                            TextStyled {
+                                text: modelData
+                            }
+                        }
+                    }
+                }
             }
         }
-    }
-
-    Component.onCompleted: {
-        const db = SDataBase.d
     }
 }

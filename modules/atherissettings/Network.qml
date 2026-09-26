@@ -12,6 +12,8 @@ ColumnStyled {
     id: root
     anchors.fill: parent
 
+    readonly property int unitSize: Theme.unitSize.normal
+
     RectForeground {
         id: settingsContainer
         height: settingsGrid.height; width: parent.width
@@ -28,6 +30,8 @@ ColumnStyled {
                 text: STranslations.tr("wifi")
                 isActive: SNetwork?.isWifiOn
                 onClicked: SNetwork.toggleWifi()
+                height: unitSize
+                width: parent.width - Theme.margine.large * 2
             }
         }
     }

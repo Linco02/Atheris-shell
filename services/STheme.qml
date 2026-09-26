@@ -51,6 +51,6 @@ Singleton {
     readonly property QtObject unitSize: QtObject {
         property int small: theme.unitSize
         property int normal: theme.unitSize * 2
-        property int large: theme.unitSize * 4
+        property int large: theme.unitSize * 6
     }
 }

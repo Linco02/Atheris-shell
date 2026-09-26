@@ -8,11 +8,13 @@ import qs.components.controls
 import qs.services
 import qs.config
 
-ColumnStyled {
+Column {
     id: root
     anchors.fill: parent
+    spacing: Theme.spacing.large
 
     property var adapter: SBluetooth?.adapter
+    readonly property int unitSize: Theme.unitSize.normal
 
     TextStyled {leftPadding: Theme.padding.large; text: adapter?.name || ""}
 
@@ -38,6 +40,8 @@ ColumnStyled {
                     text: STranslations.tr(modelData.label)
                     isActive: SBluetooth.adapter[modelData.settingKey]
                     onClicked: SBluetooth[modelData.actionName]()
+                    height: unitSize
+                    width: parent.width - Theme.margine.large * 2
                 }
             }
         }

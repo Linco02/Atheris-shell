@@ -18,21 +18,25 @@ Floating {
         }
     }
 
+    readonly property int unitSize: Theme.unitSize.normal
+    readonly property int margine: Theme.margine.large
+
     RectForeground {
         id: settingsChoser
         anchors {
             left: parent.left
-            leftMargin: Theme.padding.large
+            leftMargin: margine
         }
-        height: root.height - Theme.padding.large * 2; width: 200
+        height: root.height - margine * 2; width: unitSize * 8
 
-        ColumnStyled {
+        Column {
             anchors.fill: parent
+            spacing: Theme.spacing.large
             
             Repeater {
                 model: UIState.atherisSettingsModules
                 delegate: ButtonStyled {
-                    height: 20; width: parent.width
+                    height: unitSize; width: parent.width
                     text: modelData
                     onClicked: UIState.atherisSettingsModule = modelData
                     isActive: UIState.atherisSettingsModule === modelData
@@ -42,14 +46,16 @@ Floating {
     }
 
     ScrollStyled {
-        anchors.left: settingsChoser.right
+        anchors {
+            right: parent.right
+            rightMargin: margine
+        }
         height: root.height - Theme.padding.large * 2
-        width: root.width - settingsChoser.width
+        width: root.width - settingsChoser.width - margine * 3
 
         Loader {
             id: mainLoader
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: parent.height; width: parent.width * 0.9
+            anchors.fill: parent
 
             active: UIState.isAtherisSettingsOpen
             source: {

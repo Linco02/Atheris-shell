@@ -15,6 +15,8 @@ ColumnStyled {
     id: root
     anchors.fill: parent
 
+    readonly property int unitSize: Theme.unitSize.normal
+
     RowStyled {
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -63,12 +65,16 @@ ColumnStyled {
                 // onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
                 isActive: Settings.isWallpaperOn
                 onClicked: Settings.isWallpaperOn = !Settings.isWallpaperOn
+                height: unitSize
+                width: parent.width - Theme.margine.large * 2
             }
             ButtonLabelToggle {
                 text: "Випадкові шпалери при увімкнені"
                 // text: STranslations.tr(modelData.label)
                 // isActive: Settings[modelData.settingKey]
                 // onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+                height: unitSize
+                width: parent.width - Theme.margine.large * 2
             }
         }
     }
@@ -108,6 +114,8 @@ ColumnStyled {
                     text: modelData
                     isActive: STheme.currentTheme === modelData
                     onClicked: STheme.currentTheme = modelData
+                    height: unitSize
+                    width: parent.width - Theme.margine.large * 2
                 }
             }
         }
@@ -139,6 +147,8 @@ ColumnStyled {
                     text: STranslations.tr(modelData.label)
                     isActive: Settings[modelData.settingKey]
                     onClicked: Settings[modelData.settingKey] = !Settings[modelData.settingKey]
+                    height: unitSize
+                    width: parent.width - Theme.margine.large * 2
                 }
             }
         }

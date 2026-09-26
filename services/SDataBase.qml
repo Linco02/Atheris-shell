@@ -1,8 +1,9 @@
 pragma Singleton
-import Quickshell
-import Quickshell.Io
+import Qt.labs.folderlistmodel
 import QtQuick
 import QtQuick.LocalStorage
+import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
@@ -19,7 +20,7 @@ Singleton {
         const columnsSql = args.map(pair => pair.join(" ")).join(", ");
 
         db.transaction(function(tx) {
-            tx.executeSql(`CREATE TABLE IF NOT EXISTS settings (${columnsSql})`);
+            tx.executeSql(`CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY AUTOINCREMENT ${columnsSql})`);
         });
     }
 
@@ -74,7 +75,25 @@ Singleton {
         return result
     }
 
+    function fetchData(data) {
+        const result = Object.keys(testData)
+            .filter(d => d.startsWith("image"))
+
+        console.log(testData[0].image0)
+        return []
+    }
+
+    FolderListModel {
+        folder: "file:///home/linco02/.local/share/quickshell/QML/OfflineStorage/Databases/"
+        nameFilters: "*/.ini"
+
+        function updateFiles() {
+            dbUpdate.running = true
+        }
+    }
+
     Process {
+        id: dbUpdate
         running: true
         command: [
             "sh", "-c",
@@ -88,53 +107,6 @@ Singleton {
         }
     }
 
-    // function setValue(key, value) {
-    //     try {
-    //         var db = getDb();
-    //         db.transaction(function(tx) {
-    //             tx.executeSql('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)', [key, value]);
-    //         });
-    //     } catch (err) {
-    //         console.error("SDataBase error in setValue:", err);
-    //     }
-    // }
-
-    // function getValue(key, callback) {
-    //     try {
-    //         var freeDb = getDb();
-    //         freeDb.readTransaction(function(tx) {
-    //             var rs = tx.executeSql('SELECT value FROM settings WHERE key = ?', [key]);
-    //             if (rs.rows.length > 0) {
-    //                 callback(rs.rows.item(0).value);
-    //             } else {
-    //                 callback(null);
-    //             }
-    //         });
-    //     } catch (err) {
-    //         console.error("SDataBase error in getValue:", err);
-    //         callback(null);
-    //     }
-    // }
-
     property var baseDataTest: [["name", "Text"], ["url", "Text"], ["page", "Text"]]
     property var baseDataTestValue: [["name", "Didi"], ["url", "git.com"], ["page", "122"]]
-
-    Component.onCompleted: {
-        // console.log(LocalStorage.openDatabaseSync())
-        // setValue("BaseTest1", baseDataTestValue)
-        // createValue("BaseTest1", [
-        //     ["name", "Pith"],
-        //     ["url", "https://pith.com"],
-        //     ["page", "23"]
-        // ]);
-        // createDb("BaseTest1", baseDataTest)
-
-        // getValues("BaseTest1", "name")
-
-        // getDb("Bases")
-        // setValue("theme", "dark");
-        // getValue("theme", function(val) {
-        //     console.log("Збережена тема:", val);
-        // });
-    }
 }

@@ -15,10 +15,10 @@ Singleton {
     property bool isWallpaperChange: false
 
     // CheatSheet
-    property bool ischeatsheetopen: true
+    property bool ischeatsheetopen: false
 
     // AtherisSettings
-    property bool isAtherisSettingsOpen: false
+    property bool isAtherisSettingsOpen: true
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
     property string atherisSettingsModule: "general"
 
@@ -35,5 +35,5 @@ Singleton {
     property string dashboardModul: "dash" // "dash", "music", "performance"
 
     // AtherisBase
-    property bool isAtherisBaseOpen: true
+    property bool isAtherisBaseOpen: false
 }
