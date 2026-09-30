@@ -36,4 +36,7 @@ Singleton {
 
     // AtherisBase
     property bool isAtherisBaseOpen: false
+
+    // AtherisBase
+    property bool isAtherisTranslateOpen: false
 }

@@ -12,6 +12,7 @@ import qs.modules.atheriscenter
 import qs.modules.controllcenter
 import qs.modules.atherissettings
 import qs.modules.atherisbase
+import qs.modules.translation
 
 ShellRoot {
     id: root
@@ -72,6 +73,11 @@ ShellRoot {
     Loader {
         active: UIState.isAtherisBaseOpen
         sourceComponent: AtherisBase {}
+    }
+
+    Loader {
+        active: UIState.isAtherisTranslateOpen
+        sourceComponent: Translation {}
     }
 
     
