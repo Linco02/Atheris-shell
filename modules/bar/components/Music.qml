@@ -29,7 +29,7 @@ RectForeground {
 
         IconImage {
             implicitSize: (isHorizontal ? root.height : root.width) - Theme.padding.small
-            source: playerExist ? SIcon.getIcon(playerActive.identity) : ""
+            source: playerExist ? SIcon.getIcon(playerActive?.identity) : ""
         }
 
         RunningText {

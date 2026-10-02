@@ -18,7 +18,7 @@ Singleton {
     property bool ischeatsheetopen: false
 
     // AtherisSettings
-    property bool isAtherisSettingsOpen: true
+    property bool isAtherisSettingsOpen: false
     property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
     property string atherisSettingsModule: "general"
 
@@ -35,7 +35,7 @@ Singleton {
     property string dashboardModul: "dash" // "dash", "music", "performance"
 
     // AtherisBase
-    property bool isAtherisBaseOpen: false
+    property bool isAtherisBaseOpen: true
 
     // AtherisBase
     property bool isAtherisTranslateOpen: false

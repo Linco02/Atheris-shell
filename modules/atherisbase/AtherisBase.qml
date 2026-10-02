@@ -19,7 +19,9 @@ Floating {
     }
 
     readonly property int unitSize: Theme.unitSize.normal
+    readonly property int unitSizeL: Theme.unitSize.large
     readonly property int margine: Theme.margine.large
+    property string mode: "showbase" // showbase, addBase, redBase
 
     RectForeground {
         id: leftMenu
@@ -41,8 +43,15 @@ Floating {
             delegate: ButtonStyled {
                 height: unitSize; width: parent.width
                 text: modelData
-                onClicked: baseMenu.model = SDataBase.getAllValues(modelData)
+                // onClicked: baseMenu.model = SDataBase.getAllValues(modelData)
             }
+        }
+
+        ButtonStyled {
+            anchors.bottom: parent.bottom
+            height: unitSize; width: unitSize * 8
+            text: "AddBase"
+            // onClicked:
         }
     }
 
@@ -51,14 +60,106 @@ Floating {
         anchors {
             top: root.top
             left: leftMenu.right
-            leftMargin: Theme.margine.large
+            leftMargin: margine
             right: root.right
-            rightMargin: Theme.margine.large
+            rightMargin: margine
         }
-        height: leftMenu.height; width: root.width - navMenu.width - Theme.margine.large * 3
+        height: leftMenu.height; width: root.width - navMenu.width - margine * 3
+
+        Loader {
+            sourceComponent: addBase
+        }
+
+
+    }
+
+    Component {
+        id: addBase
+
+        Column {
+            width: rightMenu.width
+            spacing: Theme.spacing.large
+
+            RectForeground {
+                // id: baseDataCreateContainer
+                height: baseDataCreate.height + margine * 2
+                width: rightMenu.width
+
+                ListView {
+                    id: baseDataCreate
+                    anchors.centerIn: parent
+                    height: unitSize * 3 + margine
+                    width: parent.width - margine * 2
+                    spacing: Theme.spacing.normal
+
+                    model: [
+                        {"label": "Кількість картинок"},
+                        {"label": "Кількість даних"},
+                        {"label": "Кількість станів"}
+                    ]
+
+                    delegate: LabelTextInput {
+                        height: unitSize; width: parent.width
+                        margine: margine
+                        text: modelData.label
+                    }
+                }
+
+
+                // Column {
+                //     id: baseDataCreate
+                //     anchors.centerIn: parent
+                //     width: parent.width - margine * 2
+                //     spacing: Theme.spacing.normal
+
+
+                //     LabelTextInput {
+                //         text: "test"
+                //         height: unitSize; width: parent.width
+                //         margine: margine
+                //     }
+
+                //     LabelTextInput {
+                //         text: "test"
+                //         height: unitSize; width: parent.width
+                //         margine: margine
+                //     }
+                // }
+            }
+
+            RectForeground {
+                height: baseBlock.height + margine * 2; width: parent.width
+
+                Row {
+                    id: baseBlock
+                    anchors {
+                        left: parent.left
+                        leftMargin: margine
+                        top: parent.top
+                        topMargin: margine
+                    }
+                    spacing: Theme.spacing.large
+
+                    RectInactive {
+                        height: unitSizeL; width: height * 9 / 16
+                    }
+
+                    Column {
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        TextStyled {text: "label"}
+                        TextStyled {text: "state"}
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: baseMenu
 
         ListView {
-            id: baseMenu
+            // id: baseMenu
             anchors.fill: parent
             orientation: ListView.Vertical
             interactive: true
