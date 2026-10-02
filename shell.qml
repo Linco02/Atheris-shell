@@ -6,7 +6,7 @@ import qs.modules.bar
 import qs.modules.power
 import qs.modules.session
 import qs.modules.background
-// import qs.modules.сheatsheet
+import qs.modules.cheatsheet
 import qs.modules.authenficator
 import qs.modules.atheriscenter
 import qs.modules.controllcenter
@@ -40,6 +40,11 @@ ShellRoot {
                     // active: UIState.isPowerOpen
                     sourceComponent: Authenficator {panel: bar}
                 }
+
+                Loader {
+                    // active: UIState.ischeatsheetopen
+                    sourceComponent: CheatSheet {panel: bar}
+                }
             }
         }
     }
@@ -60,10 +65,7 @@ ShellRoot {
         component: Lock {}
     }
     
-    // Loader {
-    //     active: UIState.ischeatsheetopen
-    //     component: CheatSheet {}
-    // }
+
 
     Loader {
         active: UIState.isAtherisSettingsOpen
