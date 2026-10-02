@@ -10,9 +10,9 @@ import qs.modules.background
 import qs.modules.authenficator
 import qs.modules.atheriscenter
 import qs.modules.controllcenter
-import qs.modules.atherissettings
-import qs.modules.atherisbase
 import qs.modules.translation
+import qs.applications.atherissettings
+import qs.applications.atherisbase
 
 ShellRoot {
     id: root
