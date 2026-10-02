@@ -23,7 +23,7 @@ RectForeground {
         width: isHorizontal ? count * (barWidth * 1.5) : root.width
         height: isHorizontal ? root.height : count * (barWidth * 1.5)
 
-        model: SWorkspace.existingQuantityWorkspaces
+        model: SWorkspace.workspacesTest
 
         delegate: Rect {
             height: isHorizontal ? barWidth - Theme.stock.small : barWidth * 1.5
@@ -34,37 +34,94 @@ RectForeground {
                 ? Theme.colors.active : isOccupied
                 ? Theme.colors.inactive : "transparent"
 
-            topLeftRadius: neighbor.previous ? 0 : cornerRadius
-            bottomRightRadius: neighbor.following ? 0 : cornerRadius
-            topRightRadius: isHorizontal
-                ? (neighbor.following ? 0 : cornerRadius)
-                : (neighbor.previous ? 0 : cornerRadius)
-            bottomLeftRadius: isHorizontal
-                ? (neighbor.previous ? 0 : cornerRadius)
-                : (neighbor.following ? 0 : cornerRadius)
 
-            property int idWorkspace: modelData + 1
-            property var workspace: SWorkspace.getWorkspace(idWorkspace)
-            property var neighbor: SWorkspace.hasNeighbor(idWorkspace)
-            property bool isOccupied: SWorkspace.getOccupied(workspace)
-            property bool isFocused: workspace?.focused ?? false
+            // required property int wsId
+            // required property string wsName
+            required property bool isOccupied
+            required property bool isFocused
+            // topLeftRadius: neighbor.previous ? 0 : cornerRadius
+            // bottomRightRadius: neighbor.following ? 0 : cornerRadius
+            // topRightRadius: isHorizontal
+            //     ? (neighbor.following ? 0 : cornerRadius)
+            //     : (neighbor.previous ? 0 : cornerRadius)
+            // bottomLeftRadius: isHorizontal
+            //     ? (neighbor.previous ? 0 : cornerRadius)
+            //     : (neighbor.following ? 0 : cornerRadius)
 
-            TextStyledH {
-                anchors.centerIn: parent
-                isHorizontal: root.isHorizontal
-                text: isFocused ? "●" 
-                    : isOccupied ? "◉"
-                    : "○"
-            }
+            // property int idWorkspace: modelData + 1
+            // property var workspace: SWorkspace.getWorkspace(idWorkspace)
+            // property var neighbor: SWorkspace.hasNeighbor(idWorkspace)
+            // property bool isOccupied: SWorkspace.getOccupied(workspace)
+            // property bool isFocused: workspace?.focused ?? false
 
-            TapHandler {onTapped: SWorkspace.moveToWorkspace(idWorkspace, isFocused)}
+            // TextStyledH {
+            //     anchors.centerIn: parent
+            //     isHorizontal: root.isHorizontal
+            //     text: isFocused ? "●" 
+            //         : isOccupied ? "◉"
+            //         : "○"
+            // }
 
-            Behavior on topLeftRadius{NumberAnim{}}
-            Behavior on bottomRightRadius{NumberAnim{}}
-            Behavior on topRightRadius{NumberAnim{}}
-            Behavior on bottomLeftRadius{NumberAnim{}}
+            // TapHandler {onTapped: SWorkspace.moveToWorkspace(idWorkspace, isFocused)}
+
+            // Behavior on topLeftRadius{NumberAnim{}}
+            // Behavior on bottomRightRadius{NumberAnim{}}
+            // Behavior on topRightRadius{NumberAnim{}}
+            // Behavior on bottomLeftRadius{NumberAnim{}}
         }
 
         Behavior on width{NumberAnim{}}
     }
+
+    // ListViewMutable {
+    //     id: workspaceContainer
+    //     anchors.centerIn: parent
+    //     isHorizontal: root.isHorizontal
+    //     width: isHorizontal ? count * (barWidth * 1.5) : root.width
+    //     height: isHorizontal ? root.height : count * (barWidth * 1.5)
+
+    //     model: SWorkspace.existingQuantityWorkspaces
+
+    //     delegate: Rect {
+    //         height: isHorizontal ? barWidth - Theme.stock.small : barWidth * 1.5
+    //         width: isHorizontal ? barWidth * 1.5 : barWidth - Theme.stock.small
+    //         radius: 0
+
+    //         color: isFocused
+    //             ? Theme.colors.active : isOccupied
+    //             ? Theme.colors.inactive : "transparent"
+
+    //         topLeftRadius: neighbor.previous ? 0 : cornerRadius
+    //         bottomRightRadius: neighbor.following ? 0 : cornerRadius
+    //         topRightRadius: isHorizontal
+    //             ? (neighbor.following ? 0 : cornerRadius)
+    //             : (neighbor.previous ? 0 : cornerRadius)
+    //         bottomLeftRadius: isHorizontal
+    //             ? (neighbor.previous ? 0 : cornerRadius)
+    //             : (neighbor.following ? 0 : cornerRadius)
+
+    //         property int idWorkspace: modelData + 1
+    //         property var workspace: SWorkspace.getWorkspace(idWorkspace)
+    //         property var neighbor: SWorkspace.hasNeighbor(idWorkspace)
+    //         property bool isOccupied: SWorkspace.getOccupied(workspace)
+    //         property bool isFocused: workspace?.focused ?? false
+
+    //         TextStyledH {
+    //             anchors.centerIn: parent
+    //             isHorizontal: root.isHorizontal
+    //             text: isFocused ? "●" 
+    //                 : isOccupied ? "◉"
+    //                 : "○"
+    //         }
+
+    //         TapHandler {onTapped: SWorkspace.moveToWorkspace(idWorkspace, isFocused)}
+
+    //         Behavior on topLeftRadius{NumberAnim{}}
+    //         Behavior on bottomRightRadius{NumberAnim{}}
+    //         Behavior on topRightRadius{NumberAnim{}}
+    //         Behavior on bottomLeftRadius{NumberAnim{}}
+    //     }
+
+    //     Behavior on width{NumberAnim{}}
+    // }
 }
