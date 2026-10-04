@@ -76,82 +76,8 @@ Floating {
     Component {
         id: addBase
 
-        Column {
+        CreateBase{
             width: rightMenu.width
-            spacing: Theme.spacing.large
-
-            RectForeground {
-                // id: baseDataCreateContainer
-                height: baseDataCreate.height + margine * 2
-                width: rightMenu.width
-
-                ListView {
-                    id: baseDataCreate
-                    anchors.centerIn: parent
-                    height: unitSize * 3 + margine
-                    width: parent.width - margine * 2
-                    spacing: Theme.spacing.normal
-
-                    model: [
-                        {"label": "Кількість картинок"},
-                        {"label": "Кількість даних"},
-                        {"label": "Кількість станів"}
-                    ]
-
-                    delegate: LabelTextInput {
-                        height: unitSize; width: parent.width
-                        margine: margine
-                        text: modelData.label
-                    }
-                }
-
-
-                // Column {
-                //     id: baseDataCreate
-                //     anchors.centerIn: parent
-                //     width: parent.width - margine * 2
-                //     spacing: Theme.spacing.normal
-
-
-                //     LabelTextInput {
-                //         text: "test"
-                //         height: unitSize; width: parent.width
-                //         margine: margine
-                //     }
-
-                //     LabelTextInput {
-                //         text: "test"
-                //         height: unitSize; width: parent.width
-                //         margine: margine
-                //     }
-                // }
-            }
-
-            RectForeground {
-                height: baseBlock.height + margine * 2; width: parent.width
-
-                Row {
-                    id: baseBlock
-                    anchors {
-                        left: parent.left
-                        leftMargin: margine
-                        top: parent.top
-                        topMargin: margine
-                    }
-                    spacing: Theme.spacing.large
-
-                    RectInactive {
-                        height: unitSizeL; width: height * 9 / 16
-                    }
-
-                    Column {
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        TextStyled {text: "label"}
-                        TextStyled {text: "state"}
-                    }
-                }
-            }
         }
     }
 

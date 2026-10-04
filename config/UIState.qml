@@ -35,8 +35,8 @@ Singleton {
     property string dashboardModul: "dash" // "dash", "music", "performance"
 
     // AtherisBase
-    property bool isAtherisBaseOpen: false
+    property bool isAtherisBaseOpen: true
 
-    // AtherisBase
+    // AtherisTranslate
     property bool isAtherisTranslateOpen: false
 }
