@@ -41,7 +41,7 @@ Column {
                     height: unitSize; width: parent.width
                     text: modelData.label
                     spacing: spacingN
-                    onPClicked:
+                    // onPClicked:
                     // onMClicked:
                 }
             }
