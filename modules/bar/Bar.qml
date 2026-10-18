@@ -56,6 +56,7 @@ PanelWindow {
             rightMargin: horizontalMargine
         }
 
+        Tray {isHorizontal: root.isHorizontal}
         Status {isHorizontal: root.isHorizontal}
     }
 

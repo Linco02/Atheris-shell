@@ -5,7 +5,8 @@ Singleton {
     property var substitutions: ({
         "com.github.th_ch.youtube_music": "youtube-music",
         "codium": "vscodium",
-        "mozilla firefox": "firefox"
+        "mozilla firefox": "firefox",
+        "chrome_status_icon_1": "google-chrome"
     })
 
     // property var networlIconMap: ({
