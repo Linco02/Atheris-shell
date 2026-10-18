@@ -11,6 +11,7 @@ Singleton {
 
     // Задній план //
     property bool isBackgroundOn: true
+    property bool isWidgetsOn: false
     property bool isWallpaperOn: true
     property bool isRandomWallpaperOn: true
     property string wallpaperFolder: "/home/linco02/wallpapers/"

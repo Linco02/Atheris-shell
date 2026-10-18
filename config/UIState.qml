@@ -2,6 +2,9 @@ pragma Singleton
 import Quickshell
 
 Singleton {
+    // Bar
+    property bool isHorizontal: (Settings.barPosition === "top" || Settings.barPosition === "bottom")
+
     // Lock
     property bool isSessionLock: false
 
@@ -35,7 +38,7 @@ Singleton {
     property string dashboardModul: "dash" // "dash", "music", "performance"
 
     // AtherisBase
-    property bool isAtherisBaseOpen: true
+    property bool isAtherisBaseOpen: false
 
     // AtherisTranslate
     property bool isAtherisTranslateOpen: false
