@@ -77,5 +77,5 @@ Singleton {
         function onTick1s() {
             playerActiveProgres = playerActive.position / playerActive.length
         }
-    }
+    }   
 }

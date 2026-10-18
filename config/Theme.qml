@@ -24,5 +24,5 @@ Singleton {
     readonly property var stock: STheme.stock
     readonly property var unitSize: STheme.unitSize
 
-    property int cavaBarsCount: 40
+    property int cavaBarsCount: 60
 }

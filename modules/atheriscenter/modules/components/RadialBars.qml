@@ -24,7 +24,7 @@ Item {
             const angleStep = (Math.PI * 2) / bars.length
             
             bars.forEach((val, i) => {
-                const angle = i * angleStep - Math.PI / 2
+                const angle = i * angleStep - Math.PI / 2 + angleStep / 2
                 const barHeight = (val / 100) * (root.outerRadius - root.innerRadius)
                 
                 const x1 = cx + Math.cos(angle) * root.innerRadius

@@ -8,6 +8,23 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    // property var listCreatebleBase: [{"text": "Name", "image": "wall", "url": "goggle.com", "state": "read"}]
+
+    property var listCreatebleBase: []
+
+    function addBasetoList(idBase, idConnect = 0) {
+        const base = ({id: idBase, connect: idConnect})
+        listCreatebleBase.append()
+    }
+
+    function addToCreateList() {
+        return
+    }
+
+    function removefromCreateList() {
+        return
+    }
+
     property var listBase: []
     property bool d: false
 
@@ -83,30 +100,35 @@ Singleton {
         return []
     }
 
-    FolderListModel {
-        folder: "file:///home/linco02/.local/share/quickshell/QML/OfflineStorage/Databases/"
-        nameFilters: "*/.ini"
+    // FolderListModel {
+    //     folder: "file:///home/linco02/.local/share/quickshell/QML/OfflineStorage/Databases/"
+    //     nameFilters: "*/.ini"
 
-        function updateFiles() {
-            dbUpdate.running = true
-        }
-    }
+    //     function updateFiles() {
+    //         dbUpdate.running = true
+    //     }
+    // }
 
     Process {
         id: dbUpdate
         running: true
         command: [
             "sh", "-c",
-            "grep -h '^Name=' ~/.local/share/quickshell/QML/OfflineStorage/Databases/*.ini 2>/dev/null | cut -d'=' -f2"
+            "ls ~/.local/share/quickshell/QML/OfflineStorage/Databases/"
         ]
 
         stdout: StdioCollector {
             onStreamFinished: {
-                listBase = this.text.trim().split("\n")
+                if (!this.text) {
+                    const name = "MainBase"
+                    const args = ["title", "scheme"]
+
+                    // createDb(name, baseDataTest)
+                }
             }
         }
     }
 
-    property var baseDataTest: [["name", "Text"], ["url", "Text"], ["page", "Text"]]
-    property var baseDataTestValue: [["name", "Didi"], ["url", "git.com"], ["page", "122"]]
+    property var baseDataTest: [["url", "Text"], ["page", "Text"]]
+    // property var baseDataTestValue: [["name", "Didi"], ["url", "git.com"], ["page", "122"]]
 }

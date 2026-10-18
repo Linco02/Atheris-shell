@@ -1,5 +1,6 @@
 import QtQuick
 import qs.config
+import qs.services
 import qs.components
 import qs.components.shapes
 import qs.components.controls
@@ -48,12 +49,11 @@ Column {
         }
     }
 
-    property var dateT1: []
-
     RectForeground {
         height: unitSizeL + margineL * 2; width: root.width
 
         ImageStyled {
+            id: imageBase
             anchors {
                 left: parent.left
                 leftMargin: margineL
@@ -63,10 +63,21 @@ Column {
         }
 
         Column {
-            Repeater {
-                model: dateT1
-                delegate: Item {
+            anchors {
+                right: parent.right
+                rightMargin: margineL
+                verticalCenter: parent.verticalCenter
+            }
+            height: dataList.height; width: parent.width - imageBase.width - margineL * 3
 
+            Repeater {
+                id: dataList
+                model: SDataBase.listCreatebleBase
+
+                delegate: TextStyled {
+                    // text: modelData
+
+                    // Component.onCompleted: console.log(modelData)
                 }
             }
         }

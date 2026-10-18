@@ -17,8 +17,6 @@ Singleton {
             nextThumbnail();
     }
 
-
-
     function toRawPath(path) {
         return path.toString().replace("file://", "");
     }
