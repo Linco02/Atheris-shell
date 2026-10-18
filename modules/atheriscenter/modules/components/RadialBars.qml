@@ -18,14 +18,14 @@ Item {
             const ctx = getContext("2d")
             ctx.clearRect(0, 0, width, height)
             
-            const bars = SMris.cavaBarsData
+            const bars = SAudio.cavaBarsData
             const cx = width / 2
             const cy = height / 2
             const angleStep = (Math.PI * 2) / bars.length
             
             bars.forEach((val, i) => {
                 const angle = i * angleStep - Math.PI / 2 + angleStep / 2
-                const barHeight = (val / 100) * (root.outerRadius - root.innerRadius)
+                const barHeight = val * (root.outerRadius - root.innerRadius)
                 
                 const x1 = cx + Math.cos(angle) * root.innerRadius
                 const y1 = cy + Math.sin(angle) * root.innerRadius
@@ -44,7 +44,7 @@ Item {
     }
 
     Connections {
-        target: SMris
+        target: SAudio
         function onCavaBarsDataChanged() { canvas.requestPaint() }
     }
 }

@@ -17,9 +17,9 @@ RectForeground {
     property bool isHorizontal: true
     property int barWidth: Theme.barWidth
 
-    property bool playerExist: SMris.playerExist
-    property bool isPlayerPlay: SMris.isplayerActivePlay
-    property var playerActive: SMris.playerActive
+    property bool playerExist: SAudio.playerExist
+    property bool isPlayerPlay: SAudio.isplayerActivePlay
+    property var playerActive: SAudio.playerActive
 
     GridRotable {
         id: musicContainer
@@ -49,8 +49,8 @@ RectForeground {
             height: (isHorizontal ? root.height : root.width) - Theme.padding.small
             width: height
             text: isPlayerPlay ? "" : ""
-            onClicked: isPlayerPlay ? SMris.pauseMris(playerActive)
-                : SMris.playMris(playerActive)
+            onClicked: isPlayerPlay ? SAudio.pause(playerActive)
+                : SAudio.play(playerActive)
         }
     }
 }

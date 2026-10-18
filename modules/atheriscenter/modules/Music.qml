@@ -11,8 +11,8 @@ Item {
     id: root
     height: 500; width: musicContainer.width
 
-    property var player: SMris.player
-    property bool playerExist: SMris.playerExist
+    property var player: SAudio.player
+    property bool playerExist: SAudio.playerExist
     property int playerIndex: 0
     property var playerActive: playerExist ? player[playerIndex] : null
 
@@ -89,7 +89,7 @@ Item {
 
                     property var poss: 0
 
-                    onMoved: SMris.setPositionMris(playerActive, value)
+                    onMoved: SAudio.setPosition(playerActive, value)
 
                     Connections {
                         target: STick
@@ -108,7 +108,7 @@ Item {
                         text: "󰙤"
                         onClicked: {
                             if (playerExist) {
-                                SMris.previousMris(playerActive)
+                                SAudio.previous(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }
@@ -117,11 +117,11 @@ Item {
                     ButtonOwn {
                         text: isPlaying ? "" : ""
 
-                        property bool isPlaying: SMris.checkIsPlaying(playerActive)
+                        property bool isPlaying: SAudio.checkIsPlaying(playerActive)
 
                         onClicked: {
                             if (playerExist) {
-                                isPlaying ? SMris.pauseMris(playerActive) : SMris.playMris(playerActive)
+                                isPlaying ? SAudio.pause(playerActive) : SAudio.play(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }
@@ -131,7 +131,7 @@ Item {
                         text: "󰙢"
                         onClicked: {
                             if (playerExist) {
-                                SMris.nextMris(playerActive)
+                                SAudio.next(playerActive)
                                 progressBar.value = playerActive?.position
                             }
                         }

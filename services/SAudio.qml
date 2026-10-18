@@ -27,27 +27,15 @@ Singleton {
     property var cavaBarsData: Array(Theme.cavaBarsCount).fill(0)
     property bool isCavaBarOn: UIState.isAtherisCenterOpen
 
-    function checkIsPlaying(p) {
-        return p?.playbackState === MprisPlaybackState.Playing ?? false
+    function checkIsPlaying(player) {
+        return player?.playbackState === MprisPlaybackState.Playing ?? false
     }
 
-    function nextMris(player) {
-        player.next()
-    }
-
-    function previousMris(player) {
-        player.previous()
-    }
-
-    function pauseMris(player) {
-        player.pause()
-    }
-
-    function playMris(player) {
-        player.play()
-    }
-
-    function setPositionMris(player, position) {
+    function next(player) {player.next()}
+    function previous(player) {player.previous()}
+    function pause(player) {player.pause()}
+    function play(player) {player.play()}
+    function setPosition(player, position) {
         player.position = position
     }
 
@@ -60,13 +48,11 @@ Singleton {
 
         stdout: SplitParser {
             onRead: data => {
-                const raw = data.trim().split(";").map(n => parseInt(n) || 0)
-
-                const normalized = Array(Theme.cavaBarsCount).fill(0).map(
-                    (_, i) => raw[i] ?? 0
-                )
-                
-                cavaBarsData = normalized
+                cavaBarsData = data
+                    .trim()
+                    .split(";")
+                    .filter(n => n !== "")
+                    .map(n => parseInt(n) / 100 || 0)
             }
         }
     }

@@ -9,8 +9,8 @@ import qs.services
 
 RectForeground {
     id: root
-    property bool playerExist: SMris.playerExist
-    property var playerActive: SMris.playerActive
+    property bool playerExist: SAudio.playerExist
+    property var playerActive: SAudio.playerActive
 
     Column {
         anchors.centerIn: parent
@@ -19,7 +19,7 @@ RectForeground {
         CircleProgres {
             anchors.horizontalCenter: parent.horizontalCenter
             height: root.width * 2 / 3
-            progres: SMris.playerActiveProgres
+            progres: SAudio.playerActiveProgres
             progresW: 10
 
             RectClip {
@@ -45,21 +45,21 @@ RectForeground {
 
             ButtonStyled {
                 text: "󰙤"
-                onClicked: SMris.previousMris(playerActive)
+                onClicked: SAudio.previous(playerActive)
             }
 
             ButtonStyled {
-                text: SMris.isplayerActivePlay ? "" : ""
+                text: SAudio.isplayerActivePlay ? "" : ""
                 onClicked: {
-                    if (SMris.isplayerActivePlay)
-                        SMris.pauseMris(playerActive)
-                    else SMris.playMris(playerActive)
+                    if (SAudio.isplayerActivePlay)
+                        SAudio.pause(playerActive)
+                    else SAudio.play(playerActive)
                 }
             }
 
             ButtonStyled {
                 text: "󰙢"
-                onClicked: SMris.nextMris(playerActive)
+                onClicked: SAudio.next(playerActive)
             }
         }
     }
