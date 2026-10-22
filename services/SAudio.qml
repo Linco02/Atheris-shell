@@ -25,7 +25,7 @@ Singleton {
     }
     property real playerActiveProgres: 0
     property var cavaBarsData: Array(Theme.cavaBarsCount).fill(0)
-    property bool isCavaBarOn: UIState.isAtherisCenterOpen
+    property bool isCavaBarOn: UIState.atherisCenter.isOpen
 
     function checkIsPlaying(player) {
         return player?.playbackState === MprisPlaybackState.Playing ?? false

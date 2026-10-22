@@ -1,45 +1,76 @@
 pragma Singleton
 import Quickshell
+import QtQuick
 
 Singleton {
-    // Bar
-    property bool isHorizontal: (Settings.barPosition === "top" || Settings.barPosition === "bottom")
+    property QtObject bar: QtObject {
+        property bool isHorizontal: (Settings.barPosition === "top" || Settings.barPosition === "bottom") 
+    }
 
-    // Lock
-    property bool isSessionLock: false
+    property QtObject session: QtObject {
+        property bool isLock: false
+    }
 
-    // Power
-    property bool isPowerOpen: false
+    property QtObject power: QtObject {
+        property bool isOpen: false
+    }
 
-    // Auntefication
-    property bool isAuthenficatorOpen: false
+    property QtObject authenficator: QtObject {
+        property bool isOpen: false
+    }
 
-    // Background
-    property bool isWallpaperChange: false
+    property QtObject cheatsheet: QtObject {
+        property bool isOpen: false
+    }
 
-    // CheatSheet
-    property bool ischeatsheetopen: false
+    property QtObject atherisBase: QtObject {
+        property bool isOpen: false
+    }
 
-    // AtherisSettings
-    property bool isAtherisSettingsOpen: false
-    property var atherisSettingsModules: ["general", "display", "theme", "bluetooth", "network"]
-    property string atherisSettingsModule: "general"
+    property QtObject atherisTranslate: QtObject {
+        property bool isOpen: false
+    }
 
-    // ControlCenter
-    property bool isControlCenterOpen: false
-    property var controlCenterModules: ["main", "sound", "wifi", "powerMode", "bluetooth"]
-    property string controlCenterModul: "main"
-    property var timerHubModules: ["timer", "stopWatch", "alarmСlock"]
-    property string timerHubModule: "stopWatch"
+    property QtObject background: QtObject {
+        property bool isLoad: false
 
-    // AtherisCenter
-    property bool isAtherisCenterOpen: false
-    property string atherisCenterModule: "dashboard" // "dashboard", "wallpaper", "command"
-    property string dashboardModul: "dash" // "dash", "music", "performance"
+        property QtObject wallpaper: QtObject {
+            property bool isLoad: false
+        }
 
-    // AtherisBase
-    property bool isAtherisBaseOpen: false
+        property QtObject widgets: QtObject {
+            property bool isLoad: false
+        }
+    }
 
-    // AtherisTranslate
-    property bool isAtherisTranslateOpen: false
+    property QtObject atherisSettings: QtObject {
+        property bool isOpen: false
+
+        readonly property var modules: ["general", "display", "theme", "bluetooth", "network"]
+        property string modul: "general"
+    }
+
+    property QtObject controlCenter: QtObject {
+        property bool isOpen: false
+        
+        readonly property var modules: ["main", "sound", "wifi", "powerMode", "bluetooth"]
+        property string modul: "main"
+
+        property QtObject time: QtObject {
+            readonly property var modules: ["timer", "stopWatch", "alarmСlock"]
+            property string modul: "stopWatch"
+        }
+    }
+
+    property QtObject atherisCenter: QtObject {
+        property bool isOpen: false
+
+        readonly property var modules: ["dashboard", "wallpaper", "command"]
+        property string modul: "dashboard"
+
+        property QtObject dashboard: QtObject {
+            readonly property var modules: ["dash", "music", "performance"]
+            property string modul: "dash"
+        }
+    }
 }

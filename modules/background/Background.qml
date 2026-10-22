@@ -19,7 +19,7 @@ PanelWindow {
 
     property bool isLoad: false
     readonly property string barPosition: Settings.barPosition ?? "top"
-    readonly property bool isHorizontal: UIState.isHorizontal
+    readonly property bool isHorizontal: UIState.bar.isHorizontal
 
     Loader {
         active: Settings.isWallpaperOn && StartUp.isWallaperThumbnailDirCreate && isLoad

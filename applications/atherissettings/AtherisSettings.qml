@@ -13,7 +13,7 @@ Floating {
     implicitHeight: 800; implicitWidth: 1400
     onVisibleChanged: {
         if (!visible) {
-            UIState.isAtherisSettingsOpen = false
+            UIState.atherisSettings.isOpen = false
             mainLoader.active = false
         }
     }
@@ -34,12 +34,12 @@ Floating {
             spacing: Theme.spacing.large
             
             Repeater {
-                model: UIState.atherisSettingsModules
+                model: UIState.atherisSettings.modules
                 delegate: ButtonStyled {
                     height: unitSize; width: parent.width
                     text: modelData
-                    onClicked: UIState.atherisSettingsModule = modelData
-                    isActive: UIState.atherisSettingsModule === modelData
+                    onClicked: UIState.atherisSettings.modul = modelData
+                    isActive: UIState.atherisSettings.modul === modelData
                 }
             }
         }
@@ -57,9 +57,9 @@ Floating {
             id: mainLoader
             anchors.fill: parent
 
-            active: UIState.isAtherisSettingsOpen
+            active: UIState.atherisSettings.isOpen
             source: {
-                switch(UIState.atherisSettingsModule) {
+                switch(UIState.atherisSettings.modul) {
                     case "general": return "General.qml";
                     case "display": return "Display.qml";
                     case "theme": return "Theme.qml";
@@ -73,8 +73,8 @@ Floating {
 
     Connections {
         target: UIState
-        function onIsAtherisSettingsOpenChanged() {
-            if (UIState.isAtherisSettingsOpen) mainLoader.active = true
+        function onAtherisSettingsChanged() {
+            if (UIState.atherisSettings.isOpen) mainLoader.active = true
         }
     }
 }

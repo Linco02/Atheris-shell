@@ -89,7 +89,7 @@ ColumnStyled {
             model: SWallpaper.wallpapers
             imageHeight: 120
             onClicked: pathMedia => {
-                if (UIState.isWallpaperChange) SWallpaper.wallpaperChange(pathMedia)
+                if (SWallpaper.isWallpaperChange) SWallpaper.wallpaperChange(pathMedia)
             }
         }
     }

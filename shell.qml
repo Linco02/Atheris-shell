@@ -33,16 +33,16 @@ ShellRoot {
                     sourceComponent: ControlCenter {panel: bar}
                 }
                 Loader {
-                    // active: UIState.isPowerOpen
+                    // active: UIState.power.isOpen
                     sourceComponent: Power {panel: bar}
                 }
                 Loader {
-                    // active: UIState.isPowerOpen
+                    // active: UIState.power.isOpen
                     sourceComponent: Authenficator {panel: bar}
                 }
 
                 Loader {
-                    // active: UIState.ischeatsheetopen
+                    // active: UIState.cheatsheet.isOpen
                     sourceComponent: CheatSheet {panel: bar}
                 }
             }
@@ -61,24 +61,24 @@ ShellRoot {
     Shortcut {}
 
     LazyLoader {
-        active: UIState.isSessionLock
+        active: UIState.session.isLock
         component: Lock {}
     }
     
 
 
     Loader {
-        active: UIState.isAtherisSettingsOpen
+        active: UIState.atherisSettings.isOpen
         sourceComponent: AtherisSettings {}
     }
 
     Loader {
-        active: UIState.isAtherisBaseOpen
+        active: UIState.atherisBase.isOpen
         sourceComponent: AtherisBase {}
     }
 
     Loader {
-        active: UIState.isAtherisTranslateOpen
+        active: UIState.atherisTranslate.isOpen
         sourceComponent: Translation {}
     }
 

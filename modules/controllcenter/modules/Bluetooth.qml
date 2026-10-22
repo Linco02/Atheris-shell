@@ -11,5 +11,5 @@ ButtonTripled {
     textTop: "Bluetooth"
     textBottom: SBluetooth.connectedDevices[0]?.name || ""
     isActive: SBluetooth.isBluetoothOn
-    onClicked: UIState.controlCenterModul = "bluetooth"
+    onClicked: UIState.controlCenter.modul = "bluetooth"
 }

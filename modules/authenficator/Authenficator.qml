@@ -14,9 +14,9 @@ PopFade {
     positionX: panel.width / 2 - root.width / 2
     position: "top"
     isHorizontalCenter: true
-    isOpen: UIState.isAuthenficatorOpen
+    isOpen: UIState.authenficator.isOpen
     onClosedPop: {
-        UIState.isAuthenficatorOpen = false
+        UIState.authenficator.isOpen = false
         SAuthenficator.clear()
     }
 

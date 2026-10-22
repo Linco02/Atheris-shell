@@ -18,7 +18,7 @@ Singleton {
             actionProcess.command = action.command
             actionProcess.running = true
         } else {
-            UIState.isSessionLock = true
+            UIState.session.isLock = true
         }
     }
 

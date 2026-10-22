@@ -5,40 +5,40 @@ import qs.config
 Singleton {
     // AtherisCenter
     function controlAtherisCenter(targetWindow, targetMenu) {
-        const isSameWindow = targetWindow === UIState.atherisCenterModule
-        const isSameMenu = targetMenu === UIState.dashboardModul || !targetMenu
+        const isSameWindow = targetWindow === UIState.atherisCenter.modul
+        const isSameMenu = targetMenu === UIState.atherisCenter.dashboard.modul || !targetMenu
 
-        if (UIState.isAtherisCenterOpen && isSameWindow && isSameMenu) {
-            UIState.isAtherisCenterOpen = false
+        if (UIState.atherisCenter.isOpen && isSameWindow && isSameMenu) {
+            UIState.atherisCenter.isOpen = false
             return
         }
 
-        if (targetMenu) UIState.dashboardModul = targetMenu
-        UIState.atherisCenterModule = targetWindow
-        UIState.isAtherisCenterOpen = true
+        if (targetMenu) UIState.atherisCenter.dashboard.modul = targetMenu
+        UIState.atherisCenter.modul = targetWindow
+        UIState.atherisCenter.isOpen = true
     }
 
     // ControllCenter
     function controlCenter(targetMenu) {
-        const isSameMenu = targetMenu === UIState.controlCenterModul || !targetMenu
+        const isSameMenu = targetMenu === UIState.controlCenter.modul || !targetMenu
 
-        if (UIState.isControlCenterOpen && isSameMenu) {
-            UIState.isControlCenterOpen = false
+        if (UIState.controlCenter.isOpen && isSameMenu) {
+            UIState.controlCenter.isOpen = false
             return
         }
 
-        if (targetMenu) UIState.controlCenterModul = targetMenu
-        UIState.isControlCenterOpen = true
+        if (targetMenu) UIState.controlCenter.modul = targetMenu
+        UIState.controlCenter.isOpen = true
     }
     
     // AtherisSettings
     function atherisSettings(targetMenu) {
-        if (targetMenu) UIState.atherisSettingsModule = targetMenu
+        if (targetMenu) UIState.atherisSettings.modul = targetMenu
         else return
-        UIState.isAtherisSettingsOpen = true
+        UIState.atherisSettings.isOpen = true
     }
 
     function atherisbase() {
-        UIState.isAtherisBaseOpen = !UIState.isAtherisBaseOpen
+        UIState.atherisBase.isOpen = !UIState.atherisBase.isOpen
     }
 }

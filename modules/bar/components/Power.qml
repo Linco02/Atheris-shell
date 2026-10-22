@@ -12,5 +12,5 @@ Item {
         text: ""
     }
 
-    TapHandler {onTapped: UIState.isPowerOpen = !UIState.isPowerOpen}
+    TapHandler {onTapped: UIState.power.isOpen = !UIState.power.isOpen}
 }

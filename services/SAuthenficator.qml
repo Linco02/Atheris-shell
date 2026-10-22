@@ -24,7 +24,7 @@ Singleton {
             }
         }
 
-        UIState.isAuthenficatorOpen = true
+        UIState.authenficator.isOpen = true
     }
 
     function enterPassword(password) {
@@ -32,7 +32,7 @@ Singleton {
             SNetwork.connectNetworkWithPsk(__data, password)
         }
 
-        UIState.isAuthenficatorOpen = false
+        UIState.authenficator.isOpen = false
         clear()
     }
 

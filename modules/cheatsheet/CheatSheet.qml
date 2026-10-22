@@ -15,8 +15,8 @@ PopFade {
     positionX: panel.width / 2 - root.width / 2
     position: "top"
     isHorizontalCenter: true
-    isOpen: UIState.ischeatsheetopen
-    onClosedPop: UIState.ischeatsheetopen = false
+    isOpen: UIState.cheatsheet.isOpen
+    onClosedPop: UIState.cheatsheet.isOpen = false
 
     ListView {
         id: cheatSheetContainer

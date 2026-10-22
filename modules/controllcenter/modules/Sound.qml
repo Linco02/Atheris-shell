@@ -33,7 +33,7 @@ Item {
             id: rightButton
             height: root.height; width: height
             text: "󰁈"
-            onClicked: UIState.controlCenterModul = "sound"
+            onClicked: UIState.controlCenter.modul = "sound"
         }
     }
 }

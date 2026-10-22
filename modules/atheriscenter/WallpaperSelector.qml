@@ -103,7 +103,7 @@ Item {
                     HoverHandler { id: hover }
                     TapHandler {
                         onTapped: {
-                            if (UIState.isWallpaperChange) {
+                            if (SWallpaper.isWallpaperChange) {
                                 const wall = SMedia.toRawPath(modelData)
                                 SWallpaper.wallpaperChange(modelData)
                             }

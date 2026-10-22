@@ -13,7 +13,7 @@ Singleton {
     property var disks: []
 
     function runPerfomance() {
-        if (UIState.isAtherisCenterOpen) {
+        if (UIState.atherisCenter.isOpen) {
             gpuPerfomance.running = true
             cpuPerfomance.running = true
             memPerfomance.running = true

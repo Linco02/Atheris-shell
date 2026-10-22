@@ -13,7 +13,7 @@ Floating {
     implicitHeight: 800; implicitWidth: 1400
     onVisibleChanged: {
         if (!visible) {
-            UIState.isAtherisBaseOpen = false
+            UIState.atherisBase.isOpen = false
             // mainLoader.active = false
         }
     }

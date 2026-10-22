@@ -11,5 +11,5 @@ ButtonTripled {
     textTop: "Wifi"
     textBottom: SNetwork.currentNetwork?.name || ""
     isActive: SNetwork.isWifiOn
-    onClicked: UIState.controlCenterModul = "wifi"
+    onClicked: UIState.controlCenter.modul = "wifi"
 }

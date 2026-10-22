@@ -42,7 +42,7 @@ Rect {
         ButtonStyled {
             height: parent.height; width: height
             text: ""
-            onClicked: UIState.isPowerOpen = !UIState.isPowerOpen
+            onClicked: UIState.power.isOpen = !UIState.power.isOpen
         }
     }
 }

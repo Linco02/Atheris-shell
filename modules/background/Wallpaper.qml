@@ -18,7 +18,7 @@ Item {
 
     function wallpaperSwitch() {
         wallpaperReady = false
-        UIState.isWallpaperChange = false
+        SWallpaper.isWallpaperChange = false
 
         let source = SWallpaper.isWallpaperAnimated
             ? SWallpaper.wallpaperThumbnail
@@ -48,7 +48,7 @@ Item {
         isPlay: SWallpaper.isDesktopEmpty
         onContentReady: {
             wallpaperReady = true
-            UIState.isWallpaperChange = true
+            SWallpaper.isWallpaperChange = true
             removeThumbnail()
         }
     }

@@ -13,8 +13,8 @@ PopFade {
     containerH: controlCenterContainer.height
     containerW: controlCenterContainer.width
     positionX: panel.width - root.width - Theme.padding.normal
-    isOpen: UIState.isControlCenterOpen
-    onClosedPop: UIState.isControlCenterOpen = false
+    isOpen: UIState.controlCenter.isOpen
+    onClosedPop: UIState.controlCenter.isOpen = false
     position: "right"
 
 
@@ -26,7 +26,7 @@ PopFade {
             height: 900; width: 400
             active: true
             source: {
-                switch(UIState.controlCenterModul) {
+                switch(UIState.controlCenter.modul) {
                     case "sound": return "./controls/SoundControl.qml";
                     case "wifi": return "./controls/WifiControl.qml";
                     case "main": return "MainCenter.qml";

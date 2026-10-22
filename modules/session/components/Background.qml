@@ -6,7 +6,7 @@ import qs.services
 SmartView {
     anchors.fill: parent
     content: SWallpaper.wallpaper
-    isPlay: UIState.isSessionLock
+    isPlay: UIState.session.isLock
 
     layer.enabled: true
     layer.effect: MultiEffect {

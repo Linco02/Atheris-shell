@@ -18,7 +18,7 @@ PanelWindow {
     }
     implicitHeight: isHorizontal ? Theme.barWidth : 0
     implicitWidth: isHorizontal ? 0 : Theme.barWidth
-    focusable: UIState.isAtherisCenterOpen || UIState.isAuthenficatorOpen
+    focusable: UIState.atherisCenter.isOpen || UIState.authenficator.isOpen
     color: Theme.colors.surface
 
     property string barPosition: Settings.barPosition ?? "top"

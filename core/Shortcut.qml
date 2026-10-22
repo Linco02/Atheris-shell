@@ -32,7 +32,7 @@ Item {
     GlobalShortcut {
         name: "lock_session"
         description: "lock session"
-        onPressed: UIState.isSessionLock = true
+        onPressed: UIState.session.isLock = true
     }
 
     // GlobalShortcut {

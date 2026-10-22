@@ -20,15 +20,15 @@ Column {
    
         ButtonOwn {
             btnText: "󰼄"
-            onClicked: UIState.dashboardModul = "music"
+            onClicked: UIState.atherisCenter.dashboard.modul = "music"
         }
         ButtonOwn {
             btnText: "󰨝"
-            onClicked: UIState.dashboardModul = "dash"
+            onClicked: UIState.atherisCenter.dashboard.modul = "dash"
         }
         ButtonOwn {
             btnText: ""
-            onClicked: UIState.dashboardModul = "performance"
+            onClicked: UIState.atherisCenter.dashboard.modul = "performance"
         }
     }
 
@@ -43,7 +43,7 @@ Column {
         anchors.horizontalCenter: parent.horizontalCenter
         height: dash.height; width: dash.width
         clip: true
-        state: UIState.dashboardModul
+        state: UIState.atherisCenter.dashboard.modul
 
         Row {
             id: pages

@@ -5,7 +5,7 @@ import qs.services
 import "./components"
 
 WlSessionLock {
-    locked: UIState.isSessionLock
+    locked: UIState.session.isLock
 
     onLockedChanged: {
         if (locked) SPam.start()

@@ -6,9 +6,9 @@ PopJump {
     id: dashboard
     containerH: mainLoader.height
     containerW: mainLoader.width
-    isOpen: UIState.isAtherisCenterOpen
+    isOpen: UIState.atherisCenter.isOpen
     onClosedPop: {
-        UIState.isAtherisCenterOpen = false
+        UIState.atherisCenter.isOpen = false
         mainLoader.active = false
     }
 
@@ -18,9 +18,9 @@ PopJump {
             top: parent.top
             horizontalCenter: parent.horizontalCenter
         }
-        active: UIState.isAtherisCenterOpen
+        active: UIState.atherisCenter.isOpen
         source: {
-            switch(UIState.atherisCenterModule) {
+            switch(UIState.atherisCenter.modul) {
                 case "dashboard": return "DashBoard.qml";
                 case "wallpaper": return "WallpaperSelector.qml";
                 case "programs": return "ProgramsSelector.qml";
@@ -32,8 +32,8 @@ PopJump {
 
     Connections {
         target: UIState
-        function onIsAtherisCenterOpenChanged() {
-            if (UIState.isAtherisCenterOpen) mainLoader.active = true
+        function onAtherisCenterChanged() {
+            if (UIState.atherisCenter.isOpen) mainLoader.active = true
         }
     }
 }

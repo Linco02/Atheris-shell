@@ -14,21 +14,21 @@ RectForeground {
     ColumnStyled {
         ButtonMutable {
             height: 40; width: root.width
-            buttons: UIState.timerHubModules
+            buttons: UIState.controlCenter.time.modules
             buttonsNames: [
                 STranslations.tr("clock_timer"),
                 STranslations.tr("clock_stopwatch"),
                 STranslations.tr("clock_alarm")
             ]
-            activeButton: UIState.timerHubModule
-            onClicked: UIState.timerHubModule = activeButton
+            activeButton: UIState.controlCenter.time.modul
+            onClicked: UIState.controlCenter.time.modul = activeButton
         }
 
         Loader {
             height: 100; width: root.width
 
             sourceComponent: {
-                switch(UIState.timerHubModule) {
+                switch(UIState.controlCenter.time.modul) {
                     case "timer": return tTimer;
                     case "stopWatch": return tStopWatch;
                     case "alarmСlock": return tAlarmClock;

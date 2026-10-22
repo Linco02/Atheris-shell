@@ -7,17 +7,24 @@ import Quickshell.Hyprland
 import qs.config
 
 Singleton {
+    property bool isWallpaperChange: false
     property var wallpapers: []
     property string wallpaper: ""
     property string wallpaperThumbnail: ""
     property bool isWallpaperAnimated: false
     property bool isFrameGenerating: false
-    property bool isDesktopEmpty: {
-        const activeWs = Hyprland?.focusedWorkspace
-        const list = Hyprland?.toplevels?.values
-        if (activeWs || list) return false
+    // property bool isDesktopEmpty: {
+    //     const activeWs = Hyprland?.focusedWorkspace
+    //     const list = Hyprland?.toplevels?.values
+    //     if (activeWs || list) return false
 
-        return !list.some(tl => tl.workspace?.id === activeWs.id)
+    //     return !list.some(tl => tl.workspace?.id === activeWs.id)
+    // }
+
+    property bool isDesktopEmpty: {
+        const activeWs = Hyprland.focusedWorkspace
+        if (!activeWs) return true
+        return !Hyprland.toplevels.values.some(tl => tl.workspace && tl.workspace.id === activeWs.id)
     }
 
     function wallpaperInit() {

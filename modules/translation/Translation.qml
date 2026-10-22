@@ -14,9 +14,9 @@ PopFade {
     positionX: 200 / 2 - 400 / 2
     position: "top"
     isHorizontalCenter: true
-    isOpen: UIState.isAtherisTranslateOpen
+    isOpen: UIState.atherisTranslate.isOpen
     onClosedPop: {
-        UIState.isAtherisTranslateOpen = false
+        UIState.atherisTranslate.isOpen = false
         SAuthenficator.clear()
     }
 
